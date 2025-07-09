@@ -1,0 +1,19 @@
+{
+  "name": "testy-cbos",
+  "version": "1.0.0",
+  "description": "Testovaci skripty pro CBOS",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "keywords": [],
+  "author": "Marek Novák",
+  "license": "ISC",
+  "dependencies": {
+    "tslog": "^4.9.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.12"
+  }
+}
