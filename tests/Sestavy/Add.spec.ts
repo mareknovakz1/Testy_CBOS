@@ -50,18 +50,15 @@ test.describe('Testy generování uživatelských sestav', () => {
       data: payload
     });
 
-    // --- Ověření odpovědi ---
     expect(response.ok()).toBeTruthy();
     logger.info(`Sestava byla úspěšně vygenerována (Status: ${response.status()}).`);
 
-    // --- OPRAVA ZDE ---
-    // 1. Nejprve získáme textový obsah odpovědi.
     const responseBodyText = await response.text();
     logger.debug("Surová odpověď ze serveru:", responseBodyText);
 
-    // 2. Zkontrolujeme, jestli odpověď není prázdná.
+    // Zkontrolujeme, jestli odpověď není prázdná.
     if (responseBodyText) {
-      // 3. Teprve pokud není prázdná, pokusíme se ji zpracovat jako JSON.
+      // Teprve pokud není prázdná, pokusíme se ji zpracovat jako JSON.
       const responseJson = JSON.parse(responseBodyText);
 
       // Ověříme, že odpověď obsahuje očekávaná data

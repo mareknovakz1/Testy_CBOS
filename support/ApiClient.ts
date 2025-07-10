@@ -29,7 +29,7 @@ export class ApiClient {
    */
   public async getUserReportsList(): Promise<any> {
     const endpoint = '/reports-api/listOfUsersReports/60193531?offset=0&limit=100&sort=-updated';
-    logger.silly(`Odesílám GET požadavek na získání seznamu sestav: ${endpoint}`);
+    logger.debug(`Odesílám GET požadavek na získání seznamu sestav: ${endpoint}`);
 
     const response = await this.request.get(endpoint, {
       headers: {
@@ -56,7 +56,7 @@ export class ApiClient {
    */
   public async createUserReport(SestavaId: string, payload: any): Promise<any> {
     const endpoint = `/reports-api/usersReports/60193531`;
-    logger.silly(`Odesílám POST požadavek na vytvoření sestavy: ${endpoint}`);
+     logger.debug(`Odesílaný PAYLOAD:\n${JSON.stringify(payload, null, 2)}`);
 
     const response = await this.request.post(endpoint, {
       headers: {
@@ -75,7 +75,7 @@ export class ApiClient {
    */
   public async deleteUserReport(SestavaId: string | number): Promise<void> {
     const endpoint = `/reports-api/usersReports/${SestavaId}`;
-    logger.silly(`Odesílám DELETE požadavek na smazání sestavy: ${endpoint}`);
+    logger.debug(`Odesílám DELETE požadavek na smazání sestavy: ${endpoint}`);
 
     const response = await this.request.delete(endpoint, {
       headers: {
@@ -96,7 +96,7 @@ export class ApiClient {
     options: { offset?: number; limit?: number; sort?: string } = {}
   ): Promise<any> {
     const endpoint = `/reports-api/userReportPreview/${SestavaId}?offset=0&limit=1000&sort=date`;
-    logger.silly(`Odesílám GET požadavek na získání náhledu sestavy: ${endpoint}`);
+    logger.debug(`Odesílám GET požadavek na získání náhledu sestavy: ${endpoint}`);
     const response = await this.request.get(endpoint, {
       headers: {
         'Authorization': `Bearer ${this.token}`,

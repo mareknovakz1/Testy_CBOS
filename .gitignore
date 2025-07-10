@@ -1,0 +1,13 @@
+# Složka se staženými závislostmi
+/node_modules
+
+# Výsledky a reporty z Playwright testů
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# Logovací soubory
+*.log
+
+# Soubory s lokálním nastavením 
+.env
