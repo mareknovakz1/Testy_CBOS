@@ -7,12 +7,12 @@ import { logger } from '../logger';
 // Rozšíření základního 'test' objektu o naši vlastní přihlašovací logiku
 export const test = base.extend({
   page: async ({ page }, use) => {
-    logger.trace("Spouštím automatickou přihlašovací fixture...");
+    logger.silly("Spouštím automatickou přihlašovací fixture...");
 
     try {
-      logger.trace("Připraven payload pro autentizaci:", loginhash);
+      logger.silly("Připraven payload pro autentizaci:", loginhash);
 
-      logger.trace("Odesílám požadavek na autentizaci na endpoint:", `${baseURL}/auth-api/user/authorization`);
+      logger.silly("Odesílám požadavek na autentizaci na endpoint:", `${baseURL}/auth-api/user/authorization`);
       const response = await page.request.post(`${baseURL}/auth-api/user/authorization`, {
         data: loginhash,
         headers: {
@@ -24,7 +24,7 @@ export const test = base.extend({
         logger.error(`Chyba při přihlašování přes API. Status: ${response.status()}`, await response.text());
         throw new Error(`Chyba při přihlašování přes API: Status ${response.status()}`);
       }
-      logger.debug("Autentizace přes API proběhla úspěšně (Status: 200 OK).");
+      logger.trace("Autentizace přes API proběhla úspěšně (Status: 200 OK).");
 
       const responseJson = await response.json();
       const token = responseJson.accessToken;
@@ -33,12 +33,12 @@ export const test = base.extend({
         logger.error("Nepodařilo se získat 'accessToken' z API odpovědi.", responseJson);
         throw new Error("Nepodařilo se získat token z API odpovědi.");
       }
-      logger.trace("Přístupový token (accessToken) byl úspěšně získán.");
+      logger.silly("Přístupový token (accessToken) byl úspěšně získán.");
 
       await page.addInitScript(token => {
         window.localStorage.setItem('auth_token', token);
       }, token);
-      logger.trace("Token byl vložen do localStorage pro budoucí použití.");
+      logger.silly("Token byl vložen do localStorage pro budoucí použití.");
       
       await use(page);
       

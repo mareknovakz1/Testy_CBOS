@@ -74,16 +74,27 @@ test.describe(`D001 – Kompletní test časových období`, () => {
                 logger.info(`Vytvořena Sestava: ${newReportDbId} pro období "${testCase.name}". Sestava obsahuje: ${itemsCount} položek.`);
                 expect(newReportDbId).toBeDefined();
 
-                // Ověření počtu položek
+               if (createdReport.public === true) {
+                 // === VĚTEV PRO ÚSPĚCH ===
+                logger.info(`TEST V POŘÁDKU: Sestava (ID: ${newReportDbId}) je správně označena jako 'Sdílená'.`);
+
+                // Nyní pokračuje původní logika pro počet položek
                 if (itemsCount === null) {
-                const errorMessage = `Počet objektů pro období '${testCase.name}' je 'null', což je považováno za chybu.`;
-                logger.error(errorMessage);
-                test.fail(true, errorMessage);
+                    const errorMessage = `Počet objektů pro období '${testCase.name}' je 'null'.`;
+                    logger.error(errorMessage);
+                    test.fail(true, errorMessage);
                 } else if (itemsCount === 0) {
-                logger.warn(`Vytvořena Sestava: ${newReportDbId} pro období "${testCase.name}". Sestava obsahuje: 0 položek.`);
+                    logger.warn(` Detail sestavy: Sestava obsahuje 0 položek.`);
                 } else {
-                logger.info(`Vytvořena Sestava: ${newReportDbId} pro období "${testCase.name}". Sestava obsahuje: ${itemsCount} položek.`);
+                logger.info(`Sestava obsahuje ${itemsCount} položek.`);
                 }
+
+} else {
+    // === VĚTEV PRO SELHÁNÍ ===
+    const errorMessage = `❌ TEST SELHAL: Sestava (ID: ${newReportDbId}) je 'Soukromá', ale očekávána byla 'Sdílená'.`;
+    logger.fatal(errorMessage); // Použijeme fatal pro zvýraznění chyby
+    test.fail(true, errorMessage); // Aktivně selžeme test s jasnou zprávou
+}
 
             } catch (error) {
                 logger.fatal(`Došlo k fatální chybě v testu pro období "${testCase.name}"`, error);

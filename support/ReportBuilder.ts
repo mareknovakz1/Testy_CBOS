@@ -9,6 +9,7 @@ export class ReportBuilder {
      * Konstruktor vytvoří základní, minimální kostru pro sestavu.
      * @param reportDefinitionId - ID definice sestavy (např. 'D001').
      * @param name - Název sestavy.
+     * @param public - true pro sdílenou, false pro soukromou.
      */
     constructor(reportDefinitionId: string, name: string) {
         this.payload = {
