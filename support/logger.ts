@@ -6,7 +6,7 @@ import { Logger, ILogObj, ILogLevel } from "tslog";
 // $env:LOG_LEVEL="2"; npx playwright test  (POZNÁMKA: Nově se používají čísla)
 // Pro `minLevel` se ve verzi 4+ používají čísla, nikoli text.
 
-const minLevel: ILogLevel = Number(process.env.LOG_LEVEL) || 3;
+const minLevel: ILogLevel = Number(process.env.LOG_LEVEL) || 0;
 
 export const logger: Logger<ILogObj> = new Logger({
     name: "CBOS_Tests",     
