@@ -1,6 +1,4 @@
-/*
-gitignore
-*/
+# .gitignore
 # Složka se staženými závislostmi
 /node_modules
 
