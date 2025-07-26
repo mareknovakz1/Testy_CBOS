@@ -9,7 +9,6 @@ export class SestavyPage {
     constructor(page: Page) {
         this.page = page;
 
-        // Opravený selektor (byla tam chyba "contorl" a uvozovky)
         this.reportTypeSelect = page.locator('div.control.is-5-select select');
         this.addButton = page.getByRole('button', { name: 'Přidat' });
     }
