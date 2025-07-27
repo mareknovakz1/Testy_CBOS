@@ -10,6 +10,7 @@ export const test = base.extend({
     logger.silly("Spouštím automatickou přihlašovací fixture...");
 
     try {
+      logger.info(`Připojuji na: ${baseURL}`);
       logger.silly("Připraven payload pro autentizaci:", loginhash);
 
       logger.silly("Odesílám požadavek na autentizaci na endpoint:", `${baseURL}/auth-api/user/authorization`);

@@ -15,28 +15,37 @@ export class SestavyObdobi {
         this.page = page;
     }
 
-  
-    /**
-     * @param choosenPeriod Výběr typu období: 'Rozsah', 'Přesné období', 'Plovoucí období'
-     * @param period Hodnota pro daný typ období:
-     * - Rozsah: "DD.MM.YYYY - DD.MM.YYYY"
-     * - Přesné období: např. "2023", "2024.01", "2024.Q1" (přesný text tlačítka)
-     * - Plovoucí období: např. "Aktuální měsíc", "Minulý měsíc", "Poslední 3 měsíce" (přesný text tlačítka)
-     */
+/* @param Period
+* Rozsah DD.MM.YYYY - DD.MM.YYYY
+* Přesné období string YYYY.MM.DD
+* Plovoucí období q1,q2,q3,q4, actualWeek, lastWeek, last2Weeks, actualMonth, lastMonth, last3Months
+*/
     async select(choosenPeriod: 'Rozsah' | 'Přesné období' | 'Plovoucí období', period: string) {
+
+        logger.trace('Je radiobutton aktivní?');
+        const radioLocator = this.page.getByRole('radio', { name: choosenPeriod });
+        const isAlreadyChecked = await radioLocator.isChecked();
+
+        if (!isAlreadyChecked) {
+            logger.trace(`Volba '${choosenPeriod}' není aktivní, provádím kliknutí.`);
+            await this.page.getByText(choosenPeriod, { exact: true }).click();
+        }
 
         try {
             switch (choosenPeriod) {
                 case 'Rozsah': {
                     logger.info(`Vybrán typ období 'Rozsah' s periodou: ${period}`);
-                    
-                    logger.trace("Kliknutí na volbu 'Rozsah'");
-                    await this.page.getByLabel('Rozsah').click();
+                   
+                    const zacatekInput = this.page.getByLabel('Začátek období');
+                    const konecInput = this.page.getByLabel('Konec období');
 
-                    logger.trace(`Rozdělení periody '${period}' na začátek a konec`);
+                    logger.trace("Čekám na viditelnost polí pro zadání data...");
+                    await expect(zacatekInput).toBeVisible();
+                    await expect(konecInput).toBeVisible();
+
                     const [beginDate, endDate] = period.split(' - ');
+                    logger.trace(`Datumy k vyplnění: OD ${beginDate}, DO ${endDate}`);
 
-                    // Pojistka pro případ, že formát periody je nesprávný
                     if (!beginDate || !endDate) {
                         throw new Error(`Neplatný formát periody pro Rozsah: "${period}". Očekávaný formát je "DD.MM.YYYY - DD.MM.YYYY".`);
                     }
@@ -45,7 +54,7 @@ export class SestavyObdobi {
 
                     logger.trace('Vyplnění začátku období');
                     await this.page.getByLabel('Začátek období').fill(beginDate);
-
+                    
                     logger.trace('Vyplnění konce období');
                     await this.page.getByLabel('Konec období').fill(endDate);
                     break;
@@ -55,8 +64,8 @@ export class SestavyObdobi {
                     logger.info(`Vybrán typ období 'Přesné období' s periodou: ${period}`);
                     
                     logger.trace("Kliknutí na volbu 'Přesné období'");
-                    await this.page.getByLabel('Přesné období').click();
-
+                    await this.page.getByText(choosenPeriod, { exact: true }).click();
+                    
                     logger.trace(`Výběr konkrétního období: ${period}`);
                     // Používáme getByRole pro lepší sémantiku a robustnost
                     await this.page.getByRole('button', { name: period, exact: true }).click();
@@ -67,7 +76,7 @@ export class SestavyObdobi {
                     logger.info(`Vybrán typ období 'Plovoucí období' s periodou: ${period}`);
 
                     logger.trace("Kliknutí na volbu 'Plovoucí období'");
-                    await this.page.getByLabel('Plovoucí období').click();
+                    await this.page.getByText(choosenPeriod, { exact: true }).click();
                     
                     logger.trace(`Výběr konkrétního plovoucího období: ${period}`);
                     await this.page.getByRole('button', { name: period, exact: true }).click();

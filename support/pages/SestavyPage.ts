@@ -26,7 +26,7 @@ export class SestavyPage {
         logger.debug(`Krok 3: Klikám na tlačítko "Přidat".`);
         await this.addButton.click();
 
-        await expect(this.page.getByText('Nastavení sestavy')).toBeVisible();
+        await expect(this.page.getByText('Přidání uživatelské sestavy')).toBeVisible();
         logger.info(`Úspěšně vybrána sestava "${reportName}" a spuštěn průvodce.`);
     }
 }

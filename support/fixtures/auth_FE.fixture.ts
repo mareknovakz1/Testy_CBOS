@@ -9,6 +9,7 @@ type MyAuthFixtures = {
 export const test = base.extend<MyAuthFixtures>({
     page: async ({ page }, use) => {
         logger.silly('Fixture: Spouštím přihlášení přes UI...');
+        logger.info(`Připojuji na: ${baseURL} uživatele ${username}`);
         
         await page.goto('/');
         await page.locator('input[type="text"]').fill(username);

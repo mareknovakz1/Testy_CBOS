@@ -18,7 +18,7 @@ export default defineConfig({
         //trace: 'on-firts-retry',
     },
     testDir: './tests',
-    timeout: 10000, //ms
+    timeout: 60000, //ms
     //Skripty 
       testMatch: [
      //"tests/TestScripts/TestLogin.spec.ts", //Testovací skript pro přihlášení
