@@ -62,12 +62,10 @@ getUserReportPreview GET /reports-api/userReportPreview/{SestavaId}  Získá dat
 #### Sestavy
 #### Uživatelské sestavy
 
-ID Scénáře: 1
-Název: **E2E_D001_Lifecycle**
-Popis: Živtní cyklus sestavy D001. Vytvoří sestavu.
 
-ID Scénáře: 2
+ID Scénáře: 1
 Název: **E2E_TimePeriods**
+Modul: Sestavy/Uživatelské sestavy 
 Popis: Skript postupně vytvoří, přečte a následně smaže sestavu pro každé definované časové období, aby se ověřila funkčnost všech typů datumových filtrů.
 Testované kroky (časová období):
 Rozsah (výchozí období – aktuální čas)
@@ -84,3 +82,17 @@ Plovoucí období: Předchozí 3 měsíce
 Plovoucí období: Aktuální týden
 Plovoucí období: Minulý týden
 
+ID Scénáře: 2
+Název: **E2E_D001_Lifecycle**
+Modul: Sestavy/Uživatelské sestavy
+Popis: Živtní cyklus sestavy D001. Vytvoří sestavu.
+
+ID Scenáře:3
+Název: **AllReposrts_Lifecyle_public**
+Popis: Testuje vytvoření sdílenách sestav
+Testoavné kroky
+
+ID: Scénář: 4
+Název: **E2E_FE_D001_.alltimes**
+Modul: Sestavy/Uživatelské sestavy
+Popis: Otestuje na FE všechna možná zadání časového rozsahu

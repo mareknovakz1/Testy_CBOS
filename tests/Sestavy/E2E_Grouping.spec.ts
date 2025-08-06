@@ -49,13 +49,14 @@ test.describe('D001 - Kumulativní testování seskupování', () => {
                 test.fail(!createdReport, `Uložená sestava '${reportFullName}' nebyla nalezena v seznamu.`);
 
                 newReportDbId = createdReport!.id;
+                logger.debug('Response vytvořené sestavy:',createdReport);
                 const itemsCount = createdReport!.items;
 
-                if (itemsCount === null) {
+                if (itemsCount === null || itemsCount === 0) {
                     const errorMessage = `Počet objektů pro '${testCaseName}' je 'null'.`;
                     logger.error(errorMessage);
                     test.fail(true, errorMessage);
-                } else {
+                }else {   
                     logger.info(`Vytvořena sestava '${testCaseName}' (ID: ${newReportDbId}). Obsahuje: ${itemsCount} položek.`);
                 }
 
@@ -120,9 +121,10 @@ test.describe('P001 - Kumulativní testování seskupování', () => {
                 test.fail(!createdReport, `Uložená sestava '${reportFullName}' nebyla nalezena v seznamu.`);
 
                 newReportDbId = createdReport!.id;
+                logger.debug('Response vytvořené sestavy:',createdReport);
                 const itemsCount = createdReport!.items;
 
-                if (itemsCount === null) {
+                if (itemsCount === null || itemsCount === 0) {
                     const errorMessage = `Počet objektů pro P001 '${testCaseName}' je 'null'.`;
                     logger.error(errorMessage);
                     test.fail(true, errorMessage);

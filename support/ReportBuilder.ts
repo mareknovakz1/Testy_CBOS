@@ -14,7 +14,7 @@ export class ReportBuilder {
     constructor(reportDefinitionId: string, name: string) {
         this.payload = {
             settings: {
-                availableFilters: ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+                availableFilters: ["stockId", "stkitmType", "grouping", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
                 dateModelType: undefined,
                 dateFrom: undefined,
                 dateTo: undefined,
@@ -24,7 +24,7 @@ export class ReportBuilder {
                 day: undefined,
                 stockId: [],
                 stkitmType: [],
-                groupId: [],
+                grouping: [],
                 goodsOwnerId: [],
                 paidBy: [],
                 cardOwnerId: [],
@@ -105,7 +105,7 @@ export class ReportBuilder {
      * @param groupIds - Pole ID pro seskupení.
      */
     public withGrouping(groupIds: string[]): this {
-        this.payload.settings.groupId = groupIds;
+        this.payload.settings.grouping = groupIds;
         return this;
     }
      /**

@@ -33,12 +33,12 @@ test.describe('E2E: Test pomocných funkcí pro navigaci a nastavení sestav', (
         const periodPage = new SestavyObdobi(page);
 
         // --- TEST 1: Výběr období 'Rozsah' ---
-        const periodRozsah = '01.01.2024 - 31.01.2024';
+        const periodRozsah = '01.07.2025 - 31.08.2025';
         logger.debug(`Testuji výběr období typu 'Rozsah' s hodnotou: ${periodRozsah}`);
         await periodPage.select('Rozsah', periodRozsah);
         // Ověření, že se vstupní pole správně vyplnila
-        await expect(page.getByLabel('Začátek období')).toHaveValue('01.01.2024');
-        await expect(page.getByLabel('Konec období')).toHaveValue('31.01.2024');
+        await expect(page.getByLabel('Začátek období')).toHaveValue('01.07.2025');
+        await expect(page.getByLabel('Konec období')).toHaveValue('31.08.2024');
         logger.info(`OK: Období 'Rozsah' bylo úspěšně nastaveno.`);
         await page.waitForTimeout(500); // Krátká pauza pro přehlednost při sledování testu
 

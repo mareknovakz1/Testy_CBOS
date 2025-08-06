@@ -37,33 +37,32 @@ export class SestavyObdobi {
                     logger.debug(`Vybrán typ období 'Rozsah' s periodou: ${period}`);
                     
                      //Rozdělení periody na začátek a konec
-                    logger.trace("Rozdělení a validace rozsahu na začátek a konec");
-                    const parts = period.split(' - ');
-                    if (parts.length !== 2 || !parts[0] || !parts[1]) {
-                        throw new Error(`Neplatný formát periody pro Rozsah: "${period}". Očekávaný formát je "DD.MM.YYYY - DD.MM.YYYY".`);
+                    logger.info(`Vybírám datum: ${period}`);
+
+                    // 1. Rozparsujeme datum na den, měsíc a rok
+                    const dateParts = period.split('.');
+                    if (dateParts.length !== 3) {
+                        throw new Error(`Neplatný formát data pro výběr v kalendáři: ${period}`);
                     }
-                    const [beginDate, endDate] = parts;
-                    logger.silly(`Zadaný rozsah: OD ${beginDate}, DO ${endDate}`);
-                    
+                    const [day, month, year] = dateParts;
+
+                    // 2. Převedeme číslo měsíce na český název
+                    const monthNames = [
+                    'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen',
+                    'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'
+                    ];
+                    const monthIndex = parseInt(month, 10) - 1;
+                    const monthName = monthNames[monthIndex];
+
+                    if (!monthName) {
+                        throw new Error(`Neplatné číslo měsíce: ${month}`);
+                    }
                     //Otevření kalendáře pro zadání rozsahu
                     logger.trace("Vybírám typ období 'Rozsah'");
                     await this.page.getByText('Rozsah', { exact: true }).click();
                     logger.trace("Otevírám kalendář pro 'Začátek období'");
                     await this.page.locator('div.field').filter({ hasText: 'Začátek období' }).getByRole('textbox').click();
-
-                    //Otevření konce období
-                    //logger.trace("Čekám na viditelnost pole pro zadání konce období");
-                    //const konecInput = this.page.getByLabel('textbox').nth(2).locator('input'); 
-
-                    logger.trace("Čekám na viditelnost polí pro zadání data...");
-                    //await expect(zacatekInput).toBeVisible();
-                    //await expect(konecInput).toBeVisible();
-
-                    logger.trace(`Datumy k vyplnění: OD ${beginDate}, DO ${endDate}`);
-
-                    if (!beginDate || !endDate) {
-                        throw new Error(`Neplatný formát periody pro Rozsah: "${period}". Očekávaný formát je "DD.MM.YYYY - DD.MM.YYYY".`);
-                    }
+                    break;
                 }
 
                 case 'Přesné období': {

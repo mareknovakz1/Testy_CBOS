@@ -9,7 +9,7 @@ import path from "path";
 // Pro `minLevel` se ve verzi 4+ používají čísla, nikoli text.
 //Logy se ukláadají do test-result/logs
 
-const minLevel: number = Number(process.env.LOG_LEVEL) || 1; 
+const minLevel: number = Number(process.env.LOG_LEVEL) || 1; // Výchozí úroveň je 'info' (3)
 
 // --- Vytvoření složky a souboru pro logy ---
 const logDir = path.join('artefacts', 'logs');
