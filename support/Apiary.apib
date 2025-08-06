@@ -1,0 +1,1341 @@
+FORMAT: 1A
+HOST: http://localhost/api
+
+# cbos-reports-api
+
+Toto je API pro zajištění sestavení seznamu pro vybrané entity a také generování reportu s možností výstupu do XLSX, CSV nebo PDF.
+
+# Group Obecné
+
+## Status [/status]
+
+Tato metoda je určena pro ověření, zda služba běží
+
+### Získat status [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Status)
+
+
+# Group Seznamy
+
+## Seznam vydavatelů karet [/listOfCardIssuers{?issuerType,groupsConversionBy}]
+
+Tato metoda sestaví seznam vydavatelů karet podle vstupních parametrů
+
+### Získat seznam vydavatelů karet [GET]
+
++ Parameters
+    + issuerType: `B` (string, optional) - typ vydavatele karet
+    + groupsConversionBy: `N` (string, optional) - typ converze skupin zboží
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam tříd spotřební daně [/listOfCtClasses]
+
+Tato metoda sestaví seznam tříd spotrebních daní podle vstupních parametrů
+
+### Získat seznam tříd spotřební daně [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam lokálních fleet karet [/listOfLocalCards{?listType,partnerId,accOwner,cardType,cardIdentification}]
+
+Tato metoda sestaví seznam lokalních fleet karet podle vstupních parametrů
+
+### Získat seznam lokálních fleet karet [GET]
+
++ Parameters
+    + listType: `unassigned` (string, optional) - typ sestavení seznamu podle přiřazení. Default: `unassigned`
+    + partnerId: `9089` (number, optional) - identifikace partnera
+    + accOwner: `00174939` (string, optional) - identifikace sítě
+    + cardType: `1` (number, optional) - typ lokalní karty.
+        + Members
+            + `1`
+            + `2`
+            + `3`
+            + `4`
+    + cardIdentification: `D` (string, optional) - identifikace karty (plati pouze pro odběrové karty typ 1).
+        + Members
+            + `D`
+            + `U`
+            + `V`
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam partnerů [/listOfPartners{?partnerType,accOwner,id,ico,balanceInterval,stockId,allStocks}]
+
+Tato metoda sestaví seznam partnerů podle vstupních parametrů
+
+### Získat seznam partnerů [GET]
+
++ Parameters
+    + partnerType: `D` (string, optional) - typ partnera.
+        + Members
+            + `O`
+            + `F`
+            + `D`
+            + `W`
+            + `T`
+            + `G`
+            + `L`
+    + accOwner: `00174939` (string, optional) - identifikace sítě
+    + id: `9089` (number, optional) - identifikace partnera
+    + ico: `00174939` (string, optional) - ico partnera
+    + balanceInterval: `W` (string, optional) - interval pro automatické bilance.
+        + Members
+            + `W`
+            + `H`
+            + `M`
+            + `F`
+    + stockId: `1,2` (string, optional) - jeden nebo seznam čísel obchodních míst (oddělených čárkou), kde je partner nastaven jako aktivní
+    + allStocks: `true` (boolean, optional) - vybere pouze partnery, kteří mohou na všechna obchodní místa
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam centrálních kurzů [/listOfCurrencyRates{?accOwner}]
+
+Tato metoda sestaví centrálních kurzů podle vstupních parametrů
+
+### Získat seznam centrálních kurzů [GET]
+
++ Parameters
+    + accOwner: `00174939` (string, optional) - identifikace sítě
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam konkurenčních obchodních míst - CCS [/listOfForeignStocksCCS{?columns}]
+
+Tato metoda sestaví seznam konkurenčních obchodních míst
+
+### Získat seznam konkurenčních OM - CCS [GET]
+
++ Parameters
+    + columns: `id,ccsId,stockName,operator,updated` (string, optional) - Seznam sloupců oddělených čárkou (např. `id,ccsId,stockName,operator,updated`)
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam cenových kategorií [/listOfPricesCategories{?type}]
+
+Tato metoda sestaví seznam cenových kategorií podle vstupních parametrů
+
+### Získat seznam cenovýchategorií [GET]
+
++ Parameters
+    + type: `A` (string, optional) - typ kategorie.
+        + Members
+            + `A`
+            + `F`
+            + `P`
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam účtenek [/listOfReceipts{?stockId,accOwner,year,month,day,termId,operator,recType,paidBy,dateFrom,dateTo,ean,cardIssuerId,totalReceiptPriceFrom,totalReceiptPriceTo,receiptItemPriceFrom,receiptItemPriceTo,receiptNrFrom,receiptNrTo,cgroupId,lgroupId,categoryId,search,searchType}]
+
+Tato metoda sestaví seznam účtenek podle vstupních parametrů
+
+### Získat seznam účtenek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + accOwner: `00174939` (string, optional) - identifikace sítě
+    + year (number, required) - rok. Example: `2023`
+    + month (number, required) - měsíc. Example: `9`
+    + day: `8` (number, optional) - den
+    + termId: `true` (boolean, optional) - číslo pokladního terminálu
+    + operator: `OCTOPOS` (string, optional) - operátor
+    + recType: `N` (string, optional) - typ účtenky
+    + paidBy: `M` (string, optional) - způsob uhrazení
+    + dateFrom (string, optional) - datum od v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + ean (string, optional) - EAN kód
+    + cardIssuerId: `5` (number, optional) - identifikace vydavatele karty
+    + totalReceiptPriceFrom: `500` (number, optional) - celková částka účtenky, dolní hranice
+    + totalReceiptPriceTo: `3000` (number, optional) - celková částka účtenky, horní hranice
+    + receiptItemPriceFrom: `500` (number, optional) - částka alespoň jedné položky, dolní hranice
+    + receiptItemPriceTo: `2000` (number, optional) - částka alespoň jedné položky, horní hranice
+    + receiptNrFrom: `5` (string, optional) - číslo účtenky od
+    + receiptNrTo: `10` (string, optional) - číslo účtenky do
+    + cgroupId: `1,52` (string, optional) - ID centrální skupiny zboží (nebo seznam oddělený čárkou)
+    + lgroupId: `1` (string, optional) - ID lokální skupiny zboží (nebo seznam oddělený čárkou)
+    + categoryId: `8` (string, optional) - ID centrální kategorie (nebo seznam oddělený čárkou)
+    + search: `8594` (string, optional) - co se má vyhledat
+    + searchType: `fullSearch` (string, optional) - jak se mají sestavit podmínky vyhledání (EAN, PLU, card, receiptText, fullSearch)
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam UDD Účtenek [/listOfReceiptsUdd{?stockId,accOwner}]
+
+Tato metoda sestaví seznam UDD účtenek.
+
+### Získat seznam UDD účtenek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + accOwner: `00174939` (string, optional) - identifikace sítě
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam skladových karet [/listOfStockCards/{accOwner}/{stockId}{?stkitmType,cgroupId,ownerId,vatClsId,lgroupId,category,supplyStatus,withSupplyOnly,notApprovedOnly,mainOnly,tandemOnly,selectedDateTime,valid,withSellingPrice,takeMain,supplierId,ctClsId}]
+
+Tato metoda sestaví seznam skladových karet podle vstupních parametrů
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě (URI parameter). Example: `00174939`
+    + stockId (number, required) - identifikace daného skladu (obchodního místa) (URI parameter). Example: `1`
+    + stkitmType: `D` (string, optional) - typ karet zboží.
+        + Members
+            + `D`
+            + `S`
+            + `W`
+    + cgroupId: `100` (number, optional) - identifikace centrální skupiny zboží
+    + ownerId: `1` (number, optional) - identifikace vlastníka
+    + vatClsId: `1` (number, optional) - identifikace třídy DPH
+    + lgroupId: `1` (number, optional) - identifikace lokální skupiny zboží
+    + category: `5.1.0` (string, optional) - identifikace centrální kategorie zboží
+    + supplyStatus (number, optional) - označení statusu zásob.
+        + Members
+            + `1`
+            + `2`
+            + `3`
+    + withSupplyOnly: `true` (boolean, optional) - určuje zda se mají zobrazit pouze skladové karty se zásobou vyšší než je 0
+    + withSellingPrice: `true` (boolean, optional) - určuje zda se mají zobrazovat pouze skladové karty s cenou
+    + notApprovedOnly: `true` (boolean, optional) - určuje zda se mají zobrazovat pouze neschválené skladové karty
+    + mainOnly: `true` (boolean, optional) - pokud chci vyhledat pouze kmenové skladové karty
+    + tandemOnly: `false` (boolean, optional) - určuje zda se mají zobrazt pouze tandemove skladové karty
+    + selectedDateTime (string, optional) - Datum a čas pro výběr (ISO formát)
+    + valid: `true` (boolean, optional) - určuje jaké skladoví karty se mají zahrnout
+    + takeMain: `true` (boolean, optional)
+    + supplierId: `1` (number, optional) - identifikace dodavatele
+    + ctClsId: `1` (number, optional) - identifikace spotřební daně
+
+### Získat seznam skladových karet [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam jedinečných PLU skladových karet [/listOfRootStockCards{?stkitmType,accOwner,stockId,plu,ean,valid}]
+
+Tato metoda sestaví seznam skladových karet podle vstupních parametrů
+
+### Získat seznam jedinečných PLU [GET]
+
++ Parameters
+    + stkitmType: `D` (string, optional) - typ karet zboží.
+        + Members
+            + `D`
+            + `S`
+            + `W`
+    + accOwner: `00174939` (string, optional) - identifikace sítě, nebo sítí oddělených čárkou
+    + stockId: `1` (string, optional) - identifikace daného skladu (obchodního místa), nebo seznam oddělený čárkou
+    + plu: `00000001` (string, optional) - hledané plu, nebo seznamu odděleného čárkou
+    + ean: `123` (string, optional) - určuje ean
+    + valid: `true` (boolean, optional) - určuje jaké karty zboží se mají zahrnout
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam skladů [/listOfStocks{?valid,withVirtualStock}]
+
+Tato metoda sestaví seznam skladů podle vstupních parametrů
+
+### Získat seznam skladů [GET]
+
++ Parameters
+    + valid: `true` (boolean, optional) - určuje jaká obchodní místa se mají zahrnout
+    + withVirtualStock: `true` (boolean, optional) - určuje jaká obchodní místa se mají zahrnout (true - vrátí všechna OM, včetně virtuálního OM)
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam uživatelů [/listOfUsers{?cbosScale,accOwner,stockId}]
+
+Tato metoda sestaví seznam uživatelů podle vstupních parametrů
+
+### Získat seznam uživatelů [GET]
+
++ Parameters
+    + cbosScale: `1` (number, optional) - určuje váhu práv pro kterou se mají zobrazit uživatelé
+    + accOwner: `00174939` (string, optional) - identifikace sítě
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam tříd DPH [/listOfVatClasses]
+
+Tato metoda sestaví seznam tříd DPH.
+
+### Získat seznam tříd DPH [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam šablon pro nastavení práv [/listOfRoles{?scheme,scale,type}]
+
+Tato metoda sestaví seznam šablon práv.
+
+### Získat seznam šablon práv [GET]
+
++ Parameters
+    + scheme (string, required) - určení šablony. Example: `cbos`
+        + Members
+            + `cbos`
+            + `gpos`
+    + scale (number, optional) - určuje váhu šablony. Example: `1`
+    + type: `U` (string, optional) - určuje typ šablony.
+        + Members
+            + `S`
+            + `U`
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam příjemek / výdejek [/listOfGoodsDeliveryNotes{?stockId,year,month,day,documentType,documentSubType,ownerId,supplierId,documentsStatus,operator,sign}]
+
+Tato metoda sestaví seznam příjemek nebo výdejek.
+
+### Získat seznam příjemek/výdejek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + year (number, required) - rok. Example: `2023`
+    + sign (string, required) - určení, jestli se jedná o příjemku nebo výdejku. Example: `+`
+        + Members
+            + `+`
+            + `-`
+    + month: `1` (number, optional) - měsíc
+    + day: `1` (number, optional) - den
+    + documentType: `1` (number, optional) - druh dokladu
+    + documentSubType: `1` (number, optional) - důvod vystavení dokladu
+    + ownerId: `1` (number, optional) - vlastník zboží
+    + supplierId: `1` (number, optional) - dodavatel zboží
+    + documentsStatus: `1` (number, optional) - stav dokladu
+    + operator: `MH` (string, optional) - operátor
+
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam inventur [/listOfGoodsInventories{?stockId,year,month,day,search,groupId,documentsStatus,operator}]
+
+Tato metoda sestaví seznam inventur.
+
+### Získat seznam inventur [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + year (number, required) - rok. Example: `2023`
+    + month: `1` (number, optional) - měsíc
+    + day: `1` (number, optional) - den
+    + search: `123` (string, optional) - hledání dle PLU
+    + groupId: `1` (number, optional) - centrální skupina zboží
+    + documentsStatus: `1` (number, optional) - stav dokladu
+    + operator: `MH` (string, optional) - operátor
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam objednávek [/listOfOrders{?stockId,year,month,day,search,supplierId,documentsStatus,operator}]
+
+Tato metoda sestaví seznam objednávek.
+
+### Získat seznam objednávek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + year (number, required) - rok. Example: `2023`
+    + month: `1` (number, optional) - měsíc
+    + day: `1` (number, optional) - den
+    + search: `123` (string, optional) - hledání dle PLU
+    + supplierId: `1` (number, optional) - id dodavatele
+    + documentsStatus: `1` (number, optional) - stav dokladu
+    + operator: `MH` (string, optional) - operátor
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam operátorů [/listOfOperators{?stockId,year,month,day,documentType}]
+
+Tato metoda sestaví seznam operátorů pro daný typ dokumentu a období.
+
+### Získat seznam operátorů [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + year (number, required) - rok. Example: `2023`
+    + documentType (string, required) - určuje typ dokumentu. Example: `R`
+        + Members
+            + `R`
+            + `I`
+            + `G`
+            + `W`
+    + month: `1` (number, optional) - měsíc
+    + day: `1` (number, optional) - den
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam pokladních uzávěrek [/listOfPosSummaries{?stockId,format}]
+
+Tato metoda sestaví seznam pokladních uzávěrek.
+
+### Získat seznam pokladních uzávěrek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam stvrzenek o složení hotovosti [/listOfPosTankTickets{?stockId,dateFrom,dateTo,format}]
+
+Tato metoda sestaví seznam stvrzenek o složení hotovosti.
+
+### Získat seznam stvrzenek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + dateFrom (string, required) - datum od v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + format: `xlsx` (string, optional) - určuje typ formátu
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam vkladů a výběrů hotovosti [/listOfPosMoneyOperations{?stockId,dateFrom,dateTo,format}]
+
+Tato metoda sestaví seznam vkladů a výběrů hotovosti.
+
+### Získat seznam vkladů/výběrů [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + format: `xlsx` (string, optional) - určuje typ formátu
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam přeplatkových poukázek [/listOfPosTankVouchers{?stockId,dateFrom,dateTo,expired,format}]
+
+Tato metoda sestaví seznam přeplatkových poukázek.
+
+### Získat seznam poukázek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + dateFrom (string, required) - datum od v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + expired: `true` (boolean, optional) - určuje exipiraci
+    + format: `xlsx` (string, optional) - určuje typ formátu
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam čerpadlových dodacích listů [/listOfWetDeliveryNotes{?stockId,year,month,day,search,supplierId,documentType,documentsStatus,tankId,operator,format}]
+
+Tato metoda sestaví seznam čerpadlových dodacích listů.
+
+### Získat seznam ČDL [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + year (number, required) - rok. Example: `2023`
+    + month: `1` (number, optional) - měsíc
+    + day: `1` (number, optional) - den
+    + search: `123` (string, optional) - text pro hledání
+    + supplierId: `1` (number, optional) - dodavatel zboží
+    + documentType: `1` (number, optional) - druh dokladu
+    + documentsStatus: `1` (number, optional) - stav dokladu
+    + tankId: `1` (number, optional) - určuje nádrž
+    + operator: `MH` (string, optional) - operátor
+    + format: `xlsx` (string, optional) - určuje typ formátu
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam odběrů podle řidiče [/listOfDrivers{?accOwner,valid,partnerId}]
+
+Tato metoda sestaví seznam řidičů.
+
+### Získat seznam řidičů [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace účtu. Example: `60193524`
+    + valid: `true` (boolean, optional) - validita
+    + partnerId: `1` (number, optional) - id partnera
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Seznam odběrů podle vozidla [/listOfVehicles]
+
+Tato metoda sestaví seznam vozidel.
+
+### Získat seznam vozidel [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+# Group Reporty
+
+## Transakce partnera [/partnerTransactions{?partnerId,year,month,day,stockId,stkitmType,groupId,validCard,cardIdentification,responseType,format}]
+
+Tato metoda sestaví přehled transakcí pro partnera dle parametrů
+
+### Získat transakce partnera [GET]
+
++ Parameters
+    + partnerId (number, required) - ID partnera. Example: `9086`
+    + year (number, required) - rok. Example: `2023`
+    + month (number, required) - měsíc. Example: `1`
+    + day: `1` (number, optional) - den
+    + stockId: `1` (number, optional) - identifikace obchodního místa
+    + stkitmType: `D` (string, optional) - druh zboží
+    + groupId: `50` (number, optional) - centrální skupina zboží
+    + validCard: `true` (boolean, optional) - vybere transakce na aktivní karty
+    + cardIdentification: `D` (string, optional) - vybere transakce podle typu karty.
+        + Members
+            + `D`
+            + `V`
+            + `U`
+    + responseType: `sumPrice` (string, optional) - umožňuje výstup omezit
+    + format: `xlsx` (string, optional) - umožňuje typ exportu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Pohyby na skladové kartě [/stockCardTransactions{?stockCardId,dateFrom,dateTo,excludeSpecialTransactions}]
+
+Tato metoda sestaví přehled pohybů na skladové kartě za zvolené období
+
+### Získat pohyby na skladové kartě [GET]
+
++ Parameters
+    + stockCardId (number, required) - identifikace skladové karty. Example: `1`
+    + dateFrom (string, optional) - začátek požadovaného období ve tvaru ISO a UTC. Example: `2023-12-31T23:00:00.000Z`
+    + dateTo (string, optional) - konec požadovaného období ve tvaru ISO a UTC. Example: `2024-01-31T22:59:59.999Z`
+    + excludeSpecialTransactions: `false` (boolean, optional) - umožňuje vyloučit z přehledu u PHM specialní transakce typu PRETOC a VZOREK
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+# Group Sestavy
+
+## Smazané položky účtenek [/receiptDeletedItems{?stockId,termId,year,dateFrom,dateTo,groupId,operator,search,format}]
+
+Sestava smazaných položek účtenek.
+
+### Získat smazané položky účtenek [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + year (number, required) - rok. Example: `2023`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + termId: `1` (number, optional) - pokladna
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + groupId: `1` (number, optional) - centrální skupina zboží
+    + operator: `MH` (string, optional) - operátor
+    + search: `10` (string, optional) - prodejní cena od
+    + format: `xlsx` (string, optional) - určuje typ exportu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Transakce vlastní spotřeby [/selfUsageTransactions{?accOwner,stockId,dateFrom,dateTo,stkitmType,columns,sort,format}]
+
+Sestava transakcí vlastní spotřeby.
+
+### Získat transakce vlastní spotřeby [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + stkitmType: `D` (string, optional) - typ karet zboží.
+        + Members
+            + `D`
+            + `S`
+            + `W`
+    + columns (string, optional) - Seznam sloupců k zobrazení
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Odvody hotovosti [/cashCollections{?accOwner,stockId,dateFrom,dateTo,format}]
+
+Sestava odvodů hotovosti.
+
+### Získat odvody hotovosti [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Denní evidence tržeb [/dailyRegisters{?accOwner,stockId,dateFrom,dateTo,sort,offset,limit,format}]
+
+Sestava denní evidence tržeb.
+
+### Získat denní evidenci tržeb [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Denní evidence stavu nádrží [/dailyTanksSupply{?accOwner,stockId,dateFrom,dateTo,sort,offset,limit,format,extendedExport,extendedRefTemperature}]
+
+Sestava denní evidence stavu nádrží.
+
+### Získat denní evidenci stavu nádrží [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+    + extendedExport (boolean, optional) - Rozšířený export
+    + extendedRefTemperature (boolean, optional) - Rozšířený export s referenční teplotou
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Transakce podle řidičů [/driversTransactions{?accOwner,stockId,dateFrom,dateTo,partnerId,columns,sort,format}]
+
+Sestava transakcí podle řidičů.
+
+### Získat transakce podle řidičů [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + partnerId (number, optional) - ID partnera
+    + columns (string, optional) - Seznam sloupců k zobrazení
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+    + Body
+
+            ```json
+            {
+                "groupId": 1,
+                "drivers": [10, 25]
+            }
+            ```
+            + groupId (number, optional)
+            + drivers (array[number], optional) - Seznam ID řidičů
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Export detailu prodejů [/exportSalesDetail{?accOwner,stockId,year,month,day,partnerId,paidBy,stkitmType,format}]
+
+Sestava detailu prodejů.
+
+### Získat export detailu prodejů [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + year (number, required) - rok. Example: `2023`
+    + month (number, required) - měsíc. Example: `9`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + day (number, optional) - den
+    + partnerId (number, optional) - ID partnera
+    + paidBy (string, optional) - Způsob úhrady
+    + stkitmType: `D` (string, optional) - typ karet zboží.
+        + Members
+            + `D`
+            + `S`
+            + `W`
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Agregovaný seznam prodejů [/listOfSalesAgr{?accOwner,stockId,dateFrom,dateTo,cardIssuerId,goodsOwnerId,groupId,stkitmType,localCardOwnerId,paidBy,sort,groupBy,offset,limit,format,orientation,stockPricesSales}]
+
+Sestava agregovaných prodejů.
+
+### Získat agregovaný seznam prodejů [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + cardIssuerId: `1` (number, optional) - ID vydavatele karty
+    + goodsOwnerId: `1` (number, optional) - ID vlastníka zboží
+    + groupId: `1` (number, optional) - ID centrální skupiny zboží
+    + stkitmType: `D` (string, optional) - typ karet zboží.
+        + Members
+            + `D`
+            + `S`
+            + `W`
+    + localCardOwnerId: `1` (number, optional) - ID vlastníka lokální karty
+    + paidBy (string, optional) - Způsob úhrady
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + groupBy (string, optional) - Specifikace seskupení
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+    + orientation: `portrait` (string, optional) - Orientace stránky pro PDF/XLSX (`portrait`, `landscape`)
+    + stockPricesSales: `true` (boolean, optional) - Zahrnout ceny skladu
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## LPG Prodeje a Dodávky [/lpgSalesDeliveries{?accOwner,stockId,year,format,orientation}]
+
+Sestava prodejů a dodávek LPG.
+
+### Získat LPG prodeje a dodávky [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + year (number, required) - rok. Example: `2023`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+    + orientation: `portrait` (string, optional) - Orientace stránky pro PDF/XLSX (`portrait`, `landscape`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Pohyby zboží [/movementsOfGoods{?accOwner,stockId,year,month,day,groupId,valid,sort,offset,limit,format,onlyWithMove}]
+
+Sestava pohybů zboží.
+
+### Získat pohyby zboží [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + year (number, required) - rok. Example: `2023`
+    + month (number, required) - měsíc. Example: `9`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + day: `1` (number, optional) - den
+    + groupId: `1` (number, optional) - ID centrální skupiny zboží
+    + valid: `true` (boolean, optional) - Zahrnout pouze validní
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+    + onlyWithMove: `true` (boolean, optional) - Zobrazit pouze položky s pohybem
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Uživatelské reporty podle sítě [/usersReports/{accOwner}]
+
+Správa uživatelských reportů pro danou síť.
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+
+### Získat seznam uživatelských reportů [GET]
+
+Získá seznam všech uživatelských reportů pro danou síť.
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+    + Headers
+
+            X-Total-Count: 10 (number)
+    + Body
+
+            ```json
+            [
+                {
+                    "id": 1,
+                    "name": "Muj Report",
+                    "reportDefinitionId": "D003",
+                    "public": true,
+                    "settings": {},
+                    "accOwner": "00174939"
+                }
+            ]
+            ```
+
++ Response 400 (application/json; charset=utf-8)
+
+### Vytvořit report [POST]
+
+Vytvoří nový uživatelský report pro danou síť.
+
++ Request (application/json)
+    + Attributes (object)
+        + settings (object, required) - Nastavení reportu. Example: `{}`
+        + reportDefinitionId (string, required) - ID definice reportu. Example: `D003`
+        + name (string, required) - Název reportu. Example: `Cepro Reporty`
+        + public (boolean, required) - Zda má být report veřejný. Example: `true`
+
++ Response 201 (application/json; charset=utf-8)
+    + Headers
+
+            Location: /usersReports/2
+    + Body
+
+            ```json
+            {
+                "id": 2,
+                "name": "Cepro Reporty",
+                "reportDefinitionId": "D003",
+                "public": true,
+                "settings": {},
+                "accOwner": "00174939"
+            }
+            ```
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Uživatelský report podle ID [/usersReports/{id}]
+
+Získání detailu, úprava nebo smazání konkrétního uživatelského reportu.
+
++ Parameters
+    + id (number, required) - ID uživatelského reportu. Example: `1`
+
+### Získat detail uživatelského reportu [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json; charset=utf-8)
+    + Body
+
+            ```json
+            {
+                "id": 1,
+                "name": "Muj Report",
+                "reportDefinitionId": "D003",
+                "public": true,
+                "settings": {},
+                "accOwner": "00174939"
+            }
+            ```
+
++ Response 400 (application/json; charset=utf-8)
++ Response 404 (application/json; charset=utf-8)
+
+### Upravit uživatelský report [PUT]
+
++ Request (application/json)
+    + Attributes (object)
+        + settings (object, optional) - Nové nastavení reportu
+        + name (string, optional) - Nový název reportu. Example: `Cepro Reporty`
+        + public (boolean, optional) - Zda má být report veřejný. Example: `true`
+
++ Response 200 (application/json; charset=utf-8)
+    + Body
+
+            ```json
+            {
+                "id": 1,
+                "name": "Cepro Reporty",
+                "reportDefinitionId": "D003",
+                "public": true,
+                "settings": {},
+                "accOwner": "00174939"
+            }
+            ```
+
++ Response 400 (application/json; charset=utf-8)
++ Response 404 (application/json; charset=utf-8)
+
+### Smazat uživatelský report [DELETE]
+
++ Response 204
+
++ Response 400 (application/json)
+
++ Response 404 (application/json)
+
+
+## Náhled uživatelského reportu [/userReportPreview/{id}{?format,sort,offset,limit}]
+
+Zobrazení náhledu nebo export uživatelského reportu.
+
++ Parameters
+    + id (string, required) - ID uživatelské šablony. Example: `12345`
+    + format (string, optional) - Pokud není definováno, vrací JSON.
+        + Members
+            + `pdf` - vrací PDF soubor
+            + `xlsx` - vrací Excel soubor
+            + `csv` - vrací CSV soubor
+            + `csv2` - vrací CSV soubor pro FÚ
+    + sort: `-stockId` (string, optional) - řazení náhledu, i pro soubory (prefix `-` pro sestupné)
+    + offset: `0` (number, optional) - int, offset náhledu, pouze pro náhled (JSON). Example: `10`
+    + limit: `10` (number, optional) - int, počet položek náhledu, pouze pro náhled (JSON). Example: `15`
+
+### Získat náhled/export [GET]
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+            Content-Disposition: attachment; filename="..."
+            X-Total-Count: (number)
+    + Body
+
+            ```json
+            [
+              { "column1": "value1", "column2": 123 },
+              { "column1": "value2", "column2": 456 }
+            ]
+            ```
+
++ Response 400 (application/json)
++ Response 404 (application/json)
+
+
+## PHM Dodávky pro FÚ [/phmDeliveriesForFu{?accOwner,stockId,year,month,groupId,sort,offset,limit,format}]
+
+Sestava dodávek PHM pro Finanční Úřad.
+
+### Získat PHM dodávky pro FÚ [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + year (number, required) - rok. Example: `2023`
+    + month (number, required) - měsíc. Example: `9`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + groupId: `1` (number, optional) - ID centrální skupiny zboží
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## PHM Prodeje pro FÚ [/phmSalesForFU{?accOwner,stockId,year,month,groupId,sort,offset,limit,format}]
+
+Sestava prodejů PHM pro Finanční Úřad.
+
+### Získat PHM prodeje pro FÚ [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + year (number, required) - rok. Example: `2023`
+    + month (number, required) - měsíc. Example: `9`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + groupId: `1` (number, optional) - ID centrální skupiny zboží
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Cenovky [/priceTags{?stockId,format,orientation}]
+
+Generování cenovek.
+
+### Získat cenovky [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`)
+    + orientation: `portrait` (string, optional) - Orientace stránky (`portrait`, `landscape`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Nákup zboží [/purchaseOfGoods{?accOwner,stockId,dateFrom,dateTo,groupId,supplierId,plu,columns,sort,groupBy,format}]
+
+Sestava nákupu zboží.
+
+### Získat nákup zboží [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + groupId: `1` (number, optional) - ID centrální skupiny zboží
+    + supplierId: `1` (number, optional) - ID dodavatele
+    + plu: `2562` (string, optional) - PLU kód
+    + columns (string, optional) - Seznam sloupců k zobrazení
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + groupBy (string, optional) - Specifikace seskupení
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Historie prodejních cen [/salePriceHistory{?accOwner,stockId,dateFrom,dateTo,groupId,stkitmType,sort,offset,limit,format,withEmptyPrevSalePrice,notExported}]
+
+Sestava historie prodejních cen.
+
+### Získat historii prodejních cen [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + groupId: `1` (number, optional) - ID centrální skupiny zboží
+    + stkitmType: `D` (string, optional) - typ karet zboží.
+        + Members
+            + `D`
+            + `S`
+            + `W`
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + offset: `0` (number, optional) - Posun pro stránkování
+    + limit: `10` (number, optional) - Limit položek pro stránkování
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+    + withEmptyPrevSalePrice: `false` (boolean, optional) - Zahrnout i položky bez předchozí ceny
+    + notExported: `true` (boolean, optional) - Zobrazit pouze neexportované změny
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Transakce podle vozidel [/vehiclesTransactions{?accOwner,stockId,dateFrom,dateTo,partnerId,columns,sort,format}]
+
+Sestava transakcí podle vozidel.
+
+### Získat transakce podle vozidel [GET]
+
++ Parameters
+    + accOwner (string, required) - identifikace sítě. Example: `00174939`
+    + dateFrom (string, required) - datum od v ISO formátu. Example: `2023-12-31T23:00:00.000Z`
+    + stockId: `1` (number, optional) - identifikace daného skladu (obchodního místa)
+    + dateTo (string, optional) - datum do v ISO formátu (`YYYY-MM-DDTHH:mm:ss.sssZ`)
+    + partnerId: `1` (number, optional) - ID partnera
+    + columns (string, optional) - Seznam sloupců k zobrazení
+    + sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName`)
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`, `csv`)
+
++ Request (application/json)
+    + Body
+
+            ```json
+            {
+              "groupId": 1,
+              "vehicles": [101, 102]
+            }
+            ```
+            + groupId (number, optional)
+            + vehicles (array[number], optional) - Seznam ID vozidel
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+## Ceník PHM [/wetPriceList{?stockId,format}]
+
+Generování ceníku PHM.
+
+### Získat ceník PHM [GET]
+
++ Parameters
+    + stockId (number, required) - identifikace daného skladu (obchodního místa). Example: `1`
+    + format: `xlsx` (string, optional) - určuje typ formátu (např. `xlsx`, `pdf`)
+
++ Request (application/json)
+
++ Response 200
+    + Headers
+
+            Content-Type: (string)
+
++ Response 400 (application/json; charset=utf-8)
+
+
+# Data Structures
+
+## Status (object)
++ app_name: `bootstrap-oracle-api` (string, fixed) - Název aplikace
++ status: `running` (string, fixed) - Aktuální status služby
++ version: `1.0.0` (string, fixed) - Verze aplikace
+
+## Basic (object)
++ limit: `10` (number, optional) - Maximální počet záznamů na stránku
++ offset: `0` (number, optional) - Počet záznamů k přeskočení (pro stránkování)
++ sort (string, optional) - Specifikace řazení (např. `columnName` nebo `-columnName` pro sestupné)
++ search (string, optional) - Obecný vyhledávací řetězec
++ fullSearch (string, optional) - Řetězec pro fulltextové vyhledávání
++ columns (string, optional) - Seznam sloupců oddělených čárkou pro omezení výstupu
+
+## Yml (object)
++ year (number, optional) - Rok
++ month (number, optional) - Měsíc
++ day (number, optional) - Den
+
+## Valid (object)
++ valid (boolean, optional) - Filtr pro platné/neplatné záznamy

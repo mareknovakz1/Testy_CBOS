@@ -34,30 +34,36 @@ export class SestavyObdobi {
         try {
             switch (choosenPeriod) {
                 case 'Rozsah': {
-                    logger.info(`Vybrán typ období 'Rozsah' s periodou: ${period}`);
-                   
-                    const zacatekInput = this.page.getByLabel('Začátek období');
-                    const konecInput = this.page.getByLabel('Konec období');
+                    logger.debug(`Vybrán typ období 'Rozsah' s periodou: ${period}`);
+                    
+                     //Rozdělení periody na začátek a konec
+                    logger.trace("Rozdělení a validace rozsahu na začátek a konec");
+                    const parts = period.split(' - ');
+                    if (parts.length !== 2 || !parts[0] || !parts[1]) {
+                        throw new Error(`Neplatný formát periody pro Rozsah: "${period}". Očekávaný formát je "DD.MM.YYYY - DD.MM.YYYY".`);
+                    }
+                    const [beginDate, endDate] = parts;
+                    logger.silly(`Zadaný rozsah: OD ${beginDate}, DO ${endDate}`);
+                    
+                    //Otevření kalendáře pro zadání rozsahu
+                    logger.trace("Vybírám typ období 'Rozsah'");
+                    await this.page.getByText('Rozsah', { exact: true }).click();
+                    logger.trace("Otevírám kalendář pro 'Začátek období'");
+                    await this.page.locator('div.field').filter({ hasText: 'Začátek období' }).getByRole('textbox').click();
+
+                    //Otevření konce období
+                    //logger.trace("Čekám na viditelnost pole pro zadání konce období");
+                    //const konecInput = this.page.getByLabel('textbox').nth(2).locator('input'); 
 
                     logger.trace("Čekám na viditelnost polí pro zadání data...");
-                    await expect(zacatekInput).toBeVisible();
-                    await expect(konecInput).toBeVisible();
+                    //await expect(zacatekInput).toBeVisible();
+                    //await expect(konecInput).toBeVisible();
 
-                    const [beginDate, endDate] = period.split(' - ');
                     logger.trace(`Datumy k vyplnění: OD ${beginDate}, DO ${endDate}`);
 
                     if (!beginDate || !endDate) {
                         throw new Error(`Neplatný formát periody pro Rozsah: "${period}". Očekávaný formát je "DD.MM.YYYY - DD.MM.YYYY".`);
                     }
-
-                    logger.trace(`Začátek období: ${beginDate}, Konec období: ${endDate}`);
-
-                    logger.trace('Vyplnění začátku období');
-                    await this.page.getByLabel('Začátek období').fill(beginDate);
-                    
-                    logger.trace('Vyplnění konce období');
-                    await this.page.getByLabel('Konec období').fill(endDate);
-                    break;
                 }
 
                 case 'Přesné období': {
