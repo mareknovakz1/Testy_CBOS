@@ -96,8 +96,13 @@ export class ApiClient {
     }  
     logger.silly(`Sestava ${SestavaId} byla úspěšně smazána (Status: ${response.status()}).`);
   }
-
-  //--- GET getUserReportPreview ---
+  /**
+   * --- GET getUserReportPreview /reports-api/userReportPreview/{SestavaId} ---
+   * Získá náhled sestavy podle jejího ID.
+   * @param SestavaId - ID sestavy, pro kterou chceme získat náhled.
+   * @param options - Volitelné parametry pro stránkování a řazení.
+   * @returns Odpověď ze serveru ve formátu JSON (náhled sestavy).
+   */
   public async getUserReportPreview(
     SestavaId: string | number,
     options: { offset?: number; limit?: number; sort?: string } = {}
@@ -259,6 +264,18 @@ public async getListOfPartners(options: {
  * @param offset - Offset pro stránkování (např. 0)
  * @param limit - Limit pro stránkování (např. 10)
  * @param sort - Řazení (např. '-receipt')
+ * @param recType - Typ účtenky (např. 'R')
+ * @param cardIssuerID - ID vydavatele karty (např. 123)
+ * @param groupId - ID centrální skupiny zboží (např. 456)
+ * @param categoryId - ID centrální kategorie zboží (např. 789)
+ * @param operator - Operátor (uživatel) (např. 'jan.novak')
+ * @param paidBy - Způsob platby (např. 'B')
+ * @param dateFrom - Datum od (např. '2025-01-01')
+ * @param dateTo - Datum do (např. '2025-12-31')
+ * @param receiptNrFrom - Číslo účtenky od (např. '0001')
+ * @param receiptNrTo - Číslo účtenky do (např. '9999')
+ * @param search - Hledaný text (např. 'test')
+ * @param searchType - Typ hledání (např. 'fullSearch')
  * @returns Odpověď ze serveru ve formátu JSON (pole účtenek).
  */
 public async getReceipts(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
