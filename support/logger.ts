@@ -2,6 +2,7 @@ import { Logger, ILogObj, ISettings } from "tslog";
 import fs from "fs";
 import path from "path";
 
+//ÚROVEŇ LOGOVÁNÍ SE ŘÍDÍ V PLAYWRIGHT_CONFIG
 // Čteme úroveň logu z proměnné prostředí. Pokud není nastavena, použije se 'info'.
 // Možné hodnoty: 0:"silly", 1:"trace", 2:"debug", 3:"info", 4:"warn", 5:"error", 6:"fatal"
 // Úroveň logování se dá řidit pomocí command prompt
@@ -9,7 +10,7 @@ import path from "path";
 // Pro `minLevel` se ve verzi 4+ používají čísla, nikoli text.
 //Logy se ukláadají do test-result/logs
 
-const minLevel: number = Number(process.env.LOG_LEVEL) || 1; // Výchozí úroveň je 'info' (3)
+const minLevel: number = Number(process.env.LOG_LEVEL) || 0; // Výchozí úroveň je 'info' (3)
 
 // --- Vytvoření složky a souboru pro logy ---
 const logDir = path.join('artefacts', 'logs');
@@ -49,21 +50,16 @@ const fileLogger: Logger<ILogObj> = new Logger({
 
 // Transport zapisující do souboru, bez env a s relativní cestou
 const getRelativePath = (fullPath: string) => {
-    const projectRoot = process.cwd();
-    return fullPath.startsWith(projectRoot)
-        ? fullPath.slice(projectRoot.length + 1).replace(/\\/g, '/')
-        : fullPath;
+    return path.relative(process.cwd(), fullPath).replace(/\\/g, '/');
 };
 
 fileLogger.attachTransport((logObject) => {
     const pathObj = logObject._meta.path;
     let relPath = "unknown_path";
-    let pathInfo = "";
     if (pathObj && pathObj.fullFilePath) {
         relPath = getRelativePath(pathObj.fullFilePath);
-        pathInfo = ` ${JSON.stringify(pathObj)}`;
     }
-    const logMessage = `${logObject._meta.date.toISOString()} ${logObject._meta.logLevelName.toUpperCase()} ${relPath}${pathInfo}\n\t${logObject[0]}\n`;
+    const logMessage = `${logObject._meta.date.toISOString()} ${logObject._meta.logLevelName.toUpperCase()} ${relPath}\n\t${logObject[0]}\n`;
     fs.appendFileSync(logFilePath, logMessage, 'utf-8');
 });
 

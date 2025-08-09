@@ -96,3 +96,18 @@ ID: Scénář: 4
 Název: **E2E_FE_D001_.alltimes**
 Modul: Sestavy/Uživatelské sestavy
 Popis: Otestuje na FE všechna možná zadání časového rozsahu
+
+ID: Scénář 5
+Název: **FiltryUcetenekSmokeTest**
+Modul: Doklady/Uctenky/
+Popis:
+1. 'GET /administration-api/stockCardsCategories/60193531 - Získání dat z centrální kategorie zboží'
+Expc.: Získání dat z centrální kategorie
+2. GET /reports-api/listOfOperators - Získání seznamu uživatelů
+Expc.: Získání seznamu operátorů
+3. GET /reports-api/listOfCardIssuers - Získání seznamu vydavatelů karet
+Expc.: 
+4. GET /reports-api/listOfReceipts - Odeslání prázdného requestu
+Exc.: Neprázdný response
+5. 'GET /reports-api/listOfReceipts - Nevalidní data, 
+Expc.: 'prázdné pole'

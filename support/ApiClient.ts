@@ -5,7 +5,11 @@ createUserReport() POST /reports-api/usersReports/
 deleteUserReport() DELETE /reports-api/usersReports/{SestavaId} 
 getUserReportPreview GET /reports-api/userReportPreview/{SestavaId}   
 listOfPartners() GET /reports-api/listOfPartners
+getPriceCategory() GET /administration-api/stockCardsCategories/60193531
+getUSers() GET /reports-api/listOfReceipts?year=${year}&stockId=${stockId}&totalReceiptPriceFrom=${totalReceiptPriceFrom}&receiptItemPriceFrom=${receiptItemPriceFrom}&offset=${offset}&limit=${limit}&sort=${sort}
+getReceipts() GET /reports-api/receipts
  */
+
 import { APIRequestContext } from '@playwright/test';
 import { logger } from '../support/logger';
 
@@ -168,5 +172,122 @@ public async getListOfPartners(options: {
     logger.silly(`Seznam partnerů byl úspěšně získán.`);
     return response.json();
 }
+  /**
+   * --- GET filterOfReceipts /administration-api/stockCardsCategories/60193531 ---
+   * Získá seznam filtrů pro účtenky.
+   * @returns Odpověď ze serveru ve formátu JSON (pole filtrů).
+   */
+  public async getPriceCategory(): Promise<any> {
+    const endpoint = '/administration-api/stockCardsCategories/60193531';
+    logger.trace(`Odesílám GET požadavek na ${endpoint}`);
 
+    const response = await this.request.get(endpoint, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+        'Accept': 'application/json, text/plain, */*'
+      }
+    });
+
+    if (!response.ok()) {
+      logger.error(`Chyba při získávání filtrů pro příjemky. Status: ${response.status()}`, await response.text());
+      throw new Error(`Chyba při získávání filtrů pro příjemky. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Filtry pro příjemky byly úspěšně získány.`);
+    return response.json();
+  }
+  /**
+   * --- GET getUSers /reports-api/listOfOperators ---
+   * Získá seznam uživatelů (operátorů).
+   * @param stockId - ID skladu (např. 231)
+   * @param year - Rok (např. 2025)
+   * @param documentType - Typ dokumentu (např. 'R')
+   * @returns Odpověď ze serveru ve formátu JSON (pole uživatelů).
+   */
+  public async getUsers(stockId: number, year: number, documentType: string): Promise<any> {
+    const endpoint = `/reports-api/listOfOperators?stockId=${stockId}&year=${year}&documentType=${documentType}`;
+    logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        }
+    });
+
+    if (!response.ok()) {
+        logger.error(`Chyba při získávání seznamu uživatelů. Status: ${response.status()}`, await response.text());
+        throw new Error(`Chyba při získávání seznamu uživatelů. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Seznam uživatelů byl úspěšně získán.`);
+    return response.json();
+  }  
+  /**
+   * --- GET getCardIssuers /reports-api/listOfCardIssuers ---
+   * Získá seznam vydavatelů karet podle zadaných filtrů.
+   * @param columns - Pole názvů sloupců, které chceme zahrnout do odpovědi.
+   * @returns Odpověď ze serveru ve formátu JSON (pole vydavatelů karet).
+   */
+  public async getCardIssuers(columns: string[]): Promise<any> {
+    const endpoint = `/reports-api/listOfCardIssuers?columns=${columns.join(',')}`;
+    logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        }
+    });
+
+    if (!response.ok()) {
+        logger.error(`Chyba při získávání vydavatelů karet. Status: ${response.status()}`, await response.text());
+        throw new Error(`Chyba při získávání vydavatelů karet. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Seznam vydavatelů karet byl úspěšně získán.`);
+    return response.json();
+  }
+
+  /**
+ * --- GET listOfReceipts /reports-api/listOfReceipts ---
+ * Získá seznam účtenek podle zadaných filtrů.
+ * @param year - Rok (např. 2025)
+ * @param stockId - ID skladu (např. 101)
+ * @param totalReceiptPriceFrom - Minimální cena účtenky (např. 1)
+ * @param receiptItemPriceFrom - Minimální cena položky účtenky (např. 0)
+ * @param offset - Offset pro stránkování (např. 0)
+ * @param limit - Limit pro stránkování (např. 10)
+ * @param sort - Řazení (např. '-receipt')
+ * @returns Odpověď ze serveru ve formátu JSON (pole účtenek).
+ */
+public async getReceipts(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
+    const endpoint = '/reports-api/listOfReceipts';
+    // Sestavení query stringu z objektu params
+    const query = Object.entries(params)
+        .map(([key, value]) => {
+            if (Array.isArray(value)) {
+                return `${key}=${value.join(',')}`;
+            }
+            return `${key}=${value}`;
+        })
+        .join('&');
+    const url = `${endpoint}?${query}`;
+    logger.trace(`Odesílám GET požadavek na ${url}`);
+
+    const response = await this.request.get(url, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        }
+    });
+
+    if (!response.ok()) {
+        logger.error(`Chyba při získávání seznamu účtenek. Status: ${response.status()}`, await response.text());
+        throw new Error(`Chyba při získávání seznamu účtenek. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Seznam účtenek byl úspěšně získán.`);
+    return response.json();
+}
 }
