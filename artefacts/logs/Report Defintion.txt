@@ -1,0 +1,673 @@
+[
+    {
+        "id": "D001",
+        "category": "sales",
+        "name": "overviews.SalesOverview.label",
+        "mainFilters": [
+            "stockId",
+            "stkitmType",
+            "groupId",
+            "goodsOwnerId",
+            "paidBy",
+            "cardOwnerId",
+            "cardIssuerId"
+        ],
+        "otherFilters": [
+            "stockPricesSales"
+        ],
+        "dataConditions": {
+            "stkitmType": [
+                "S",
+                "D",
+                "W",
+                "F"
+            ]
+        },
+        "reportColumns": [
+            "date",
+            "monthLabel",
+            "stockLabel",
+            "goodsOwnerLabel",
+            "stkitmTypeLabel",
+            "groupLabel",
+            "plu",
+            "recText",
+            "paidByLabel",
+            "cardIssuerLabel",
+            "localCardOwnerLabel",
+            "vatValue",
+            "amount",
+            "stockPricesSales",
+            "priceWithoutVat",
+            "vatTotal",
+            "priceWithVat"
+        ],
+        "reportGrouping": [
+            "date",
+            "monthLabel",
+            "stockLabel",
+            "stkitmTypeLabel",
+            "groupLabel",
+            "plu",
+            "recText",
+            "paidByLabel",
+            "vatValue",
+            "cardIssuerLabel",
+            "localCardOwnerLabel"
+        ],
+        "outputFormats": [
+            "pdf",
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range",
+            "ymd",
+            "float"
+        ],
+        "nameCz": "Přehled prodejů",
+        "moduleName": "listOfSalesAgr",
+        "defaultSort": "date",
+        "local": false,
+        "tableName": "SalesOverview"
+    },
+    {
+        "id": "D002",
+        "category": "sales",
+        "name": "overviews.WetSales.label",
+        "mainFilters": [
+            "stockId"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "accOwnerDic",
+            "address",
+            "regNrMpo",
+            "salesDate",
+            "fuCodeName",
+            "ctNomenclature",
+            "sumAmount",
+            "sumPrice"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "ymd"
+        ],
+        "nameCz": "Přehled prodejů PHM pro FÚ",
+        "moduleName": "phmSalesForFU",
+        "defaultSort": "-salesDate,-stockId",
+        "local": false,
+        "tableName": "PhmSalesForFU"
+    },
+    {
+        "id": "D003",
+        "category": "sales",
+        "name": "overviews.DiscountCards.label",
+        "mainFilters": [
+            "stockId",
+            "partnerId"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "receipt",
+            "itemId",
+            "recDatetime",
+            "paidByLabel",
+            "cardNr",
+            "driverName",
+            "carNr",
+            "stockName",
+            "recText",
+            "vatValue",
+            "amount",
+            "unitPrice",
+            "price",
+            "bonus",
+            "finalPrice",
+            "vat"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Přehled prodejů se slevovou kartou",
+        "moduleName": "bonusCardOverview",
+        "defaultSort": "-receipt",
+        "local": false,
+        "tableName": "DiscountCardsOverview"
+    },
+    {
+        "id": "D004",
+        "category": "sales",
+        "name": "overviews.ReceiptDeletedItems.label",
+        "mainFilters": [
+            "stockId",
+            "termId",
+            "groupId",
+            "operator",
+            "purchPrice"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "deletedDate",
+            "termName",
+            "groupName",
+            "stkitmTypeName",
+            "plu",
+            "receiptText",
+            "itemSalePrice",
+            "itemAmount",
+            "itemPriceSum",
+            "operator"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Přehled smazaných položek účtenek",
+        "moduleName": "receiptDeletedItems",
+        "defaultSort": "-deletedDate",
+        "local": true,
+        "tableName": null
+    },
+    {
+        "id": "D005",
+        "category": "sales",
+        "name": "overviews.ForeignStocks.label",
+        "mainFilters": [
+            "stockId"
+        ],
+        "otherFilters": [
+            "afterDate"
+        ],
+        "dataConditions": {},
+        "reportColumns": [
+            "stockName",
+            "foreignStockName",
+            "foreignStockDistance",
+            "product",
+            "price",
+            "ccsStockPrice",
+            "differentPrice",
+            "change",
+            "updated",
+            "commentary",
+            "priceSetAfterDate"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range",
+            "ymd"
+        ],
+        "nameCz": "Přehled konkurenčních cen",
+        "moduleName": "foreignStocks",
+        "defaultSort": "-stockName",
+        "local": false,
+        "tableName": "foreignStocks"
+    },
+    {
+        "id": "D006",
+        "category": "sales",
+        "name": "overviews.ExportSalesDetail.label",
+        "mainFilters": [
+            "stockId",
+            "stkitmType",
+            "partnerId",
+            "paidBy"
+        ],
+        "otherFilters": [],
+        "dataConditions": {
+            "paidBy": [
+                "B",
+                "E",
+                "M",
+                "L",
+                "N",
+                "V",
+                "R",
+                "F",
+                "T"
+            ],
+            "stkitmType": [
+                "S",
+                "D",
+                "W",
+                "F"
+            ]
+        },
+        "reportColumns": [
+            "stockName",
+            "receipt",
+            "recTypeLabel",
+            "recDatetime",
+            "operator",
+            "itemId",
+            "paidByLabel",
+            "cardIssuerName",
+            "cardName",
+            "cardNr",
+            "cardOwnerName",
+            "bonusCardNr",
+            "bonusCardOwnerName",
+            "stkitmTypeName",
+            "groupName",
+            "plu",
+            "recText",
+            "vatValue",
+            "amount",
+            "priceWithoutVat",
+            "vatTotal",
+            "priceWithVat",
+            "bonus",
+            "priceWithoutBonus",
+            "tickets"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range",
+            "ymd"
+        ],
+        "nameCz": "Export položek pokladních dokladů",
+        "moduleName": "exportSalesDetail",
+        "defaultSort": "-stockName",
+        "local": true,
+        "tableName": null
+    },
+    {
+        "id": "P001",
+        "category": "deliveries",
+        "name": "overviews.Purchase.label",
+        "mainFilters": [
+            "stockId",
+            "groupId",
+            "supplierId",
+            "plu"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "date",
+            "documentLabel",
+            "itemId",
+            "supplierLabel",
+            "groupLabel",
+            "stockLabel",
+            "plu",
+            "stockCardLabel",
+            "purchPrice",
+            "amount",
+            "vatTotal",
+            "priceWithoutVat"
+        ],
+        "reportGrouping": [
+            "plu",
+            "supplierLabel",
+            "stockLabel",
+            "groupLabel",
+            "documentLabel"
+        ],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range",
+            "ymd",
+            "float"
+        ],
+        "nameCz": "Přehled nákupu zboží",
+        "moduleName": "purchaseOfGoods",
+        "defaultSort": "date",
+        "local": false,
+        "tableName": "PurchaseOfGoods"
+    },
+    {
+        "id": "P002",
+        "category": "deliveries",
+        "name": "overviews.WetDeliveries.label",
+        "mainFilters": [
+            "stockId"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "accOwnerDic",
+            "stockLabel",
+            "loadingPlace",
+            "address",
+            "deliveryDate",
+            "fuCodeName",
+            "ctCkncs",
+            "caLt",
+            "priceMj",
+            "cdlNrDl",
+            "caNr",
+            "supplierName",
+            "supplierDic",
+            "transport",
+            "transporterName",
+            "transporterDic",
+            "carNr",
+            "trailerNr"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "ymd"
+        ],
+        "nameCz": "Přehled dodávek PHM pro FÚ",
+        "moduleName": "phmDeliveriesForFU",
+        "defaultSort": "-deliveryDate",
+        "local": false,
+        "tableName": "PhmDeliveriesForFU"
+    },
+    {
+        "id": "S001",
+        "category": "stock",
+        "name": "overviews.MovementsOfGoods.label",
+        "mainFilters": [
+            "stockId",
+            "groupId"
+        ],
+        "otherFilters": [
+            "valid",
+            "onlyWithMove"
+        ],
+        "dataConditions": {},
+        "reportColumns": [
+            "id",
+            "plu",
+            "stockCardName",
+            "groupLabel",
+            "delAmount",
+            "delPrice",
+            "delVat",
+            "delPriceWithVat",
+            "recAmount",
+            "recPrice",
+            "recVat",
+            "recPriceWithVat",
+            "salAmount",
+            "salPrice",
+            "salVat",
+            "salPriceWithVat"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx"
+        ],
+        "periodTypes": [
+            "ymd"
+        ],
+        "nameCz": "Přehled pohybů zboží",
+        "moduleName": "movementsOfGoods",
+        "defaultSort": "stockCardName",
+        "local": false,
+        "tableName": "MovementsOfGoods"
+    },
+    {
+        "id": "S002",
+        "category": "stock",
+        "name": "overviews.RevaluationGoods.label",
+        "mainFilters": [
+            "stockId",
+            "stkitmType",
+            "groupId"
+        ],
+        "otherFilters": [
+            "withEmptyPrevSalePrice",
+            "notExported"
+        ],
+        "dataConditions": {
+            "stkitmType": [
+                "S",
+                "D",
+                "W"
+            ]
+        },
+        "reportColumns": [
+            "stockName",
+            "plu",
+            "stockCardName",
+            "groupName",
+            "exported",
+            "exportedDate",
+            "change",
+            "prevSellingPriceWithVat",
+            "sellingPriceWithVat",
+            "startValid",
+            "operator"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "csv2",
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Přehled přecenění",
+        "moduleName": "salePriceHistory",
+        "defaultSort": "-startValid",
+        "local": false,
+        "tableName": "SalePriceHistory"
+    },
+    {
+        "id": "S003",
+        "category": "stock",
+        "name": "overviews.DailyTanksSupply.label",
+        "mainFilters": [
+            "stockId"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "stockName",
+            "supplyDate",
+            "tankId",
+            "stockCardName",
+            "volume",
+            "volumeRef",
+            "temperature",
+            "water"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Půlnoční zásoby PHM",
+        "moduleName": "dailyTanksSupply",
+        "defaultSort": "stockName,-supplyDate,tankId",
+        "local": false,
+        "tableName": "DailyTanksSupply"
+    },
+    {
+        "id": "S004",
+        "category": "stock",
+        "name": "overviews.DailyRegisters.label",
+        "mainFilters": [
+            "stockId"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "stockName",
+            "registryDate",
+            "tankId",
+            "dispenId",
+            "nozzleId",
+            "stockCardName",
+            "plu",
+            "eValue",
+            "mValue"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Půlnoční registry stojanů",
+        "moduleName": "dailyRegisters",
+        "defaultSort": "stockName,-registryDate,tankId,dispenId,nozzleId",
+        "local": false,
+        "tableName": "DailyRegisters"
+    },
+    {
+        "id": "T001",
+        "category": "transaction",
+        "name": "overviews.CardsPreauthOnly.label",
+        "mainFilters": [
+            "stockId"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "recDatetime",
+            "stockName",
+            "termName",
+            "recId",
+            "recPrice",
+            "preauthAmount",
+            "authOperation",
+            "cardNr",
+            "authCode",
+            "finalAuthReason",
+            "authReasonInfo",
+            "operator"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Přehled nedoautorizovaných transakcí",
+        "moduleName": "receiptCardsPreauthOnly",
+        "defaultSort": "recDatetime",
+        "local": false,
+        "tableName": "ReceiptCardsPreauthOnly"
+    },
+    {
+        "id": "T002",
+        "category": "transaction",
+        "name": "overviews.ListOfDriversTransactions.label",
+        "mainFilters": [
+            "stockId",
+            "groupId",
+            "partnerId",
+            "drivers"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "stockName",
+            "receipt",
+            "recDatetime",
+            "recText",
+            "amount",
+            "itemSalePrice",
+            "itemPrice",
+            "vatValue",
+            "vatTotal",
+            "payCardNr",
+            "pairCardNr",
+            "driverName",
+            "personalNumber",
+            "carNr",
+            "vehicleName"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "pdf",
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Přehled odběrů podle řidiče",
+        "moduleName": "driversTransactions",
+        "defaultSort": "-stockName",
+        "local": false,
+        "tableName": "DriversTransactions"
+    },
+    {
+        "id": "T003",
+        "category": "transaction",
+        "name": "overviews.ListOfVehiclesTransactions.label",
+        "mainFilters": [
+            "stockId",
+            "groupId",
+            "partnerId",
+            "vehicles"
+        ],
+        "otherFilters": [],
+        "dataConditions": {},
+        "reportColumns": [
+            "stockName",
+            "receipt",
+            "recDatetime",
+            "recText",
+            "amount",
+            "itemSalePrice",
+            "itemPrice",
+            "vatValue",
+            "vatTotal",
+            "payCardNr",
+            "pairCardNr",
+            "driverName",
+            "personalNumber",
+            "carNr",
+            "vehicleName"
+        ],
+        "reportGrouping": [],
+        "outputFormats": [
+            "pdf",
+            "xlsx",
+            "csv"
+        ],
+        "periodTypes": [
+            "range"
+        ],
+        "nameCz": "Přehled odběrů podle vozidla",
+        "moduleName": "vehiclesTransactions",
+        "defaultSort": "carNr",
+        "local": false,
+        "tableName": "VehiclesTransactions"
+    }
+]

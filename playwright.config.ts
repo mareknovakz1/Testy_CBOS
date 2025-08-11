@@ -6,12 +6,13 @@ import { defineConfig, devices } from '@playwright/test';
 import { baseURL } from './support/constants'; // Importujeme si naši základní URL
 
 // Nastavte zde úroveň logování (0=silly, 1=trace, 2=debug, 3=info, 4=warn, 5=error, 6=fatal)
-const logLevel = 1; // změňte dle potřeby
+const logLevel = 3; // změňte dle potřeby
 process.env.LOG_LEVEL = String(logLevel);
 
 
 export default defineConfig({
     fullyParallel: false, //Paralelní spuštění testů
+    maxFailures: 1000,
     projects: [
     {
       name: 'chromium',

@@ -256,6 +256,7 @@ public async getListOfPartners(options: {
 
   /**
  * --- GET listOfReceipts /reports-api/listOfReceipts ---
+ * /reports-api/listOfReceipts{?stockId,accOwner,year,month,day,termId,operator,recType,paidBy,dateFrom,dateTo,ean,cardIssuerId,totalReceiptPriceFrom,totalReceiptPriceTo,receiptItemPriceFrom,receiptItemPriceTo,receiptNrFrom,receiptNrTo,cgroupId,lgroupId,categoryId,search,searchType}';
  * Získá seznam účtenek podle zadaných filtrů.
  * @param year - Rok (např. 2025)
  * @param stockId - ID skladu (např. 101)
@@ -279,6 +280,7 @@ public async getListOfPartners(options: {
  * @returns Odpověď ze serveru ve formátu JSON (pole účtenek).
  */
 public async getReceipts(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
+    
     const endpoint = '/reports-api/listOfReceipts';
     // Sestavení query stringu z objektu params
     const query = Object.entries(params)
