@@ -1,10 +1,40 @@
-/* FILtry
-cardIssuerId [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 22, 23, 50, 51, 52, 53, 54, 60, 73, 74, 75, 76, 77, 81, 82, 83]
-cardOwnerId [1]
-paidBy  ['M', 'K', 'P', 'H', 'S']
-goodsOwnerId [1, 2, 546, 42,]
-groupId
-stkitmType 
-stockId
+import { test, expect } from '@playwright/test';
 
-*/
+test('test', async ({ page }) => {
+  await page.goto('http://192.168.130.240:8180/login');
+  await page.locator('input[type="text"]').click();
+  await page.locator('input[type="text"]').fill('mn_without_obchod');
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="password"]').fill('1');
+  await page.getByRole('button', { name: 'Přihlásit' }).click();
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="text"]').click();
+  await page.locator('input[type="text"]').press('ArrowLeft');
+  await page.locator('input[type="text"]').press('ArrowLeft');
+  await page.locator('input[type="text"]').press('ArrowLeft');
+  await page.locator('input[type="text"]').press('ArrowLeft');
+  await page.locator('input[type="text"]').press('ArrowLeft');
+  await page.locator('input[type="text"]').fill('mn_withoutobchod');
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="password"]').fill('1');
+  await page.locator('input[type="password"]').press('Enter');
+  await page.goto('http://192.168.130.240:8180/');
+  await page.getByRole('link', { name: 'Uživatelské sestavy' }).click();
+  await page.getByRole('navigation').filter({ hasText: 'Typ sestavy Vyberte ze' }).getByRole('combobox').selectOption('D001');
+  await page.getByRole('button', { name: '󱇬 Přidat' }).click();
+  await page.locator('span').filter({ hasText: 'Plovoucí období: Období, kter' }).nth(1).click();
+  await page.getByRole('button', { name: 'Druhé čtvrtletí' }).click();
+  await page.getByRole('button', { name: 'Následující krok 󰅂' }).click();
+  await page.getByRole('row', { name: '󰅘 Odeber vše' }).locator('a').click();
+  await page.locator('[id="1089-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.locator('[id="1105-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.locator('[id="1818-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.locator('[id="2019-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.locator('[id="2048-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.locator('[id="3258-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.locator('[id="3245-content"]').getByRole('row', { name: 'Výběr položky' }).locator('span').first().click();
+  await page.getByRole('button', { name: 'Následující krok 󰅂' }).click();
+  await page.getByRole('button', { name: 'Vytvořit sestavu' }).click();
+  await page.getByRole('row', { name: '1073 D001: Přehled prodejů' }).locator('a').nth(1).click();
+  await page.getByRole('button', { name: 'Smazat' }).click();
+});

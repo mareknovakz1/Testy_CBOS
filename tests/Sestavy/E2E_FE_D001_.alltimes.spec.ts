@@ -1,66 +1,96 @@
-import { test, expect } from '../../support/fixtures/auth_FE.fixture';
 import { logger } from '../../support/logger';
-import { DashboardPage } from '../../support/pages/Dashboard';
-import { SestavyPage } from '../../support/pages/SestavyPage';
-// 1. Přidán import pro novou třídu SestavyObdobi
-import { SestavyObdobi } from '../../support/pages/SestavyObdobi'; 
+import { nameOne, password } from '../../support/constants';
+import { Page } from '@playwright/test';
+import { baseURL } from '../../support/constants';
+import { test, expect } from '../../support/fixtures/auth_FE.fixture'; 
 
-test.describe('E2E: Test pomocných funkcí pro navigaci a nastavení sestav', () => {
+/**
+ * Vytvoří novou sestavu pro zadané plovoucí období.
+ * @param page - Objekt stránky z Playwrightu.
+ * @param nazevObdobi - Název období, který se má vybrat (např. 'Druhé čtvrtletí').
+ * @returns Vrací `true` v případě úspěchu, `false` v případě chyby.
+ */
+export async function CreateReportFloatPeriod(page: Page, nazevObdobi: string): Promise<boolean> {
+  // INFO: Hlavní milník - Oznamuje, co se chystáme dělat a s jakými daty.
+  logger.info(`Zahajuji vytváření sestavy pro období: '${nazevObdobi}'`);
 
-    test('ověří výběr sestavy a nastavení všech typů období', async ({ page }) => {
-        
-        logger.debug('Spouštím test pro ověření pomocných funkcí navigace a nastavení období.');
+  try {
+    logger.debug('Klikám na tlačítko "Přidat" pro vytvoření nové sestavy');
+    await page.getByRole('button', { name: '󱇬 Přidat' }).click();
 
-        const dashboardPage = new DashboardPage(page);
-        logger.trace("Volám metodu: dashboardPage.hoverAndClickInMenu('Sestavy', 'Uživatelské sestavy')");
-        await dashboardPage.hoverAndClickInMenu('Sestavy', 'Uživatelské sestavy');
+    logger.trace("Otevírám dialog pro výběr období.");
+    await page.locator('label').filter({ hasText: 'Plovoucí období: Období, kter' }).locator('span').first().click();
 
-        logger.trace("Ověřuji URL, zda obsahuje '/reports'");
-        await expect(page).toHaveURL(/.*\/reports/);
-        
-        logger.debug('Čekám na plné načtení tabulky se sestavami...');
-        await expect(page.locator('table.table')).toBeVisible({ timeout: 10000 });
-        logger.debug('Tabulka je viditelná, stránka je připravena.');
+    logger.debug(`Vybírám zadané období: '${nazevObdobi}'.`);
+    await page.getByRole('button', { name: nazevObdobi }).click();
 
-        const reportsPage = new SestavyPage(page);
-        logger.trace("Volám metodu: reportsPage.selectAndAddReport('D001 - Přehled prodejů')");
-        await reportsPage.selectAndAddReport('D001 - Přehled prodejů');
+    logger.trace("Klikám na tlačítko 'Následující krok'.");
+    await page.getByRole('button', { name: 'Následující krok 󰅂' }).click();
 
-        logger.info('ÚSPĚCH: Navigace a přidání sestavy proběhlo v pořádku.');
-        logger.info('--- Zahajuji testování výběru období ---');
+    logger.trace("Klikám podruhé na tlačítko 'Následující krok'.");
+    await page.getByRole('button', { name: 'Následující krok 󰅂' }).click();
 
-        // 2. Inicializace třídy pro práci s obdobím
-        const periodPage = new SestavyObdobi(page);
+    logger.trace("Klikám na finální tlačítko 'Vytvořit sestavu'.");
+    await page.getByRole('button', { name: 'Vytvořit sestavu' }).click();
 
-        // --- TEST 1: Výběr období 'Rozsah' ---
-        const periodRozsah = '01.07.2025 - 31.08.2025';
-        logger.debug(`Testuji výběr období typu 'Rozsah' s hodnotou: ${periodRozsah}`);
-        await periodPage.select('Rozsah', periodRozsah);
-        // Ověření, že se vstupní pole správně vyplnila
-        await expect(page.getByLabel('Začátek období')).toHaveValue('01.07.2025');
-        await expect(page.getByLabel('Konec období')).toHaveValue('31.08.2024');
-        logger.info(`OK: Období 'Rozsah' bylo úspěšně nastaveno.`);
-        await page.waitForTimeout(500); // Krátká pauza pro přehlednost při sledování testu
+    logger.info(`Požadavek na vytvoření sestavy pro období '${nazevObdobi}' byl úspěšně odeslán.`);
+    return true;
 
-        // --- TEST 2: Výběr 'Přesného období' ---
-        // Použijte přesný text tlačítka, které je v aplikaci
-        const periodPresne = '2024'; 
-        logger.debug(`Testuji výběr 'Přesného období' s hodnotou: ${periodPresne}`);
-        await periodPage.select('Přesné období', periodPresne);
-        // Ověření, že je dané tlačítko aktivní (pomocí atributu aria-pressed nebo specifické třídy)
-        await expect(page.getByRole('button', { name: periodPresne, exact: true })).toHaveAttribute('aria-pressed', 'true');
-        logger.info(`OK: 'Přesné období' bylo úspěšně nastaveno.`);
-        await page.waitForTimeout(500);
+  } catch (error) {
+    logger.error(`Došlo k chybě při vytváření sestavy pro období '${nazevObdobi}': ${error}`);
+    return false;
+  }
+}
+// Seznam plovoucích období, která budou testována
+const Periods = ['Aktuální týden',
+                'Druhé čtvrtletí', 
+                'Třetí čtvrtletí', 
+                'Čtvrté čtvrtletí', 
+                'První čtvrtletí',  
+                'Předchozí 2 týdny', 
+                'Aktuální měsíc', 
+                'Předchozí 3 měsíce',
+                'minulý měsíc',
+                'minulý týden'];
 
-        // --- TEST 3: Výběr 'Plovoucího období' ---
-        // Použijte přesný text tlačítka, např. 'Minulý měsíc'
-        const periodPlovouci = 'Minulý měsíc';
-        logger.debug(`Testuji výběr 'Plovoucího období' s hodnotou: ${periodPlovouci}`);
-        await periodPage.select('Plovoucí období', periodPlovouci);
-        // Ověření, že je dané tlačítko aktivní
-        await expect(page.getByRole('button', { name: periodPlovouci, exact: true })).toHaveAttribute('aria-pressed', 'true');
-        logger.info(`OK: 'Plovoucí období' bylo úspěšně nastaveno.`);
-        
-        logger.info('--- VŠECHNY TESTY OBDOBÍ BYLY ÚSPĚŠNĚ PROVEDENY ---');
+test.describe.serial('E2E testy pro sestavu D001 s plovoucím obdobím', () => {
+    test.beforeEach(async ({ page }) => {
+    logger.info('Spouštím test E2E_FE_D001_.alltimes.spec.ts');  
+    logger.trace('Naviguji na přihlašovací stránku a přihlašuji se');
+    await page.goto(baseURL);
+
+
+    //Vybrání sestav
+    logger.info('Přihlášení úspěšné, čekám na načtení stránky');
+    logger.debug('KLikám na tlačítko "Sestavy" v navigaci');
+    await page.getByText('Sestavy', { exact: true }).click();
+    logger.debug('Klikám na "Uživatelské sestavy" v navigaci');
+    await page.getByRole('link', { name: 'Uživatelské sestavy' }).click();
+    logger.debug('Vybírám typ sestavy D001 z rozbalovacího menu');
+    await page.getByRole('navigation').filter({ hasText: 'Typ sestavy Vyberte ze' }).getByRole('combobox').selectOption('D001');
+
+    logger.info('Sestava D001 byla úspěšně vybrána, pokračuji k vytvoření sestavy');
     });
-});
+
+    test('Vytvoření sestavy D001 s plovoucím obdobím', async ({ page }) => {
+        logger.info('Zahajuji test pro vytvoření sestavy D001 s plovoucím obdobím');
+
+        for (const period of Periods) {
+            try {
+                const success = await CreateReportFloatPeriod(page, period);
+
+                // Na základě výsledku (true/false) zalogujeme úspěch nebo chybu.
+                if (success) {
+                    logger.info(`Sestava D001 pro období '${period}' byla úspěšně vytvořena.`);
+                } else {
+                    logger.error(`Funkce CreateReportFloatPeriod selhala pro období '${period}'.`);
+                    test.fail(true, `Nepodařilo se vytvořit sestavu pro období: ${period}`);
+                }
+            } catch (error) {
+                logger.error(`Došlo k neočekávané chybě při vytváření sestavy pro období '${period}': ${error}`);
+                test.fail(true, `Neočekávaná chyba u období: ${period}`);
+            }
+        } 
+    logger.info('Test pro vytvoření sestavy D001 s plovoucím obdobím byl dokončen.');
+    });
+});    
