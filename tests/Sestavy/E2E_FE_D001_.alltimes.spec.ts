@@ -1,5 +1,4 @@
 import { logger } from '../../support/logger';
-import { nameOne, password } from '../../support/constants';
 import { Page } from '@playwright/test';
 import { baseURL } from '../../support/constants';
 import { test, expect } from '../../support/fixtures/auth_FE.fixture'; 

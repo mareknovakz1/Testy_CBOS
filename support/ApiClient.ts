@@ -77,6 +77,7 @@ export class ApiClient {
   /**
    * --- METODA PRO SMAZÁNÍ SESTAVY ---
    * Smaže konkrétní uživatelskou sestavu.
+   * DELETE /reports-api/userReports
    * @param SestavaId - ID sestavy, kterou chceme smazat.
    * @returns Prázdnou odpověď v případě úspěchu.
    */
