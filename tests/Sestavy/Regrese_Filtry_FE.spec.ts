@@ -1,3 +1,6 @@
+/**
+ * NEKOMPLETNÍ 
+ */
 import { logger } from '../../support/logger';
 import { Page, expect } from '@playwright/test';
 import { baseURL } from '../../support/constants';

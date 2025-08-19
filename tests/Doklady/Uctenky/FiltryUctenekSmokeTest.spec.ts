@@ -1,8 +1,6 @@
 import { expect, test } from '../../../support/fixtures/auth.fixture';
 import { ApiClient } from '../../../support/ApiClient';
 import { logger } from '../../../support/logger';
-import { parse } from 'path';
-import { count } from 'console';
 
 /*
  + Parameters
@@ -32,49 +30,56 @@ import { count } from 'console';
     + searchType: `fullSearch` (string, optional) - jak se mají sestavit podmínky vyhledání (EAN, PLU, card, receiptText, fullSearch)
  */
 
+let apiClient: ApiClient;
+let issuerIds: number[] = [];
+let cGroupIds: number[] = []; //Centrální skupina zboží
+let categoryIds: string[] = []; //Centrální kategorie zboží
+let OperatorName: string[] = [];
+const accOwner = '60193531'; 
+    
 test.describe.serial('API Testy pro získání filtrů účtenek', () => {
-    let apiClient: ApiClient;
-    let issuerIds: number[] = []; //Id vydavatelů karet, které získáme z API
-    let centralniKategorieIds: number[] = []; //Id centrálních kategorií zboží, které získáme z API
-    const accOwner = '60193531'; 
 
-    // Inicializace ApiClientu před každým testem
-    test.beforeEach(async ({ page }) => {
-        logger.silly('Spouštím beforeEach: Inicializuji ApiClient...');
-        await page.goto('/');
-
-        const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
-        expect(token, 'Chybí autorizační token z fixture!').toBeTruthy();
-        apiClient = new ApiClient(page.request, token!);
-        logger.trace('ApiClient úspěšně inicializován.');
+    // Tento blok se spustí jednou před každým testem v této sadě.
+    test.beforeEach(async ({ request, authToken }) => {
+        expect(authToken, 'Autorizační token musí být k dispozici z auth fixture!').toBeTruthy();
+        apiClient = new ApiClient(request, authToken); 
     });
 
-    //Zde testujeme stažení dat - centrální kategorie zboží
-    test('GET /administration-api/stockCardsCategories/60193531 - Získání dat z centrální kategorie zboží', async () => {
-        const endpoint = '/administration-api/stockCardsCategories/60193531';
+ // Zde testujeme stažení dat - centrální kategorie zboží a centrálních kategorií zboží
+    test('GET /administration-api/stockCardsCategories - Získání a roztřídění dat', async () => {
+        const endpoint = `/administration-api/stockCardsCategories/${accOwner}`;
         logger.info(`Spouštím test endpointu: GET ${endpoint}`);
+        
+        // apiClient je již připraven z bloku beforeEach
+        const categories = await apiClient.getPriceCategory();
+        logger.silly('Response data:\n' + JSON.stringify(categories, null, 2));
 
-        try {
-            const filters = await apiClient.getPriceCategory();
-            logger.silly('Response data:\n' + JSON.stringify(filters, null, 2));
+        // Základní kontroly, že jsme dostali platná data
+        expect(categories).toBeDefined();
+        expect(Array.isArray(categories)).toBeTruthy();
+        expect(categories.length).toBeGreaterThan(0);
 
-            expect(filters).toBeDefined();
-            expect(Array.isArray(filters)).toBeTruthy();
-            expect(filters.length).toBeGreaterThan(0);
+        
+        // 1. Získání pole všech ID (již máte)
+        const ids = categories.map(category => category.id);
+        cGroupIds = ids; 
+        const names = categories.map(category => category.name); // 2. Získání pole všech názvů (name)
+        const categoryCodes = categories.map(category => category.category);// 3. Získání pole všech kódů kategorií - centrílní kategorie zboží
+        categoryIds = categoryCodes;
+        const useOnStockCardsFlags = categories.map(category => category.useOnStockCards);// 4. Získání pole všech příznaků 'useOnStockCards'
+        const validFlags = categories.map(category => category.valid); // 5. Získání pole všech příznaků 'valid'
 
-            // Vytvoření pole všech name
-            const centralniKategorieNames = filters.map((item: any) => item.name);
-            logger.debug('Centrální kategorie zboží (name): ' + JSON.stringify(centralniKategorieNames));
 
-            // Vytvoření pole všech id
-            centralniKategorieIds = filters.map((item: any) => item.id);
-            logger.debug('Centrální kategorie zboží (id): ' + JSON.stringify(centralniKategorieIds));
+        // --- Logování pro ověření ---
+        logger.trace('Pole všech ID:', cGroupIds);
+        logger.trace('Pole všech názvů:', names);
+        logger.trace('Pole všech kódů kategorií:', categoryIds);
+        logger.trace('Pole příznaků "useOnStockCards":', useOnStockCardsFlags);
+        logger.trace('Pole příznaků "valid":', validFlags);
 
-            logger.trace('Filtry účtenek byly úspěšně získány.');
-        } catch (error) {
-            logger.error(`Chyba při získávání filtrů účtenek: ${error}`);
-            throw error;
-        }
+        // Můžete přidat i další kontroly, např. že všechna pole mají stejnou délku
+        expect(ids.length).toEqual(categories.length);
+        expect(names.length).toEqual(categories.length);
     });
 
     // Zde testujeme stažení dat - Získání seznamu uživatelů
@@ -90,11 +95,13 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             expect(Array.isArray(users)).toBeTruthy();
             expect(users.length).toBeGreaterThan(0);
 
-            // Vytvoření pole všech hodnot (např. value) uživatelů
             const userValues = users.map((user: any) => user.value);
-            logger.debug('Uživatelé (value): ' + JSON.stringify(userValues));
+            OperatorName = userValues;
 
-            logger.trace('Seznam uživatelů byl úspěšně získán.');
+            // Log pro ověření, že se proměnná naplnila
+            logger.info(`Bylo získáno a uloženo ${OperatorName.length} operátorů.`);
+            expect(OperatorName.length).toBeGreaterThan(0);
+
         } catch (error) {
             logger.error(`Chyba při získávání seznamu uživatelů: ${error}`);
             throw error;
@@ -126,30 +133,31 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         }
     });
 
-    // Test pro získání účtenek s plnými filtry
+// Test pro získání účtenek s plnými filtry
     test('GET /reports-api/listOfReceipts - Plná data, očekáváme výsledek', async () => {
-        logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s plnými filtry `);
+        logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s plnými filtry`);
         try {
-            // Plná validní data
             const filters = {
-                            year: 2025,
-                            stockId: 101,
-                            totalReceiptPriceFrom: 1, // Předpokládám název tohoto parametru
-                            receiptItemPriceFrom: 0,
-                            offset: 0,
-                            limit: 10,
-                            sort: '-receipt', 
-                            };
+                year: 2025,
+                stockId: 101,
+                totalReceiptPriceFrom: 1,
+                receiptItemPriceFrom: 0,
+                offset: 0,
+                limit: 10,
+                sort: '-receipt', 
+            };
 
+            // Zde apiClient.getReceipts() vrací přímo pole, přejmenujeme proměnnou pro srozumitelnost.
             const receipts = await apiClient.getReceipts(filters);
-            logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
+            logger.silly('Response data (pole účtenek):\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
+            // Kontrolujeme, že jsme dostali pole.
             expect(Array.isArray(receipts)).toBeTruthy();
-            // Očekáváme, že response obsahuje nějaká data
+            
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
-            } logger.trace('Response GET /reports-api/listOfReceipts (plná data): ' + JSON.stringify(receipts, null, 2));
+            }
+            logger.trace('Response GET /reports-api/listOfReceipts (plná data): ' + JSON.stringify(receipts, null, 2));
         } catch (error) {
             logger.error(`Chyba při získávání účtenek (plná data): ${error}`);
             throw error;
@@ -247,12 +255,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const filters = {
                 year: 2025,
                 stockId: 101,
-                categoryId: centralniKategorieIds, //Zde by mělo být ID centrální kategorie zboží
+                categoryId: categoryIds, 
                 offset: 0,
                 limit: 10,
                 sort: '-receipt',
             };
-
+            logger.silly('Sestavený request (filtry) pro odeslání:', filters);
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
@@ -265,7 +273,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         } catch (error) {
             logger.error(`Chyba při získávání účtenek s filtrem categoryId: ${error}`);
             throw error;
-        }
+        } 
     });
     
     //Filtrování podle Centrální skupiyn zboží
@@ -275,7 +283,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const filters = {
                 year: 2025,
                 stockId: 101,
-                cgroupId: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,70,71,72,73,74,75,76,78,80,81,82,83,84,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,110,111,199,200,201,202,203,204,210,901,902,903], //Zde by mělo být ID centrální skupiny zboží
+                cgroupId: cGroupIds, 
                 offset: 0,
                 limit: 10,
                 sort: '-receipt',
@@ -331,7 +339,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const filters = {
                 year: 2025,
                 stockId: 101,
-                operator: ['OCTOPOS', 'OCTOPUS'], //Zde by mělo být ID operátora
+                operator: OperatorName, //Zde by mělo být ID operátora
                 offset: 0,
                 limit: 10,
                 sort: '-receipt',
@@ -351,8 +359,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             throw error;
         } 
     });
-               
-
+      
     //Filtrování času podle formátu YYYY-MM-DDTHH:mm:ss:000Z
     test('GET /reports-api/listOfReceipts - Filtrování podle data od a do s formátem YYYY-MM-DDTHH:mm:ss:000Z', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem dateFrom a dateTo ve formátu YYYY-MM-DDTHH:mm:ss:000Z`);
@@ -402,6 +409,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
                 limit: 10000000,
                 sort: '-receipt',
             };
+            
+            logger.silly('Sestavený request (filtry) pro odeslání:', filters);
             const receipts = await apiClient.getReceipts(filters); //Zde získáváme účtenky s filtrem totalReceiptPriceFrom
             expect(receipts).toBeDefined(); // Ověříme, že response není undefined
             expect(Array.isArray(receipts)).toBeTruthy(); // Očekáváme, že response bude pole

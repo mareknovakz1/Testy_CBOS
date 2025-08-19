@@ -1,55 +1,64 @@
-// Autentifikace
-import { test as base, expect } from '@playwright/test';
-import { loginhash, baseURL } from '../constants';
-// KROK 1: Importujeme náš nový globální logger
-import { logger } from '../logger';
+// soubor: support/fixtures.ts
 
-// Rozšíření základního 'test' objektu o naši vlastní přihlašovací logiku
-export const test = base.extend({
-  page: async ({ page }, use) => {
-    logger.silly("Spouštím automatickou přihlašovací fixture...");
+import { test as baseTest, expect, request as playwrightRequest } from '@playwright/test';
+import { ApiClient } from '../ApiClient'; // Upravte cestu
+import { logger } from '../logger';     // Upravte cestu
+import { loginhash, baseURL } from '../constants'; // Upravte cestu
 
-    try {
-      logger.info(`Připojuji na: ${baseURL}`);
-      logger.silly("Připraven payload pro autentizaci:", loginhash);
+// 1. Definujeme si typy pro naše nové fixtures
+type MyFixtures = {
+  authToken: string;    // Fixture, která vrací jen string s tokenem
+  authPage: void;       // Fixture, která jen přihlásí stránku (nic nevrací)
+  apiClient: ApiClient; // Fixture, která vrací připravený a autorizovaný ApiClient
+};
 
-      logger.silly("Odesílám požadavek na autentizaci na endpoint:", `${baseURL}/auth-api/user/authorization`);
-      const response = await page.request.post(`${baseURL}/auth-api/user/authorization`, {
-        data: loginhash,
-        headers: {
-          'Content-Type': 'text/plain'
-        }
-      });
+// 2. Rozšíříme základní 'test' objekt o naše nové, typované fixtures
+export const test = baseTest.extend<MyFixtures>({
+  
+  // --- ZÁKLADNÍ FIXTURE PRO ZÍSKÁNÍ TOKENU ---
+  // Tato fixture nemá žádné závislosti a jejím jediným úkolem je získat token.
+  // Je znovupoužitelná pro ostatní fixtures.
+  authToken: async ({}, use) => {
+    logger.trace("Spouštím 'authToken' fixture pro získání tokenu...");
+    const requestContext = await playwrightRequest.newContext();
+    const response = await requestContext.post(`${baseURL}/auth-api/user/authorization`, {
+      data: loginhash,
+      headers: { 'Content-Type': 'text/plain' }
+    });
 
-      if (!response.ok()) {
-        logger.error(`Chyba při přihlašování přes API. Status: ${response.status()}`, await response.text());
-        throw new Error(`Chyba při přihlašování přes API: Status ${response.status()}`);
-      }
-      logger.trace("Autentizace přes API proběhla úspěšně (Status: 200 OK).");
-
-      const responseJson = await response.json();
-      const token = responseJson.accessToken;
-
-      if (!token) {
-        logger.error("Nepodařilo se získat 'accessToken' z API odpovědi.", responseJson);
-        throw new Error("Nepodařilo se získat token z API odpovědi.");
-      }
-      logger.silly("Přístupový token (accessToken) byl úspěšně získán.");
-
-      await page.addInitScript(token => {
-        window.localStorage.setItem('auth_token', token);
-      }, token);
-      logger.silly("Token byl vložen do localStorage pro budoucí použití.");
-      
-      await use(page);
-      
-      logger.trace("Fixture dokončila svou práci po skončení testu.");
-
-    } catch (error) {
-      logger.fatal("Došlo k fatální chybě uvnitř přihlašovací fixture. Test nemůže pokračovat.", error);
-      throw error;
+    if (!response.ok()) {
+      logger.fatal(`Chyba při získávání tokenu v 'authToken' fixture. Status: ${response.status()}`);
+      throw new Error("Nepodařilo se získat token.");
     }
+
+    const responseJson = await response.json();
+    const token = responseJson.accessToken;
+    expect(token, "Token nebyl nalezen v odpovědi z API!").toBeTruthy();
+    
+    logger.trace("Token úspěšně získán.");
+    await use(token); // Poskytneme string s tokenem dalším fixtures
   },
+
+  // --- FIXTURE PRO AUTOMATICKÉ PŘIHLÁŠENÍ STRÁNKY (vaše původní logika) ---
+  // Tato fixture závisí na 'authToken'. Vezme si token a vloží ho do stránky.
+  // Nahrazuje vaši původní úpravu 'page' fixture.
+  page: async ({ page, authToken }, use) => {
+    logger.trace("Spouštím 'page' fixture pro přihlášení UI...");
+    await page.addInitScript(token => {
+      window.localStorage.setItem('auth_token', token);
+    }, authToken);
+    logger.silly("Token byl vložen do localStorage pro UI testy.");
+    await page.goto('/'); // Po vložení tokenu můžeme bezpečně navigovat
+    await use(page);
+  },
+
+  // --- FIXTURE PRO PŘIPRAVENÝ A AUTORIZOVANÝ API KLIENT ---
+  // Tato fixture závisí na 'authToken' a 'request'.
+  apiClient: async ({ request, authToken }, use) => {
+    logger.trace("Spouštím 'apiClient' fixture...");
+    const client = new ApiClient(request, authToken);
+    await use(client); // Poskytneme hotovou instanci ApiClienta testu
+  }
 });
 
 export { expect };

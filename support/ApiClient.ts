@@ -17,8 +17,7 @@ export class ApiClient {
   private request: APIRequestContext;
   private token: string;
 
-  /**
-   * Konstruktor přijímá kontext pro posílání požadavků a autorizační token.
+  /** Konstruktor přijímá kontext pro posílání požadavků a autorizační token.
    * @param request - Objekt page.request z Playwrightu.
    * @param token - Bearer token pro autorizaci.
    */
@@ -52,8 +51,7 @@ export class ApiClient {
     return response.json();
   }
 
-   /**
-    * --- POST createUserReport  /reports-api/usersReports/60193531 
+   /**--- POST createUserReport  /reports-api/usersReports/60193531 
    * Vytvoří novou uživatelskou sestavu.
    * Přijímá ID sestavy a hotový payload objekt.
    * @param SestavaId - ID sestavy.
@@ -74,8 +72,7 @@ export class ApiClient {
     });
 
   } 
-  /**
-   * --- METODA PRO SMAZÁNÍ SESTAVY ---
+  /**--- METODA PRO SMAZÁNÍ SESTAVY ---
    * Smaže konkrétní uživatelskou sestavu.
    * DELETE /reports-api/userReports
    * @param SestavaId - ID sestavy, kterou chceme smazat.
@@ -97,8 +94,8 @@ export class ApiClient {
     }  
     logger.silly(`Sestava ${SestavaId} byla úspěšně smazána (Status: ${response.status()}).`);
   }
-  /**
-   * --- GET getUserReportPreview /reports-api/userReportPreview/{SestavaId} ---
+
+  /**--- GET getUserReportPreview /reports-api/userReportPreview/{SestavaId} ---
    * Získá náhled sestavy podle jejího ID.
    * @param SestavaId - ID sestavy, pro kterou chceme získat náhled.
    * @param options - Volitelné parametry pro stránkování a řazení.
@@ -128,8 +125,7 @@ export class ApiClient {
     logger.silly(`Náhled sestavy ${SestavaId} byl úspěšně získán.`);
     return response.json();
   }
-  /**
- * --- GET listOfPartners /reports-api/listOfPartners ---
+  /** --- GET listOfPartners /reports-api/listOfPartners ---
  * Získá seznam partnerů (např. fleet karet) podle zadaných filtrů.
  * @param options - Objekt s parametry pro filtrování, např. { columns, accOwner, cardType, sort }.
  * @returns Odpověď ze serveru ve formátu JSON (pole partnerů).
@@ -178,8 +174,7 @@ public async getListOfPartners(options: {
     logger.silly(`Seznam partnerů byl úspěšně získán.`);
     return response.json();
 }
-  /**
-   * --- GET filterOfReceipts /administration-api/stockCardsCategories/60193531 ---
+  /** --- GET filterOfReceipts /administration-api/stockCardsCategories/60193531 ---
    * Získá seznam filtrů pro účtenky.
    * @returns Odpověď ze serveru ve formátu JSON (pole filtrů).
    */
@@ -202,8 +197,8 @@ public async getListOfPartners(options: {
     logger.silly(`Filtry pro příjemky byly úspěšně získány.`);
     return response.json();
   }
-  /**
-   * --- GET getUSers /reports-api/listOfOperators ---
+ 
+  /** --- GET getUSers /reports-api/listOfOperators ---
    * Získá seznam uživatelů (operátorů).
    * @param stockId - ID skladu (např. 231)
    * @param year - Rok (např. 2025)
@@ -229,8 +224,8 @@ public async getListOfPartners(options: {
     logger.silly(`Seznam uživatelů byl úspěšně získán.`);
     return response.json();
   }  
-  /**
-   * --- GET getCardIssuers /reports-api/listOfCardIssuers ---
+
+  /**--- GET getCardIssuers /reports-api/listOfCardIssuers ---
    * Získá seznam vydavatelů karet podle zadaných filtrů.
    * @param columns - Pole názvů sloupců, které chceme zahrnout do odpovědi.
    * @returns Odpověď ze serveru ve formátu JSON (pole vydavatelů karet).
@@ -255,8 +250,7 @@ public async getListOfPartners(options: {
     return response.json();
   }
 
-  /**
- * --- GET listOfReceipts /reports-api/listOfReceipts ---
+  /** --- GET listOfReceipts /reports-api/listOfReceipts ---
  * /reports-api/listOfReceipts{?stockId,accOwner,year,month,day,termId,operator,recType,paidBy,dateFrom,dateTo,ean,cardIssuerId,totalReceiptPriceFrom,totalReceiptPriceTo,receiptItemPriceFrom,receiptItemPriceTo,receiptNrFrom,receiptNrTo,cgroupId,lgroupId,categoryId,search,searchType}';
  * Získá seznam účtenek podle zadaných filtrů.
  * @param year - Rok (např. 2025)
@@ -310,4 +304,51 @@ public async getReceipts(params: { [key: string]: string | number | string[] | n
     logger.silly(`Seznam účtenek byl úspěšně získán.`);
     return response.json();
 }
+
+/**--- GET reports-api/listOfStocks
+*Získá sezanm OM
+*Implemenotvané URL pro získání OM
+*reports-api/listOfStocks?columns=id,text,street,city,zip,accOwner,accOwnerName,stockCardsCount,erpExtId,erpEnabled,erpName,valid,transferEnabled,cardEnabled,authEnabled,transferResult,cardResult,authResult,testResult,updated,operator,rate,patternStock,isDistributed,restrictedMode,auxiliaryStorage,franchiserId&accOwner=60193531&sort=street 
+* @param {string} [accOwner] - '00174939' Identifikace sítě, např. 
+* @param {number} [stockId] - Identifikace konkrétního skladu (obchodního místa).
+* @param {number} [cbosScale] - Určuje váhu CBoS práv, pro kterou se mají OM zobrazit.
+* @param {string} [sort='id'] - Název sloupce pro třídění. Pro sestupné řazení přidejte na začátek znaménko mínus (např. '-id').
+* @param {string} [columns] - Čárkou oddělený seznam sloupců, které má API vrátit.
+* @param {number} [limit=25] - Počet záznamů na stránku pro účely stránkování.
+* @param {number} [offset=0] - Počet záznamů, které se mají přeskočit (používá se pro stránkování).
+* @param {string} [q] - Řetězec pro fulltextové vyhledávání napříč relevantními poli.
+* @returns {Promise<Object>} Promise, který vrací objekt s polem obchodních míst v klíči `data` a informacemi o stránkování v klíči `pagination`.
+*/
+public async getListOfStocks(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
+    const endpoint = '/reports-api/listOfStocks';
+    
+    // Sestavení query stringu z objektu params
+    const query = Object.entries(params)
+        .map(([key, value]) => {
+            if (Array.isArray(value)) {
+                return `${key}=${value.join(',')}`;
+            }
+            return `${key}=${value}`;
+        })
+        .join('&');
+    
+    const url = query ? `${endpoint}?${query}` : endpoint;
+    logger.trace(`Odesílám GET požadavek na ${url}`);
+
+    const response = await this.request.get(url, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        }
+    });
+
+    if (!response.ok()) {
+        logger.error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`, await response.text());
+        throw new Error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Seznam obchodních míst byl úspěšně získán.`);
+    return response.json();
+  }
 }
+

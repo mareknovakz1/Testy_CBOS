@@ -14,11 +14,12 @@ export default defineConfig({
     fullyParallel: false, //Paralelní spuštění testů
     maxFailures: 1000,
     
-    timeout: 10000, //ms
+    timeout: 20*1000, //s*1000 ms
     projects: [
     {
       name: 'chromium',
       use: {  channel: 'chrome',
+        video: 'retain-on-failure', // - nahrávání jen v případě selhání testu
       viewport: { width: 1920, height: 1080 }
       },
     },
@@ -30,4 +31,5 @@ export default defineConfig({
         //trace: 'on-firts-retry',
     },
     testDir: './tests',
+
 });  

@@ -1,6 +1,7 @@
 import { test as base, expect, Page } from '@playwright/test';
 import { logger } from '../logger';
 import { nameOne as username, passwordOne, baseURL } from '../constants';
+import {name }
 
 type MyAuthFixtures = {
     page: Page;
