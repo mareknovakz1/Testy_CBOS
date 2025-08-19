@@ -2,47 +2,42 @@
   "sortingColumns": [
     {
       "name": "Číslo",
-      "cellSelector": "tbody tr td:nth-child(1)",
+      "cellSelector": "tbody tr td:nth-child(2)",
       "type": "number"
     },
     {
-      "name": "Název",
-      "cellSelector": "tbody tr td:nth-child(2)",
-      "type": "string"
-    },
-    {
       "name": "Ulice",
-      "cellSelector": "tbody tr td:nth-child(3)",
-      "type": "string"
-    },
-    {
-      "name": "Město",
       "cellSelector": "tbody tr td:nth-child(4)",
       "type": "string"
     },
     {
-      "name": "PSČ",
+      "name": "Město",
       "cellSelector": "tbody tr td:nth-child(5)",
+      "type": "string"
+    },
+    {
+      "name": "PSČ",
+      "cellSelector": "tbody tr td:nth-child(6)",
       "type": "number"
     },
     {
       "name": "Napojeno",
-      "cellSelector": "tbody tr td:nth-child(6)",
-      "type": "string"
-    },
-    {
-      "name": "Provozovatel ČS",
       "cellSelector": "tbody tr td:nth-child(7)",
       "type": "string"
     },
     {
-      "name": "Poslední změny",
+      "name": "Provozovatel ČS",
       "cellSelector": "tbody tr td:nth-child(8)",
       "type": "string"
     },
     {
-      "name": "Operátor",
+      "name": "Poslední změny",
       "cellSelector": "tbody tr td:nth-child(9)",
+      "type": "string"
+    },
+    {
+      "name": "Operátor",
+      "cellSelector": "tbody tr td:nth-child(10)",
       "type": "string"
     }
   ]
