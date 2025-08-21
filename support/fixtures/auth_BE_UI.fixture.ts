@@ -64,7 +64,7 @@ export const test = baseTest.extend<MyFixtures>({
             const networkSelect = page.locator('select#account');
             await expect(networkSelect).toBeVisible({ timeout: 5000 });
             await networkSelect.selectOption({ label: 'ČEPRO, a.s.' });
-            await page.getByRole('button', { name: 'Potvrdit' }).click();
+            await page.getByRole('button', { name: 'Potvrdit' }).click();;
             await expect(dashboardElement).toBeVisible({ timeout: 10000 });
             logger.info("Výběr sítě byl úspěšný, uživatel je na dashboardu.");
         }

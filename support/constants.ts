@@ -2,12 +2,21 @@
 
 //Při zadání vlastního uživatele je nutné podchytit odeslaný hassh na requestu při autenitizaci
 //Hash se nachází v payloadu requestu authentication
-export const loginhash:string = "eyJvcGVyYXRvciI6Ik1OQSIsInBhc3N3b3JkIjoiMSJ9"; 
-export const name:string = "MNA";
-export const password:string = "1";
-export const nameOne:string =  "MN_WITHOUTOBCHOD"; //Uživatel se zakázaným VOM
-//export const nameOne:string =  "MNA"; //Uživatel se zakázaným VOM
-export const passwordOne:string = "1";
+
+
+//.239
+export const passwordOne:string = "1234";
+export const server:string = "239";
+export const loginhash:string = "eyJvcGVyYXRvciI6Ik1OQSIsInBhc3N3b3JkIjoiMTIzNCJ9";
+export const nameOne:string = "MNA"; //Administrátor bez VOM na 239
+
+/*
+//.240
 export const server:string = "240";
+export const loginhash:string = "eyJvcGVyYXRvciI6Ik1OQSIsInBhc3N3b3JkIjoiMSJ9";  
+export const nameOne:string =  "MN_WITHOUTOBCHOD"; //Uživatel se zakázaným VOM
+export const password:string = "1";
+*/
 export const port:string = "8180";
 export const baseURL = `http://192.168.130.${server}:${port}`;
+

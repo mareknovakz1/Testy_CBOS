@@ -13,7 +13,7 @@ type TestCase = RangeTestCase | FloatingTestCase | ExactDateTestCase;
 const REPORT_DEFINITION_ID = 'D001';
 const BASE_REPORT_NAME = 'D001: Přehled prodejů';
 
-// --- DEFINICE TESTOVACÍCH PŘÍPADŮ (FINÁLNÍ VERZE) ---
+// --- DEFINICE TESTOVACÍCH PŘÍPADŮ ---
 const testCases: TestCase[] = [
     { name: "Rozsah (výchozí)", type: 'range', payload: { from: new Date("2025-07-01T00:00:00Z"), to: new Date() } },
     { name: "Přesné období: Aktuální den", type: 'exact', payload: new Date() },
@@ -29,28 +29,54 @@ const testCases: TestCase[] = [
     { name: "Plovoucí období: Předchozí 3 měsíce", type: 'floating', payload: 'last3Months' },
 ];
 
+// --- GENERUJEME TESTOVACÍ SÉRIE PRO KAŽDÉ OBDOBÍ ---
 
-test.describe(`D001 – Kompletní test časových období`, () => {
+for (const testCase of testCases) {
 
-    for (const testCase of testCases) {
+    // Pro každý testovací případ vytvoříme samostatnou testovací sérii
+    test.describe(`D001 – Ověření sestavy pro období: ${testCase.name}`, () => {
 
-        test(`Ověření sestavy pro období: ${testCase.name}`, async ({ page }) => {
-            let newReportDbId: number | string | undefined;
+        let newReportDbId: number | string | undefined;
+        let apiClient: ApiClient; // Definujeme ApiClient zde pro přístup v `afterEach`
 
+        // `beforeEach` se spustí před každým testem v této sérii (zde máme jen jeden)
+        test.beforeEach(async ({ page }) => {
+            // Inicializace a příprava společná pro test
+            await page.goto('/');
+            const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
+            expect(token, "Autentizační token musí být přítomen").toBeTruthy();
+            apiClient = new ApiClient(page.request, token!);
+        });
+
+        // `afterEach` se postará o úklid po každém testu v sérii
+        test.afterEach(async () => {
+            if (newReportDbId) {
+                logger.trace(`(AFTER EACH) Mažu sestavu s ID: ${newReportDbId}...`);
+                try {
+                    await apiClient.deleteUserReport(newReportDbId);
+                    const finalList = await apiClient.getUserReportsList();
+                    const deletedReportExists = finalList.some(report => report.id === newReportDbId);
+                    
+                    expect(deletedReportExists, `Sestava s ID ${newReportDbId} by měla být smazána.`).toBe(false);
+                    logger.debug(`Ověření úspěšné. Sestava s ID ${newReportDbId} byla smazána.`);
+                } catch (cleanupError) {
+                    logger.error(`Chyba při mazání sestavy (ID: ${newReportDbId}) v 'afterEach' bloku.`, cleanupError);
+                }
+            } else {
+                logger.warn(`Nebylo vytvořeno ID sestavy pro období "${testCase.name}", úklid se neprovádí.`);
+            }
+        });
+        
+        // Hlavní testovací logika
+        test(`Vytvoření, ověření a smazání sestavy`, async () => {
             try {
-                // Příprava
-                await page.goto('/');
-                const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
-                expect(token).toBeTruthy();
-                const apiClient = new ApiClient(page.request, token!);
-
                 // --- VYTVOŘENÍ SESTAVY ---
                 const dynamicReportName = `${BASE_REPORT_NAME} - ${testCase.name}`;
                 logger.trace(`Vytvářím sestavu '${dynamicReportName}'...`);
 
                 const reportBuilder = new ReportBuilder(REPORT_DEFINITION_ID, dynamicReportName);
 
-                // Dynamické sestavení payloadu podle typu testovacího případu
+                // Dynamické sestavení payloadu
                 if (testCase.type === 'range') {
                     reportBuilder.withDateRange(testCase.payload.from, testCase.payload.to);
                 } else if (testCase.type === 'floating') {
@@ -67,46 +93,28 @@ test.describe(`D001 – Kompletní test časových období`, () => {
                 const createdReport = allReports.find(report => report.name === dynamicReportName);
                 
                 test.fail(!createdReport, `Uložená sestava '${dynamicReportName}' nebyla nalezena v seznamu.`);
-
-                newReportDbId = createdReport.id;
+                
+                newReportDbId = createdReport.id; // Uložíme ID pro `afterEach`
                 const itemsCount = createdReport.items;
 
                 logger.info(`Vytvořena Sestava: ${newReportDbId} pro období "${testCase.name}". Sestava obsahuje: ${itemsCount} položek.`);
                 expect(newReportDbId).toBeDefined();
 
-                // Nyní pokračuje původní logika pro počet položek
+                // --- OVĚŘENÍ POČTU POLOŽEK ---
                 if (itemsCount === null) {
                     const errorMessage = `Počet objektů pro období '${testCase.name}' je 'null'.`;
                     logger.error(errorMessage);
                     test.fail(true, errorMessage);
                 } else if (itemsCount === 0) {
-                    logger.warn(` Detail sestavy: Sestava obsahuje 0 položek.`);
+                    logger.warn(`Detail sestavy: Sestava obsahuje 0 položek.`);
                 } else {
-                logger.info(`Sestava obsahuje ${itemsCount} položek.`);
+                    logger.info(`Sestava obsahuje ${itemsCount} položek.`);
                 }
 
             } catch (error) {
                 logger.fatal(`Došlo k fatální chybě v testu pro období "${testCase.name}"`, error);
-                throw error;
-            } finally {
-                if (newReportDbId) {
-                    logger.trace(`(FINALLY) Mažu sestavu s ID: ${newReportDbId}...`);
-                    try {
-                        const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
-                        const apiClient = new ApiClient(page.request, token!);
-                        await apiClient.deleteUserReport(newReportDbId);
-
-                        const finalList = await apiClient.getUserReportsList();
-                        const deletedReportExists = finalList.some(report => report.id === newReportDbId);
-                        expect(deletedReportExists).toBe(false);
-                        logger.debug(`Ověření úspěšné. Sestava s ID ${newReportDbId} byla smazána.`);
-                    } catch (cleanupError) {
-                        logger.error(`Chyba při mazání sestavy (ID: ${newReportDbId}) v 'finally' bloku.`, cleanupError);
-                    }
-                } else {
-                    logger.warn(`Nebylo vytvořeno ID sestavy pro období "${testCase.name}", úklid se neprovádí.`);
-                }
+                throw error; // Znovu vyhodíme chybu, aby byl test označen jako neúspěšný
             }
         });
-    }
-});
+    });
+}

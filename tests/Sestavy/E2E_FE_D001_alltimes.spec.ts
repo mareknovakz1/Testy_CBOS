@@ -71,25 +71,27 @@ test.describe.serial('E2E testy pro sestavu D001 s plovoucím obdobím', () => {
     logger.info('Sestava D001 byla úspěšně vybrána, pokračuji k vytvoření sestavy');
     });
 
-    test('Vytvoření sestavy D001 s plovoucím obdobím', async ({ page }) => {
-        logger.info('Zahajuji test pro vytvoření sestavy D001 s plovoucím obdobím');
+    for (const period of Periods) {
 
-        for (const period of Periods) {
+        test(`Vytvoření sestavy pro období: '${period}'`, async ({ page }) => {
+            logger.info(`Zahajuji test pro vytvoření sestavy pro období: '${period}'`);
+
+            // Zavoláme funkci pro vytvoření sestavy.
+            // Použijeme try...catch pro odchycení a zalogování případné chyby.
             try {
                 const success = await CreateReportFloatPeriod(page, period);
 
-                // Na základě výsledku (true/false) zalogujeme úspěch nebo chybu.
-                if (success) {
-                    logger.info(`Sestava D001 pro období '${period}' byla úspěšně vytvořena.`);
-                } else {
-                    logger.error(`Funkce CreateReportFloatPeriod selhala pro období '${period}'.`);
-                    test.fail(true, `Nepodařilo se vytvořit sestavu pro období: ${period}`);
-                }
+                // Pro ověření výsledku použijeme `expect` místo `test.fail`.
+                // Je to čistší způsob, jak nechat test selhat s jasnou zprávou.
+                expect(success, `Vytvoření sestavy pro období '${period}' selhalo.`).toBe(true);
+                
+                logger.info(`Sestava D001 pro období '${period}' byla úspěšně vytvořena.`);
+
             } catch (error) {
-                logger.error(`Došlo k neočekávané chybě při vytváření sestavy pro období '${period}': ${error}`);
-                test.fail(true, `Neočekávaná chyba u období: ${period}`);
-            }
-        } 
-    logger.info('Test pro vytvoření sestavy D001 s plovoucím obdobím byl dokončen.');
-    });
-});    
+                logger.error(`Došlo k neočekávané chybě při testování období '${period}'`, error);
+                // Znovu vyhodíme chybu, aby byl test správně označen jako neúspěšný.
+                throw error;
+            }    
+        });
+    }
+});

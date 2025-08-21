@@ -40,7 +40,7 @@ export const test = base.extend<MyAuthFixtures>({
             if (await networkSelect.isVisible()) {
                 logger.trace('Fixture: Výběr sítě je stále viditelný, provádím výběr.');
                 await networkSelect.selectOption({ label: 'ČEPRO, a.s.' });
-                await page.getByRole('button', { name: 'Potvrdit' }).click();
+                await page.getByRole('button', { name: /^(Confirm|Potvrdit)$/ }).click();
             } else {
                 logger.trace('Fixture: Výběr sítě mezitím zmizel (automatické přihlášení), pokračuji.');
             }

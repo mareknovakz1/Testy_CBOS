@@ -41,12 +41,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
 
     // Tento blok se spustí jednou před každým testem v této sadě.
     test.beforeEach(async ({ request, authToken }) => {
-        expect(authToken, 'Autorizační token musí být k dispozici z auth fixture!').toBeTruthy();
+        expect.soft(authToken, 'Autorizační token musí být k dispozici z auth fixture!').toBeTruthy();
         apiClient = new ApiClient(request, authToken); 
     });
 
  // Zde testujeme stažení dat - centrální kategorie zboží a centrálních kategorií zboží
-    test('GET /administration-api/stockCardsCategories - Získání a roztřídění dat', async () => {
+    test('GET /administration-api/stockCardsCategories - Získání a roztřídění dat @regression, @search, @high', async () => {
         const endpoint = `/administration-api/stockCardsCategories/${accOwner}`;
         logger.info(`Spouštím test endpointu: GET ${endpoint}`);
         
@@ -55,9 +55,9 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         logger.silly('Response data:\n' + JSON.stringify(categories, null, 2));
 
         // Základní kontroly, že jsme dostali platná data
-        expect(categories).toBeDefined();
-        expect(Array.isArray(categories)).toBeTruthy();
-        expect(categories.length).toBeGreaterThan(0);
+        expect.soft(categories).toBeDefined();
+        expect.soft(Array.isArray(categories)).toBeTruthy();
+        expect.soft(categories.length).toBeGreaterThan(0);
 
         
         // 1. Získání pole všech ID (již máte)
@@ -78,29 +78,29 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         logger.trace('Pole příznaků "valid":', validFlags);
 
         // Můžete přidat i další kontroly, např. že všechna pole mají stejnou délku
-        expect(ids.length).toEqual(categories.length);
-        expect(names.length).toEqual(categories.length);
+        expect.soft(ids.length).toEqual(categories.length);
+        expect.soft(names.length).toEqual(categories.length);
     });
 
     // Zde testujeme stažení dat - Získání seznamu uživatelů
-    test('GET /reports-api/listOfOperators - Získání seznamu uživatelů', async () => {
+    test('GET /reports-api/listOfOperators - Získání seznamu uživatelů @regression, @search, @high', async () => {
         const endpoint = '/reports-api/listOfOperators';
         logger.info(`Spouštím test endpointu: GET ${endpoint}`);
 
         try {
-            const users = await apiClient.getUsers(101, 2025, 'R');
+            const users = await apiClient.getUsers(230, 2025, 'R');
             logger.silly('Response data:\n' + JSON.stringify(users, null, 2));
 
-            expect(users).toBeDefined();
-            expect(Array.isArray(users)).toBeTruthy();
-            expect(users.length).toBeGreaterThan(0);
+            expect.soft(users).toBeDefined();
+            expect.soft(Array.isArray(users)).toBeTruthy();
+            expect.soft(users.length).toBeGreaterThan(0);
 
             const userValues = users.map((user: any) => user.value);
             OperatorName = userValues;
 
             // Log pro ověření, že se proměnná naplnila
             logger.info(`Bylo získáno a uloženo ${OperatorName.length} operátorů.`);
-            expect(OperatorName.length).toBeGreaterThan(0);
+            expect.soft(OperatorName.length).toBeGreaterThan(0);
 
         } catch (error) {
             logger.error(`Chyba při získávání seznamu uživatelů: ${error}`);
@@ -109,7 +109,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Získání seznamu vydvatele karet
-    test('GET /reports-api/listOfCardIssuers - Získání seznamu vydavatelů karet', async () => {
+    test('GET /reports-api/listOfCardIssuers - Získání seznamu vydavatelů karet @regression, @search, @high', async () => {
         const endpoint = '/reports-api/listOfCardIssuers?columns=id,issuerName,issuerType';
         logger.info(`Spouštím test endpointu: GET ${endpoint}`);
 
@@ -117,9 +117,9 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const cardIssuers = await apiClient.getCardIssuers(['id', 'issuerName', 'issuerType']);
             logger.silly('Response data:\n' + JSON.stringify(cardIssuers, null, 2));
 
-            expect(cardIssuers).toBeDefined();
-            expect(Array.isArray(cardIssuers)).toBeTruthy();
-            expect(cardIssuers.length).toBeGreaterThan(0);
+            expect.soft(cardIssuers).toBeDefined();
+            expect.soft(Array.isArray(cardIssuers)).toBeTruthy();
+            expect.soft(cardIssuers.length).toBeGreaterThan(0);
 
             // Vytvoření pole všech issuerName
             const issuerNames = cardIssuers.map((issuer: any) => issuer.issuerName);
@@ -134,12 +134,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
 // Test pro získání účtenek s plnými filtry
-    test('GET /reports-api/listOfReceipts - Plná data, očekáváme výsledek', async () => {
+    test('GET /reports-api/listOfReceipts - Plná data, očekáváme výsledek @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s plnými filtry`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 totalReceiptPriceFrom: 1,
                 receiptItemPriceFrom: 0,
                 offset: 0,
@@ -152,7 +152,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             logger.silly('Response data (pole účtenek):\n' + JSON.stringify(receipts, null, 2));
 
             // Kontrolujeme, že jsme dostali pole.
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -165,12 +165,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     // Zde testujeme negativní scénář, kdy očekáváme prázdný response
-    test('GET /reports-api/listOfReceipts - Negativní test, na response očekáváme []', async () => {
+    test('GET /reports-api/listOfReceipts - Negativní test, na response očekáváme [] @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s chybně zadanými filtry `);
         try {
             const filters = {
                             year: 1984, //Záměrně chybné datum
-                            stockId: 101,
+                            stockId: 230,
                             totalReceiptPriceFrom: 1, 
                             receiptItemPriceFrom: 0,
                             offset: 0,
@@ -181,8 +181,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length !== 0) {
                 test.fail(true, 'Očekáváme prázdný response, ale server vrací data.');
@@ -194,12 +194,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle Typu účtenky (N,S,C,R)
-    test('GET /reports-api/listOfReceipts - Filtrování podle Typu účtenky (N,S,C,R)', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle Typu účtenky (N,S,C,R) @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem recType`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 recType: ['N','S','C','R'], 
                 offset: 0,
                 limit: 10,
@@ -209,8 +209,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -222,12 +222,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
     
     //Filtrování podle Vydavatele karty
-    test('GET /reports-api/listOfReceipts - Filtrování podle Vydavatele karty', async () => {   
+    test('GET /reports-api/listOfReceipts - Filtrování podle Vydavatele karty @regression, @search, @high', async () => {   
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem cardIssuerId`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 cardIssuerId: issuerIds, 
                 offset: 0,
                 limit: 10,
@@ -237,8 +237,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -249,12 +249,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         }
    });
    //Filtrování podle centrální kategorie zboží
-   test('GET /reports-api/listOfReceipts - Filtrování podle centrální kategorie zboží', async () => {   
+   test('GET /reports-api/listOfReceipts - Filtrování podle centrální kategorie zboží @regression, @search, @high', async () => {   
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem categoryId`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 categoryId: categoryIds, 
                 offset: 0,
                 limit: 10,
@@ -264,8 +264,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -277,12 +277,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
     
     //Filtrování podle Centrální skupiyn zboží
-    test('GET /reports-api/listOfReceipts - Filtrování podle centrální skupiny zboží', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle centrální skupiny zboží @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem groupId`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 cgroupId: cGroupIds, 
                 offset: 0,
                 limit: 10,
@@ -292,8 +292,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -305,12 +305,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle Způsobu platby
-    test('GET /reports-api/listOfReceipts - Filtrování podle způsobu platby', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle způsobu platby @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem paidBy`);
         try {
                 const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 paidBy: ['M', 'K', 'P', 'H', 'S'], //Způsob platby
                 offset: 0,
                 limit: 10,
@@ -320,8 +320,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -333,12 +333,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle Operátora
-    test('GET /reports-api/listOfReceipts - Filtrování podle operátora', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle operátora @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem operator`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 operator: OperatorName, //Zde by mělo být ID operátora
                 offset: 0,
                 limit: 10,
@@ -347,8 +347,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -361,12 +361,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
       
     //Filtrování času podle formátu YYYY-MM-DDTHH:mm:ss:000Z
-    test('GET /reports-api/listOfReceipts - Filtrování podle data od a do s formátem YYYY-MM-DDTHH:mm:ss:000Z', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle data od a do s formátem YYYY-MM-DDTHH:mm:ss:000Z @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem dateFrom a dateTo ve formátu YYYY-MM-DDTHH:mm:ss:000Z`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 dateFrom: '2024-12-31T23:00:00.000Z', // Příklad data od
                 dateTo: '2025-08-10T21:59:59.000Z', // Příklad data do
                 offset: 0,
@@ -377,8 +377,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -403,7 +403,7 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 totalReceiptPriceFrom: 100,
                 offset: 0,
                 limit: 10000000,
@@ -412,23 +412,23 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             
             logger.silly('Sestavený request (filtry) pro odeslání:', filters);
             const receipts = await apiClient.getReceipts(filters); //Zde získáváme účtenky s filtrem totalReceiptPriceFrom
-            expect(receipts).toBeDefined(); // Ověříme, že response není undefined
-            expect(Array.isArray(receipts)).toBeTruthy(); // Očekáváme, že response bude pole
+            expect.soft(receipts).toBeDefined(); // Ověříme, že response není undefined
+            expect.soft(Array.isArray(receipts)).toBeTruthy(); // Očekáváme, že response bude pole
             countFrom = receipts.length;
             logger.info(`Počet účtenek nad 100: ${countFrom}`); 
-            expect(countFrom, 'Počet účtenek je 0').toBeGreaterThan(0); // Očekáváme, že počet účtenek bude větší než 0
+            expect.soft(countFrom, 'Počet účtenek je 0').toBeGreaterThan(0); // Očekáváme, že počet účtenek bude větší než 0
         }catch (error) {
             logger.error(`Chyba při získávání účtenek s filtrem totalReceiptPriceFrom: ${error}`);
             throw error;
         }       
     });
 
-    test('GET /reports-api/listOfReceipts - Počet účtenek do 500', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek do 500 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem totalReceiptPriceTo`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 totalReceiptPriceTo: 500,
                 offset: 0,
                 limit: 10000000,
@@ -436,8 +436,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             };
 
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             await expect.soft(receipts.length, 'Počet účtenek je 0').toBeGreaterThan(0);
             countTo = receipts.length;
             logger.info(`Počet účtenek do 500: ${countTo}`);
@@ -447,12 +447,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         }
     });
 
-    test('GET /reports-api/listOfReceipts - Počet účtenek 100-500', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek 100-500 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem totalReceiptPriceFrom a totalReceiptPriceTo`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 totalReceiptPriceFrom: 100,
                 totalReceiptPriceTo: 500,
                 offset: 0,
@@ -461,8 +461,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             };
 
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             await expect.soft(receipts.length, 'Počet účtenek je 0').toBeGreaterThan(0);
             countBetween = receipts.length;
             logger.info(`Počet účtenek mezi 100 a 500: ${countBetween}`);
@@ -482,18 +482,18 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 receiptNrFrom: '50000',
                 offset: 0,
                 limit: 10000000,
                 sort: '-receipt',
             };
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             countFrom = receipts.length;
             logger.info(`Počet účtenek s číslem od 5: ${countFrom}`);
-            expect(countFrom, 'Počet účtenek je 0').toBeGreaterThan(0);
+            expect.soft(countFrom, 'Počet účtenek je 0').toBeGreaterThan(0);
         } catch (error) {
             logger.error(`Chyba při získávání účtenek s filtrem receiptNrFrom: ${error}`);
             throw error;
@@ -501,12 +501,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle "do" čísla účtenky
-    test('GET /reports-api/listOfReceipts - Počet účtenek s číslem do 10', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek s číslem do 10 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem receiptNrTo`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 receiptNrTo: '60000',
                 offset: 0,
                 limit: 10000000,
@@ -514,8 +514,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             };
 
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             await expect.soft(receipts.length, 'Počet účtenek je 0').toBeGreaterThan(0);
             countTo = receipts.length;
             logger.info(`Počet účtenek s číslem do 10: ${countTo}`);
@@ -526,12 +526,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle "od" a "do" čísla účtenky
-    test('GET /reports-api/listOfReceipts - Počet účtenek s číslem od 5 a do 10', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek s číslem od 5 a do 10 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem receiptNrFrom a receiptNrTo`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 receiptNrFrom: '50000',
                 receiptNrTo: '60000',
                 offset: 0,
@@ -540,8 +540,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             };
 
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             await expect.soft(receipts.length, 'Počet účtenek je 0').toBeGreaterThan(0);
             countBetween = receipts.length;
             logger.info(`Počet účtenek s číslem od 5 a do 10: ${countBetween}`);
@@ -555,23 +555,23 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     //1. ověří cenu položky účtenky "od"
     //2. ověří cenu položky účtenky "do"
     //3. ověří cenu položky účtenky "od" a "do"
-    test('GET /reports-api/listOfReceipts - Počet účtenek s cenou položky od 500', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek s cenou položky od 500 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem receiptItemPriceFrom`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 receiptItemPriceFrom: 500,
                 offset: 0,
                 limit: 10000000,
                 sort: '-receipt',
             };
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             countFrom = receipts.length;
             logger.info(`Počet účtenek s cenou položky od 500: ${countFrom}`);
-            expect(countFrom, 'Počet účtenek je 0').toBeGreaterThan(0);
+            expect.soft(countFrom, 'Počet účtenek je 0').toBeGreaterThan(0);
         } catch (error) {
             logger.error(`Chyba při získávání účtenek s filtrem receiptItemPriceFrom: ${error}`);
             throw error;
@@ -579,12 +579,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle "do" ceny položky účtenky
-    test('GET /reports-api/listOfReceipts - Počet účtenek s cenou položky do 2000', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek s cenou položky do 2000 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem receiptItemPriceTo`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 receiptItemPriceTo: 2000,
                 offset: 0,
                 limit: 10000000,
@@ -592,8 +592,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             };
 
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             await expect.soft(receipts.length, 'Počet účtenek je 0').toBeGreaterThan(0);
             countTo = receipts.length;
             logger.info(`Počet účtenek s cenou položky do 2000: ${countTo}`);
@@ -604,12 +604,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle "od" a "do" ceny položky účtenky
-    test('GET /reports-api/listOfReceipts - Počet účtenek s cenou položky od 500 a do 2000', async () => {
+    test('GET /reports-api/listOfReceipts - Počet účtenek s cenou položky od 500 a do 2000 @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem receiptItemPriceFrom a receiptItemPriceTo`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 receiptItemPriceFrom: 500,
                 receiptItemPriceTo: 2000,
                 offset: 0,
@@ -618,8 +618,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             };
 
             const receipts = await apiClient.getReceipts(filters);
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             await expect.soft(receipts.length, 'Počet účtenek je 0').toBeGreaterThan(0);
             countBetween = receipts.length;
             logger.info(`Počet účtenek s cenou položky od 500 a do 2000: ${countBetween}`);
@@ -630,12 +630,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle vyhledávacího textu
-    test('GET /reports-api/listOfReceipts - Filtrování podle vyhledávacího textu', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle vyhledávacího textu @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem search`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 search: '100', //Zde by mělo být EAN kód nebo PLU
                 offset: 0,
                 limit: 10,
@@ -645,8 +645,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
@@ -658,12 +658,12 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
     });
 
     //Filtrování podle PLU
-    test('GET /reports-api/listOfReceipts - Filtrování podle PLU', async () => {
+    test('GET /reports-api/listOfReceipts - Filtrování podle PLU @regression, @search, @high', async () => {
         logger.info(`Spouštím test endpointu: GET /reports-api/listOfReceipts s filtrem searchType = PLU`);
         try {
             const filters = {
                 year: 2025,
-                stockId: 101,
+                stockId: 230,
                 search: '10', //PLU kód
                 searchType: 'PLU',
                 offset: 0,
@@ -674,8 +674,8 @@ test.describe.serial('API Testy pro získání filtrů účtenek', () => {
             const receipts = await apiClient.getReceipts(filters);
             logger.silly('Response data:\n' + JSON.stringify(receipts, null, 2));
 
-            expect(receipts).toBeDefined();
-            expect(Array.isArray(receipts)).toBeTruthy();
+            expect.soft(receipts).toBeDefined();
+            expect.soft(Array.isArray(receipts)).toBeTruthy();
             // Očekáváme, že response obsahuje nějaká data
             if (receipts.length === 0) {
                 test.fail(true, 'Očekáváme, že response obsahuje nějaká data, ale dostali jsme prázdné pole.');
