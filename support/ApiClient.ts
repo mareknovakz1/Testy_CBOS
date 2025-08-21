@@ -8,6 +8,8 @@ listOfPartners() GET /reports-api/listOfPartners
 getPriceCategory() GET /administration-api/stockCardsCategories/60193531
 getUSers() GET /reports-api/listOfReceipts?year=${year}&stockId=${stockId}&totalReceiptPriceFrom=${totalReceiptPriceFrom}&receiptItemPriceFrom=${receiptItemPriceFrom}&offset=${offset}&limit=${limit}&sort=${sort}
 getReceipts() GET /reports-api/receipts
+getOfListSotcks() GET reports-api/listOfStocks
+getListOfStockCards() GET reports-api/listOfStockCards/{accOwnerId}/{stockId} 
  */
 
 import { APIRequestContext } from '@playwright/test';
@@ -350,5 +352,94 @@ public async getListOfStocks(params: { [key: string]: string | number | string[]
     logger.silly(`Seznam obchodních míst byl úspěšně získán.`);
     return response.json();
   }
-}
 
+/**--- GET reports-api/listOfStockCards/{accOwnerId}/{stockId} ---
+ * Získá seznam skladových karet pro daný accOwner a sklad.
+ * @param {string | number} accOwnerId - ID vlastníka účtu (např. 60193531).
+ * @param {string | number} stockId - ID skladu (např. 101).
+ * @param {object} params - Objekt s volitelnými query parametry.
+ * @param {string[]} [params.columns] - Pole sloupců k vrácení.
+ * @param {boolean} [params.valid] - Filtr pro platné karty.
+ * @param {boolean} [params.takeMain] - Zda se mají brát hlavní karty.
+ * @param {number} [params.offset] - Posun pro stránkování.
+ * @param {number} [params.limit] - Počet záznamů na stránku.
+ * @param {string} [params.sort] - Řazení (např. '+operator').
+ * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (pole skladových karet).
+ */
+public async getListOfStockCards(
+    accOwnerId: string | number,
+    stockId: string | number,
+    params: {
+        columns?: string[];
+        valid?: boolean;
+        takeMain?: boolean;
+        offset?: number;
+        limit?: number;
+        sort?: string;
+    } = {}
+): Promise<any> {
+    const endpoint = `/reports-api/listOfStockCards/${accOwnerId}/${stockId}`;
+    
+    // Připravíme parametry dotazu z poskytnutého objektu.
+    // Pro sloupce převedeme pole na string oddělený čárkami.
+    const queryParams: { [key: string]: any } = { ...params };
+    if (params.columns) {
+        queryParams.columns = params.columns.join(',');
+    }
+
+    logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        },
+        params: queryParams
+    });
+
+    if (!response.ok()) {
+        const errorText = await response.text();
+        logger.error(`Chyba při získávání seznamu skladových karet. Status: ${response.status()}`, errorText);
+        throw new Error(`Chyba při získávání seznamu skladových karet. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Seznam skladových karet byl úspěšně získán.`);
+    return response.json();
+}  
+
+/**--- POST /auth-api/user/authorization ---
+ * Autorizuje uživatele a získá autorizační token.
+ * @param {string} operator - Přihlašovací jméno operátora.
+ * @param {string} password - Heslo operátora.
+ * @returns {Promise<any>} Odpověď ze serveru obsahující autorizační data (včetně tokenu).
+ */
+public async authorizeUser(operator: string, password: string): Promise<any> {
+    const endpoint = '/auth-api/user/authorization';
+    logger.trace(`Odesílám POST požadavek pro autorizaci uživatele: ${operator}`);
+
+    // Vytvoření JSON objektu s přihlašovacími údaji
+    const credentials = { operator, password };
+    const jsonCredentials = JSON.stringify(credentials);
+    
+    // Podle cURL příkazu se tělo posílá jako base64 enkódovaný string
+    const requestBody = Buffer.from(jsonCredentials).toString('base64');
+
+    const response = await this.request.post(endpoint, {
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'text/plain'
+            // Autorizační header (Bearer token) se zde nepoužívá, protože se teprve přihlašujeme
+        },
+        data: requestBody
+    });
+
+    if (!response.ok()) {
+        const errorText = await response.text();
+        logger.error(`Chyba při autorizaci uživatele ${operator}. Status: ${response.status()}`, errorText);
+        throw new Error(`Chyba při autorizaci uživatele ${operator}. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Uživatel ${operator} byl úspěšně autorizován.`);
+    return response.json();
+}
+}
