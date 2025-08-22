@@ -11,6 +11,7 @@ process.env.LOG_LEVEL = String(logLevel);
 
 
 export default defineConfig({
+    workers: 1, //Běží vždy jen jeden test
     fullyParallel: false, //Paralelní spuštění testů
     retries: 1, //Provede jedno opakování po selhaném testu
     timeout: 100*1000, //s*1000 ms

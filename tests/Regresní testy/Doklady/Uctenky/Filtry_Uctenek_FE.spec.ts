@@ -35,13 +35,13 @@ test.describe('Filtrace v sestavě Účtenky', () => {
         await page.getByRole('link', { name: 'Účtenky' }).click();
     });
 
-    test('Filtrování podle jednoho kritéria (Typ účtenky)', async ({ page }) => {
+    test('Filtrování podle jednoho kritéria (Typ účtenky) @regression, @search, @FE', async ({ page }) => {
         logger.info('Zahajuji test filtrování podle typu účtenky.');
         await page.getByLabel('Typ účtenky').getByRole('row', { name: 'Vyber vše' }).locator('span').first().click();
         await applyFiltersAndCheckResults(page);    
     });
 
-    test('Filtrování podle číselného rozsahu a částky', async ({ page }) => {
+    test('Filtrování podle číselného rozsahu a částky @regression, @search, @FE', async ({ page }) => {
         logger.info('Zahajuji test filtrování podle číselných hodnot.');
 
         logger.debug('Vyplňuji Číslo účtenky od-do.');
@@ -55,7 +55,7 @@ test.describe('Filtrace v sestavě Účtenky', () => {
         logger.info('Test filtrování podle číselných hodnot byl úspěšný.');
     });
 
-    test('Komplexní filtrace s více parametry a zobrazení výsledků', async ({ page }) => {
+    test('Komplexní filtrace s více parametry a zobrazení výsledků @regression, @search, @FE', async ({ page }) => {
         try {
             logger.info('Zahajuji test komplexního filtrování.');
             
