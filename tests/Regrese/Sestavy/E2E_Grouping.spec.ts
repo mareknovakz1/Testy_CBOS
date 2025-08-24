@@ -1,7 +1,7 @@
-import { test, expect } from '../../support/fixtures/auth.fixture';
-import { ReportBuilder } from '../../support/ReportBuilder';
-import { logger } from '../../support/logger';
-import { ApiClient } from '../../support/ApiClient';
+import { test, expect } from '../../../support/fixtures/auth.fixture';
+import { ReportBuilder } from '../../../support/ReportBuilder';
+import { logger } from '../../../support/logger';
+import { ApiClient } from '../../../support/ApiClient';
 
 /**
  * Vytvoří sadu kumulativních testů pro danou sestavu a její úrovně seskupení.

@@ -1,7 +1,7 @@
-import { test, expect } from '../../support/fixtures/auth.fixture';
-import { ApiClient } from '../../support/ApiClient';
-import { ReportBuilder } from '../../support/ReportBuilder';
-import { logger } from '../../support/logger';
+import { test, expect } from '../../../support/fixtures/auth.fixture';
+import { ApiClient } from '../../../support/ApiClient';
+import { ReportBuilder } from '../../../support/ReportBuilder';
+import { logger } from '../../../support/logger';
 
 // --- JEDNOTNÁ A FINÁLNÍ DEFINICE VŠECH SESTAV ---
 

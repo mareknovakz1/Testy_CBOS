@@ -1,7 +1,7 @@
-import { logger } from '../../support/logger';
+import { logger } from '../../../support/logger';
 import { Page } from '@playwright/test';
-import { baseURL } from '../../support/constants';
-import { test, expect } from '../../support/fixtures/auth_FE.fixture'; 
+import { baseURL } from '../../../support/constants';
+import { test, expect } from '../../../support/fixtures/auth_FE.fixture'; 
 
 /**
  * Vytvoří novou sestavu pro zadané plovoucí období.

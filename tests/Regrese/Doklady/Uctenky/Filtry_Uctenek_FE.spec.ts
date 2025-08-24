@@ -1,7 +1,7 @@
-import { logger } from '../../../support/logger';
+import { logger } from '../../../../support/logger';
 import { Page, expect } from '@playwright/test';
-import { baseURL } from '../../../support/constants';
-import { test } from '../../../support/fixtures/auth_FE.fixture';
+import { baseURL } from '../../../../support/constants';
+import { test } from '../../../../support/fixtures/auth_FE.fixture';
 
 /**
  * Pomocná funkce pro aplikaci filtrů a ověření výsledků.

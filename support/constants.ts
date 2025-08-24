@@ -5,10 +5,10 @@
 
 
 //.239
-export const passwordOne:string = "1234";
+export const passwordOne:string = "1";
 export const server:string = "239";
-export const loginhash:string = "eyJvcGVyYXRvciI6Ik1OQSIsInBhc3N3b3JkIjoiMTIzNCJ9";
-export const nameOne:string = "MNA"; //Administrátor bez VOM na 239
+export const loginhash:string = "eyJvcGVyYXRvciI6Ik1OX1RFVFNUX0FVVE9NQVQiLCJwYXNzd29yZCI6IjEifQ==";
+export const nameOne:string = "MN_TETST_AUTOMAT"; //Administrátor bez VOM na 239
 
 /*
 //.240

@@ -1,10 +1,10 @@
 /**
  * NEKOMPLETNÍ 
  */
-import { logger } from '../../support/logger';
+import { logger } from '../../../support/logger';
 import { Page, expect } from '@playwright/test';
-import { baseURL } from '../../support/constants';
-import { test } from '../../support/fixtures/auth_FE.fixture';
+import { baseURL } from '../../../support/constants';
+import { test } from '../../../support/fixtures/auth_FE.fixture';
 
 /**
  * Pomocná funkce pro zapouzdření opakujícího se procesu vytváření sestavy.
@@ -12,6 +12,8 @@ import { test } from '../../support/fixtures/auth_FE.fixture';
  * @param reportId - ID sestavy k výběru (např. 'D001').
  * @param configureSteps - Asynchronní funkce obsahující unikátní kroky pro konfiguraci dané sestavy.
  */
+
+/*
 async function createReportWorkflow(
   page: Page,
   reportId: string,
@@ -30,9 +32,9 @@ async function createReportWorkflow(
   await page.getByRole('button', { name: 'Následující krok 󰅂' }).click();
 }
 
-/**
- * Dokončí proces kliknutím na "Vytvořit sestavu" a ověří úspěch.
- */
+
+//Dokončí proces kliknutím na "Vytvořit sestavu" a ověří úspěch.
+/*
 async function finishReportCreation(page: Page) {
   logger.info("Dokončuji vytváření sestavy.");
   
@@ -173,4 +175,4 @@ test.describe.serial('E2E testy pro generování uživatelských sestav', () => 
     }
   });
 
-});
+});*/

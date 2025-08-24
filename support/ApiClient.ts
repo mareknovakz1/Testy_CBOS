@@ -16,6 +16,15 @@ import { APIRequestContext } from '@playwright/test';
 import { logger } from '../support/logger';
 
 export class ApiClient {
+    static getDashboard() {
+        throw new Error('Method not implemented.');
+    }
+    static getListOfStocks(arg0: { accOwner: any; limit: number; }) {
+        throw new Error('Method not implemented.');
+    }
+    static getListOfStockCards(ACC_OWNER_ID: any, STOCK_ID: any, arg2: { limit: number; }) {
+        throw new Error('Method not implemented.');
+    }
   private request: APIRequestContext;
   private token: string;
 
@@ -442,4 +451,317 @@ public async authorizeUser(operator: string, password: string): Promise<any> {
     logger.silly(`Uživatel ${operator} byl úspěšně autorizován.`);
     return response.json();
 }
+
+/**--- GET /dashboard ---
+ * Načte hlavní stránku dashboardu.
+ * Očekává HTML odpověď.
+ * @returns {Promise<string>} Promise, který vrací obsah stránky jako text.
+ */
+public async getDashboard(): Promise<string> {
+    const endpoint = '/dashboard';
+    logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'
+            // Autorizační token se pro tento požadavek nepoužívá
+        },
+        ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
+    });
+
+    if (!response.ok()) {
+        const errorText = await response.text();
+        logger.error(`Chyba při načítání dashboardu. Status: ${response.status()}`, errorText);
+        throw new Error(`Chyba při načítání dashboardu. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Dashboard byl úspěšně načten.`);
+    return response.text();
+}
+/**--- GET /administration-api/stockCardsGroupsLocal/{stockId} ---
+ * Získá lokální skupiny skladových karet pro daný sklad.
+ * @param {string | number} stockId - ID skladu (např. 230).
+ * @param {object} params - Volitelné parametry pro stránkování a řazení.
+ * @param {number} [params.offset] - Posun pro stránkování (počet záznamů k přeskočení).
+ * @param {number} [params.limit] - Maximální počet záznamů na stránku.
+ * @param {string} [params.sort] - Klíč pro řazení (např. '+id' pro vzestupné řazení podle ID).
+ * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+ */
+public async getStockCardsGroupsLocal(
+    stockId: string | number, 
+    params: { offset?: number, limit?: number, sort?: string } = {}
+): Promise<any> {
+    const endpoint = `/administration-api/stockCardsGroupsLocal/${stockId}`;
+    logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        },
+        params: params,
+        ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
+    });
+
+    if (!response.ok()) {
+        const errorText = await response.text();
+        logger.error(`Chyba při získávání lokálních skupin skladových karet pro sklad ${stockId}. Status: ${response.status()}`, errorText);
+        throw new Error(`Chyba při získávání lokálních skupin skladových karet. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Lokální skupiny skladových karet pro sklad ${stockId} byly úspěšně získány.`);
+    return response.json();
+}
+/**--- GET /administration-api/stockCardsSupergroupsLocal/{stockId} ---
+ * Získá lokální nadskupiny skladových karet pro daný sklad.
+ * @param {string | number} stockId - ID skladu (např. 230).
+ * @param {object} params - Volitelné parametry pro stránkování a řazení.
+ * @param {number} [params.offset] - Posun pro stránkování (počet záznamů k přeskočení).
+ * @param {number} [params.limit] - Maximální počet záznamů na stránku.
+ * @param {string} [params.sort] - Klíč pro řazení (např. '+id' pro vzestupné řazení podle ID).
+ * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+ */
+public async getStockCardsSupergroupsLocal(
+    stockId: string | number, 
+    params: { offset?: number, limit?: number, sort?: string } = {}
+): Promise<any> {
+    const endpoint = `/administration-api/stockCardsSupergroupsLocal/${stockId}`;
+    logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        },
+        params: params,
+        ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
+    });
+
+    if (!response.ok()) {
+        const errorText = await response.text();
+        logger.error(`Chyba při získávání lokálních nadskupin skladových karet pro sklad ${stockId}. Status: ${response.status()}`, errorText);
+        throw new Error(`Chyba při získávání lokálních nadskupin skladových karet. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Lokální nadskupiny skladových karet pro sklad ${stockId} byly úspěšně získány.`);
+    return response.json();
+}
+    /**
+     * Získá seznam POS terminálů pro daný sklad.
+     * --- GET /administration-api/listOfPosTerminals/{stockId} ---
+     * @param {string | number} stockId - ID skladu (např. 230).
+     * @param {object} params - Volitelné parametry pro dotaz.
+     * @param {string} [params.sort] - Klíč pro řazení (např. 'id').
+     * @param {boolean} [params.octomat] - Filtr pro Octomat.
+     * @param {boolean} [params.mpay] - Filtr pro mPay.
+     * @param {boolean} [params.frank] - Filtr pro Frank.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfPosTerminals(
+        stockId: string | number,
+        params: { sort?: string, octomat?: boolean, mpay?: boolean, frank?: boolean } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/listOfPosTerminals/${stockId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu POS terminálů pro sklad ${stockId}. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu POS terminálů. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam POS terminálů pro sklad ${stockId} byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Získá definice rychlých voleb pro daný sklad a terminál.
+     * --- GET /administration-api/listOfHotKeysDefinitions/{stockId}/{posTerminalId} ---
+     * @param {string | number} stockId - ID skladu (např. 230).
+     * @param {string | number} posTerminalId - ID POS terminálu (např. 23001).
+     * @param {object} params - Volitelné parametry pro dotaz.
+     * @param {number} [params.hotKeysGroupId] - ID skupiny rychlých voleb.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfHotKeysDefinitions(
+        stockId: string | number,
+        posTerminalId: string | number,
+        params: { hotKeysGroupId?: number } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/listOfHotKeysDefinitions/${stockId}/${posTerminalId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání definic rychlých voleb. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání definic rychlých voleb. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Definice rychlých voleb byly úspěšně získány.`);
+        return response.json();
+    }
+    /**
+     * Získá informace o počtech záznamů v tabulkách pro dashboard.
+     * --- GET /dashboard-api/tablesCountInfo ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} [params.accOwner] - ID vlastníka účtu.
+     * @param {string | number} [params.cardTypes] - Typy karet.
+     * @param {string} [params.tables] - Název tabulky k dotazování (např. 'localCards').
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getTablesCountInfo(
+        params: {
+            accOwner?: string;
+            cardTypes?: string | number;
+            tables?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/dashboard-api/tablesCountInfo';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání informací o počtech tabulek. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání informací o počtech tabulek. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Informace o počtech tabulek byly úspěšně získány.`);
+        return response.json();
+    }
+    /**
+     * Získá seznam lokálních karet.
+     * --- GET /reports-api/listOfLocalCards ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {boolean} [params.valid] - Filtr pro platné karty.
+     * @param {string} [params.accOwner] - ID vlastníka účtu.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @param {string} [params.sort] - Řazení (např. '+updated').
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfLocalCards(
+        params: {
+            valid?: boolean;
+            accOwner?: string;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfLocalCards';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu lokálních karet. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu lokálních karet. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam lokálních karet byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Získá seznam cenových kategorií.
+     * --- GET /reports-api/listOfPricesCategories ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} [params.accOwner] - ID vlastníka účtu.
+     * @param {boolean} [params.valid] - Filtr pro platné kategorie.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfPricesCategories(
+        params: {
+            accOwner?: string;
+            valid?: boolean;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfPricesCategories';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu cenových kategorií. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu cenových kategorií. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam cenových kategorií byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Získá seznam žádostí o EuroOil karty.
+     * --- GET /reports-api/listOfEuroOilCardRequests ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} [params.stockId] - ID skladu.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @param {string} [params.sort] - Řazení (např. '-operator').
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfEuroOilCardRequests(
+        params: {
+            stockId?: string;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfEuroOilCardRequests';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání žádostí o EuroOil karty. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání žádostí o EuroOil karty. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam žádostí o EuroOil karty byl úspěšně získán.`);
+        return response.json();
+    }
 }

@@ -1,7 +1,7 @@
-import { test, expect } from '../../support/fixtures/auth.fixture';
-import { ApiClient } from '../../support/ApiClient';
-import { ReportBuilder } from '../../support/ReportBuilder';
-import { logger } from '../../support/logger';
+import { test, expect } from '../../../support/fixtures/auth.fixture';
+import { ApiClient } from '../../../support/ApiClient';
+import { ReportBuilder } from '../../../support/ReportBuilder';
+import { logger } from '../../../support/logger';
 
 // --- Typové definice pro parametrizaci ---
 interface RangeTestCase { name: string; type: 'range'; payload: { from: Date; to: Date | null }; }

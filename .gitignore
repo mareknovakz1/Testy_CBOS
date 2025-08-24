@@ -6,6 +6,7 @@
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/reportResults.ts/
 
 # Logovací soubory
 *.log

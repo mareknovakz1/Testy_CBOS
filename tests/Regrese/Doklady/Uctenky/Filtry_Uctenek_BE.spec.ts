@@ -1,6 +1,6 @@
-import { expect, test } from '../../../support/fixtures/auth.fixture';
-import { ApiClient } from '../../../support/ApiClient';
-import { logger } from '../../../support/logger';
+import { expect, test } from '../../../../support/fixtures/auth.fixture';
+import { ApiClient } from '../../../../support/ApiClient';
+import { logger } from '../../../../support/logger';
 
 /*
  + Parameters
@@ -37,7 +37,7 @@ let categoryIds: string[] = []; //Centrální kategorie zboží
 let OperatorName: string[] = [];
 const accOwner = '60193531'; 
     
-test.describe.serial('API Testy pro získání filtrů účtenek', () => {
+test.describe('API Testy pro získání filtrů účtenek', () => {
 
     // Tento blok se spustí jednou před každým testem v této sadě.
     test.beforeEach(async ({ request, authToken }) => {
