@@ -1603,36 +1603,41 @@ public async getStockCardsSupergroupsLocal(
         return response.json();
     }
     /**
-     * Získá seznam centrálních kategorií zboží.
-     * --- GET /administration-api/stockCardsCategoriesCentral/{accOwner} ---
-     * @param accOwner ID vlastníka účtu.
-     * @param params Objekt s query parametry.
+     * Získá seznam kategorií zboží.
+     * --- GET /administration-api/stockCardsCategories/{accOwner} ---
+     * @param {string} accOwner - ID vlastníka účtu (path parametr).
+     * @param {object} params - Objekt s query parametry.
      * @returns {Promise<any>} Odpověď ze serveru.
      */
-    public async getStockCardsCategoriesCentral(
+    public async getStockCardsCategories(
         accOwner: string,
         params: {
+            valid?: boolean;
+            offset?: number;
             limit?: number;
             sort?: string;
         } = {}
     ): Promise<any> {
-        const endpoint = `/administration-api/stockCardsCategoriesCentral/${accOwner}`;
+        const endpoint = `/administration-api/stockCardsCategories/${accOwner}`;
         logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
 
         const response = await this.request.get(endpoint, {
-            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
             params: params
         });
 
         if (!response.ok()) {
             const errorText = await response.text();
-            logger.error(`Chyba při získávání centrálních kategorií zboží. Status: ${response.status()}`, errorText);
-            throw new Error(`Chyba při získávání centrálních kategorií zboží. Status: ${response.status()}`);
+            logger.error(`Chyba při získávání kategorií zboží. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání kategorií zboží. Status: ${response.status()}`);
         }
         return response.json();
     }
 
-    /**
+        /**
      * Získá seznam centrálních skupin zboží.
      * --- GET /administration-api/stockCardsGroupsCentral/{accOwner} ---
      * @param accOwner ID vlastníka účtu.
@@ -1642,19 +1647,32 @@ public async getStockCardsSupergroupsLocal(
     public async getStockCardsGroupsCentral(
         accOwner: string,
         params: {
+            columns?: string[];
             fullSearch?: string;
             withHistory?: boolean;
+            withEdit?: boolean;
+            withItems?: boolean;
+            withPlanned?: boolean;
             offset?: number;
             limit?: number;
             sort?: string;
         } = {}
     ): Promise<any> {
         const endpoint = `/administration-api/stockCardsGroupsCentral/${accOwner}`;
-        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+        
+        const queryParams: { [key: string]: any } = { ...params };
+        if (params.columns && Array.isArray(params.columns)) {
+            queryParams.columns = params.columns.join(',');
+        }
+
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
 
         const response = await this.request.get(endpoint, {
-            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
-            params: params
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: queryParams
         });
 
         if (!response.ok()) {
@@ -1664,6 +1682,7 @@ public async getStockCardsSupergroupsLocal(
         }
         return response.json();
     }
+
     /**
      * Získá centrální parametry systému (features).
      * --- GET /administration-api/fsfeature/{accOwner} ---
