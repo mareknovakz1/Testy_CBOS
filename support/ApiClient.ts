@@ -37,30 +37,44 @@ export class ApiClient {
     this.token = token;
   }
 
-  //--- GET getUserReportsList	/reports-api/usersReports	
-  /*
-   * Získá seznam všech uživatelských sestav.
-   * @returns Odpověď ze serveru ve formátu JSON (pole sestav).
-   */
-  public async getUserReportsList(): Promise<any> {
-    const endpoint = '/reports-api/listOfUsersReports/60193531?offset=0&limit=100&sort=-updated';
-    logger.trace(`Odesílám GET požadavek na získání seznamu sestav: ${endpoint}`);
+    /**
+     * Získá seznam uživatelských sestav.
+     * --- GET /reports-api/listOfUsersReports/{accOwner} ---
+     * @param {string} accOwner - ID vlastníka účtu (povinný path parametr).
+     * @param {object} params - Objekt s query parametry.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @param {string} [params.sort] - Řazení (např. '-operator').
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfUsersReports(
+        accOwner: string,
+        params: {
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/reports-api/listOfUsersReports/${accOwner}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
 
-    const response = await this.request.get(endpoint, {
-      headers: {
-        'Authorization': `Bearer ${this.token}`,
-        'Accept': 'application/json'
-      }
-    });
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params // Query parametry
+        });
 
-    if (!response.ok()) {
-      logger.error(`Chyba při získávání seznamu sestav. Status: ${response.status()}`, await response.text());
-      throw new Error(`Chyba při získávání seznamu sestav. Status: ${response.status()}`);
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu uživatelských sestav. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu uživatelských sestav. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam uživatelských sestav byl úspěšně získán.`);
+        return response.json();
     }
-    
-    logger.silly(`Seznam sestav byl úspěšně získán.`);
-    return response.json();
-  }
 
    /**--- POST createUserReport  /reports-api/usersReports/60193531 
    * Vytvoří novou uživatelskou sestavu.
@@ -261,60 +275,60 @@ public async getListOfPartners(options: {
     return response.json();
   }
 
-  /** --- GET listOfReceipts /reports-api/listOfReceipts ---
- * /reports-api/listOfReceipts{?stockId,accOwner,year,month,day,termId,operator,recType,paidBy,dateFrom,dateTo,ean,cardIssuerId,totalReceiptPriceFrom,totalReceiptPriceTo,receiptItemPriceFrom,receiptItemPriceTo,receiptNrFrom,receiptNrTo,cgroupId,lgroupId,categoryId,search,searchType}';
- * Získá seznam účtenek podle zadaných filtrů.
- * @param year - Rok (např. 2025)
- * @param stockId - ID skladu (např. 101)
- * @param totalReceiptPriceFrom - Minimální cena účtenky (např. 1)
- * @param receiptItemPriceFrom - Minimální cena položky účtenky (např. 0)
- * @param offset - Offset pro stránkování (např. 0)
- * @param limit - Limit pro stránkování (např. 10)
- * @param sort - Řazení (např. '-receipt')
- * @param recType - Typ účtenky (např. 'R')
- * @param cardIssuerID - ID vydavatele karty (např. 123)
- * @param groupId - ID centrální skupiny zboží (např. 456)
- * @param categoryId - ID centrální kategorie zboží (např. 789)
- * @param operator - Operátor (uživatel) (např. 'jan.novak')
- * @param paidBy - Způsob platby (např. 'B')
- * @param dateFrom - Datum od (např. '2025-01-01')
- * @param dateTo - Datum do (např. '2025-12-31')
- * @param receiptNrFrom - Číslo účtenky od (např. '0001')
- * @param receiptNrTo - Číslo účtenky do (např. '9999')
- * @param search - Hledaný text (např. 'test')
- * @param searchType - Typ hledání (např. 'fullSearch')
- * @returns Odpověď ze serveru ve formátu JSON (pole účtenek).
- */
-public async getReceipts(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
-    
-    const endpoint = '/reports-api/listOfReceipts';
-    // Sestavení query stringu z objektu params
-    const query = Object.entries(params)
-        .map(([key, value]) => {
-            if (Array.isArray(value)) {
-                return `${key}=${value.join(',')}`;
+    /** --- GET listOfReceipts /reports-api/listOfReceipts ---
+     * /reports-api/listOfReceipts{?stockId,accOwner,year,month,day,termId,operator,recType,paidBy,dateFrom,dateTo,ean,cardIssuerId,totalReceiptPriceFrom,totalReceiptPriceTo,receiptItemPriceFrom,receiptItemPriceTo,receiptNrFrom,receiptNrTo,cgroupId,lgroupId,categoryId,search,searchType}';
+     * Získá seznam účtenek podle zadaných filtrů.
+     * @param year - Rok (např. 2025)
+     * @param stockId - ID skladu (např. 101)
+     * @param totalReceiptPriceFrom - Minimální cena účtenky (např. 1)
+     * @param receiptItemPriceFrom - Minimální cena položky účtenky (např. 0)
+     * @param offset - Offset pro stránkování (např. 0)
+     * @param limit - Limit pro stránkování (např. 10)
+     * @param sort - Řazení (např. '-receipt')
+     * @param recType - Typ účtenky (např. 'R')
+     * @param cardIssuerID - ID vydavatele karty (např. 123)
+     * @param groupId - ID centrální skupiny zboží (např. 456)
+     * @param categoryId - ID centrální kategorie zboží (např. 789)
+     * @param operator - Operátor (uživatel) (např. 'jan.novak')
+     * @param paidBy - Způsob platby (např. 'B')
+     * @param dateFrom - Datum od (např. '2025-01-01')
+     * @param dateTo - Datum do (např. '2025-12-31')
+     * @param receiptNrFrom - Číslo účtenky od (např. '0001')
+     * @param receiptNrTo - Číslo účtenky do (např. '9999')
+     * @param search - Hledaný text (např. 'test')
+     * @param searchType - Typ hledání (např. 'fullSearch')
+     * @returns Odpověď ze serveru ve formátu JSON (pole účtenek).
+     */
+    public async getReceipts(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
+        
+        const endpoint = '/reports-api/listOfReceipts';
+        // Sestavení query stringu z objektu params
+        const query = Object.entries(params)
+            .map(([key, value]) => {
+                if (Array.isArray(value)) {
+                    return `${key}=${value.join(',')}`;
+                }
+                return `${key}=${value}`;
+            })
+            .join('&');
+        const url = `${endpoint}?${query}`;
+        logger.trace(`Odesílám GET požadavek na ${url}`);
+
+        const response = await this.request.get(url, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
             }
-            return `${key}=${value}`;
-        })
-        .join('&');
-    const url = `${endpoint}?${query}`;
-    logger.trace(`Odesílám GET požadavek na ${url}`);
+        });
 
-    const response = await this.request.get(url, {
-        headers: {
-            'Authorization': `Bearer ${this.token}`,
-            'Accept': 'application/json, text/plain, */*'
+        if (!response.ok()) {
+            logger.error(`Chyba při získávání seznamu účtenek. Status: ${response.status()}`, await response.text());
+            throw new Error(`Chyba při získávání seznamu účtenek. Status: ${response.status()}`);
         }
-    });
 
-    if (!response.ok()) {
-        logger.error(`Chyba při získávání seznamu účtenek. Status: ${response.status()}`, await response.text());
-        throw new Error(`Chyba při získávání seznamu účtenek. Status: ${response.status()}`);
+        logger.silly(`Seznam účtenek byl úspěšně získán.`);
+        return response.json();
     }
-
-    logger.silly(`Seznam účtenek byl úspěšně získán.`);
-    return response.json();
-}
 
 /**--- GET reports-api/listOfStocks
 *Získá sezanm OM
@@ -764,4 +778,479 @@ public async getStockCardsSupergroupsLocal(
         logger.silly(`Seznam žádostí o EuroOil karty byl úspěšně získán.`);
         return response.json();
     }
+    /**
+     * Získá seznam bonusových tříd.
+     * --- GET /reports-api/listOfBonusClasses ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} [params.accOwner] - ID vlastníka účtu.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @param {string} [params.sort] - Řazení (např. '-operator').
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfBonusClasses(
+        params: {
+            accOwner?: string;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfBonusClasses';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu bonusových tříd. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu bonusových tříd. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam bonusových tříd byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Získá číselník období pro přehled skladových zásob.
+     * --- GET /balances-api/supplyPeriodsEnums/{stockId} ---
+     * @param {string} stockId - ID skladu (povinný path parametr).
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (očekává se pole objektů).
+     */
+    public async getSupplyPeriodsEnums(stockId: string): Promise<any> {
+        const endpoint = `/balances-api/supplyPeriodsEnums/${stockId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            }
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání číselníku období. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání číselníku období. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Číselník období byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Získá data o stavech nádrží pro dashboard.
+     * --- GET /dashboard-api/stocksTanks/{stockId} ---
+     * @param {string} stockId - ID skladu (povinný path parametr).
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (očekává se pole objektů).
+     */
+    public async getStocksTanks(stockId: string): Promise<any> {
+        const endpoint = `/dashboard-api/stocksTanks/${stockId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            }
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání dat o nádržích. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání dat o nádržích. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Data o nádržích byla úspěšně získána.`);
+        return response.json();
+    }
+    /**
+     * Získá číselník operátorů pro filtry.
+     * --- GET /reports-api/listOfOperators ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} params.stockId - ID skladu.
+     * @param {number | string} params.year - Rok.
+     * @param {string} params.documentType - Typ dokumentu (např. 'R' pro příjemky).
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (očekává se pole objektů).
+     */
+    public async getListOfOperators(
+        params: {
+            stockId: string;
+            year: number | string;
+            documentType: string;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfOperators';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání číselníku operátorů. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání číselníku operátorů. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Číselník operátorů byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Získá seznam UDD příjemek.
+     * --- GET /reports-api/listOfReceiptsUdd ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string[]} [params.columns] - Seznam sloupců k vrácení.
+     * @param {string} [params.stockId] - ID skladu.
+     * @param {number | string} [params.year] - Rok.
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfReceiptsUdd(
+    params: {
+        columns?: string[];
+        stockId?: string;
+        year?: number | string;
+        sort?: string;
+        offset?: number;
+        limit?: number;
+    } = {}
+    ): Promise<any> {
+    const endpoint = '/reports-api/listOfReceiptsUdd';
+
+    // API očekává 'columns' jako string oddělený čárkou,
+    // pro pohodlí v kódu můžeme přijímat pole a zde ho spojit.
+    const queryParams: { [key: string]: any } = { ...params };
+    if (params.columns && Array.isArray(params.columns)) {
+        queryParams.columns = params.columns.join(',');
+    }
+
+    logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
+
+    const response = await this.request.get(endpoint, {
+        headers: {
+            'Authorization': `Bearer ${this.token}`,
+            'Accept': 'application/json, text/plain, */*'
+        },
+        params: queryParams
+    });
+
+    if (!response.ok()) {
+        const errorText = await response.text();
+        logger.error(`Chyba při získávání seznamu UDD příjemek. Status: ${response.status()}`, errorText);
+        throw new Error(`Chyba při získávání seznamu UDD příjemek. Status: ${response.status()}`);
+    }
+
+    logger.silly(`Seznam UDD příjemek byl úspěšně získán.`);
+    return response.json();
+    }
+        /**
+     * Získá seznam stvrzenek o složení hotovosti (POS Tank Tickets).
+     * --- GET /reports-api/listOfPosTankTickets ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} params.stockId - ID skladu.
+     * @param {string} [params.dateFrom] - Datum od (ISO string).
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfPosTankTickets(
+        params: {
+            stockId: string;
+            dateFrom?: string;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfPosTankTickets';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu stvrzenek (Tank Tickets). Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu stvrzenek (Tank Tickets). Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam stvrzenek (Tank Tickets) byl úspěšně získán.`);
+        return response.json();
+    }
+        /**
+     * Získá seznam vkladů a výběrů v hotovosti.
+     * --- GET /reports-api/listOfPosMoneyOperations ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} params.stockId - ID skladu.
+     * @param {string} [params.dateFrom] - Datum od (ISO string).
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfPosMoneyOperations(
+        params: {
+            stockId: string;
+            dateFrom?: string;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfPosMoneyOperations';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu peněžních operací. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu peněžních operací. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam peněžních operací byl úspěšně získán.`);
+        return response.json();
+    }
+        /**
+     * Získá seznam přeplatkových poukázek.
+     * --- GET /reports-api/listOfPosTankVouchers ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} params.stockId - ID skladu.
+     * @param {string} [params.dateFrom] - Datum od (ISO string).
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfPosTankVouchers(
+        params: {
+            stockId: string;
+            dateFrom?: string;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfPosTankVouchers';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu přeplatkových poukázek. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu přeplatkových poukázek. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam přeplatkových poukázek byl úspěšně získán.`);
+        return response.json();
+    }
+        /**
+     * Získá seznam inventur zboží.
+     * --- GET /reports-api/listOfGoodsInventories ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string[]} [params.columns] - Seznam sloupců k vrácení.
+     * @param {string} params.accOwner - ID vlastníka účtu.
+     * @param {string} params.stockId - ID skladu.
+     * @param {number | string} params.year - Rok.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfGoodsInventories(
+        params: {
+            columns?: string[];
+            accOwner: string;
+            stockId: string;
+            year: number | string;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfGoodsInventories';
+        const queryParams: { [key: string]: any } = { ...params };
+        if (params.columns) {
+            queryParams.columns = params.columns.join(',');
+        }
+
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: queryParams
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu inventur zboží. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu inventur zboží. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam inventur zboží byl úspěšně získán.`);
+        return response.json();
+    }
+
+        /**
+     * Získá seznam objednávek zboží.
+     * --- GET /reports-api/listOfOrders ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} params.stockId - ID skladu.
+     * @param {number | string} params.year - Rok.
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfOrders(
+        params: {
+            stockId: string;
+            year: number | string;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfOrders';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu objednávek. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu objednávek. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam objednávek byl úspěšně získán.`);
+        return response.json();
+    }
+        /**
+     * Získá seznam čerpadlových dodacích listů.
+     * --- GET /reports-api/listOfWetDeliveryNotes ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string[]} [params.columns] - Seznam sloupců.
+     * @param {string} params.accOwner - ID vlastníka účtu.
+     * @param {string} params.stockId - ID skladu.
+     * @param {number | string} params.year - Rok.
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfWetDeliveryNotes(
+        params: {
+            columns?: string[];
+            accOwner: string;
+            stockId: string;
+            year: number | string;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfWetDeliveryNotes';
+        const queryParams: { [key: string]: any } = { ...params };
+        if (params.columns) {
+            queryParams.columns = params.columns.join(',');
+        }
+        
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: queryParams
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání čerpadlových dodacích listů. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání čerpadlových dodacích listů. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam čerpadlových dodacích listů byl úspěšně získán.`);
+        return response.json();
+    }
+
+    /**
+     * Získá seznam denních uzávěrek.
+     * --- GET /reports-api/listOfDailyBalances ---
+     * @param {object} params - Objekt s query parametry.
+     * @param {string} params.accOwner - ID vlastníka účtu.
+     * @param {string} params.stockId - ID skladu.
+     * @param {string} [params.dateFrom] - Datum od (ISO string).
+     * @param {string} [params.dateTo] - Datum do (ISO string).
+     * @param {string} [params.sort] - Řazení.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet záznamů na stránku.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfDailyBalances(
+        params: {
+            accOwner: string;
+            stockId: string;
+            dateFrom?: string;
+            dateTo?: string;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfDailyBalances';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání denních uzávěrek. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání denních uzávěrek. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam denních uzávěrek byl úspěšně získán.`);
+        return response.json();
+    }
+    
 }

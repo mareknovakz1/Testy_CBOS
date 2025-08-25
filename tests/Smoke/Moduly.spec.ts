@@ -1,3 +1,5 @@
+
+
 import { expect, test } from '../../support/fixtures/auth.fixture';
 import { ApiClient } from '../../support/ApiClient';
 import { logger } from '../../support/logger';
@@ -11,6 +13,7 @@ import { logger } from '../../support/logger';
  * 3. Využije se sdílená, autorizovaná instance ApiClient.
  * 4. Ověří se, že volání proběhlo bez chyby a odpověď má správnou datovou strukturu.
  */
+
 test.describe('API Smoke Tests', () => {
     // Sdílená instance ApiClient pro všechny testy v této sadě
     let apiClient: ApiClient;
@@ -197,8 +200,8 @@ test.describe('API Smoke Tests', () => {
 
         // Specifická aserce: ověříme, že odpověď obsahuje klíč pro dotazovanou tabulku a že hodnota je číslo
         expect(response[tableToQuery], `Odpověď musí obsahovat klíč pro tabulku "${tableToQuery}"`).toBeDefined();
-        expect(typeof response[tableToQuery], `Hodnota pro "${tableToQuery}" musí být číslo`).toBe('number');
-        expect(response[tableToQuery], `Počet záznamů pro "${tableToQuery}" musí být 0 nebo více`).toBeGreaterThanOrEqual(0);
+        expect(typeof response[tableToQuery].count, `Hodnota pro "${tableToQuery}.count" musí být číslo`).toBe('number');
+        expect(response[tableToQuery].count, `Počet záznamů pro "${tableToQuery}" musí být 0 nebo více`).toBeGreaterThanOrEqual(0);
 
         logger.info(`Endpoint úspěšně vrátil počet záznamů pro tabulku "${tableToQuery}": ${response[tableToQuery]}.`);
     });
@@ -287,4 +290,352 @@ test.describe('API Smoke Tests', () => {
             logger.info(`Endpoint úspěšně vrátil ${normalizedResponse.data.length} žádostí o EuroOil karty.`);
         }
     });
-});
+
+    test('TC-1206: GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @Smoke @API @Critical', async () => {
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfBonusClasses`);
+
+        // Zavoláme metodu API klienta s parametry
+        const response = await apiClient.getListOfBonusClasses({
+            accOwner: ACC_OWNER_ID,
+            limit: 10
+        });
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfBonusClasses nesmí být prázdná').toBeDefined();
+
+        // Normalizujeme odpověď pro jednotné ověření struktury
+        const normalizedResponse = Array.isArray(response)
+            ? { data: response, pagination: undefined }
+            : response;
+
+        expect(normalizedResponse.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+
+        // Pokud odpověď není přímo pole, ověříme i existenci stránkování
+        if (!Array.isArray(response)) {
+            expect(normalizedResponse.pagination, 'Pokud je odpověď objekt, musí obsahovat "pagination"').toBeDefined();
+        }
+
+        if (normalizedResponse.data.length === 0) {
+            logger.warn(`Endpoint vrátil 0 bonusových tříd pro accOwnerId: ${ACC_OWNER_ID}.`);
+        } else {
+            logger.info(`Endpoint úspěšně vrátil ${normalizedResponse.data.length} bonusových tříd.`);
+        }
+    });
+
+    test('TC-1207: GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @Smoke @API @Critical', async () => {
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfUsersReports`);
+
+        // Zavoláme metodu API klienta s path a query parametry
+        const response = await apiClient.getListOfUsersReports(ACC_OWNER_ID, {
+            limit: 10
+        });
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfUsersReports nesmí být prázdná').toBeDefined();
+
+        // Normalizujeme odpověď pro jednotné ověření struktury
+        const normalizedResponse = Array.isArray(response)
+            ? { data: response, pagination: undefined }
+            : response;
+
+        expect(normalizedResponse.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+
+        // Pokud odpověď není přímo pole, ověříme i existenci stránkování
+        if (!Array.isArray(response)) {
+            expect(normalizedResponse.pagination, 'Pokud je odpověď objekt, musí obsahovat "pagination"').toBeDefined();
+        }
+
+        if (normalizedResponse.data.length === 0) {
+            logger.warn(`Endpoint vrátil 0 uživatelských sestav pro accOwnerId: ${ACC_OWNER_ID}.`);
+        } else {
+            logger.info(`Endpoint úspěšně vrátil ${normalizedResponse.data.length} uživatelských sestav.`);
+        }
+    });
+    test('TC-1208: GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @Smoke @API @Critical', async () => {
+        logger.trace(`Spouštím test pro endpoint: GET /balances-api/supplyPeriodsEnums`);
+
+        const response = await apiClient.getSupplyPeriodsEnums(STOCK_ID);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+
+        // Ověříme, že odpověď je definovaná a je to pole
+        expect(response, 'Odpověď z /balances-api/supplyPeriodsEnums nesmí být prázdná').toBeDefined();
+        expect(response, 'Odpověď musí být pole').toBeInstanceOf(Array);
+
+        if (response.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.length} položek v číselníku.`);
+            const firstItem = response[0];
+
+            // Ověříme strukturu první položky v poli
+            expect.soft(firstItem, 'První položka nesmí být null').not.toBeNull();
+
+            expect.soft(firstItem).toHaveProperty('value');
+            expect.soft(typeof firstItem.value, 'Vlastnost "value" musí být číslo').toBe('number');
+
+            expect.soft(firstItem).toHaveProperty('label');
+            expect.soft(typeof firstItem.label, 'Vlastnost "label" musí být textový řetězec').toBe('string');
+
+            expect.soft(firstItem).toHaveProperty('year');
+            expect.soft(typeof firstItem.year, 'Vlastnost "year" musí být textový řetězec').toBe('string');
+
+            expect.soft(firstItem).toHaveProperty('balanceItems');
+            expect.soft(typeof firstItem.balanceItems, 'Vlastnost "balanceItems" musí být číslo').toBe('number');
+        } else {
+            logger.warn(`Endpoint vrátil prázdný číselník období pro stockId: ${STOCK_ID}.`);
+        }
+    });
+    test('TC-1209: GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @Smoke @API @Critical', async () => {
+        logger.trace(`Spouštím test pro endpoint: GET /dashboard-api/stocksTanks`);
+
+        const response = await apiClient.getStocksTanks(STOCK_ID);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+
+        // Ověříme, že odpověď je definovaná a je to pole
+        expect(response, 'Odpověď z /dashboard-api/stocksTanks nesmí být prázdná').toBeDefined();
+        expect(response, 'Odpověď musí být pole').toBeInstanceOf(Array);
+
+        if (response.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil data pro ${response.length} nádrží.`);
+            const firstTank = response[0];
+
+            // Ověříme strukturu prvního objektu v poli
+            expect.soft(firstTank, 'První objekt nádrže nesmí být null').not.toBeNull();
+            expect.soft(firstTank).toHaveProperty('tankId');
+            expect.soft(firstTank).toHaveProperty('stockCardName');
+            expect.soft(firstTank).toHaveProperty('volume');
+            expect.soft(firstTank).toHaveProperty('capacity');
+            expect.soft(firstTank).toHaveProperty('fillPercent');
+            
+            // Ověříme datové typy klíčových vlastností
+            expect.soft(typeof firstTank.tankId, 'Vlastnost "tankId" musí být číslo').toBe('number');
+            expect.soft(typeof firstTank.stockCardName, 'Vlastnost "stockCardName" musí být textový řetězec').toBe('string');
+            expect.soft(typeof firstTank.volume, 'Vlastnost "volume" musí být číslo').toBe('number');
+            expect.soft(typeof firstTank.fillPercent, 'Vlastnost "fillPercent" musí být číslo').toBe('number');
+        } else {
+            logger.warn(`Endpoint nevrátil žádná data o nádržích pro stockId: ${STOCK_ID}.`);
+        }
+    });
+
+    test('TC-1210: GET /reports-api/listOfOperators - Doklady/ Účtenky @Smoke @API @Critical', async () => {
+       const testParams = {
+                stockId: STOCK_ID,
+                year: 2025,
+                documentType: 'R'
+            };
+            logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfOperators s parametry: ${JSON.stringify(testParams)}`);
+
+            const response = await apiClient.getListOfOperators(testParams);
+
+            logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+
+            // Ověříme, že odpověď je definovaná a je to pole
+            expect(response, 'Odpověď z /reports-api/listOfOperators nesmí být prázdná').toBeDefined();
+            expect(response, 'Odpověď musí být pole').toBeInstanceOf(Array);
+
+            if (response.length > 0) {
+                logger.info(`Endpoint úspěšně vrátil ${response.length} operátorů.`);
+                const firstOperator = response[0];
+
+                // Ověříme strukturu prvního objektu v poli
+                expect.soft(firstOperator, 'První objekt operátora nesmí být null').not.toBeNull();
+                expect.soft(firstOperator).toHaveProperty('operator');
+                expect.soft(firstOperator).toHaveProperty('name');
+                
+                // Ověříme datové typy
+                expect.soft(typeof firstOperator.operator, 'Vlastnost "operator" musí být textový řetězec').toBe('string');
+                expect.soft(typeof firstOperator.name, 'Vlastnost "name" musí být textový řetězec').toBe('string');
+            } else {
+                logger.warn(`Endpoint nevrátil žádné operátory pro parametry: ${JSON.stringify(testParams)}.`);
+            }
+        });
+    test('TC-1211: GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @Smoke @API @Critical', async () => {
+        const testParams = {
+            stockId: STOCK_ID,
+            year: 2025,
+            limit: 10
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfReceiptsUdd s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfReceiptsUdd(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfReceiptsUdd nesmí být prázdná').toBeDefined();
+
+        // Pro tento typ endpointu očekáváme vždy objekt s 'data' a 'pagination'
+        expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+        expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+        
+        if (response.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.data.length} UDD příjemek.`);
+            // Rychlá kontrola, že první záznam má základní identifikátory
+            const firstReceipt = response.data[0];
+            expect(firstReceipt).toHaveProperty('id');
+            expect(firstReceipt).toHaveProperty('receiptId');
+        } else {
+            logger.warn(`Endpoint nevrátil žádné UDD příjemky pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+    test('TC-1212: GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @Smoke @API @Critical', async () => {
+        const testParams = {
+            stockId: STOCK_ID,
+            dateFrom: '2025-08-01T00:00:00.000Z',
+            limit: 10
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfPosTankTickets s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfPosTankTickets(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfPosTankTickets nesmí být prázdná').toBeDefined();
+
+        expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+        expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+        
+        if (response.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.data.length} stvrzenek.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádné stvrzenky pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+
+    test('TC-1213: GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @Smoke @API @Critical', async () => {
+        const testParams = {
+            stockId: STOCK_ID,
+            dateFrom: '2025-08-01T00:00:00.000Z',
+            limit: 10
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfPosMoneyOperations s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfPosMoneyOperations(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfPosMoneyOperations nesmí být prázdná').toBeDefined();
+
+        expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+        expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+        
+        if (response.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.data.length} peněžních operací.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádné peněžní operace pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+
+    test('TC-1214: GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @Smoke @API @Critical', async () => {
+        const testParams = {
+            stockId: STOCK_ID,
+            dateFrom: '2025-08-01T00:00:00.000Z',
+            limit: 10
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfPosTankVouchers s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfPosTankVouchers(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfPosTankVouchers nesmí být prázdná').toBeDefined();
+
+        expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+        expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+        
+        if (response.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.data.length} přeplatkových poukázek.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádné přeplatkové poukázky pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+    test('TC-1215: GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @Smoke @API @Critical', async () => {
+        const testParams = {
+            accOwner: ACC_OWNER_ID,
+            stockId: STOCK_ID,
+            year: 2025
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfGoodsInventories s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfGoodsInventories(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfGoodsInventories nesmí být prázdná').toBeDefined();
+
+        // Tento endpoint pravděpodobně vrací přímo pole
+        expect(response, 'Odpověď musí být pole').toBeInstanceOf(Array);
+        
+        if (response.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.length} inventur zboží.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádné inventury zboží pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+
+    test('TC-1216: GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @Smoke @API @Critical', async () => {
+        const testParams = {
+            stockId: STOCK_ID,
+            year: 2025,
+            limit: 10
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfOrders s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfOrders(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfOrders nesmí být prázdná').toBeDefined();
+
+        expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+        expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+        
+        if (response.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.data.length} objednávek.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádné objednávky pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+
+    test('TC-1217: GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @Smoke @API @Critical', async () => {
+        const testParams = {
+            accOwner: ACC_OWNER_ID,
+            stockId: STOCK_ID,
+            year: 2025,
+            limit: 10
+        };
+        logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfWetDeliveryNotes s parametry: ${JSON.stringify(testParams)}`);
+
+        const response = await apiClient.getListOfWetDeliveryNotes(testParams);
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /reports-api/listOfWetDeliveryNotes nesmí být prázdná').toBeDefined();
+
+        expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+        expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+        
+        if (response.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${response.data.length} čerpadlových dodacích listů.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádné čerpadlové dodací listy pro parametry: ${JSON.stringify(testParams)}.`);
+        }
+    });
+
+    test('TC-1218: GET /reports-api/listOfDailyBalances - Uzávěrky/ Denní uzávěrky @Smoke @API @Critical', async () => {
+    const testParams = {
+        accOwner: ACC_OWNER_ID,
+        stockId: STOCK_ID,
+        limit: 10,
+        dateFrom: '2025-08-01T00:00:00.000Z',
+        dateTo: '2025-08-25T23:59:59.000Z'
+    };
+    logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfDailyBalances s parametry: ${JSON.stringify(testParams)}`);
+
+    const response = await apiClient.getListOfDailyBalances(testParams);
+
+    logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+    expect(response, 'Odpověď z /reports-api/listOfDailyBalances nesmí být prázdná').toBeDefined();
+
+    expect(response.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+    expect(response.pagination, 'Odpověď musí obsahovat objekt "pagination"').toBeDefined();
+    
+    if (response.data.length > 0) {
+        logger.info(`Endpoint úspěšně vrátil ${response.data.length} denních uzávěrek.`);
+    } else {
+        logger.warn(`Endpoint nevrátil žádné denní uzávěrky pro parametry: ${JSON.stringify(testParams)}.`);
+    }
+    });
+});     
