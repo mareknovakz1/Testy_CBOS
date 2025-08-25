@@ -1208,31 +1208,30 @@ public async getStockCardsSupergroupsLocal(
         return response.json();
     }
 
-    /**
-     * Získá seznam denních uzávěrek.
-     * --- GET /reports-api/listOfDailyBalances ---
+/**
+     * Získá seznam denních uzávěrek (bilancí).
+     * --- GET /balances-api/dailyBillances/{stockId} ---
+     * @param {string} stockId - ID skladu (povinný path parametr).
      * @param {object} params - Objekt s query parametry.
-     * @param {string} params.accOwner - ID vlastníka účtu.
-     * @param {string} params.stockId - ID skladu.
-     * @param {string} [params.dateFrom] - Datum od (ISO string).
-     * @param {string} [params.dateTo] - Datum do (ISO string).
+     * @param {number | string} params.year - Rok.
+     * @param {number | string} params.month - Měsíc.
      * @param {string} [params.sort] - Řazení.
      * @param {number} [params.offset] - Posun pro stránkování.
      * @param {number} [params.limit] - Počet záznamů na stránku.
      * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
      */
     public async getListOfDailyBalances(
+        stockId: string,
         params: {
-            accOwner: string;
-            stockId: string;
-            dateFrom?: string;
-            dateTo?: string;
+            year: number | string;
+            month: number | string;
             sort?: string;
             offset?: number;
             limit?: number;
         }
     ): Promise<any> {
-        const endpoint = '/reports-api/listOfDailyBalances';
+        // POZOR: V reálné adrese endpointu je záměrný překlep "dailyBillances"
+        const endpoint = `/balances-api/dailyBillances/${stockId}`;
         logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
 
         const response = await this.request.get(endpoint, {
@@ -1252,5 +1251,446 @@ public async getStockCardsSupergroupsLocal(
         logger.silly(`Seznam denních uzávěrek byl úspěšně získán.`);
         return response.json();
     }
-    
+        /**
+         * Získá seznam poukázaných tržeb.
+         * --- GET /balances-api/dailyRevenues/{stockId} ---
+         * @param stockId ID skladu (path parametr).
+         * @param params Objekt s query parametry (year, month, offset, limit, sort).
+         * @returns {Promise<any>} Odpověď ze serveru.
+         */
+        public async getDailyRevenues(
+            stockId: string,
+            params: {
+                year: number | string;
+                month: number | string;
+                offset?: number;
+                limit?: number;
+                sort?: string;
+            }
+        ): Promise<any> {
+            const endpoint = `/balances-api/dailyRevenues/${stockId}`;
+            logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+            const response = await this.request.get(endpoint, {
+                headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+                params: params
+            });
+
+            if (!response.ok()) {
+                const errorText = await response.text();
+                logger.error(`Chyba při získávání poukázaných tržeb. Status: ${response.status()}`, errorText);
+                throw new Error(`Chyba při získávání poukázaných tržeb. Status: ${response.status()}`);
+            }
+            return response.json();
+    }
+
+    /**
+     * Získá seznam účetních uzávěrek (turnovers).
+     * --- GET /balances-api/turnovers/{stockId} ---
+     * @param stockId ID skladu (path parametr).
+     * @param params Objekt s query parametry (year, offset, limit, sort).
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getTurnovers(
+        stockId: string,
+        params: {
+            year: number | string;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        }
+    ): Promise<any> {
+        const endpoint = `/balances-api/turnovers/${stockId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání účetních uzávěrek. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání účetních uzávěrek. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam pokladních uzávěrek.
+     * --- GET /reports-api/listOfPosSummaries ---
+     * @param params Objekt s query parametry (stockId, year, month, sort).
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfPosSummaries(
+        params: {
+            stockId: string;
+            year: number | string;
+            month: number | string;
+            sort?: string;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfPosSummaries';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání pokladních uzávěrek. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání pokladních uzávěrek. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam uživatelů.
+     * --- GET /reports-api/listOfUsers ---
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfUsers(
+        params: {
+            accOwner: string;
+            stockId?: string;
+            sortNulls?: boolean;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfUsers';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu uživatelů. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu uživatelů. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam šablon rolí.
+     * --- GET /reports-api/listOfRoles ---
+     * @param params Objekt s query parametry (valid, scheme).
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfRoles(
+        params: {
+            valid?: boolean;
+            scheme?: 'cbos' | 'gpos';
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfRoles';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu rolí. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu rolí. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam tříd DPH.
+     * --- GET /reports-api/listOfVatClasses ---
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfVatClasses(
+        params: {
+            valid?: boolean;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfVatClasses';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání tříd DPH. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání tříd DPH. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam definic ISO kódů karet.
+     * --- GET /administration-api/listOfCardDefinitions/{accOwner} ---
+     * @param accOwner ID vlastníka účtu (path parametr).
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfCardDefinitions(
+        accOwner: string,
+        params: {
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/listOfCardDefinitions/${accOwner}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání definic karet. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání definic karet. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+
+    /**
+     * Získá seznam registrovaných socket klientů.
+     * --- GET /socket-api/registeredClients ---
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getRegisteredClients(): Promise<any> {
+        const endpoint = '/socket-api/registeredClients';
+        logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání registrovaných klientů. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání registrovaných klientů. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+
+    /**
+     * Získá seznam vydavatelů karet.
+     * --- GET /reports-api/listOfCardIssuers ---
+     * @param params Objekt s query parametry pro stránkování a řazení.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfCardIssuers(
+        params: {
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfCardIssuers';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání vydavatelů karet. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání vydavatelů karet. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam konkurenčních OM pro CCS.
+     * --- GET /reports-api/listOfForeignStocksCCS ---
+     * @param params Objekt s query parametry pro stránkování a řazení.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfForeignStocksCCS(
+        params: {
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfForeignStocksCCS';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání konkurenčních OM (CCS). Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání konkurenčních OM (CCS). Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+
+    /**
+     * Získá seznam konkurenčních OM.
+     * --- GET /administration-api/listOfForeignStocks/{accOwner}/{stockId} ---
+     * @param accOwner ID vlastníka účtu.
+     * @param stockId ID skladu.
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfForeignStocks(
+        accOwner: string,
+        stockId: string,
+        params: {
+            valid?: boolean;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/listOfForeignStocks/${accOwner}/${stockId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání konkurenčních OM. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání konkurenčních OM. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam kurzů měn.
+     * --- GET /reports-api/listOfCurrencyRates ---
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getListOfCurrencyRates(
+        params: {
+            accOwner: string;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        }
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfCurrencyRates';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání kurzů měn. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání kurzů měn. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá seznam centrálních kategorií zboží.
+     * --- GET /administration-api/stockCardsCategoriesCentral/{accOwner} ---
+     * @param accOwner ID vlastníka účtu.
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getStockCardsCategoriesCentral(
+        accOwner: string,
+        params: {
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/stockCardsCategoriesCentral/${accOwner}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání centrálních kategorií zboží. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání centrálních kategorií zboží. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+
+    /**
+     * Získá seznam centrálních skupin zboží.
+     * --- GET /administration-api/stockCardsGroupsCentral/{accOwner} ---
+     * @param accOwner ID vlastníka účtu.
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getStockCardsGroupsCentral(
+        accOwner: string,
+        params: {
+            fullSearch?: string;
+            withHistory?: boolean;
+            offset?: number;
+            limit?: number;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/stockCardsGroupsCentral/${accOwner}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání centrálních skupin zboží. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání centrálních skupin zboží. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+    /**
+     * Získá centrální parametry systému (features).
+     * --- GET /administration-api/fsfeature/{accOwner} ---
+     * @param accOwner ID vlastníka účtu.
+     * @param params Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru.
+     */
+    public async getFsFeatures(
+        accOwner: string,
+        params: {
+            withHistory?: boolean;
+            sort?: string;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/administration-api/fsfeature/${accOwner}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            params: params
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání centrálních parametrů. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání centrálních parametrů. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
 }
