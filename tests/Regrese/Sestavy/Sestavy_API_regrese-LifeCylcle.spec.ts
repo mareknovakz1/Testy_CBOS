@@ -11,39 +11,44 @@ type PayloadType = 'dateRange' | 'exactDate' | 'dateRangeFromOnly';
 interface ReportConfig {
     dateType: 'dateRange' | 'exactDate' | 'rangeFromOnly';
     partnerIds?: number[]; 
-    stockIds?: number[];   
+    stockIds?: number[];
+    
 }
 
 const sentPublic:boolean = true; //public - sestava je sdílená
 
 // Jedno pole, kde má každá sestava přiřazený svůj funkční typ payloadu
-const allReportsConfig: { id: string; name: string; config: ReportConfig }[] = [
+const allReportsConfig: { id: string; //ID vytvořené sestavy - načteno z oracle
+                        name: string; //Libovolné jméno
+                        config: ReportConfig, 
+                        testCaseId: string; //ID test casu
+                    }[] = [
     // 1. Sestavy funkční s plným časovým rozsahem (OD-DO)
-    { id: 'D001', name: 'D001 - Přehled prodejů', config: { dateType: 'dateRange' } },
-    { id: 'D005', name: 'D005 - Přehled konkurenčních cen', config: { dateType: 'dateRange' } },
-    { id: 'P001', name: 'P001 - Přehled nákupů zboží', config: { dateType: 'dateRange' } },
-    { id: 'S002', name: 'S002 - Přehled přecenění', config: { dateType: 'dateRange' } },
-    { id: 'S003', name: 'S003 - Půlnoční zásoby PHM', config: { dateType: 'dateRange' } },
-    { id: 'S004', name: 'S004 - Půlnoční registry stojanů', config: { dateType: 'dateRange' } },
-    { id: 'T001', name: 'T001 - Přehled neautorizovaných transakcí', config: { dateType: 'dateRange' } },
-    { id: 'T002', name: 'T002 - Přehled odběrů podle řidiče', config: { dateType: 'dateRange' } },
-    { id: 'T003', name: 'T003 - Přehled odběrů podle vozidla', config: { dateType: 'dateRange' } },
+    { id: 'D001', name: 'D001 - Přehled prodejů', config: { dateType: 'dateRange' }, testCaseId: 'TC-1234' },
+    { id: 'D005', name: 'D005 - Přehled konkurenčních cen', config: { dateType: 'dateRange' }, testCaseId: 'TC-1235' },
+    { id: 'P001', name: 'P001 - Přehled nákupů zboží', config: { dateType: 'dateRange' }, testCaseId: 'TC-1236' },
+    { id: 'S002', name: 'S002 - Přehled přecenění', config: { dateType: 'dateRange' }, testCaseId: 'TC-1237' },
+    { id: 'S003', name: 'S003 - Půlnoční zásoby PHM', config: { dateType: 'dateRange' }, testCaseId: 'TC-1238' },
+    { id: 'S004', name: 'S004 - Půlnoční registry stojanů', config: { dateType: 'dateRange' }, testCaseId: 'TC-1239' },
+    { id: 'T001', name: 'T001 - Přehled neautorizovaných transakcí', config: { dateType: 'dateRange' }, testCaseId: 'TC-1240' },
+    { id: 'T002', name: 'T002 - Přehled odběrů podle řidiče', config: { dateType: 'dateRange' }, testCaseId: 'TC-1241' },
+    { id: 'T003', name: 'T003 - Přehled odběrů podle vozidla', config: { dateType: 'dateRange' }, testCaseId: 'TC-1242' },
 
     // 2. Sestavy funkční s konkrétním datem (YMD)
-    { id: 'D002', name: 'D002 - Přehled prodejů PHM pro FÚ', config: { dateType: 'exactDate' } },
-    { id: 'P002', name: 'P002 - Přehled dodávek PHM pro FÚ', config: { dateType: 'exactDate' } },
-    { id: 'S001', name: 'S001 - Přehled pohybů zboží', config: { dateType: 'exactDate' } },
+    { id: 'D002', name: 'D002 - Přehled prodejů PHM pro FÚ', config: { dateType: 'exactDate' }, testCaseId: 'TC-1243' },
+    { id: 'P002', name: 'P002 - Přehled dodávek PHM pro FÚ', config: { dateType: 'exactDate' }, testCaseId: 'TC-1244' },
+    { id: 'S001', name: 'S001 - Přehled pohybů zboží', config: { dateType: 'exactDate' }, testCaseId: 'TC-1245' },
 
     // 3. Sestavy funkční s časovým rozsahem "OD" a speciálními filtry
-    { id: 'D003', name: 'D003 - Přehled prodejů se slevovou kartou', config: { dateType: 'rangeFromOnly', partnerIds: [1], stockIds: [101] } },
-    { id: 'D004', name: 'D004 - Přehled smazaných položek účtenek', config: { dateType: 'rangeFromOnly', stockIds: [101] } },
-    { id: 'D006', name: 'D006 - Export položek pokladních dokladů', config: { dateType: 'rangeFromOnly', stockIds: [101] } },
+    { id: 'D003', name: 'D003 - Přehled prodejů se slevovou kartou', config: { dateType: 'rangeFromOnly', partnerIds: [1], stockIds: [230] }, testCaseId: 'TC-1246' },
+    { id: 'D004', name: 'D004 - Přehled smazaných položek účtenek', config: { dateType: 'rangeFromOnly', stockIds: [230] }, testCaseId: 'TC-1247' },
+    { id: 'D006', name: 'D006 - Export položek pokladních dokladů', config: { dateType: 'rangeFromOnly', stockIds: [230] }, testCaseId: 'TC-1248' },
 ];
 
-test.describe('Finální E2E cyklus pro všechny sestavy s dynamickým payloadem', () => {
+test.describe('Cyklus pro všechny sestavy s dynamickým payloadem', () => {
 
     for (const report of allReportsConfig) {
-        test(`Životní cyklus sestavy: ${report.name}`, async ({ page }) => {
+        test(`${report.testCaseId}: Životní cyklus sestavy: ${report.name}, @regression @API @sestavy @high`, async ({ page }) => {
             let newReportDbId: number | string | undefined;
             try {
                 await page.goto('/');
@@ -91,8 +96,10 @@ test.describe('Finální E2E cyklus pro všechny sestavy s dynamickým payloadem
                 const itemsCount = createdReport.items;
                 const isPublic = createdReport.public;
 
-                    // PŘESUNUTO SEM: Veškerá logika, která závisí na nalezené sestavě
-                    if (itemsCount === null || itemsCount === 0) {
+                    //Kontorla item != null - pravděpoodbná chyba
+                     expect(itemsCount, `CHYBA: Sestava '${report.name}' selhala při generování na serveru (items je null).`).not.toBeNull();
+
+                    if (itemsCount === 0) {
                         const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
                         logger.warn(errorMessage);
                     } else {
@@ -110,6 +117,7 @@ test.describe('Finální E2E cyklus pro všechny sestavy s dynamickým payloadem
                 } catch (error) {
                 logger.fatal(`Došlo k fatální chybě během životního cyklu sestavy '${report.name}'.`, error);
                 throw error;
+
             } finally {
             if (newReportDbId) {
                 logger.trace(`(FINALLY) Pokouším se smazat sestavu '${report.name}' s ID: ${newReportDbId}...`);

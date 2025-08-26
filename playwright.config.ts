@@ -49,9 +49,10 @@ export default defineConfig({
       },
     ],
     reporter: [
-    ['html'], 
-    ['junit', { outputFile: 'results.xml' }]
-    ], //konfigurace testiny
+  ['list'], 
+  ['junit', { outputFile: 'results.xml' }],
+  ['html', { open: 'never' }]
+  ],
     use:{
         baseURL: baseURL,
         //trace: 'on-firts-retry',
