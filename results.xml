@@ -1,10 +1,110 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="3.0497740000002085">
-<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-25T14:22:29.122Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.007" errors="0">
-<testcase name="API Smoke Tests › TC-1231: GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="1.007">
+<testsuites id="" name="" tests="15" failures="0" skipped="0" errors="0" time="32.24002600000007">
+<testsuite name="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" timestamp="2025-08-26T08:46:47.508Z" hostname="chromium" tests="15" failures="0" skipped="0" time="29.479" errors="0">
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: D001 - Přehled prodejů" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="2.352">
 <system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-25[0m[0m 14[0m[0m:22[0m[0m:31[0m[0m.013[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:29[39m[0m[0m]Zahajuji API smoke test suite...
-2025[0m[0m-08[0m[0m-25[0m[0m 14[0m[0m:22[0m[0m:31[0m[0m.027[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:34[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
-2025[0m[0m-08[0m[0m-25[0m[0m 14[0m[0m:22[0m[0m:31[0m[0m.096[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1033[39m[0m[0m]Endpoint úspěšně vrátil 10 kategorií zboží.
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:50[0m[0m.778[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'D001 - Přehled prodejů' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:50[0m[0m.788[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "D001 - Přehled prodejů" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: D005 - Přehled konkurenčních cen" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.813">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:52[0m[0m.573[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'D005 - Přehled konkurenčních cen' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:52[0m[0m.578[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "D005 - Přehled konkurenčních cen" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: P001 - Přehled nákupů zboží" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.875">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:54[0m[0m.477[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'P001 - Přehled nákupů zboží' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:54[0m[0m.479[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "P001 - Přehled nákupů zboží" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: S002 - Přehled přecenění" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="2.554">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:57[0m[0m.011[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'S002 - Přehled přecenění' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:57[0m[0m.014[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "S002 - Přehled přecenění" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: S003 - Půlnoční zásoby PHM" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.96">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:59[0m[0m.016[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'S003 - Půlnoční zásoby PHM' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:46[0m[0m:59[0m[0m.022[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "S003 - Půlnoční zásoby PHM" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: S004 - Půlnoční registry stojanů" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="2.028">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:01[0m[0m.059[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'S004 - Půlnoční registry stojanů' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:01[0m[0m.061[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "S004 - Půlnoční registry stojanů" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: T001 - Přehled neautorizovaných transakcí" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.805">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:02[0m[0m.891[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'T001 - Přehled neautorizovaných transakcí' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:02[0m[0m.894[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "T001 - Přehled neautorizovaných transakcí" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: T002 - Přehled odběrů podle řidiče" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="2.016">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:04[0m[0m.871[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'T002 - Přehled odběrů podle řidiče' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:04[0m[0m.878[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "T002 - Přehled odběrů podle řidiče" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: T003 - Přehled odběrů podle vozidla" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.729">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:06[0m[0m.657[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'T003 - Přehled odběrů podle vozidla' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:06[0m[0m.661[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "T003 - Přehled odběrů podle vozidla" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: D002 - Přehled prodejů PHM pro FÚ" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.797">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:08[0m[0m.440[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'D002 - Přehled prodejů PHM pro FÚ' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:08[0m[0m.443[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "D002 - Přehled prodejů PHM pro FÚ" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: P002 - Přehled dodávek PHM pro FÚ" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.981">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:10[0m[0m.454[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'P002 - Přehled dodávek PHM pro FÚ' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:10[0m[0m.457[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "P002 - Přehled dodávek PHM pro FÚ" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: S001 - Přehled pohybů zboží" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="2.13">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:12[0m[0m.571[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'S001 - Přehled pohybů zboží' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:12[0m[0m.573[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "S001 - Přehled pohybů zboží" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: D003 - Přehled prodejů se slevovou kartou" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.745">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:14[0m[0m.299[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'D003 - Přehled prodejů se slevovou kartou' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:14[0m[0m.301[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:97[39m[0m[0m]Počet objektů pro období 'D003 - Přehled prodejů se slevovou kartou' je 'null'.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:14[0m[0m.307[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "D003 - Přehled prodejů se slevovou kartou" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: D004 - Přehled smazaných položek účtenek" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="2.04">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:16[0m[0m.359[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'D004 - Přehled smazaných položek účtenek' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:16[0m[0m.360[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:97[39m[0m[0m]Počet objektů pro období 'D004 - Přehled smazaných položek účtenek' je 'null'.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:16[0m[0m.364[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "D004 - Přehled smazaných položek účtenek" je sdílená.
+]]>
+</system-out>
+</testcase>
+<testcase name="Finální E2E cyklus pro všechny sestavy s dynamickým payloadem › Životní cyklus sestavy: D006 - Export položek pokladních dokladů" classname="Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts" time="1.654">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:18[0m[0m.048[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:86[39m[0m[0m]Sestava 'D006 - Export položek pokladních dokladů' byla úspěšně vytvořena.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:18[0m[0m.049[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:97[39m[0m[0m]Počet objektů pro období 'D006 - Export položek pokladních dokladů' je 'null'.
+2025[0m[0m-08[0m[0m-26[0m[0m 08[0m[0m:47[0m[0m:18[0m[0m.052[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\E2E_AllReports_Lifecycle_public.spec.ts:103[39m[0m[0m]Test je v pořádku, sestava "D006 - Export položek pokladních dokladů" je sdílená.
 ]]>
 </system-out>
 </testcase>

@@ -15,6 +15,14 @@ getListOfStockCards() GET reports-api/listOfStockCards/{accOwnerId}/{stockId}
 import { APIRequestContext } from '@playwright/test';
 import { logger } from '../support/logger';
 
+export interface UserReport {
+    id: number | string;
+    name: string;
+    items: number | null;
+    public: boolean;
+    // ... případně doplňte další vlastnosti, které API vrací
+}
+
 export class ApiClient {
     static getDashboard() {
         throw new Error('Method not implemented.');
@@ -54,7 +62,7 @@ export class ApiClient {
             limit?: number;
             sort?: string;
         } = {}
-    ): Promise<any> {
+    ): Promise<UserReport[]> {
         const endpoint = `/reports-api/listOfUsersReports/${accOwner}`;
         logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
 

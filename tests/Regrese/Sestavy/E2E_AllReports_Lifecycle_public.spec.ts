@@ -80,29 +80,32 @@ test.describe('Finální E2E cyklus pro všechny sestavy s dynamickým payloadem
                 reportPayload.public = sentPublic; 
                 await apiClient.createUserReport('60193531', reportPayload);
 
-                const allReports = await apiClient.getUserReportsList();
+                const allReports = await apiClient.getListOfUsersReports('60193531'); 
                 const createdReport = allReports.find(r => r.name === report.name);
                 if (createdReport) {
-                    logger.info(`Sestava '${report.name}' byla úspěšně vytvořena.`);
+                logger.info(`Sestava '${report.name}' byla úspěšně vytvořena.`);
+                
+                // ZDE JSOU PROMĚNNÉ STÁLE PLATNÉ
+                newReportDbId = createdReport.id;
+                logger.silly('Response vytvořené sestavy:', createdReport);
+                const itemsCount = createdReport.items;
+                const isPublic = createdReport.public;
+
+                    // PŘESUNUTO SEM: Veškerá logika, která závisí na nalezené sestavě
+                    if (itemsCount === null || itemsCount === 0) {
+                        const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
+                        logger.warn(errorMessage);
+                    } else {
+                        logger.debug(`Vytvořena Sestava: ${newReportDbId} pro období "${report.name}". Sestava obsahuje: ${itemsCount} položek.`);
+                    }
+                
+                expect(isPublic, `Sestava '${report.name}' měla být sdílená, ale není!`).toBe(true);
+                logger.info(`Test je v pořádku, sestava "${report.name}" je sdílená.`);
+
                 } else {
                     logger.error(`Sestava '${report.name}' nebyla nalezena v seznamu.`);
-                    test.fail(!createdReport, `Uložená sestava '${report.name}' nebyla nalezena v seznamu.`);
+                    test.fail(true, `Uložená sestava '${report.name}' nebyla nalezena v seznamu.`);
                 }
-                
-                newReportDbId = createdReport!.id;
-                logger.debug('Response vytvořené sestavy:',createdReport);
-                const itemsCount = createdReport.items;
-                const isPublic = createdReport!.public;
-
-                if (itemsCount === null || itemsCount === 0) {
-                    const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
-                    logger.warn(errorMessage);
-                } else {
-                    logger.debug(`Vytvořena Sestava: ${newReportDbId} pro období "${report.name}". Sestava obsahuje: ${itemsCount} položek.`);
-                }
-                expect(isPublic, `Sestava '${report.name}' měla být sdílená, ale není!`).toBe(true);
-                    logger.info(`Test je v pořádku, sestava "${report.name}" je sdílená.`);
-               
 
                 } catch (error) {
                 logger.fatal(`Došlo k fatální chybě během životního cyklu sestavy '${report.name}'.`, error);
@@ -116,7 +119,7 @@ test.describe('Finální E2E cyklus pro všechny sestavy s dynamickým payloadem
                 logger.silly(`Požadavek na smazání sestavy '${report.name}' (ID: ${newReportDbId}) byl odeslán.`);
 
                 logger.trace(`Ověřuji, že sestava (ID: ${newReportDbId}) byla skutečně smazána...`);
-                const reportsAfterDelete = await apiClient.getUserReportsList();
+                const reportsAfterDelete = await apiClient.getListOfUsersReports('60193531');
                 const deletedReportExists = reportsAfterDelete.some(r => r.id === newReportDbId);
                 expect(deletedReportExists, `Sestava '${report.name}' (ID: ${newReportDbId}) nebyla smazána!`).toBe(false);
                 logger.debug(`Ověření úspěšné: Sestava '${report.name}' (ID: ${newReportDbId}) byla smazána ze serveru.`);
