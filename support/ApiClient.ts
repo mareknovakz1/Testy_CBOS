@@ -1,19 +1,76 @@
 /*
- * API Client - Knihovna pro GET requesty
-getUserReportsList() GET /reports-api/usersReports 
-createUserReport() POST /reports-api/usersReports/ 
-deleteUserReport() DELETE /reports-api/usersReports/{SestavaId} 
-getUserReportPreview GET /reports-api/userReportPreview/{SestavaId}   
-listOfPartners() GET /reports-api/listOfPartners
-getPriceCategory() GET /administration-api/stockCardsCategories/60193531
-getUSers() GET /reports-api/listOfReceipts?year=${year}&stockId=${stockId}&totalReceiptPriceFrom=${totalReceiptPriceFrom}&receiptItemPriceFrom=${receiptItemPriceFrom}&offset=${offset}&limit=${limit}&sort=${sort}
-getReceipts() GET /reports-api/receipts
-getOfListSotcks() GET reports-api/listOfStocks
-getListOfStockCards() GET reports-api/listOfStockCards/{accOwnerId}/{stockId} 
+ * API Client - Knihovna pro komunikaci s API
+ *
+ * ================= ADMINISTRATION-API =================
+ * getPriceCategory() GET /administration-api/stockCardsCategories/{categoryId}
+ * getStockCardsGroupsLocal() GET /administration-api/stockCardsGroupsLocal/{stockId}
+ * getStockCardsSupergroupsLocal() GET /administration-api/stockCardsSupergroupsLocal/{stockId}
+ * getListOfPosTerminals() GET /administration-api/listOfPosTerminals/{stockId}
+ * getListOfHotKeysDefinitions() GET /administration-api/listOfHotKeysDefinitions/{stockId}/{posTerminalId}
+ * getListOfCardDefinitions() GET /administration-api/listOfCardDefinitions/{accOwner}
+ * getListOfForeignStocks() GET /administration-api/listOfForeignStocks/{accOwner}/{stockId}
+ * getStockCardsCategories() GET /administration-api/stockCardsCategories/{accOwner}
+ * getStockCardsGroupsCentral() GET /administration-api/stockCardsGroupsCentral/{accOwner}
+ * getFsFeatures() GET /administration-api/fsfeature/{accOwner}
+ *
+ * ===================== AUTH-API =======================
+ * authorizeUser() POST /auth-api/user/authorization
+ *
+ * ==================== BALANCES-API ====================
+ * getSupplyPeriodsEnums() GET /balances-api/supplyPeriodsEnums/{stockId}
+ * getListOfDailyBalances() GET /balances-api/dailyBillances/{stockId}
+ * getDailyRevenues() GET /balances-api/dailyRevenues/{stockId}
+ * getTurnovers() GET /balances-api/turnovers/{stockId}
+ *
+ * =================== DASHBOARD-API ====================
+ * getTablesCountInfo() GET /dashboard-api/tablesCountInfo
+ * getStocksTanks() GET /dashboard-api/stocksTanks/{stockId}
+ * 
+ * ==================== REPORTS-API =====================
+ * getListOfUsersReports() GET /reports-api/listOfUsersReports/{accOwner}
+ * createUserReport() POST /reports-api/usersReports/{SestavaId}
+ * deleteUserReport() DELETE /reports-api/usersReports/{SestavaId}
+ * getUserReportPreview() GET /reports-api/userReportPreview/{SestavaId}
+ * getListOfPartners() GET /reports-api/listOfPartners
+ * getUsers() GET /reports-api/listOfOperators
+ * getCardIssuers() GET /reports-api/listOfCardIssuers
+ * getReceipts() GET /reports-api/listOfReceipts
+ * getListOfStocks() GET /reports-api/listOfStocks
+ * getListOfStockCards() GET /reports-api/listOfStockCards/{accOwnerId}/{stockId}
+ * getListOfLocalCards() GET /reports-api/listOfLocalCards
+ * getListOfPricesCategories() GET /reports-api/listOfPricesCategories
+ * getListOfEuroOilCardRequests() GET /reports-api/listOfEuroOilCardRequests
+ * getListOfBonusClasses() GET /reports-api/listOfBonusClasses
+ * getListOfOperators() GET /reports-api/listOfOperators
+ * getListOfReceiptsUdd() GET /reports-api/listOfReceiptsUdd
+ * getListOfPosTankTickets() GET /reports-api/listOfPosTankTickets
+ * getListOfPosMoneyOperations() GET /reports-api/listOfPosMoneyOperations
+ * getListOfPosTankVouchers() GET /reports-api/listOfPosTankVouchers
+ * getListOfGoodsInventories() GET /reports-api/listOfGoodsInventories
+ * getListOfOrders() GET /reports-api/listOfOrders
+ * getListOfWetDeliveryNotes() GET /reports-api/listOfWetDeliveryNotes
+ * getListOfPosSummaries() GET /reports-api/listOfPosSummaries
+ * getListOfUsers() GET /reports-api/listOfUsers
+ * getListOfRoles() GET /reports-api/listOfRoles
+ * getListOfVatClasses() GET /reports-api/listOfVatClasses
+ * getListOfCardIssuers() GET /reports-api/listOfCardIssuers
+ * getListOfForeignStocksCCS() GET /reports-api/listOfForeignStocksCCS
+ * getListOfCurrencyRates() GET /reports-api/listOfCurrencyRates
+ * 
+ * =================== DOCUMENTS-API ====================
+ * POST /documents-api/goodsDeliveryNotes/{stockId}
+ *
+ * ===================== SOCKET-API =====================
+ * getRegisteredClients() GET /socket-api/registeredClients
+ *
+ * ======================= OTHER ========================
+ * getDashboard() GET /dashboard
  */
+
 
 import { APIRequestContext } from '@playwright/test';
 import { logger } from '../support/logger';
+
 
 export interface UserReport {
     id: number | string;
@@ -22,6 +79,26 @@ export interface UserReport {
     public: boolean;
     // ... případně doplňte další vlastnosti, které API vrací
 }
+
+/**
+ * Definuje strukturu datového těla (payload) pro vytvoření
+ * dodacího listu pro suché zboží.
+ */
+    export interface GoodsDeliveryNotePayload {
+        accOwner: string;
+        deliveryNoteNr: string;
+        documentType: number;
+        documentSubType: number;
+        deliveryDate: string; // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
+        stockId: number;
+        ownerId: number;
+        ownerName: string;
+        supplierId: number;
+        supplierName: string;
+        transporterId: number;
+        transporterName: string;
+        sign: string;
+    }
 
 export class ApiClient {
     static getDashboard() {
@@ -1717,6 +1794,86 @@ public async getStockCardsSupergroupsLocal(
             const errorText = await response.text();
             logger.error(`Chyba při získávání centrálních parametrů. Status: ${response.status()}`, errorText);
             throw new Error(`Chyba při získávání centrálních parametrů. Status: ${response.status()}`);
+        }
+        return response.json();
+    }
+
+       /**
+     * Vytvoří nový dodací list (příjemku) pro suché zboží.
+     * --- POST /documents-api/goodsDeliveryNotes/{stockId} ---
+     * @param {string | number} stockId - ID skladu, pro který se doklad vytváří (path parametr).
+     * @param {GoodsDeliveryNotePayload} payload - Data pro vytvoření dodacího listu.
+     * @returns {Promise<any>} Odpověď ze serveru, typicky objekt vytvořeného dokladu.
+     */
+    public async createGoodsDeliveryNote(
+        stockId: string | number,
+        payload: GoodsDeliveryNotePayload
+    ): Promise<any> {
+        const endpoint = `/documents-api/goodsDeliveryNotes/${stockId}`;
+        logger.trace(`Odesílám POST požadavek na ${endpoint} s payloadem: ${JSON.stringify(payload, null, 2)}`);
+
+        const response = await this.request.post(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json, text/plain, */*'
+            },
+            data: payload,
+            ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při vytváření dodacího listu pro sklad ${stockId}. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při vytváření dodacího listu. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Dodací list pro sklad ${stockId} byl úspěšně vytvořen.`);
+        
+        // API může vrátit prázdné tělo (201, 204) nebo vytvořený objekt (200, 201)
+        // Bezpečnější je zkusit parsovat JSON, a pokud selže, vrátit text
+        try {
+            return await response.json();
+        } catch (e) {
+            return await response.text(); 
+        }
+    }
+    /**  --- GET //reports-api/listOfForeignStocksPrices/{accOwner}
+        * Získá seznam cen konkurenčních OM.
+        * --- GET /reports-api/listOfForeignStocksPrices/{accOwner} ---
+        * @param accOwner 
+        * @param params Objekt s query parametry.
+        * @returns {Promise<any>} Odpověď ze serveru.
+        */
+        public async getListOfForeignStocksPrices(
+        accOwner: string,
+        params: {
+            dateFrom?: string;
+            offset?: number;
+            StockId?: string;
+            limit?: number;
+            sort?: string;
+            withLoadData?: boolean;
+        } = {}
+    ): Promise<any> {
+        const endpoint = `/reports-api/listOfForeignStocksPrices`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s accOwner: ${accOwner} a parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: { 'Authorization': `Bearer ${this.token}`, 'Accept': 'application/json, text/plain, */*' },
+            // --- TOTO JE SPRÁVNÉ ŘEŠENÍ ---
+            // Vytvoříme objekt 'params', který obsahuje jak accOwner,
+            // tak všechny ostatní volitelné parametry.
+            params: {
+                accOwner: accOwner,
+                ...params
+            }
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání cen konkurenčních cen. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání cen konkurenčních cen. Status: ${response.status()}`);
         }
         return response.json();
     }

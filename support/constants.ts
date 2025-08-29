@@ -19,4 +19,5 @@ export const password:string = "1";
 */
 export const port:string = "8180";
 export const baseURL = `http://192.168.130.${server}:${port}`;
+export const ACC_OWNER_ID = '60193531'; //Vlastník sítě
 

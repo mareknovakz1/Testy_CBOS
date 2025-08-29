@@ -1,200 +1,337 @@
-<testsuites id="" name="" tests="15" failures="1" skipped="0" errors="0" time="43.937943">
-<testsuite name="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" timestamp="2025-08-26T11:23:30.763Z" hostname="API" tests="15" failures="1" skipped="0" time="39.971" errors="0">
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1234: Životní cyklus sestavy: D001 - Přehled prodejů, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="2.663">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:34[0m[0m.117[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D001 - Přehled prodejů' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:34[0m[0m.123[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "D001 - Přehled prodejů" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1235: Životní cyklus sestavy: D005 - Přehled konkurenčních cen, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="2.02">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:36[0m[0m.173[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D005 - Přehled konkurenčních cen' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:36[0m[0m.177[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "D005 - Přehled konkurenčních cen" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1236: Životní cyklus sestavy: P001 - Přehled nákupů zboží, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.754">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:37[0m[0m.909[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'P001 - Přehled nákupů zboží' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:37[0m[0m.913[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "P001 - Přehled nákupů zboží" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1237: Životní cyklus sestavy: S002 - Přehled přecenění, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.717">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:39[0m[0m.631[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'S002 - Přehled přecenění' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:39[0m[0m.635[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "S002 - Přehled přecenění" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1238: Životní cyklus sestavy: S003 - Půlnoční zásoby PHM, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.668">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:41[0m[0m.325[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'S003 - Půlnoční zásoby PHM' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:41[0m[0m.328[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "S003 - Půlnoční zásoby PHM" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1239: Životní cyklus sestavy: S004 - Půlnoční registry stojanů, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.762">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:43[0m[0m.090[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'S004 - Půlnoční registry stojanů' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:43[0m[0m.092[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "S004 - Půlnoční registry stojanů" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1240: Životní cyklus sestavy: T001 - Přehled neautorizovaných transakcí, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.723">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:44[0m[0m.838[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'T001 - Přehled neautorizovaných transakcí' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:44[0m[0m.842[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "T001 - Přehled neautorizovaných transakcí" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1241: Životní cyklus sestavy: T002 - Přehled odběrů podle řidiče, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.681">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:46[0m[0m.508[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'T002 - Přehled odběrů podle řidiče' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:46[0m[0m.511[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "T002 - Přehled odběrů podle řidiče" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1242: Životní cyklus sestavy: T003 - Přehled odběrů podle vozidla, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.646">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:48[0m[0m.162[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'T003 - Přehled odběrů podle vozidla' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:48[0m[0m.165[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "T003 - Přehled odběrů podle vozidla" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1243: Životní cyklus sestavy: D002 - Přehled prodejů PHM pro FÚ, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.996">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:50[0m[0m.146[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D002 - Přehled prodejů PHM pro FÚ' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:50[0m[0m.150[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "D002 - Přehled prodejů PHM pro FÚ" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1244: Životní cyklus sestavy: P002 - Přehled dodávek PHM pro FÚ, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.691">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:51[0m[0m.854[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'P002 - Přehled dodávek PHM pro FÚ' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:51[0m[0m.856[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "P002 - Přehled dodávek PHM pro FÚ" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1245: Životní cyklus sestavy: S001 - Přehled pohybů zboží, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="2.286">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:54[0m[0m.182[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'S001 - Přehled pohybů zboží' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:54[0m[0m.186[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "S001 - Přehled pohybů zboží" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1246: Životní cyklus sestavy: D003 - Přehled prodejů se slevovou kartou, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="5.614">
-<failure message="Sestavy_API_regrese-LifeCylcle.spec.ts:51:13 TC-1246: Životní cyklus sestavy: D003 - Přehled prodejů se slevovou kartou, @regression @API @sestavy @high" type="FAILURE">
-<![CDATA[  [API] › Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:51:13 › Cyklus pro všechny sestavy s dynamickým payloadem › TC-1246: Životní cyklus sestavy: D003 - Přehled prodejů se slevovou kartou, @regression @API @sestavy @high 
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.7873420000000002">
+<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-29T07:40:40.890Z" hostname="API" tests="1" failures="1" skipped="0" time="0.868" errors="0">
+<testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.868">
+<failure message="Moduly.spec.ts:38:10 TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" type="FAILURE">
+<![CDATA[  [API] › Smoke\Moduly.spec.ts:38:10 › API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical 
 
-    Error: CHYBA: Sestava 'D003 - Přehled prodejů se slevovou kartou' selhala při generování na serveru (items je null).
+    TypeError: apiRequestContext.get: Invalid URL
 
-    expect(received).not.toBeNull()
+       at ..\support\ApiClient.ts:563
 
-    Received: null
-
-       98 |
-       99 |                     //Kontorla item != null - pravděpoodbná chyba
-    > 100 |                      expect(itemsCount, `CHYBA: Sestava '${report.name}' selhala při generování na serveru (items je null).`).not.toBeNull();
-          |                                                                                                                                   ^
-      101 |
-      102 |                     if (itemsCount === 0) {
-      103 |                         const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:100:131
-
-    Error Context: ..\test-results\Regrese-Sestavy-Sestavy_AP-fd9fa-regression-API-sestavy-high-API\error-context.md
-
-    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
-
-    Error: CHYBA: Sestava 'D003 - Přehled prodejů se slevovou kartou' selhala při generování na serveru (items je null).
-
-    expect(received).not.toBeNull()
-
-    Received: null
-
-       98 |
-       99 |                     //Kontorla item != null - pravděpoodbná chyba
-    > 100 |                      expect(itemsCount, `CHYBA: Sestava '${report.name}' selhala při generování na serveru (items je null).`).not.toBeNull();
-          |                                                                                                                                   ^
-      101 |
-      102 |                     if (itemsCount === 0) {
-      103 |                         const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:100:131
-
-    Error Context: ..\test-results\Regrese-Sestavy-Sestavy_AP-fd9fa-regression-API-sestavy-high-API-retry1\error-context.md
-
-    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
-
-    Error: CHYBA: Sestava 'D003 - Přehled prodejů se slevovou kartou' selhala při generování na serveru (items je null).
-
-    expect(received).not.toBeNull()
-
-    Received: null
-
-       98 |
-       99 |                     //Kontorla item != null - pravděpoodbná chyba
-    > 100 |                      expect(itemsCount, `CHYBA: Sestava '${report.name}' selhala při generování na serveru (items je null).`).not.toBeNull();
-          |                                                                                                                                   ^
-      101 |
-      102 |                     if (itemsCount === 0) {
-      103 |                         const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:100:131
-
-    Error Context: ..\test-results\Regrese-Sestavy-Sestavy_AP-fd9fa-regression-API-sestavy-high-API-retry2\error-context.md
+      561 |     logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+      562 |
+    > 563 |     const response = await this.request.get(endpoint, {
+          |                                         ^
+      564 |         headers: {
+      565 |             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+      566 |             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'
+        at ApiClient.getDashboard (C:\Users\novakma\Testy_CBOS\support\ApiClient.ts:563:41)
+        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Moduly.spec.ts:42:46
 ]]>
 </failure>
 <system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:56[0m[0m.003[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D003 - Přehled prodejů se slevovou kartou' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:56[0m[0m.008[0m[0m [91m[1mFATAL[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:118[39m[0m[0m]Došlo k fatální chybě během životního cyklu sestavy 'D003 - Přehled prodejů se slevovou kartou'.
-[97m[101m[1m Error [22m[49m[39m[0m[0m CHYBA: Sestava 'D003 - Přehled prodejů se slevovou kartou' selhala při generování na serveru (items je null).
-
-[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoBeNull[2m()[22m
-
-Received: [31mnull[39m, Error, [object Object][0m[0m
-error stack:
-  • [33m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts[39m[0m[0m:[0m[0m:[0m[0m
-    [0m[0m[0m[0m
-
-[[ATTACHMENT|test-results\Regrese-Sestavy-Sestavy_AP-fd9fa-regression-API-sestavy-high-API\error-context.md]]
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:58[0m[0m.894[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D003 - Přehled prodejů se slevovou kartou' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:23[0m[0m:58[0m[0m.899[0m[0m [91m[1mFATAL[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:118[39m[0m[0m]Došlo k fatální chybě během životního cyklu sestavy 'D003 - Přehled prodejů se slevovou kartou'.
-[97m[101m[1m Error [22m[49m[39m[0m[0m CHYBA: Sestava 'D003 - Přehled prodejů se slevovou kartou' selhala při generování na serveru (items je null).
-
-[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoBeNull[2m()[22m
-
-Received: [31mnull[39m, Error, [object Object][0m[0m
-error stack:
-  • [33m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts[39m[0m[0m:[0m[0m:[0m[0m
-    [0m[0m[0m[0m
-
-[[ATTACHMENT|test-results\Regrese-Sestavy-Sestavy_AP-fd9fa-regression-API-sestavy-high-API-retry1\error-context.md]]
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:24[0m[0m:01[0m[0m.616[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D003 - Přehled prodejů se slevovou kartou' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:24[0m[0m:01[0m[0m.621[0m[0m [91m[1mFATAL[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:118[39m[0m[0m]Došlo k fatální chybě během životního cyklu sestavy 'D003 - Přehled prodejů se slevovou kartou'.
-[97m[101m[1m Error [22m[49m[39m[0m[0m CHYBA: Sestava 'D003 - Přehled prodejů se slevovou kartou' selhala při generování na serveru (items je null).
-
-[2mexpect([22m[31mreceived[39m[2m).[22mnot[2m.[22mtoBeNull[2m()[22m
-
-Received: [31mnull[39m, Error, [object Object][0m[0m
-error stack:
-  • [33m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts[39m[0m[0m:[0m[0m:[0m[0m
-    [0m[0m[0m[0m
-
-[[ATTACHMENT|test-results\Regrese-Sestavy-Sestavy_AP-fd9fa-regression-API-sestavy-high-API-retry2\error-context.md]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1247: Životní cyklus sestavy: D004 - Přehled smazaných položek účtenek, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="1.684">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:24[0m[0m:04[0m[0m.295[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D004 - Přehled smazaných položek účtenek' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:24[0m[0m:04[0m[0m.299[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "D004 - Přehled smazaných položek účtenek" je sdílená.
-]]>
-</system-out>
-</testcase>
-<testcase name="Cyklus pro všechny sestavy s dynamickým payloadem › TC-1248: Životní cyklus sestavy: D006 - Export položek pokladních dokladů, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts" time="10.066">
-<system-out>
-<![CDATA[2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:24[0m[0m:14[0m[0m.376[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:91[39m[0m[0m]Sestava 'D006 - Export položek pokladních dokladů' byla úspěšně vytvořena.
-2025[0m[0m-08[0m[0m-26[0m[0m 11[0m[0m:24[0m[0m:14[0m[0m.383[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_API_regrese-LifeCylcle.spec.ts:110[39m[0m[0m]Test je v pořádku, sestava "D006 - Export položek pokladních dokladů" je sdílená.
+<![CDATA[2025-08-29 07:40:41.674 SILLY [\support\fixtures\auth.fixture.ts:22]FIXTURE 'authToken': Start.
+2025-08-29 07:40:41.678 TRACE [\support\fixtures\auth.fixture.ts:23]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025-08-29 07:40:41.699 TRACE [\support\fixtures\auth.fixture.ts:25]FIXTURE 'authToken': Request kontext vytvořen.
+2025-08-29 07:40:41.699 TRACE [\support\fixtures\auth.fixture.ts:28]{
+  message: "FIXTURE 'authToken': Odesílám POST request pro získání tokenu.",
+  url: 'http://192.168.130.239:8180/auth-api/user/authorization',
+  data: 'eyJvcGVyYXRvciI6Ik1OX1RFVFNUX0FVVE9NQVQiLCJwYXNzd29yZCI6IjEifQ=='
+} Detail requestu
+2025-08-29 07:40:42.484 TRACE [\support\fixtures\auth.fixture.ts:39]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025-08-29 07:40:42.485 SILLY [\support\fixtures\auth.fixture.ts:52]FIXTURE 'authToken': Odpověď je OK (status 2xx). Parsuji JSON...
+2025-08-29 07:40:42.489 TRACE [\support\fixtures\auth.fixture.ts:54]{
+  message: "FIXTURE 'authToken': JSON úspěšně naparsován.",
+  json: {
+    accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50cyI6WyI2MDE5MzUzMSJdLCJhY2NvdW50c1VubGltaXRlZCI6ZmFsc2UsImNhcmROdW1iZXIiOiIiLCJjYm9zUm9sZUlkIjoyLCJjYm9zU2NhbGUiOjIsImNyZWF0ZWQiOiIyMDI1LTA4LTIyVDA5OjE5OjQ3LjMwN1oiLCJlbWFpbCI6IiIsImdwb3NSb2xlSWQiOjEzLCJsYW5nIjoiY3MtQ1oiLCJuYW1lIjoiVcW-aXZhdGVsIGJleiBWT00iLCJvcGVyYXRvciI6Ik1OX1RFVFNUX0FVVE9NQVQiLCJwYXNzd29yZFJlc2V0IjpmYWxzZSwicGVyUGFnZSI6MTAsInBpbiI6IiIsInJlbG9hZEluaXQiOmZhbHNlLCJzdG9ja3MiOlsxNTAsMjMwLDIzMSwyNTAsNDU4LDQ4Nyw0OSw1NjksNiw2NTUsNyw3MzAsNzMxLDczMiw3NDIsNzQzLDc4M10sInN0b2Nrc1VubGltaXRlZCI6ZmFsc2UsInVwZGF0ZWQiOiIyMDI1LTA4LTIyVDA5OjIxOjIyLjYxMloiLCJ2YWxpZCI6dHJ1ZSwidmFsaWRQb3MiOmZhbHNlLCJnYXV0aCI6ImV5SmhjMk5wYVNJNklqOVNOMXRhWW01SFFtRkpTbmt2YkVOUlMyMURWMGg5TkhwVmJudFVMelVwSWl3aWFHVjRJam9pTTJZMU1qTTNOV0kxWVRZeU5tVTBOelF5TmpFME9UUmhOemt5Wmpaak5ETTFNVFJpTm1RME16VTNORGczWkRNME4yRTFOVFpsTjJJMU5ESm1NelV5T1NJc0ltSmhjMlV6TWlJNklrZzFTa1JQVnpJeVRVcFlSVTlSVkVKS1JrWklVMHd6VFVsT1NWVlhNMHRFU3pWRlNESk9SREpMVmxoSVYxWkNVRWRWVlZFaUxDSnZkSEJoZFhSb1gzVnliQ0k2SW05MGNHRjFkR2c2THk5MGIzUndMMDFPWDFSRlZGTlVYMEZWVkU5TlFWUS9jMlZqY21WMFBVZzFTa1JQVnpJeVRVcFlSVTlSVkVKS1JrWklVMHd6VFVsT1NWVlhNMHRFU3pWRlNESk9SREpMVmxoSVYxWkNVRWRWVlZFbWFYTnpkV1Z5UFVOQ1QxTXRNak01SlRJd0pUSTRSRVZXSlRJNUluMD0iLCJnYXV0aFJlZ2lzdGVyZWQiOmZhbHNlLCJsb2NrZWQiOmZhbHNlLCJiYWRMb2dpbkNvdW50IjowLCJsYXN0TG9naW5UaW1lc3RhbXAiOiIyMDI1LTA4LTI5VDA3OjIyOjI3LjA3MloiLCJjaGFuZ2VQYXNzd29yZFRpbWVzdGFtcCI6IjIwMjUtMDgtMjJUMDk6MjE6MjIuNjEyWiIsImNvbW1lbnQiOiIiLCJjYm9zUmlnaHRzIjp7IkJvbnVzU3lzdGVtIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWUsInN0YXR1cyI6dHJ1ZX0sIkNhcmREZWZpdGlvbnMiOnsibGlzdCI6dHJ1ZX0sIkNhcmRJc3N1ZXJzIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJDdENsYXNzZXMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkN1cnJlbmN5UmF0ZSI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkRhaWx5QmlsYW5jZXMiOnsiY3JlYXRlIjp0cnVlLCJleHBvcnQiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkRhaWx5UmV2ZW51ZSI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkRhc2hib2FyZCI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsInRhYmxlTWFyZ2luUmVwb3J0Ijp0cnVlLCJ0YWJsZVNhbGVzUmVwb3J0Ijp0cnVlfSwiRXVyb09pbENhcmQiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlfSwiRm9yZWlnblN0b2NrcyI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkZvcmVpZ25TdG9ja3NDQ1MiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJHb29kc0RlbGl2ZXJ5Tm90ZXMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJ2YWxpZCI6dHJ1ZX0sIkdvb2RzT3JkZXJzIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJleHBvcnQiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZSwidmFsaWQiOnRydWV9LCJIb3RLZXlzRGVmaW5pdGlvbnMiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJJbnZlbnRvcnkiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwiZmluYWxpemUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkxvY2FsQ2FyZHMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlfSwiUGFydG5lcnMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJ0cmFuc2FjdGlvbnMiOnRydWV9LCJQb3NNb25leU9wZXJhdGlvbnMiOnsiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUG9zU3VtbWFyaWVzIjp7ImRldGFpbCI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUG9zVGFua1RpY2tldHMiOnsiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUG9zVGFua1ZvdWNoZXJzIjp7ImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwidm91Y2hlcnNBY2NlcHRhbmNlIjp0cnVlfSwiUHJpY2VDYXRlZ29yaWVzIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJSZWNlaXB0cyI6eyJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZX0sIlJlY2VpcHRzVWRkIjp7ImRldGFpbCI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUmVwb3J0cyI6eyJjcmVhdGUiOnRydWUsImRldGFpbCI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJTdG9ja0NhcmRzIjp7ImFwcHJvdmFsUmVxdWlyZWRMb2NhbCI6dHJ1ZSwiY2hhbmdlRHJ5R29vZHMiOnRydWUsImNoYW5nZU93bmVyIjp0cnVlLCJjaGFuZ2VQcmljZSI6dHJ1ZSwiY2hhbmdlUHJpY2VXZXQiOnRydWUsImNoYW5nZVdldEdvb2RzIjp0cnVlLCJjcmVhdGUiOnRydWUsImRlbGV0ZUZyb21BbGxTdG9ja0NhcmRzIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJzdG9ja0NhcmREaXN0cmlidXRlIjp0cnVlLCJ0cmFuc2ZlckxvY2FsVG9DZW50cmFsIjp0cnVlfSwiU3RvY2tDYXJkc0NhdGVnb3JpZXMiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJTdG9ja0NhcmRzR3JvdXBzQ2VudHJhbCI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIlN0b2NrQ2FyZHNHcm91cHNMb2NhbCI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIlN0b2NrQ2FyZHNNYXNzIjp7ImNoYW5nZUNhdGVnb3JpZXMiOnRydWUsImNoYW5nZUdvb2RzR3JvdXAiOnRydWUsImNoYW5nZUxvY2FsR3JvdXBzIjp0cnVlLCJjaGFuZ2VNaW5pbWFsU3VwcGx5Ijp0cnVlLCJjaGFuZ2VPd25lciI6dHJ1ZSwiY2hhbmdlUHJpY2UiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZSwic3RvY2tDYXJkRGlzdHJpYnV0ZSI6dHJ1ZX0sIlN0b2NrQ2VudHJhbEZlYXR1cmVzIjp7ImNyZWF0ZSI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlfSwiU3RvY2tzIjp7ImNoYW5nZVByb2R1Y3QiOnRydWUsImRldGFpbCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJzdG9ja0ZlYXR1cmVzIjp0cnVlfSwiU3VwcGx5QmFsYW5jZU92ZXJ2aWV3Ijp7ImNyZWF0ZSI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiVHVybm92ZXJzIjp7ImNyZWF0ZSI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJVc2VycyI6eyJjcmVhdGUiOnRydWUsImRldGFpbCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibWVudSI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJzZXRBY2NvdW50Ijp0cnVlLCJzZXRVc2VyQ2FyZCI6dHJ1ZX0sIlZhdENsYXNzZXMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIldldERlbGl2ZXJ5Tm90ZXMiOnsiY2hhbmdlUHVyY2hQcmljZSI6dHJ1ZSwiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJyZW1vdmVBdXRvbWF0UmVjb3JkcyI6dHJ1ZSwidmFsaWQiOnRydWV9LCJXZXRQcmljZUxpc3RPdmVydmlldyI6eyJleHBvcnQiOnRydWUsImxpc3QiOnRydWV9fSwiaWF0IjoxNzU2NDUzMjQyLCJleHAiOjE3NTY1Mzk2NDIsImlzcyI6InVybjp5b3Vyc3lzdGVtIiwianRpIjoiMmZhNTBlNTAtY2I5NC00ZjdmLTg4NWYtMmU3MDM1ZGY4OWY1In0.7E-kH3M0TO7G_u47_9NlPb4nCKbng16nXK1mopGl1MA',
+    content: {
+      accounts: [
+        '60193531'
+      ],
+      accountsUnlimited: false,
+      cardNumber: '',
+      cbosRoleId: 2,
+      cbosScale: 2,
+      created: '2025-08-22T09:19:47.307Z',
+      email: '',
+      gposRoleId: 13,
+      lang: 'cs-CZ',
+      name: 'Uživatel bez VOM',
+      operator: 'MN_TETST_AUTOMAT',
+      passwordReset: false,
+      perPage: 10,
+      pin: '',
+      reloadInit: false,
+      stocks: [
+        150,
+        230,
+        231,
+        250,
+        458,
+        487,
+        49,
+        569,
+        6,
+        655,
+        7,
+        730,
+        731,
+        732,
+        742,
+        743,
+        783
+      ],
+      stocksUnlimited: false,
+      updated: '2025-08-22T09:21:22.612Z',
+      valid: true,
+      validPos: false,
+      gauth: 'eyJhc2NpaSI6Ij9SN1taYm5HQmFJSnkvbENRS21DV0h9NHpVbntULzUpIiwiaGV4IjoiM2Y1MjM3NWI1YTYyNmU0NzQyNjE0OTRhNzkyZjZjNDM1MTRiNmQ0MzU3NDg3ZDM0N2E1NTZlN2I1NDJmMzUyOSIsImJhc2UzMiI6Ikg1SkRPVzIyTUpYRU9RVEJKRkZIU0wzTUlOSVVXM0tESzVFSDJORDJLVlhIV1ZCUEdVVVEiLCJvdHBhdXRoX3VybCI6Im90cGF1dGg6Ly90b3RwL01OX1RFVFNUX0FVVE9NQVQ/c2VjcmV0PUg1SkRPVzIyTUpYRU9RVEJKRkZIU0wzTUlOSVVXM0tESzVFSDJORDJLVlhIV1ZCUEdVVVEmaXNzdWVyPUNCT1MtMjM5JTIwJTI4REVWJTI5In0=',
+      gauthRegistered: false,
+      locked: false,
+      badLoginCount: 0,
+      lastLoginTimestamp: '2025-08-29T07:22:27.072Z',
+      changePasswordTimestamp: '2025-08-22T09:21:22.612Z',
+      comment: '',
+      cbosRights: {
+        BonusSystem: {
+          create: true,
+          detail: true,
+          list: true,
+          modify: true,
+          status: true
+        },
+        CardDefitions: {
+          list: true
+        },
+        CardIssuers: {
+          create: true,
+          detail: true,
+          list: true,
+          modify: true
+        },
+        CtClasses: {
+          create: true,
+          detail: true,
+          list: true,
+          modify: true
+        },
+        CurrencyRate: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        DailyBilances: {
+          create: true,
+          export: true,
+          list: true,
+          modify: true
+        },
+        DailyRevenue: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        Dashboard: {
+          create: true,
+          list: true,
+          tableMarginReport: true,
+          tableSalesReport: true
+        },
+        EuroOilCard: {
+          create: true,
+          list: true
+        },
+        ForeignStocks: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        ForeignStocksCCS: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        GoodsDeliveryNotes: {
+          create: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true,
+          valid: true
+        },
+        GoodsOrders: {
+          create: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true,
+          valid: true
+        },
+        HotKeysDefinitions: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        Inventory: {
+          create: true,
+          detail: true,
+          export: true,
+          finalize: true,
+          list: true,
+          modify: true
+        },
+        LocalCards: {
+          create: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true
+        },
+        Partners: {
+          create: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true,
+          transactions: true
+        },
+        PosMoneyOperations: {
+          export: true,
+          list: true
+        },
+        PosSummaries: {
+          detail: true,
+          export: true,
+          list: true
+        },
+        PosTankTickets: {
+          export: true,
+          list: true
+        },
+        PosTankVouchers: {
+          export: true,
+          list: true,
+          vouchersAcceptance: true
+        },
+        PriceCategories: {
+          create: true,
+          detail: true,
+          list: true,
+          modify: true
+        },
+        Receipts: {
+          detail: true,
+          export: true,
+          list: true
+        },
+        ReceiptsUdd: {
+          detail: true,
+          export: true,
+          list: true
+        },
+        Reports: {
+          create: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true
+        },
+        StockCards: {
+          approvalRequiredLocal: true,
+          changeDryGoods: true,
+          changeOwner: true,
+          changePrice: true,
+          changePriceWet: true,
+          changeWetGoods: true,
+          create: true,
+          deleteFromAllStockCards: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true,
+          stockCardDistribute: true,
+          transferLocalToCentral: true
+        },
+        StockCardsCategories: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        StockCardsGroupsCentral: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        StockCardsGroupsLocal: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        StockCardsMass: {
+          changeCategories: true,
+          changeGoodsGroup: true,
+          changeLocalGroups: true,
+          changeMinimalSupply: true,
+          changeOwner: true,
+          changePrice: true,
+          list: true,
+          modify: true,
+          stockCardDistribute: true
+        },
+        StockCentralFeatures: {
+          create: true,
+          list: true,
+          modify: true
+        },
+        Stocks: {
+          changeProduct: true,
+          detail: true,
+          list: true,
+          modify: true,
+          stockFeatures: true
+        },
+        SupplyBalanceOverview: {
+          create: true,
+          export: true,
+          list: true
+        },
+        Turnovers: {
+          create: true,
+          export: true,
+          list: true,
+          modify: true
+        },
+        Users: {
+          create: true,
+          detail: true,
+          list: true,
+          menu: true,
+          modify: true,
+          setAccount: true,
+          setUserCard: true
+        },
+        VatClasses: {
+          create: true,
+          detail: true,
+          list: true,
+          modify: true
+        },
+        WetDeliveryNotes: {
+          changePurchPrice: true,
+          create: true,
+          detail: true,
+          export: true,
+          list: true,
+          modify: true,
+          removeAutomatRecords: true,
+          valid: true
+        },
+        WetPriceListOverview: {
+          export: true,
+          list: true
+        }
+      }
+    }
+  }
+} Obsah odpovědi
+2025-08-29 07:40:42.491 TRACE [\support\fixtures\auth.fixture.ts:60]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025-08-29 07:40:42.495 SILLY [\support\fixtures\auth.fixture.ts:62]FIXTURE 'authToken': Token úspěšně získán (prvních 10 znaků: 'eyJhbGciOi...').
+2025-08-29 07:40:42.496 TRACE [\support\fixtures\auth.fixture.ts:64]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025-08-29 07:40:42.498 INFO [\tests\Smoke\Moduly.spec.ts:30]Zahajuji API smoke test suite...
+2025-08-29 07:40:42.500 INFO [\tests\Smoke\Moduly.spec.ts:35]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025-08-29 07:40:42.502 TRACE [\tests\Smoke\Moduly.spec.ts:40]Spouštím test pro endpoint: GET /dashboard
+2025-08-29 07:40:42.504 TRACE [\support\ApiClient.ts:561]Odesílám GET požadavek na /dashboard
+2025-08-29 07:40:42.521 SILLY [\support\fixtures\auth.fixture.ts:66]FIXTURE 'authToken': Fixture dokončila svou práci po 'use'.
 ]]>
 </system-out>
 </testcase>

@@ -10,7 +10,7 @@ type PayloadType = 'dateRange' | 'exactDate' | 'dateRangeFromOnly';
 
 interface ReportConfig {
     dateType: 'dateRange' | 'exactDate' | 'rangeFromOnly';
-    partnerIds?: number[]; 
+    partnerId?: number[]; 
     stockIds?: number[];
     
 }
@@ -40,7 +40,7 @@ const allReportsConfig: { id: string; //ID vytvořené sestavy - načteno z orac
     { id: 'S001', name: 'S001 - Přehled pohybů zboží', config: { dateType: 'exactDate' }, testCaseId: 'TC-1245' },
 
     // 3. Sestavy funkční s časovým rozsahem "OD" a speciálními filtry
-    { id: 'D003', name: 'D003 - Přehled prodejů se slevovou kartou', config: { dateType: 'rangeFromOnly', partnerIds: [1], stockIds: [230] }, testCaseId: 'TC-1246' },
+    { id: 'D003', name: 'D003 - Přehled prodejů se slevovou kartou', config: { dateType: 'rangeFromOnly', partnerId: [1], stockIds: [230] }, testCaseId: 'TC-1246' },
     { id: 'D004', name: 'D004 - Přehled smazaných položek účtenek', config: { dateType: 'rangeFromOnly', stockIds: [230] }, testCaseId: 'TC-1247' },
     { id: 'D006', name: 'D006 - Export položek pokladních dokladů', config: { dateType: 'rangeFromOnly', stockIds: [230] }, testCaseId: 'TC-1248' },
 ];
@@ -73,8 +73,8 @@ test.describe('Cyklus pro všechny sestavy s dynamickým payloadem', () => {
                 }
 
                 // 2. KROK: Přidání speciálních filtrů podle konfigurace
-                if (report.config.partnerIds) {
-                    builder.withPartnerFilter(report.config.partnerIds);
+                if (report.config.partnerId) {
+                    builder.withPartnerFilter(report.config.partnerId);
                 }
                 if (report.config.stockIds) {
                     builder.withStockFilter(report.config.stockIds);

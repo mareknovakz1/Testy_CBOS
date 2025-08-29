@@ -5,14 +5,29 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "run:sestavy_reg_full": "dotenv -- npx playwright test --grep @sestavy --grep @regression",
+    "report:sestavy_reg_full": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Full Regression - %{date} %{time}\"",
+    "test:report_sestavy_reg_full": "npm-run-all --continue-on-error --serial run:sestavy_reg_full report:sestavy_reg_full",
 
-    "run:sestavy_reg": "dotenv -- npx playwright test --project=API --grep @regression --grep @API --grep @sestavy",
-    "report:sestavy_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Regression Sestavy - %{date} %{time}\"",
-    "test:report_sestavy_reg": "npm-run-all --continue-on-error --serial run:sestavy_reg report:sestavy_reg",
+    "run:sestavy_api": "dotenv -- npx playwright test --project=API --grep @sestavy --grep @API",
+    "report:sestavy_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - API Tests - %{date} %{time}\"",
+    "test:report_sestavy_api": "npm-run-all --continue-on-error --serial run:sestavy_api report:sestavy_api",
 
-    "run:smoke_api": "dotenv -- npx playwright test --project=API --grep @smoke",
-    "report:smoke_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Smoke Test - %{date} %{time}\"",
-    "test:report_smoke_api": "npm-run-all --continue-on-error --serial run:smoke_api report:smoke_api"
+    "run:sestavy_e2e": "dotenv -- npx playwright test --project chromium --project firefox --project edge --grep @sestavy --grep @E2E",
+    "report:sestavy_e2e": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - E2E Tests - %{date} %{time}\"",
+    "test:report_sestavy_e2e": "npm-run-all --continue-on-error --serial run:sestavy_e2e report:sestavy_e2e",
+
+    "run:smoke_api": "dotenv -- npx playwright test --project=API --grep @smoke --grep @critical",
+    "report:smoke_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Smoke Test - %{date} %{time}\" --junit-ignore-classname --junit-classname-as-folder single",
+    "test:report_smoke_api_critical": "npm-run-all --continue-on-error --serial run:smoke_api report:smoke_api",
+
+    "run:reg_receipts": "dotenv -- npx playwright test --project=API --grep @receipts --grep @regression --grep @API",
+    "report:reg_receipts": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Regression Doklady - %{date} %{time}\"",
+    "test:report_reg_receipts": "npm-run-all --continue-on-error --serial run:reg_receipts report:reg_receipts",
+
+    "run:full_reg": "dotenv -- npx playwright test --grep \"@smoke|@regression\"",
+    "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression (Smoke + Regression) - %{date} %{time}\"",
+    "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg"
   },
 
   "keywords": [],
