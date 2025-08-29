@@ -1877,4 +1877,36 @@ public async getStockCardsSupergroupsLocal(
         }
         return response.json();
     }
+
+    /**
+     * Získá detail konkrétní objednávky zboží.
+     * --- GET /documents-api/orders/{stockId}/{orderId} ---
+     * @param {string | number} stockId - ID skladu, ke kterému objednávka patří.
+     * @param {string | number} orderId - ID samotné objednávky.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON s detailem objednávky.
+     */
+    public async getOrderDetail(
+        stockId: string | number,
+        orderId: string | number
+    ): Promise<any> {
+        const endpoint = `/documents-api/orders/${stockId}/${orderId}`;
+        logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání detailu objednávky ${orderId}. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání detailu objednávky ${orderId}. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Detail objednávky ${orderId} byl úspěšně získán.`);
+        return response.json();
+    }
 }
