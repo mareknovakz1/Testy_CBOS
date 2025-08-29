@@ -35,7 +35,7 @@ test.describe('API Smoke Tests', () => {
         logger.info('ApiClient byl úspěšně inicializován s autorizačním tokenem.');
     });
 
-    test.only('TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical', async () => {
+    test('TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical', async () => {
 
         logger.trace('Spouštím test pro endpoint: GET /dashboard');
         // Používáme instanci 'apiClient', nikoliv statickou třídu 'ApiClient'

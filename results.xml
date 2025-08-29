@@ -1,337 +1,1320 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.7873420000000002">
-<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-29T07:40:40.890Z" hostname="API" tests="1" failures="1" skipped="0" time="0.868" errors="0">
-<testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.868">
-<failure message="Moduly.spec.ts:38:10 TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" type="FAILURE">
-<![CDATA[  [API] › Smoke\Moduly.spec.ts:38:10 › API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical 
-
-    TypeError: apiRequestContext.get: Invalid URL
-
-       at ..\support\ApiClient.ts:563
-
-      561 |     logger.trace(`Odesílám GET požadavek na ${endpoint}`);
-      562 |
-    > 563 |     const response = await this.request.get(endpoint, {
-          |                                         ^
-      564 |         headers: {
-      565 |             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-      566 |             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'
-        at ApiClient.getDashboard (C:\Users\novakma\Testy_CBOS\support\ApiClient.ts:563:41)
-        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Moduly.spec.ts:42:46
-]]>
-</failure>
+<testsuites id="" name="" tests="164" failures="0" skipped="0" errors="0" time="129.053313">
+<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-29T14:09:48.189Z" hostname="chromium" tests="41" failures="0" skipped="0" time="31.195" errors="0">
+<testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.75">
 <system-out>
-<![CDATA[2025-08-29 07:40:41.674 SILLY [\support\fixtures\auth.fixture.ts:22]FIXTURE 'authToken': Start.
-2025-08-29 07:40:41.678 TRACE [\support\fixtures\auth.fixture.ts:23]FIXTURE 'authToken': Budu vytvářet nový request kontext...
-2025-08-29 07:40:41.699 TRACE [\support\fixtures\auth.fixture.ts:25]FIXTURE 'authToken': Request kontext vytvořen.
-2025-08-29 07:40:41.699 TRACE [\support\fixtures\auth.fixture.ts:28]{
-  message: "FIXTURE 'authToken': Odesílám POST request pro získání tokenu.",
-  url: 'http://192.168.130.239:8180/auth-api/user/authorization',
-  data: 'eyJvcGVyYXRvciI6Ik1OX1RFVFNUX0FVVE9NQVQiLCJwYXNzd29yZCI6IjEifQ=='
-} Detail requestu
-2025-08-29 07:40:42.484 TRACE [\support\fixtures\auth.fixture.ts:39]FIXTURE 'authToken': Odpověď přijata se statusem 201.
-2025-08-29 07:40:42.485 SILLY [\support\fixtures\auth.fixture.ts:52]FIXTURE 'authToken': Odpověď je OK (status 2xx). Parsuji JSON...
-2025-08-29 07:40:42.489 TRACE [\support\fixtures\auth.fixture.ts:54]{
-  message: "FIXTURE 'authToken': JSON úspěšně naparsován.",
-  json: {
-    accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50cyI6WyI2MDE5MzUzMSJdLCJhY2NvdW50c1VubGltaXRlZCI6ZmFsc2UsImNhcmROdW1iZXIiOiIiLCJjYm9zUm9sZUlkIjoyLCJjYm9zU2NhbGUiOjIsImNyZWF0ZWQiOiIyMDI1LTA4LTIyVDA5OjE5OjQ3LjMwN1oiLCJlbWFpbCI6IiIsImdwb3NSb2xlSWQiOjEzLCJsYW5nIjoiY3MtQ1oiLCJuYW1lIjoiVcW-aXZhdGVsIGJleiBWT00iLCJvcGVyYXRvciI6Ik1OX1RFVFNUX0FVVE9NQVQiLCJwYXNzd29yZFJlc2V0IjpmYWxzZSwicGVyUGFnZSI6MTAsInBpbiI6IiIsInJlbG9hZEluaXQiOmZhbHNlLCJzdG9ja3MiOlsxNTAsMjMwLDIzMSwyNTAsNDU4LDQ4Nyw0OSw1NjksNiw2NTUsNyw3MzAsNzMxLDczMiw3NDIsNzQzLDc4M10sInN0b2Nrc1VubGltaXRlZCI6ZmFsc2UsInVwZGF0ZWQiOiIyMDI1LTA4LTIyVDA5OjIxOjIyLjYxMloiLCJ2YWxpZCI6dHJ1ZSwidmFsaWRQb3MiOmZhbHNlLCJnYXV0aCI6ImV5SmhjMk5wYVNJNklqOVNOMXRhWW01SFFtRkpTbmt2YkVOUlMyMURWMGg5TkhwVmJudFVMelVwSWl3aWFHVjRJam9pTTJZMU1qTTNOV0kxWVRZeU5tVTBOelF5TmpFME9UUmhOemt5Wmpaak5ETTFNVFJpTm1RME16VTNORGczWkRNME4yRTFOVFpsTjJJMU5ESm1NelV5T1NJc0ltSmhjMlV6TWlJNklrZzFTa1JQVnpJeVRVcFlSVTlSVkVKS1JrWklVMHd6VFVsT1NWVlhNMHRFU3pWRlNESk9SREpMVmxoSVYxWkNVRWRWVlZFaUxDSnZkSEJoZFhSb1gzVnliQ0k2SW05MGNHRjFkR2c2THk5MGIzUndMMDFPWDFSRlZGTlVYMEZWVkU5TlFWUS9jMlZqY21WMFBVZzFTa1JQVnpJeVRVcFlSVTlSVkVKS1JrWklVMHd6VFVsT1NWVlhNMHRFU3pWRlNESk9SREpMVmxoSVYxWkNVRWRWVlZFbWFYTnpkV1Z5UFVOQ1QxTXRNak01SlRJd0pUSTRSRVZXSlRJNUluMD0iLCJnYXV0aFJlZ2lzdGVyZWQiOmZhbHNlLCJsb2NrZWQiOmZhbHNlLCJiYWRMb2dpbkNvdW50IjowLCJsYXN0TG9naW5UaW1lc3RhbXAiOiIyMDI1LTA4LTI5VDA3OjIyOjI3LjA3MloiLCJjaGFuZ2VQYXNzd29yZFRpbWVzdGFtcCI6IjIwMjUtMDgtMjJUMDk6MjE6MjIuNjEyWiIsImNvbW1lbnQiOiIiLCJjYm9zUmlnaHRzIjp7IkJvbnVzU3lzdGVtIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWUsInN0YXR1cyI6dHJ1ZX0sIkNhcmREZWZpdGlvbnMiOnsibGlzdCI6dHJ1ZX0sIkNhcmRJc3N1ZXJzIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJDdENsYXNzZXMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkN1cnJlbmN5UmF0ZSI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkRhaWx5QmlsYW5jZXMiOnsiY3JlYXRlIjp0cnVlLCJleHBvcnQiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkRhaWx5UmV2ZW51ZSI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkRhc2hib2FyZCI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsInRhYmxlTWFyZ2luUmVwb3J0Ijp0cnVlLCJ0YWJsZVNhbGVzUmVwb3J0Ijp0cnVlfSwiRXVyb09pbENhcmQiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlfSwiRm9yZWlnblN0b2NrcyI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkZvcmVpZ25TdG9ja3NDQ1MiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJHb29kc0RlbGl2ZXJ5Tm90ZXMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJ2YWxpZCI6dHJ1ZX0sIkdvb2RzT3JkZXJzIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJleHBvcnQiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZSwidmFsaWQiOnRydWV9LCJIb3RLZXlzRGVmaW5pdGlvbnMiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJJbnZlbnRvcnkiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwiZmluYWxpemUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIkxvY2FsQ2FyZHMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlfSwiUGFydG5lcnMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJ0cmFuc2FjdGlvbnMiOnRydWV9LCJQb3NNb25leU9wZXJhdGlvbnMiOnsiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUG9zU3VtbWFyaWVzIjp7ImRldGFpbCI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUG9zVGFua1RpY2tldHMiOnsiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUG9zVGFua1ZvdWNoZXJzIjp7ImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwidm91Y2hlcnNBY2NlcHRhbmNlIjp0cnVlfSwiUHJpY2VDYXRlZ29yaWVzIjp7ImNyZWF0ZSI6dHJ1ZSwiZGV0YWlsIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJSZWNlaXB0cyI6eyJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZX0sIlJlY2VpcHRzVWRkIjp7ImRldGFpbCI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiUmVwb3J0cyI6eyJjcmVhdGUiOnRydWUsImRldGFpbCI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJTdG9ja0NhcmRzIjp7ImFwcHJvdmFsUmVxdWlyZWRMb2NhbCI6dHJ1ZSwiY2hhbmdlRHJ5R29vZHMiOnRydWUsImNoYW5nZU93bmVyIjp0cnVlLCJjaGFuZ2VQcmljZSI6dHJ1ZSwiY2hhbmdlUHJpY2VXZXQiOnRydWUsImNoYW5nZVdldEdvb2RzIjp0cnVlLCJjcmVhdGUiOnRydWUsImRlbGV0ZUZyb21BbGxTdG9ja0NhcmRzIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJzdG9ja0NhcmREaXN0cmlidXRlIjp0cnVlLCJ0cmFuc2ZlckxvY2FsVG9DZW50cmFsIjp0cnVlfSwiU3RvY2tDYXJkc0NhdGVnb3JpZXMiOnsiY3JlYXRlIjp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJTdG9ja0NhcmRzR3JvdXBzQ2VudHJhbCI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIlN0b2NrQ2FyZHNHcm91cHNMb2NhbCI6eyJjcmVhdGUiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIlN0b2NrQ2FyZHNNYXNzIjp7ImNoYW5nZUNhdGVnb3JpZXMiOnRydWUsImNoYW5nZUdvb2RzR3JvdXAiOnRydWUsImNoYW5nZUxvY2FsR3JvdXBzIjp0cnVlLCJjaGFuZ2VNaW5pbWFsU3VwcGx5Ijp0cnVlLCJjaGFuZ2VPd25lciI6dHJ1ZSwiY2hhbmdlUHJpY2UiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZSwic3RvY2tDYXJkRGlzdHJpYnV0ZSI6dHJ1ZX0sIlN0b2NrQ2VudHJhbEZlYXR1cmVzIjp7ImNyZWF0ZSI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlfSwiU3RvY2tzIjp7ImNoYW5nZVByb2R1Y3QiOnRydWUsImRldGFpbCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJzdG9ja0ZlYXR1cmVzIjp0cnVlfSwiU3VwcGx5QmFsYW5jZU92ZXJ2aWV3Ijp7ImNyZWF0ZSI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlfSwiVHVybm92ZXJzIjp7ImNyZWF0ZSI6dHJ1ZSwiZXhwb3J0Ijp0cnVlLCJsaXN0Ijp0cnVlLCJtb2RpZnkiOnRydWV9LCJVc2VycyI6eyJjcmVhdGUiOnRydWUsImRldGFpbCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibWVudSI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJzZXRBY2NvdW50Ijp0cnVlLCJzZXRVc2VyQ2FyZCI6dHJ1ZX0sIlZhdENsYXNzZXMiOnsiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImxpc3QiOnRydWUsIm1vZGlmeSI6dHJ1ZX0sIldldERlbGl2ZXJ5Tm90ZXMiOnsiY2hhbmdlUHVyY2hQcmljZSI6dHJ1ZSwiY3JlYXRlIjp0cnVlLCJkZXRhaWwiOnRydWUsImV4cG9ydCI6dHJ1ZSwibGlzdCI6dHJ1ZSwibW9kaWZ5Ijp0cnVlLCJyZW1vdmVBdXRvbWF0UmVjb3JkcyI6dHJ1ZSwidmFsaWQiOnRydWV9LCJXZXRQcmljZUxpc3RPdmVydmlldyI6eyJleHBvcnQiOnRydWUsImxpc3QiOnRydWV9fSwiaWF0IjoxNzU2NDUzMjQyLCJleHAiOjE3NTY1Mzk2NDIsImlzcyI6InVybjp5b3Vyc3lzdGVtIiwianRpIjoiMmZhNTBlNTAtY2I5NC00ZjdmLTg4NWYtMmU3MDM1ZGY4OWY1In0.7E-kH3M0TO7G_u47_9NlPb4nCKbng16nXK1mopGl1MA',
-    content: {
-      accounts: [
-        '60193531'
-      ],
-      accountsUnlimited: false,
-      cardNumber: '',
-      cbosRoleId: 2,
-      cbosScale: 2,
-      created: '2025-08-22T09:19:47.307Z',
-      email: '',
-      gposRoleId: 13,
-      lang: 'cs-CZ',
-      name: 'Uživatel bez VOM',
-      operator: 'MN_TETST_AUTOMAT',
-      passwordReset: false,
-      perPage: 10,
-      pin: '',
-      reloadInit: false,
-      stocks: [
-        150,
-        230,
-        231,
-        250,
-        458,
-        487,
-        49,
-        569,
-        6,
-        655,
-        7,
-        730,
-        731,
-        732,
-        742,
-        743,
-        783
-      ],
-      stocksUnlimited: false,
-      updated: '2025-08-22T09:21:22.612Z',
-      valid: true,
-      validPos: false,
-      gauth: 'eyJhc2NpaSI6Ij9SN1taYm5HQmFJSnkvbENRS21DV0h9NHpVbntULzUpIiwiaGV4IjoiM2Y1MjM3NWI1YTYyNmU0NzQyNjE0OTRhNzkyZjZjNDM1MTRiNmQ0MzU3NDg3ZDM0N2E1NTZlN2I1NDJmMzUyOSIsImJhc2UzMiI6Ikg1SkRPVzIyTUpYRU9RVEJKRkZIU0wzTUlOSVVXM0tESzVFSDJORDJLVlhIV1ZCUEdVVVEiLCJvdHBhdXRoX3VybCI6Im90cGF1dGg6Ly90b3RwL01OX1RFVFNUX0FVVE9NQVQ/c2VjcmV0PUg1SkRPVzIyTUpYRU9RVEJKRkZIU0wzTUlOSVVXM0tESzVFSDJORDJLVlhIV1ZCUEdVVVEmaXNzdWVyPUNCT1MtMjM5JTIwJTI4REVWJTI5In0=',
-      gauthRegistered: false,
-      locked: false,
-      badLoginCount: 0,
-      lastLoginTimestamp: '2025-08-29T07:22:27.072Z',
-      changePasswordTimestamp: '2025-08-22T09:21:22.612Z',
-      comment: '',
-      cbosRights: {
-        BonusSystem: {
-          create: true,
-          detail: true,
-          list: true,
-          modify: true,
-          status: true
-        },
-        CardDefitions: {
-          list: true
-        },
-        CardIssuers: {
-          create: true,
-          detail: true,
-          list: true,
-          modify: true
-        },
-        CtClasses: {
-          create: true,
-          detail: true,
-          list: true,
-          modify: true
-        },
-        CurrencyRate: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        DailyBilances: {
-          create: true,
-          export: true,
-          list: true,
-          modify: true
-        },
-        DailyRevenue: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        Dashboard: {
-          create: true,
-          list: true,
-          tableMarginReport: true,
-          tableSalesReport: true
-        },
-        EuroOilCard: {
-          create: true,
-          list: true
-        },
-        ForeignStocks: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        ForeignStocksCCS: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        GoodsDeliveryNotes: {
-          create: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true,
-          valid: true
-        },
-        GoodsOrders: {
-          create: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true,
-          valid: true
-        },
-        HotKeysDefinitions: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        Inventory: {
-          create: true,
-          detail: true,
-          export: true,
-          finalize: true,
-          list: true,
-          modify: true
-        },
-        LocalCards: {
-          create: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true
-        },
-        Partners: {
-          create: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true,
-          transactions: true
-        },
-        PosMoneyOperations: {
-          export: true,
-          list: true
-        },
-        PosSummaries: {
-          detail: true,
-          export: true,
-          list: true
-        },
-        PosTankTickets: {
-          export: true,
-          list: true
-        },
-        PosTankVouchers: {
-          export: true,
-          list: true,
-          vouchersAcceptance: true
-        },
-        PriceCategories: {
-          create: true,
-          detail: true,
-          list: true,
-          modify: true
-        },
-        Receipts: {
-          detail: true,
-          export: true,
-          list: true
-        },
-        ReceiptsUdd: {
-          detail: true,
-          export: true,
-          list: true
-        },
-        Reports: {
-          create: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true
-        },
-        StockCards: {
-          approvalRequiredLocal: true,
-          changeDryGoods: true,
-          changeOwner: true,
-          changePrice: true,
-          changePriceWet: true,
-          changeWetGoods: true,
-          create: true,
-          deleteFromAllStockCards: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true,
-          stockCardDistribute: true,
-          transferLocalToCentral: true
-        },
-        StockCardsCategories: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        StockCardsGroupsCentral: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        StockCardsGroupsLocal: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        StockCardsMass: {
-          changeCategories: true,
-          changeGoodsGroup: true,
-          changeLocalGroups: true,
-          changeMinimalSupply: true,
-          changeOwner: true,
-          changePrice: true,
-          list: true,
-          modify: true,
-          stockCardDistribute: true
-        },
-        StockCentralFeatures: {
-          create: true,
-          list: true,
-          modify: true
-        },
-        Stocks: {
-          changeProduct: true,
-          detail: true,
-          list: true,
-          modify: true,
-          stockFeatures: true
-        },
-        SupplyBalanceOverview: {
-          create: true,
-          export: true,
-          list: true
-        },
-        Turnovers: {
-          create: true,
-          export: true,
-          list: true,
-          modify: true
-        },
-        Users: {
-          create: true,
-          detail: true,
-          list: true,
-          menu: true,
-          modify: true,
-          setAccount: true,
-          setUserCard: true
-        },
-        VatClasses: {
-          create: true,
-          detail: true,
-          list: true,
-          modify: true
-        },
-        WetDeliveryNotes: {
-          changePurchPrice: true,
-          create: true,
-          detail: true,
-          export: true,
-          list: true,
-          modify: true,
-          removeAutomatRecords: true,
-          valid: true
-        },
-        WetPriceListOverview: {
-          export: true,
-          list: true
-        }
-      }
-    }
-  }
-} Obsah odpovědi
-2025-08-29 07:40:42.491 TRACE [\support\fixtures\auth.fixture.ts:60]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
-2025-08-29 07:40:42.495 SILLY [\support\fixtures\auth.fixture.ts:62]FIXTURE 'authToken': Token úspěšně získán (prvních 10 znaků: 'eyJhbGciOi...').
-2025-08-29 07:40:42.496 TRACE [\support\fixtures\auth.fixture.ts:64]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
-2025-08-29 07:40:42.498 INFO [\tests\Smoke\Moduly.spec.ts:30]Zahajuji API smoke test suite...
-2025-08-29 07:40:42.500 INFO [\tests\Smoke\Moduly.spec.ts:35]ApiClient byl úspěšně inicializován s autorizačním tokenem.
-2025-08-29 07:40:42.502 TRACE [\tests\Smoke\Moduly.spec.ts:40]Spouštím test pro endpoint: GET /dashboard
-2025-08-29 07:40:42.504 TRACE [\support\ApiClient.ts:561]Odesílám GET požadavek na /dashboard
-2025-08-29 07:40:42.521 SILLY [\support\fixtures\auth.fixture.ts:66]FIXTURE 'authToken': Fixture dokončila svou práci po 'use'.
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:49[0m[0m.857[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:49[0m[0m.863[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:49[0m[0m.907[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:47[39m[0m[0m]Endpoint GET /dashboard vrátil validní HTML obsah.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1195: GET /reports-api/listOfStocks - Obchodní místa @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.754">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:50[0m[0m.601[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:50[0m[0m.604[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:50[0m[0m.668[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:70[39m[0m[0m]Endpoint úspěšně vrátil 5 obchodních míst.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1196: GET /reports-api/listOfStockCards - Skladové karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.764">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:51[0m[0m.364[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:51[0m[0m.366[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:51[0m[0m.442[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:88[39m[0m[0m]Endpoint úspěšně vrátil 10 skladových karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.695">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:52[0m[0m.105[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:52[0m[0m.106[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:52[0m[0m.141[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:104[39m[0m[0m]Endpoint vrátil 0 lokálních skupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.717">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:52[0m[0m.823[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:52[0m[0m.824[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:52[0m[0m.864[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:122[39m[0m[0m]Endpoint vrátil 0 lokálních nadskupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.732">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:53[0m[0m.559[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:53[0m[0m.561[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:53[0m[0m.601[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:142[39m[0m[0m]Endpoint úspěšně vrátil 9 POS terminálů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @Smoke @API @Critical POS Terminál 2/2" classname="Smoke\Moduly.spec.ts" time="0.698">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:54[0m[0m.251[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:54[0m[0m.253[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:54[0m[0m.302[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:161[39m[0m[0m]Endpoint úspěšně vrátil 38 rychlých voleb.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.902">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:55[0m[0m.034[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:55[0m[0m.037[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:55[0m[0m.214[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:180[39m[0m[0m]Endpoint úspěšně vrátil 162 partnerů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.756">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:55[0m[0m.913[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:55[0m[0m.917[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:55[0m[0m.982[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:206[39m[0m[0m]Endpoint úspěšně vrátil počet záznamů pro tabulku "localCards": [object Object].
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.731">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:56[0m[0m.666[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:56[0m[0m.669[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:56[0m[0m.720[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:236[39m[0m[0m]Endpoint úspěšně vrátil 5 lokálních karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.697">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:57[0m[0m.378[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:57[0m[0m.380[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:57[0m[0m.421[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:259[39m[0m[0m]Endpoint úspěšně vrátil 2 cenových kategorií.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.734">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:58[0m[0m.105[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:58[0m[0m.107[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:58[0m[0m.159[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:288[39m[0m[0m]Endpoint vrátil 0 žádostí o EuroOil karty pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.828">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:58[0m[0m.940[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:58[0m[0m.941[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:58[0m[0m.994[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:321[39m[0m[0m]Endpoint úspěšně vrátil 10 bonusových tříd.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.759">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:59[0m[0m.655[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:59[0m[0m.656[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:09[0m[0m:59[0m[0m.762[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:351[39m[0m[0m]Endpoint úspěšně vrátil 253 uživatelských sestav.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.934">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:00[0m[0m.630[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:00[0m[0m.633[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:00[0m[0m.692[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:366[39m[0m[0m]Endpoint úspěšně vrátil 2 položek v číselníku.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.732">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:01[0m[0m.376[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:01[0m[0m.377[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:01[0m[0m.424[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:401[39m[0m[0m]Endpoint úspěšně vrátil data pro 4 nádrží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.801">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:02[0m[0m.164[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:02[0m[0m.168[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:02[0m[0m.241[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:442[39m[0m[0m]Endpoint úspěšně vrátil 13 operátorů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.679">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:02[0m[0m.885[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:02[0m[0m.887[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:02[0m[0m.927[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:485[39m[0m[0m]Endpoint úspěšně vrátil 10 UDD příjemek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.754">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:03[0m[0m.642[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:03[0m[0m.643[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:03[0m[0m.686[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:519[39m[0m[0m]Endpoint úspěšně vrátil 10 stvrzenek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.763">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:04[0m[0m.403[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:04[0m[0m.405[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:04[0m[0m.452[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:552[39m[0m[0m]Endpoint nevrátil žádné peněžní operace pro parametry: {"stockId":"230","dateFrom":"2025-08-01T00:00:00.000Z","limit":10}.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.886">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:05[0m[0m.292[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:05[0m[0m.295[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:05[0m[0m.345[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:581[39m[0m[0m]Endpoint úspěšně vrátil 10 přeplatkových poukázek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.822">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:06[0m[0m.115[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:06[0m[0m.118[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:06[0m[0m.173[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:604[39m[0m[0m]Endpoint úspěšně vrátil 15 inventur zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.863">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:06[0m[0m.968[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:06[0m[0m.970[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:07[0m[0m.045[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:635[39m[0m[0m]Endpoint úspěšně vrátil 10 objednávek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.805">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:07[0m[0m.788[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:07[0m[0m.790[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:07[0m[0m.849[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:667[39m[0m[0m]Endpoint úspěšně vrátil 10 čerpadlových dodacích listů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.829">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:08[0m[0m.534[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:08[0m[0m.538[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:08[0m[0m.689[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:699[39m[0m[0m]Endpoint úspěšně vrátil 10 denních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.748">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:09[0m[0m.359[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:09[0m[0m.364[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:09[0m[0m.441[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:730[39m[0m[0m]Endpoint úspěšně vrátil 10 záznamů o tržbách.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.794">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:10[0m[0m.158[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:10[0m[0m.164[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:10[0m[0m.241[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:760[39m[0m[0m]Endpoint úspěšně vrátil 5 účetních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.78">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:10[0m[0m.951[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:10[0m[0m.953[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:11[0m[0m.030[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:777[39m[0m[0m]Endpoint úspěšně vrátil 25 pokladních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.764">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:11[0m[0m.744[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:11[0m[0m.745[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:11[0m[0m.796[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:807[39m[0m[0m]Endpoint úspěšně vrátil 10 uživatelů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.696">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:12[0m[0m.454[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:12[0m[0m.456[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:12[0m[0m.502[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:824[39m[0m[0m]Endpoint úspěšně vrátil 9 rolí.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.732">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:13[0m[0m.199[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:13[0m[0m.202[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:13[0m[0m.244[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:854[39m[0m[0m]Endpoint úspěšně vrátil 3 tříd DPH.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.725">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:13[0m[0m.926[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:13[0m[0m.928[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:13[0m[0m.966[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:881[39m[0m[0m]Endpoint úspěšně vrátil 10 definic karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.696">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:14[0m[0m.628[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:14[0m[0m.632[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:14[0m[0m.674[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:897[39m[0m[0m]Endpoint úspěšně vrátil 2 registrovaných klientů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.773">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:15[0m[0m.400[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:15[0m[0m.403[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:15[0m[0m.449[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:921[39m[0m[0m]Endpoint úspěšně vrátil 10 vydavatelů karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.738">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:16[0m[0m.147[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:16[0m[0m.151[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:16[0m[0m.198[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:948[39m[0m[0m]Endpoint úspěšně vrátil 10 konkurenčních OM (CCS).
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.726">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:16[0m[0m.846[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:16[0m[0m.850[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:16[0m[0m.929[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:975[39m[0m[0m]Endpoint úspěšně vrátil 5 konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.72">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:17[0m[0m.603[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:17[0m[0m.608[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:17[0m[0m.657[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1005[39m[0m[0m]Endpoint úspěšně vrátil 3 kurzů měn.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.72">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:18[0m[0m.339[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:18[0m[0m.343[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:18[0m[0m.383[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1035[39m[0m[0m]Endpoint úspěšně vrátil 10 kategorií zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.697">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:19[0m[0m.048[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:19[0m[0m.051[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:19[0m[0m.087[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1064[39m[0m[0m]Endpoint úspěšně vrátil 10 centrálních skupin zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.765">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:19[0m[0m.780[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:19[0m[0m.782[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:19[0m[0m.859[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1081[39m[0m[0m]Endpoint úspěšně vrátil 85 centrálních parametrů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.736">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:20[0m[0m.555[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:20[0m[0m.558[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:20[0m[0m.605[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1110[39m[0m[0m]Endpoint nevrátil žádné ceny konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-29T14:09:48.189Z" hostname="firefox" tests="41" failures="0" skipped="0" time="30.961" errors="0">
+<testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.814">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:22[0m[0m.583[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:22[0m[0m.587[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:22[0m[0m.642[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:47[39m[0m[0m]Endpoint GET /dashboard vrátil validní HTML obsah.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1195: GET /reports-api/listOfStocks - Obchodní místa @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.721">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:23[0m[0m.301[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:23[0m[0m.303[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:23[0m[0m.373[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:70[39m[0m[0m]Endpoint úspěšně vrátil 5 obchodních míst.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1196: GET /reports-api/listOfStockCards - Skladové karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.797">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:24[0m[0m.052[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:24[0m[0m.056[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:24[0m[0m.176[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:88[39m[0m[0m]Endpoint úspěšně vrátil 10 skladových karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.86">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:24[0m[0m.914[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:24[0m[0m.917[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:25[0m[0m.043[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:104[39m[0m[0m]Endpoint vrátil 0 lokálních skupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.787">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:25[0m[0m.741[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:25[0m[0m.746[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:25[0m[0m.836[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:122[39m[0m[0m]Endpoint vrátil 0 lokálních nadskupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.717">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:26[0m[0m.509[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:26[0m[0m.512[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:26[0m[0m.559[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:142[39m[0m[0m]Endpoint úspěšně vrátil 9 POS terminálů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @Smoke @API @Critical POS Terminál 2/2" classname="Smoke\Moduly.spec.ts" time="0.712">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:27[0m[0m.226[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:27[0m[0m.229[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:27[0m[0m.281[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:161[39m[0m[0m]Endpoint úspěšně vrátil 38 rychlých voleb.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.826">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:27[0m[0m.968[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:27[0m[0m.970[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:28[0m[0m.117[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:180[39m[0m[0m]Endpoint úspěšně vrátil 162 partnerů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.784">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:28[0m[0m.854[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:28[0m[0m.856[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:28[0m[0m.906[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:206[39m[0m[0m]Endpoint úspěšně vrátil počet záznamů pro tabulku "localCards": [object Object].
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.723">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:29[0m[0m.577[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:29[0m[0m.582[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:29[0m[0m.635[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:236[39m[0m[0m]Endpoint úspěšně vrátil 5 lokálních karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.774">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:30[0m[0m.371[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:30[0m[0m.376[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:30[0m[0m.418[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:259[39m[0m[0m]Endpoint úspěšně vrátil 2 cenových kategorií.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.741">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:31[0m[0m.114[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:31[0m[0m.115[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:31[0m[0m.166[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:288[39m[0m[0m]Endpoint vrátil 0 žádostí o EuroOil karty pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.703">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:31[0m[0m.806[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:31[0m[0m.810[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:31[0m[0m.876[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:321[39m[0m[0m]Endpoint úspěšně vrátil 10 bonusových tříd.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.822">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:32[0m[0m.563[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:32[0m[0m.568[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:32[0m[0m.699[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:351[39m[0m[0m]Endpoint úspěšně vrátil 253 uživatelských sestav.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.763">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:33[0m[0m.412[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:33[0m[0m.414[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:33[0m[0m.458[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:366[39m[0m[0m]Endpoint úspěšně vrátil 2 položek v číselníku.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.756">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:34[0m[0m.181[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:34[0m[0m.182[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:34[0m[0m.227[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:401[39m[0m[0m]Endpoint úspěšně vrátil data pro 4 nádrží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.732">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:34[0m[0m.893[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:34[0m[0m.897[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:34[0m[0m.969[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:442[39m[0m[0m]Endpoint úspěšně vrátil 13 operátorů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.75">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:35[0m[0m.660[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:35[0m[0m.666[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:35[0m[0m.723[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:485[39m[0m[0m]Endpoint úspěšně vrátil 10 UDD příjemek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.744">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:36[0m[0m.442[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:36[0m[0m.445[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:36[0m[0m.487[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:519[39m[0m[0m]Endpoint úspěšně vrátil 10 stvrzenek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.717">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:37[0m[0m.125[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:37[0m[0m.127[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:37[0m[0m.209[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:552[39m[0m[0m]Endpoint nevrátil žádné peněžní operace pro parametry: {"stockId":"230","dateFrom":"2025-08-01T00:00:00.000Z","limit":10}.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.874">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:37[0m[0m.961[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:37[0m[0m.966[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:38[0m[0m.093[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:581[39m[0m[0m]Endpoint úspěšně vrátil 10 přeplatkových poukázek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.921">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:38[0m[0m.925[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:38[0m[0m.927[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:39[0m[0m.019[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:604[39m[0m[0m]Endpoint úspěšně vrátil 15 inventur zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.913">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:39[0m[0m.876[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:39[0m[0m.880[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:39[0m[0m.938[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:635[39m[0m[0m]Endpoint úspěšně vrátil 10 objednávek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.757">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:40[0m[0m.635[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:40[0m[0m.641[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:40[0m[0m.699[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:667[39m[0m[0m]Endpoint úspěšně vrátil 10 čerpadlových dodacích listů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.736">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:41[0m[0m.381[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:41[0m[0m.384[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:41[0m[0m.444[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:699[39m[0m[0m]Endpoint úspěšně vrátil 10 denních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.757">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:42[0m[0m.143[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:42[0m[0m.146[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:42[0m[0m.207[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:730[39m[0m[0m]Endpoint úspěšně vrátil 10 záznamů o tržbách.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.751">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:42[0m[0m.900[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:42[0m[0m.904[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:42[0m[0m.966[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:760[39m[0m[0m]Endpoint úspěšně vrátil 5 účetních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.708">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:43[0m[0m.595[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:43[0m[0m.599[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:43[0m[0m.676[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:777[39m[0m[0m]Endpoint úspěšně vrátil 25 pokladních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.733">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:44[0m[0m.361[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:44[0m[0m.364[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:44[0m[0m.413[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:807[39m[0m[0m]Endpoint úspěšně vrátil 10 uživatelů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.74">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:45[0m[0m.105[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:45[0m[0m.107[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:45[0m[0m.157[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:824[39m[0m[0m]Endpoint úspěšně vrátil 9 rolí.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.687">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:45[0m[0m.803[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:45[0m[0m.806[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:45[0m[0m.851[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:854[39m[0m[0m]Endpoint úspěšně vrátil 3 tříd DPH.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.712">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:46[0m[0m.516[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:46[0m[0m.518[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:46[0m[0m.565[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:881[39m[0m[0m]Endpoint úspěšně vrátil 10 definic karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.763">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:47[0m[0m.299[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:47[0m[0m.303[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:47[0m[0m.337[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:897[39m[0m[0m]Endpoint úspěšně vrátil 2 registrovaných klientů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.696">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:47[0m[0m.983[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:47[0m[0m.987[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:48[0m[0m.044[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:921[39m[0m[0m]Endpoint úspěšně vrátil 10 vydavatelů karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.688">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:48[0m[0m.689[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:48[0m[0m.691[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:48[0m[0m.734[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:948[39m[0m[0m]Endpoint úspěšně vrátil 10 konkurenčních OM (CCS).
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.739">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:49[0m[0m.432[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:49[0m[0m.436[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:49[0m[0m.481[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:975[39m[0m[0m]Endpoint úspěšně vrátil 5 konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.705">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:50[0m[0m.136[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:50[0m[0m.140[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:50[0m[0m.193[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1005[39m[0m[0m]Endpoint úspěšně vrátil 3 kurzů měn.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.675">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:50[0m[0m.835[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:50[0m[0m.836[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:50[0m[0m.873[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1035[39m[0m[0m]Endpoint úspěšně vrátil 10 kategorií zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.736">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:51[0m[0m.569[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:51[0m[0m.572[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:51[0m[0m.615[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1064[39m[0m[0m]Endpoint úspěšně vrátil 10 centrálních skupin zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.747">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:52[0m[0m.296[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:52[0m[0m.301[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:52[0m[0m.367[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1081[39m[0m[0m]Endpoint úspěšně vrátil 85 centrálních parametrů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.68">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:53[0m[0m.006[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:53[0m[0m.009[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:53[0m[0m.054[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1110[39m[0m[0m]Endpoint nevrátil žádné ceny konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-29T14:09:48.189Z" hostname="edge" tests="41" failures="0" skipped="0" time="31.117" errors="0">
+<testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.771">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:54[0m[0m.842[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:54[0m[0m.847[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:54[0m[0m.886[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:47[39m[0m[0m]Endpoint GET /dashboard vrátil validní HTML obsah.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1195: GET /reports-api/listOfStocks - Obchodní místa @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.731">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:55[0m[0m.574[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:55[0m[0m.579[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:55[0m[0m.629[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:70[39m[0m[0m]Endpoint úspěšně vrátil 5 obchodních míst.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1196: GET /reports-api/listOfStockCards - Skladové karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="1.04">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:56[0m[0m.462[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:56[0m[0m.465[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:56[0m[0m.677[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:88[39m[0m[0m]Endpoint úspěšně vrátil 10 skladových karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.695">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:57[0m[0m.336[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:57[0m[0m.338[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:57[0m[0m.375[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:104[39m[0m[0m]Endpoint vrátil 0 lokálních skupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.706">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:58[0m[0m.052[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:58[0m[0m.053[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:58[0m[0m.085[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:122[39m[0m[0m]Endpoint vrátil 0 lokálních nadskupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.803">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:58[0m[0m.847[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:58[0m[0m.853[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:58[0m[0m.899[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:142[39m[0m[0m]Endpoint úspěšně vrátil 9 POS terminálů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @Smoke @API @Critical POS Terminál 2/2" classname="Smoke\Moduly.spec.ts" time="0.755">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:59[0m[0m.596[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:59[0m[0m.599[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:10[0m[0m:59[0m[0m.649[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:161[39m[0m[0m]Endpoint úspěšně vrátil 38 rychlých voleb.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="1.01">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:00[0m[0m.531[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:00[0m[0m.533[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:00[0m[0m.672[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:180[39m[0m[0m]Endpoint úspěšně vrátil 162 partnerů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.748">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:01[0m[0m.356[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:01[0m[0m.361[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:01[0m[0m.423[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:206[39m[0m[0m]Endpoint úspěšně vrátil počet záznamů pro tabulku "localCards": [object Object].
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.779">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:02[0m[0m.159[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:02[0m[0m.164[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:02[0m[0m.213[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:236[39m[0m[0m]Endpoint úspěšně vrátil 5 lokálních karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.688">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:02[0m[0m.858[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:02[0m[0m.862[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:02[0m[0m.907[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:259[39m[0m[0m]Endpoint úspěšně vrátil 2 cenových kategorií.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.762">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:03[0m[0m.625[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:03[0m[0m.629[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:03[0m[0m.680[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:288[39m[0m[0m]Endpoint vrátil 0 žádostí o EuroOil karty pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.748">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:04[0m[0m.370[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:04[0m[0m.375[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:04[0m[0m.431[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:321[39m[0m[0m]Endpoint úspěšně vrátil 10 bonusových tříd.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.909">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:05[0m[0m.099[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:05[0m[0m.101[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:05[0m[0m.350[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:351[39m[0m[0m]Endpoint úspěšně vrátil 253 uživatelských sestav.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.701">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:05[0m[0m.989[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:05[0m[0m.992[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:06[0m[0m.044[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:366[39m[0m[0m]Endpoint úspěšně vrátil 2 položek v číselníku.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.762">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:06[0m[0m.764[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:06[0m[0m.766[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:06[0m[0m.812[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:401[39m[0m[0m]Endpoint úspěšně vrátil data pro 4 nádrží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.782">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:07[0m[0m.518[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:07[0m[0m.521[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:07[0m[0m.607[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:442[39m[0m[0m]Endpoint úspěšně vrátil 13 operátorů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.69">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:08[0m[0m.251[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:08[0m[0m.253[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:08[0m[0m.302[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:485[39m[0m[0m]Endpoint úspěšně vrátil 10 UDD příjemek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.761">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:09[0m[0m.017[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:09[0m[0m.018[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:09[0m[0m.073[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:519[39m[0m[0m]Endpoint úspěšně vrátil 10 stvrzenek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.794">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:09[0m[0m.819[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:09[0m[0m.822[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:09[0m[0m.876[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:552[39m[0m[0m]Endpoint nevrátil žádné peněžní operace pro parametry: {"stockId":"230","dateFrom":"2025-08-01T00:00:00.000Z","limit":10}.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.76">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:10[0m[0m.589[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:10[0m[0m.593[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:10[0m[0m.647[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:581[39m[0m[0m]Endpoint úspěšně vrátil 10 přeplatkových poukázek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.723">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:11[0m[0m.330[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:11[0m[0m.331[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:11[0m[0m.377[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:604[39m[0m[0m]Endpoint úspěšně vrátil 15 inventur zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.808">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:12[0m[0m.122[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:12[0m[0m.125[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:12[0m[0m.190[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:635[39m[0m[0m]Endpoint úspěšně vrátil 10 objednávek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.755">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:12[0m[0m.879[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:12[0m[0m.883[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:12[0m[0m.954[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:667[39m[0m[0m]Endpoint úspěšně vrátil 10 čerpadlových dodacích listů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.723">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:13[0m[0m.620[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:13[0m[0m.623[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:13[0m[0m.683[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:699[39m[0m[0m]Endpoint úspěšně vrátil 10 denních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.737">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:14[0m[0m.362[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:14[0m[0m.364[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:14[0m[0m.426[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:730[39m[0m[0m]Endpoint úspěšně vrátil 10 záznamů o tržbách.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.789">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:15[0m[0m.155[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:15[0m[0m.159[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:15[0m[0m.226[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:760[39m[0m[0m]Endpoint úspěšně vrátil 5 účetních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.764">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:15[0m[0m.927[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:15[0m[0m.931[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:15[0m[0m.996[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:777[39m[0m[0m]Endpoint úspěšně vrátil 25 pokladních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.687">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:16[0m[0m.625[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:16[0m[0m.630[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:16[0m[0m.686[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:807[39m[0m[0m]Endpoint úspěšně vrátil 10 uživatelů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.771">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:17[0m[0m.413[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:17[0m[0m.416[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:17[0m[0m.463[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:824[39m[0m[0m]Endpoint úspěšně vrátil 9 rolí.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.743">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:18[0m[0m.160[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:18[0m[0m.162[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:18[0m[0m.214[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:854[39m[0m[0m]Endpoint úspěšně vrátil 3 tříd DPH.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.699">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:18[0m[0m.870[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:18[0m[0m.871[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:18[0m[0m.918[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:881[39m[0m[0m]Endpoint úspěšně vrátil 10 definic karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.727">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:19[0m[0m.612[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:19[0m[0m.616[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:19[0m[0m.650[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:897[39m[0m[0m]Endpoint úspěšně vrátil 2 registrovaných klientů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.747">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:20[0m[0m.354[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:20[0m[0m.357[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:20[0m[0m.407[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:921[39m[0m[0m]Endpoint úspěšně vrátil 10 vydavatelů karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.681">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:21[0m[0m.038[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:21[0m[0m.042[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:21[0m[0m.091[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:948[39m[0m[0m]Endpoint úspěšně vrátil 10 konkurenčních OM (CCS).
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.756">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:21[0m[0m.802[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:21[0m[0m.806[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:21[0m[0m.853[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:975[39m[0m[0m]Endpoint úspěšně vrátil 5 konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.741">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:22[0m[0m.551[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:22[0m[0m.554[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:22[0m[0m.601[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1005[39m[0m[0m]Endpoint úspěšně vrátil 3 kurzů měn.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.712">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:23[0m[0m.267[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:23[0m[0m.270[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:23[0m[0m.321[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1035[39m[0m[0m]Endpoint úspěšně vrátil 10 kategorií zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.697">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:23[0m[0m.980[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:23[0m[0m.983[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:24[0m[0m.023[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1064[39m[0m[0m]Endpoint úspěšně vrátil 10 centrálních skupin zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.763">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:24[0m[0m.712[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:24[0m[0m.716[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:24[0m[0m.789[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1081[39m[0m[0m]Endpoint úspěšně vrátil 85 centrálních parametrů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.699">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:25[0m[0m.446[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:25[0m[0m.450[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:25[0m[0m.498[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1110[39m[0m[0m]Endpoint nevrátil žádné ceny konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="Smoke\Moduly.spec.ts" timestamp="2025-08-29T14:09:48.189Z" hostname="API" tests="41" failures="0" skipped="0" time="30.242" errors="0">
+<testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.703">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:27[0m[0m.290[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:27[0m[0m.294[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:27[0m[0m.333[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:47[39m[0m[0m]Endpoint GET /dashboard vrátil validní HTML obsah.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1195: GET /reports-api/listOfStocks - Obchodní místa @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.725">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:28[0m[0m.010[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:28[0m[0m.012[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:28[0m[0m.066[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:70[39m[0m[0m]Endpoint úspěšně vrátil 5 obchodních míst.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1196: GET /reports-api/listOfStockCards - Skladové karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.778">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:28[0m[0m.766[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:28[0m[0m.768[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:28[0m[0m.849[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:88[39m[0m[0m]Endpoint úspěšně vrátil 10 skladových karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.738">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:29[0m[0m.562[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:29[0m[0m.564[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:29[0m[0m.595[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:104[39m[0m[0m]Endpoint vrátil 0 lokálních skupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.764">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:30[0m[0m.323[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:30[0m[0m.324[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:30[0m[0m.357[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:122[39m[0m[0m]Endpoint vrátil 0 lokálních nadskupin pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.722">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:31[0m[0m.049[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:31[0m[0m.051[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:31[0m[0m.093[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:142[39m[0m[0m]Endpoint úspěšně vrátil 9 POS terminálů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @Smoke @API @Critical POS Terminál 2/2" classname="Smoke\Moduly.spec.ts" time="0.67">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:31[0m[0m.724[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:31[0m[0m.726[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:31[0m[0m.770[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:161[39m[0m[0m]Endpoint úspěšně vrátil 38 rychlých voleb.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.862">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:32[0m[0m.494[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:32[0m[0m.497[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:32[0m[0m.635[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:180[39m[0m[0m]Endpoint úspěšně vrátil 162 partnerů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.749">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:33[0m[0m.330[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:33[0m[0m.331[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:33[0m[0m.389[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:206[39m[0m[0m]Endpoint úspěšně vrátil počet záznamů pro tabulku "localCards": [object Object].
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.767">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:34[0m[0m.104[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:34[0m[0m.107[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:34[0m[0m.153[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:236[39m[0m[0m]Endpoint úspěšně vrátil 5 lokálních karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.711">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:34[0m[0m.833[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:34[0m[0m.837[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:34[0m[0m.879[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:259[39m[0m[0m]Endpoint úspěšně vrátil 2 cenových kategorií.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.721">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:35[0m[0m.565[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:35[0m[0m.568[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:35[0m[0m.609[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:288[39m[0m[0m]Endpoint vrátil 0 žádostí o EuroOil karty pro stockId: 230.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.777">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:36[0m[0m.336[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:36[0m[0m.338[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:36[0m[0m.392[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:321[39m[0m[0m]Endpoint úspěšně vrátil 10 bonusových tříd.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.742">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:37[0m[0m.034[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:37[0m[0m.038[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:37[0m[0m.142[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:351[39m[0m[0m]Endpoint úspěšně vrátil 253 uživatelských sestav.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.719">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:37[0m[0m.808[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:37[0m[0m.811[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:37[0m[0m.852[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:366[39m[0m[0m]Endpoint úspěšně vrátil 2 položek v číselníku.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.743">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:38[0m[0m.557[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:38[0m[0m.560[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:38[0m[0m.607[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:401[39m[0m[0m]Endpoint úspěšně vrátil data pro 4 nádrží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.773">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:39[0m[0m.275[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:39[0m[0m.280[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:39[0m[0m.390[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:442[39m[0m[0m]Endpoint úspěšně vrátil 13 operátorů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.722">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:40[0m[0m.066[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:40[0m[0m.068[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:40[0m[0m.121[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:485[39m[0m[0m]Endpoint úspěšně vrátil 10 UDD příjemek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.749">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:40[0m[0m.824[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:40[0m[0m.827[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:40[0m[0m.876[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:519[39m[0m[0m]Endpoint úspěšně vrátil 10 stvrzenek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.769">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:41[0m[0m.600[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:41[0m[0m.603[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:41[0m[0m.654[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:552[39m[0m[0m]Endpoint nevrátil žádné peněžní operace pro parametry: {"stockId":"230","dateFrom":"2025-08-01T00:00:00.000Z","limit":10}.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.701">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:42[0m[0m.292[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:42[0m[0m.293[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:42[0m[0m.342[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:581[39m[0m[0m]Endpoint úspěšně vrátil 10 přeplatkových poukázek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.747">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.060[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.066[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.122[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:604[39m[0m[0m]Endpoint úspěšně vrátil 15 inventur zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.801">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.866[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.870[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.928[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:635[39m[0m[0m]Endpoint úspěšně vrátil 10 objednávek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.702">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:44[0m[0m.566[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:44[0m[0m.570[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:44[0m[0m.637[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:667[39m[0m[0m]Endpoint úspěšně vrátil 10 čerpadlových dodacích listů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.783">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:45[0m[0m.343[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:45[0m[0m.344[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:45[0m[0m.423[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:699[39m[0m[0m]Endpoint úspěšně vrátil 10 denních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.76">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:46[0m[0m.134[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:46[0m[0m.136[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:46[0m[0m.192[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:730[39m[0m[0m]Endpoint úspěšně vrátil 10 záznamů o tržbách.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.706">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:46[0m[0m.848[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:46[0m[0m.849[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:46[0m[0m.904[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:760[39m[0m[0m]Endpoint úspěšně vrátil 5 účetních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.725">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:47[0m[0m.579[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:47[0m[0m.582[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:47[0m[0m.632[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:777[39m[0m[0m]Endpoint úspěšně vrátil 25 pokladních uzávěrek.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.734">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:48[0m[0m.329[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:48[0m[0m.330[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:48[0m[0m.374[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:807[39m[0m[0m]Endpoint úspěšně vrátil 10 uživatelů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.749">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:49[0m[0m.074[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:49[0m[0m.079[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:49[0m[0m.129[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:824[39m[0m[0m]Endpoint úspěšně vrátil 9 rolí.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.693">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:49[0m[0m.788[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:49[0m[0m.790[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:49[0m[0m.831[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:854[39m[0m[0m]Endpoint úspěšně vrátil 3 tříd DPH.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.729">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:50[0m[0m.523[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:50[0m[0m.526[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:50[0m[0m.564[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:881[39m[0m[0m]Endpoint úspěšně vrátil 10 definic karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.748">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:51[0m[0m.279[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:51[0m[0m.282[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:51[0m[0m.319[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:897[39m[0m[0m]Endpoint úspěšně vrátil 2 registrovaných klientů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.704">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:51[0m[0m.975[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:51[0m[0m.980[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:52[0m[0m.031[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:921[39m[0m[0m]Endpoint úspěšně vrátil 10 vydavatelů karet.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.718">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:52[0m[0m.710[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:52[0m[0m.713[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:52[0m[0m.755[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:948[39m[0m[0m]Endpoint úspěšně vrátil 10 konkurenčních OM (CCS).
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.746">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:53[0m[0m.466[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:53[0m[0m.467[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:53[0m[0m.509[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:975[39m[0m[0m]Endpoint úspěšně vrátil 5 konkurenčních OM.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.689">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:54[0m[0m.165[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:54[0m[0m.168[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:54[0m[0m.205[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1005[39m[0m[0m]Endpoint úspěšně vrátil 3 kurzů měn.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.726">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:54[0m[0m.899[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:54[0m[0m.902[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:54[0m[0m.937[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1035[39m[0m[0m]Endpoint úspěšně vrátil 10 kategorií zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.762">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:55[0m[0m.624[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:55[0m[0m.626[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:55[0m[0m.704[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1064[39m[0m[0m]Endpoint úspěšně vrátil 10 centrálních skupin zboží.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.702">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:56[0m[0m.337[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:56[0m[0m.341[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:56[0m[0m.412[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1081[39m[0m[0m]Endpoint úspěšně vrátil 85 centrálních parametrů.
+]]>
+</system-out>
+</testcase>
+<testcase name="API Smoke Tests › TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @Smoke @API @Critical" classname="Smoke\Moduly.spec.ts" time="0.713">
+<system-out>
+<![CDATA[2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:57[0m[0m.086[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:30[39m[0m[0m]Zahajuji API smoke test suite...
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:57[0m[0m.090[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:35[39m[0m[0m]ApiClient byl úspěšně inicializován s autorizačním tokenem.
+2025[0m[0m-08[0m[0m-29[0m[0m 14[0m[0m:11[0m[0m:57[0m[0m.130[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly.spec.ts:1110[39m[0m[0m]Endpoint nevrátil žádné ceny konkurenčních OM.
 ]]>
 </system-out>
 </testcase>
