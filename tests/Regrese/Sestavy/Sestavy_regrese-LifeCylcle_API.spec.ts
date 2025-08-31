@@ -51,6 +51,9 @@ test.describe('Cyklus pro všechny sestavy s dynamickým payloadem', () => {
         test(`${report.testCaseId}: Životní cyklus sestavy: ${report.name}, @regression @API @sestavy @high`, async ({ page }) => {
             let newReportDbId: number | string | undefined;
             try {
+                /**
+                 * Blok s autenitizací 
+                 */
                 await page.goto('/');
                 const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
                 expect(token).toBeTruthy();
