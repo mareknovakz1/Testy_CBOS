@@ -59,6 +59,7 @@
  * 
  * =================== DOCUMENTS-API ====================
  * POST /documents-api/goodsDeliveryNotes/{stockId}
+ * getOrderDetail() GET /documents-api/orders/{stockId}/{orderId} ---
  *
  * ===================== SOCKET-API =====================
  * getRegisteredClients() GET /socket-api/registeredClients
@@ -98,6 +99,22 @@ export interface UserReport {
         transporterId: number;
         transporterName: string;
         sign: string;
+    }
+
+    /**
+     * deklarace payload pro: 
+     * createOrder() POST /documents-api/goodsDeliveryNotes/{stockId}
+     */ 
+    export interface OrderPayload {
+        DeliveryDate: string;     // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
+        description: string;      // Popis objednávky 
+        orderDate: string;        // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
+        ownerId: string;          // Vlastník sítě
+        ownerName: string;        // Vlastník sítě
+        suplierId: string;        // Dodavatel
+        SupplierName: string;     // Dodvatel
+        transporterId: string;    // Přepravce
+        transporterName: string;  // Přepravce
     }
 
 export class ApiClient {
@@ -1909,4 +1926,43 @@ public async getStockCardsSupergroupsLocal(
         logger.silly(`Detail objednávky ${orderId} byl úspěšně získán.`);
         return response.json();
     }
+    /**
+     * Odešle nový požadavek na vytvoření objednávky zboží.
+     * --- POST /documents-api/orders/{stockId} ---
+     * @param {string | number} stockId - ID skladu, pro který se objednávka vytváří (path parametr).
+     * @param {OrderPayload} payload - Data pro vytvoření objednávky.
+     * @returns {Promise<any>} Odpověď ze serveru, typicky objekt vytvořené objednávky.
+     */
+// Define the payload structure for creating an order
+
+    public async createOrder(
+        stockId: string | number,
+        payload: OrderPayload
+    ): Promise<any> {
+        const endpoint = `/documents-api/orders/${stockId}`;
+        logger.trace(`Odesílám POST požadavek na ${endpoint} s payloadem: ${JSON.stringify(payload, null, 2)}`);
+        const response = await this.request.post(endpoint, {
+            headers: { 
+                'Authorization': `Bearer ${this.token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json, text/plain, */*'
+            },
+            data: payload,
+            ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při vytváření objednávky pro sklad ${stockId}. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při vytváření objednávky. Status: ${response.status()}`);
+        }
+        logger.silly(`Objednávka pro sklad ${stockId} byla úspěšně vytvořena.`);
+        // API může vrátit prázdné tělo (201, 204) nebo vytvořený objekt (200, 201)
+        // Bezpečnější je zkusit parsovat JSON, a pokud selže, vrátit text
+        try {
+            return await response.json();
+        } catch (e) {
+            return await response.text(); 
+        }
+    }   
 }
