@@ -1093,7 +1093,6 @@ test.describe('API Smoke Tests', () => {
         logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
         expect(response, 'Odpověď z /reports-api/listOfForeignStockPrices nesmí být prázdná').toBeDefined();
 
-        // ---- OPRAVA: Přidání normalizační logiky ----
         const normalizedResponse = Array.isArray(response)
             ? { data: response, pagination: undefined }
             : response;
@@ -1109,5 +1108,37 @@ test.describe('API Smoke Tests', () => {
         } else {
             logger.warn(`Endpoint nevrátil žádné ceny konkurenčních OM.`);
         }
-    });    
+    });
+    
+    test.only('TC-1340 GET /minimalSupply - Minimální zásoba @Smoke @API', async () => {
+        logger.trace(`Spouštím test pro endpoint: GET /minimalSupply`);
+
+        // Zavoláme metodu API klienta s povinným accOwner a omezíme počet výsledků
+        const response = await apiClient.getMinimalSupply(ACC_OWNER_ID, {
+            limit: 10,
+            stockId: STOCK_ID
+        });
+
+        logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
+        expect(response, 'Odpověď z /minimalSupply nesmí být prázdná').toBeDefined();
+
+        const normalizedResponse = Array.isArray(response)
+            ? { data: response, pagination: undefined }
+            : response;
+
+        // Klíčová aserce: ověříme, že odpověď obsahuje pole 'data'
+        expect(normalizedResponse.data, 'Odpověď musí obsahovat pole "data"').toBeInstanceOf(Array);
+
+        // Pokud odpověď není jen pole, měla by obsahovat i informace o stránkování
+        if (!Array.isArray(response)) {
+            expect(normalizedResponse.pagination, 'Pokud je odpověď objekt, musí obsahovat "pagination"').toBeDefined();
+        }
+        
+        // Zalogujeme výsledek
+        if (normalizedResponse.data.length > 0) {
+            logger.info(`Endpoint úspěšně vrátil ${normalizedResponse.data.length} záznamů o minimální zásobě.`);
+        } else {
+            logger.warn(`Endpoint nevrátil žádná data o minimální zásobě pro accOwner: ${ACC_OWNER_ID} a stockId: ${STOCK_ID}.`);
+        }
+    });
 });     

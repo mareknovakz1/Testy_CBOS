@@ -1965,5 +1965,54 @@ public async getStockCardsSupergroupsLocal(
         } catch (e) {
             return await response.text(); 
         }
-    }   
+    }
+    
+    /**
+     * Získá data o minimální hlídané zásobě.
+     * --- GET /minimalSupply ---
+     * @param {string} accOwner - Identifikace sítě (povinný query parametr).
+     * @param {object} params - Objekt s volitelnými query parametry.
+     * @param {number | string} [params.stockId] - ID skladu nebo čárkou oddělený seznam ID.
+     * @param {number} [params.coeficient] - Koeficient pro výpočet v procentech (např. 10).
+     * @param {string} [params.sort] - Řazení výsledků.
+     * @param {number} [params.offset] - Posun pro stránkování.
+     * @param {number} [params.limit] - Počet položek na stránku.
+     * @param {'xlsx' | 'csv'} [params.format] - Formát pro export.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getMinimalSupply(
+        accOwner: string,
+        params: {
+            stockId?: number | string;
+            coeficient?: number;
+            sort?: string;
+            offset?: number;
+            limit?: number;
+            format?: 'xlsx' | 'csv';
+        } = {}
+    ): Promise<any> {
+        const endpoint = '/reports-api/minimalSupply'; 
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s accOwner: ${accOwner} a parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            // Spojíme povinný accOwner s ostatními volitelnými parametry do jednoho objektu
+            params: {
+                accOwner: accOwner,
+                ...params
+            }
+        });
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání minimální zásoby. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání minimální zásoby. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Data o minimální zásobě byla úspěšně získána.`);
+        return response.json();
+    }
 }

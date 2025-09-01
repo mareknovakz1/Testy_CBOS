@@ -2,140 +2,140 @@ import { test, expect } from '../../../support/fixtures/auth.fixture';
 import { ApiClient } from '../../../support/ApiClient';
 import { ReportBuilder } from '../../../support/ReportBuilder';
 import { logger } from '../../../support/logger';
-
-// --- JEDNOTNÁ A FINÁLNÍ DEFINICE VŠECH SESTAV ---
-
-// Definujeme typy payloadů, které reálně používáme
-type PayloadType = 'dateRange' | 'exactDate' | 'dateRangeFromOnly';
+import allReportsConfig from '../../../test-data/Sestavy_regrese-LifeCycle_API.json';
 
 interface ReportConfig {
     dateType: 'dateRange' | 'exactDate' | 'rangeFromOnly';
-    partnerId?: number[]; 
+    partnerId?: number[];
     stockIds?: number[];
-    
 }
 
-const sentPublic:boolean = true; //public - sestava je sdílená
+interface ReportTestData {
+    id: string;
+    name: string;
+    config: ReportConfig;
+    testCaseId: string;
+}
 
-// Jedno pole, kde má každá sestava přiřazený svůj funkční typ payloadu
-const allReportsConfig: { id: string; //ID vytvořené sestavy - načteno z oracle
-                        name: string; //Libovolné jméno
-                        config: ReportConfig, 
-                        testCaseId: string; //ID test casu
-                    }[] = [
-    // 1. Sestavy funkční s plným časovým rozsahem (OD-DO)
-    { id: 'D001', name: 'D001 - Přehled prodejů', config: { dateType: 'dateRange' }, testCaseId: 'TC-1234' },
-    { id: 'D005', name: 'D005 - Přehled konkurenčních cen', config: { dateType: 'dateRange' }, testCaseId: 'TC-1235' },
-    { id: 'P001', name: 'P001 - Přehled nákupů zboží', config: { dateType: 'dateRange' }, testCaseId: 'TC-1236' },
-    { id: 'S002', name: 'S002 - Přehled přecenění', config: { dateType: 'dateRange' }, testCaseId: 'TC-1237' },
-    { id: 'S003', name: 'S003 - Půlnoční zásoby PHM', config: { dateType: 'dateRange' }, testCaseId: 'TC-1238' },
-    { id: 'S004', name: 'S004 - Půlnoční registry stojanů', config: { dateType: 'dateRange' }, testCaseId: 'TC-1239' },
-    { id: 'T001', name: 'T001 - Přehled neautorizovaných transakcí', config: { dateType: 'dateRange' }, testCaseId: 'TC-1240' },
-    { id: 'T002', name: 'T002 - Přehled odběrů podle řidiče', config: { dateType: 'dateRange' }, testCaseId: 'TC-1241' },
-    { id: 'T003', name: 'T003 - Přehled odběrů podle vozidla', config: { dateType: 'dateRange' }, testCaseId: 'TC-1242' },
+interface ApiUserReport {
+    id: number | string;
+    name: string;
+    items: number | null;
+    public: boolean;
+}
 
-    // 2. Sestavy funkční s konkrétním datem (YMD)
-    { id: 'D002', name: 'D002 - Přehled prodejů PHM pro FÚ', config: { dateType: 'exactDate' }, testCaseId: 'TC-1243' },
-    { id: 'P002', name: 'P002 - Přehled dodávek PHM pro FÚ', config: { dateType: 'exactDate' }, testCaseId: 'TC-1244' },
-    { id: 'S001', name: 'S001 - Přehled pohybů zboží', config: { dateType: 'exactDate' }, testCaseId: 'TC-1245' },
-
-    // 3. Sestavy funkční s časovým rozsahem "OD" a speciálními filtry
-    { id: 'D003', name: 'D003 - Přehled prodejů se slevovou kartou', config: { dateType: 'rangeFromOnly', partnerId: [1], stockIds: [230] }, testCaseId: 'TC-1246' },
-    { id: 'D004', name: 'D004 - Přehled smazaných položek účtenek', config: { dateType: 'rangeFromOnly', stockIds: [230] }, testCaseId: 'TC-1247' },
-    { id: 'D006', name: 'D006 - Export položek pokladních dokladů', config: { dateType: 'rangeFromOnly', stockIds: [230] }, testCaseId: 'TC-1248' },
-];
+const sentPublic: boolean = true; // Sestava je sdílená
 
 test.describe('Cyklus pro všechny sestavy s dynamickým payloadem', () => {
 
-    for (const report of allReportsConfig) {
+    for (const report of (allReportsConfig as ReportTestData[])) {
         test(`${report.testCaseId}: Životní cyklus sestavy: ${report.name}, @regression @API @sestavy @high`, async ({ page }) => {
             let newReportDbId: number | string | undefined;
             try {
-                /**
-                 * Blok s autenitizací 
-                 */
+                // --- Blok pro autenitizaci
+                logger.info(`Spouštím test životního cyklu pro sestavu: '${report.name}'`);
                 await page.goto('/');
+                logger.trace('Naviguji na domovskou stránku pro získání tokenu.');
                 const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
-                expect(token).toBeTruthy();
+                expect(token, 'Autentizační token nebyl nalezen v localStorage.').toBeTruthy();
+                logger.trace('Autentizační token úspěšně získán.');
+                
                 const apiClient = new ApiClient(page.request, token!);
+                logger.trace('ApiClient byl inicializován.');
 
+                // --- KROK 2: SESTAVENÍ PAYLOADU ---
                 const builder = new ReportBuilder(report.id, report.name);
+                logger.trace(`Inicializuji ReportBuilder pro sestavu '${report.name}'.`);
                 logger.trace(`Vytvářím sestavu '${report.name}' s konfigurací: ${JSON.stringify(report.config)}`);
 
                 // Nastavení data podle konfigurace
                 switch (report.config.dateType) {
                     case 'dateRange':
                         builder.withDateRange(new Date('2025-01-01'), new Date('2025-12-31'));
+                        logger.debug(`Nastavuji časový rozsah (dateRange) pro sestavu '${report.name}'.`);
                         break;
                     case 'exactDate':
                         builder.withExactDate(new Date(2025, 6, 1)); // 1. červenec 2025
+                        logger.debug(`Nastavuji přesné datum (exactDate) pro sestavu '${report.name}'.`);
                         break;
                     case 'rangeFromOnly':
                         builder.withDateRange(new Date(2025, 6, 1), null);
+                        logger.debug(`Nastavuji časový rozsah od (rangeFromOnly) pro sestavu '${report.name}'.`);
                         break;
                 }
 
-                // 2. KROK: Přidání speciálních filtrů podle konfigurace
+                // Přidání speciálních filtrů podle konfigurace
                 if (report.config.partnerId) {
                     builder.withPartnerFilter(report.config.partnerId);
+                    logger.debug(`Přidávám partner filtr s ID: [${report.config.partnerId.join(', ')}] pro sestavu '${report.name}'.`);
                 }
                 if (report.config.stockIds) {
                     builder.withStockFilter(report.config.stockIds);
+                    logger.debug(`Přidávám skladový filtr s ID: [${report.config.stockIds.join(', ')}] pro sestavu '${report.name}'.`);
                 }
 
-                // 3. KROK: Sestavení finálního payloadu
+                // Sestavení finálního payloadu
                 const reportPayload = builder.build();
-                reportPayload.public = sentPublic; 
-                await apiClient.createUserReport('60193531', reportPayload);
-
-                const allReports = await apiClient.getListOfUsersReports('60193531'); 
-                const createdReport = allReports.find(r => r.name === report.name);
-                if (createdReport) {
-                logger.info(`Sestava '${report.name}' byla úspěšně vytvořena.`);
+                reportPayload.public = sentPublic;
+                logger.debug(`Nastavuji příznak 'public' na '${sentPublic}' pro sestavu '${report.name}'.`);
+                logger.silly(`Finální payload pro vytvoření sestavy '${report.name}': ${JSON.stringify(reportPayload)}`);
                 
-                // ZDE JSOU PROMĚNNÉ STÁLE PLATNÉ
-                newReportDbId = createdReport.id;
-                logger.silly('Response vytvořené sestavy:', createdReport);
-                const itemsCount = createdReport.items;
-                const isPublic = createdReport.public;
+                // --- KROK 3: VYTVOŘENÍ A OVĚŘENÍ SESTAVY ---
+                await apiClient.createUserReport('60193531', reportPayload);
+                logger.trace(`Požadavek na vytvoření sestavy '${report.name}' odeslán.`);
 
-                    //Kontorla item != null - pravděpoodbná chyba
-                     expect(itemsCount, `CHYBA: Sestava '${report.name}' selhala při generování na serveru (items je null).`).not.toBeNull();
+                const allReports: ApiUserReport[] = await apiClient.getListOfUsersReports('60193531');
+                logger.trace('Získávám seznam všech uživatelských sestav pro ověření.');
+                const createdReport = allReports.find((r: ApiUserReport) => r.name === report.name);
+                
+                if (createdReport) {
+                    logger.info(`Sestava '${report.name}' byla úspěšně vytvořena s ID: ${createdReport.id}.`);
+                    newReportDbId = createdReport.id;
+                    logger.silly(`Response vytvořené sestavy: ${JSON.stringify(createdReport)}`);
+                    const itemsCount = createdReport.items;
+                    const isPublic = createdReport.public;
+
+                    // Kontrola, že items není null
+                    logger.trace(`Ověřuji, že počet položek (items) v sestavě '${report.name}' není null.`);
+                    expect(itemsCount, `CHYBA: Sestava '${report.name}' selhala při generování na serveru (items je null).`).not.toBeNull();
 
                     if (itemsCount === 0) {
-                        const errorMessage = `Počet objektů pro období '${report.name}' je '${itemsCount}'.`;
+                        const errorMessage = `Počet objektů pro sestavu '${report.name}' je '${itemsCount}'. Může se jednat o chybu, nebo jen nedostatek dat.`;
                         logger.warn(errorMessage);
                     } else {
-                        logger.debug(`Vytvořena Sestava: ${newReportDbId} pro období "${report.name}". Sestava obsahuje: ${itemsCount} položek.`);
+                        logger.info(`Vytvořená sestava '${report.name}' (ID: ${newReportDbId}) obsahuje ${itemsCount} položek.`);
                     }
-                
-                expect(isPublic, `Sestava '${report.name}' měla být sdílená, ale není!`).toBe(true);
-                logger.info(`Test je v pořádku, sestava "${report.name}" je sdílená.`);
+                    
+                    logger.trace(`Ověřuji, že sestava '${report.name}' je správně označena jako sdílená.`);
+                    expect(isPublic, `Sestava '${report.name}' měla být sdílená, ale není!`).toBe(true);
+                    logger.info(`Ověření příznaku sdílení pro sestavu "${report.name}" je v pořádku.`);
 
                 } else {
-                    logger.error(`Sestava '${report.name}' nebyla nalezena v seznamu.`);
-                    test.fail(true, `Uložená sestava '${report.name}' nebyla nalezena v seznamu.`);
+                    const errorMessage = `Nově vytvořená sestava '${report.name}' nebyla nalezena v seznamu všech sestav.`;
+                    logger.error(errorMessage);
+                    test.fail(true, errorMessage);
                 }
 
-                } catch (error) {
+            } catch (error) {
                 logger.fatal(`Došlo k fatální chybě během životního cyklu sestavy '${report.name}'.`, error);
-                throw error;
-
+                throw error; // Znovu vyhodíme chybu, aby Playwright test správně označil jako selhaný
             } finally {
-            if (newReportDbId) {
-                logger.trace(`(FINALLY) Pokouším se smazat sestavu '${report.name}' s ID: ${newReportDbId}...`);
-                const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
-                const apiClient = new ApiClient(page.request, token!);
-                await apiClient.deleteUserReport(newReportDbId);
-                logger.silly(`Požadavek na smazání sestavy '${report.name}' (ID: ${newReportDbId}) byl odeslán.`);
+                // --- KROK 4: ÚKLID ---
+                if (newReportDbId) {
+                    logger.trace(`(FINALLY BLOCK) Zahajuji úklid pro sestavu '${report.name}' s ID: ${newReportDbId}.`);
+                    const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
+                    const apiClient = new ApiClient(page.request, token!);
+                    await apiClient.deleteUserReport(newReportDbId);
+                    logger.trace(`Požadavek na smazání sestavy '${report.name}' (ID: ${newReportDbId}) byl odeslán.`);
 
-                logger.trace(`Ověřuji, že sestava (ID: ${newReportDbId}) byla skutečně smazána...`);
-                const reportsAfterDelete = await apiClient.getListOfUsersReports('60193531');
-                const deletedReportExists = reportsAfterDelete.some(r => r.id === newReportDbId);
-                expect(deletedReportExists, `Sestava '${report.name}' (ID: ${newReportDbId}) nebyla smazána!`).toBe(false);
-                logger.debug(`Ověření úspěšné: Sestava '${report.name}' (ID: ${newReportDbId}) byla smazána ze serveru.`);
+                    logger.trace(`Ověřuji, že sestava (ID: ${newReportDbId}) byla skutečně smazána...`);
+                    const reportsAfterDelete: ApiUserReport[] = await apiClient.getListOfUsersReports('60193531');
+                    const deletedReportExists = reportsAfterDelete.some((r: ApiUserReport) => r.id === newReportDbId);
+                    
+                    expect(deletedReportExists, `Sestava '${report.name}' (ID: ${newReportDbId}) nebyla smazána!`).toBe(false);
+                    logger.info(`Úklid úspěšný: Sestava '${report.name}' (ID: ${newReportDbId}) byla ověřitelně smazána ze serveru.`);
                 }
             }
         });
     }
-}); 
+});

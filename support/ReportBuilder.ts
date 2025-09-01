@@ -9,11 +9,11 @@ export class ReportBuilder {
      * Konstruktor vytvoří základní, minimální kostru pro sestavu.
      * @param reportDefinitionId - ID definice sestavy (např. 'D001').
      * @param name - Název sestavy.
-     * @param public - true pro sdílenou, false pro soukromou.
      */
     constructor(reportDefinitionId: string, name: string) {
         this.payload = {
             settings: {
+                // Tento seznam budeme nyní upravovat dynamicky
                 availableFilters: ["stockId", "stkitmType", "grouping", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
                 dateModelType: undefined,
                 dateFrom: undefined,
@@ -30,11 +30,11 @@ export class ReportBuilder {
                 cardOwnerId: [],
                 cardIssuerId: [],
                 sort: "",
-                partnerId: [], // Přidáme jako výchozí
-                termId: [],    // Přidáme jako výchozí
+                partnerId: [],
+                termId: [],
             },
             name: name,
-            public: false,
+            public: false, // Výchozí hodnota
             reportDefinitionId: reportDefinitionId
         };
     }
@@ -48,8 +48,6 @@ export class ReportBuilder {
         this.payload.settings.dateModelType = 'range';
         this.payload.settings.dateFrom = from.toISOString();
         this.payload.settings.dateTo = to ? to.toISOString() : null;
-
-        // Vyčistíme ostatní datové typy
         this.payload.settings.floatType = undefined;
         this.payload.settings.year = undefined;
         this.payload.settings.month = undefined;
@@ -64,8 +62,6 @@ export class ReportBuilder {
     public withFloatingPeriod(period: string): this {
         this.payload.settings.dateModelType = 'float';
         this.payload.settings.floatType = period;
-
-        // Vyčistíme ostatní datové typy
         this.payload.settings.dateFrom = null;
         this.payload.settings.dateTo = null;
         this.payload.settings.year = undefined;
@@ -83,8 +79,6 @@ export class ReportBuilder {
         this.payload.settings.year = date.getFullYear();
         this.payload.settings.month = date.getMonth() + 1; // Měsíce v JS jsou 0-11
         this.payload.settings.day = date.getDate();
-
-        // Vyčistíme ostatní datové typy
         this.payload.settings.dateFrom = null;
         this.payload.settings.dateTo = null;
         this.payload.settings.floatType = undefined;
@@ -97,6 +91,7 @@ export class ReportBuilder {
      */
     public withStockFilter(stockIds: number[]): this {
         this.payload.settings.stockId = stockIds;
+        // stockId je už ve výchozím availableFilters, není třeba přidávat
         return this;
     }
 
@@ -106,22 +101,53 @@ export class ReportBuilder {
      */
     public withGrouping(groupIds: string[]): this {
         this.payload.settings.grouping = groupIds;
+        // grouping je už ve výchozím availableFilters
         return this;
     }
-     /**
+
+    /**
      * Přidá filtr na partnery (držitele fleet karet).
      * @param partnerIds - Pole ID partnerů.
      */
     public withPartnerFilter(partnerIds: number[]): this {
         this.payload.settings.partnerId = partnerIds;
+
+        // --- OPRAVA: ZAJISTÍME, ŽE JE FILTR DEKLAROVÁN JAKO DOSTUPNÝ ---
+        if (!this.payload.settings.availableFilters.includes('partnerId')) {
+            this.payload.settings.availableFilters.push('partnerId');
+        }
         return this;
     }
 
-     /**
+    /**
+     * Přidá filtr na terminál.
+     * @param terminalIds - Pole ID terminálů.
+     */
+    public withTerminalFilter(terminalIds: number[]): this {
+        this.payload.settings.termId = terminalIds;
+
+        // --- OPRAVA: ZAJISTÍME, ŽE JE FILTR DEKLAROVÁN JAKO DOSTUPNÝ ---
+        if (!this.payload.settings.availableFilters.includes('termId')) {
+            this.payload.settings.availableFilters.push('termId');
+        }
+        return this;
+    }
+    
+    /**
+     * Nastaví, zda má být sestava veřejná (sdílená).
+     * @param isPublic - true pro veřejnou, false pro soukromou.
+     */
+    public withPublicFlag(isPublic: boolean): this {
+        this.payload.public = isPublic;
+        return this;
+    }
+
+
+    /**
      * Finální metoda, která vrátí kompletní objekt payloadu.
      */
     public build(): any {
+        // Před vrácením můžeme uklidit nepoužívané (undefined) klíče, ale není to nutné
         return this.payload;
     }
 }
-
