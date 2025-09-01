@@ -106,13 +106,14 @@ export interface UserReport {
      * createOrder() POST /documents-api/goodsDeliveryNotes/{stockId}
      */ 
     export interface OrderPayload {
-        DeliveryDate: string;     // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
+        deliveryDate: string;     // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
         description: string;      // Popis objednávky 
         orderDate: string;        // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
-        ownerId: string;          // Vlastník sítě
-        ownerName: string;        // Vlastník sítě
-        suplierId: string;        // Dodavatel
-        SupplierName: string;     // Dodvatel
+        ownerId: number;
+        ownerName: string;        // Vlastník sítě 
+        stockId: number;        // Obchodní místo
+        supplierId: number;      
+        supplierName: string;     // Dodvatel
         transporterId: string;    // Přepravce
         transporterName: string;  // Přepravce
     }

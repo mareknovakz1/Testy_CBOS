@@ -51,7 +51,7 @@ export const test = baseTest.extend<MyFixtures>({
 
     logger.silly("FIXTURE 'authToken': Odpověď je OK (status 2xx). Parsuji JSON...");
     const responseJson = await response.json();
-    logger.trace({
+    logger.silly({
         message: "FIXTURE 'authToken': JSON úspěšně naparsován.",
         json: responseJson
     }, "Obsah odpovědi");

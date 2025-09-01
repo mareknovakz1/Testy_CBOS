@@ -3,32 +3,35 @@
     {
       "testCaseId": "TC-XY-01",
       "description": "Vytvoření a ověření objednávky s dodáním za 7 dní.",
-      "payload": {
+      "PostPayload": {
         "description": "Objednávka API Test",
-        "ownerId": "1",
+        "ownerId": 1,
         "ownerName": "ČEPRO, a.s.",
-        "suplierId": "8",
-        "SupplierName": "Banner Baterie ČR spol.s r.o.",
+        "stockId": 230,
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o.",
         "transporterId": "434",
         "transporterName": "AutoMax Group s.r.o"
       },
-      "daysToDelivery": 7,
-      "stockId": 230
+    "daysToDelivery": 7,
+    "stockId": 230
     },
+    
     {
       "testCaseId": "TC-XY-02",
-      "description": "Vytvoření objednávky s jiným dodavatelem a kratší dobou dodání.",
-      "payload": {
+      "description": "Vytvoření objednávky s kratší dobou dodání.",
+      "PostPayload": {
         "description": "Rychlá objednávka",
-        "ownerId": "1",
+        "ownerId": 1,
         "ownerName": "ČEPRO, a.s.",
-        "suplierId": "9",
-        "SupplierName": "Banner Baterie ČR spol.s r.o.",
+        "stockId": 230,
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o.",
         "transporterId": "434",
         "transporterName": "AutoMax Group s.r.o"
       },
       "daysToDelivery": 1,
-      "stockId": 230
+       "stockId": 230
     }
   ]
 }

@@ -2,8 +2,6 @@ import { test, expect } from '../../../../support/fixtures/auth.fixture';
 import { logger } from '../../../../support/logger'; // Předpokládaný import
 import { ApiClient } from '../../../../support/ApiClient'; // Předpokládaný import
 import { baseURL } from '../../../../support/constants'; // Předpokládaný import
-
-// Načtení testovacích dat ze souboru JSON
 import * as testData from '../../../../test-data/orderData.json';
 
 const allOrderTestCases = testData.testCases;
@@ -25,20 +23,19 @@ test.describe('API testy objednávky', () => {
             const apiClient = new ApiClient(page.request, token!);
             logger.debug('Autenitizace úspěšně dokončena.')
                
-            logger.trace('Vytvářím novou objednávku přes API...');
-
-            // Dynamické vytvoření datumu dodání
+            logger.debug('Dynamické vytváření deliveryDate a orderDate')
             const deliveryDate = new Date();
             deliveryDate.setDate(deliveryDate.getDate() + testCase.daysToDelivery);
+            logger.trace(`deliveryDate: ${deliveryDate}`)
 
+            logger.trace('Deklarace a definice orderPayload.')
             const orderPayload = {
-            ...testCase.payload, // Rozšíření statického payloadu z JSON
-                "DeliveryDate": deliveryDate.toISOString(),
+            ...testCase.PostPayload, // Rozšíření statického payloadu z JSON
+                "deliveryDate": deliveryDate.toISOString(),
                 "orderDate": new Date().toISOString() // Aktuální datum a čas
                 };
-            logger.debug(`Payload pro: POST ${baseURL}/document ${JSON.stringify(orderPayload)}`);
             
-            logger.trace(`Odesíláme: ${baseURL}//documents-api/orders/${testCase.stockId}`)
+            logger.debug(`Odesíláme: ${baseURL}//documents-api/orders/${testCase.stockId}`)
             const response = await apiClient.createOrder(testCase.stockId, orderPayload);
      
             logger.trace(`Dostáváme response pro ${baseURL}//documents-api/orders/${testCase.stockId}`)

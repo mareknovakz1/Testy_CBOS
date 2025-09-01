@@ -1,3 +1,11 @@
+/**
+ * Vykoná životní cyklus všech sestav
+ * Vytvoření -> přečtení -> kontorla -> smazání
+ * @sestavy
+ * @api
+ * @regression
+ * @medium
+ */
 import { test, expect } from '../../../support/fixtures/auth.fixture';
 import { ApiClient } from '../../../support/ApiClient';
 import { ReportBuilder } from '../../../support/ReportBuilder';
