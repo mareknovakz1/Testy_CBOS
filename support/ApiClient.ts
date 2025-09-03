@@ -1,5 +1,6 @@
 /*
  * API Client - Knihovna pro komunikaci s API
+ * ? za promněnnou znamná - proměnná je volitelná -> zbytek je povinný
  *
  * ================= ADMINISTRATION-API =================
  * getPriceCategory() GET /administration-api/stockCardsCategories/{categoryId}
@@ -106,17 +107,83 @@ export interface UserReport {
      * createOrder() POST /documents-api/goodsDeliveryNotes/{stockId}
      */ 
     export interface OrderPayload {
-        deliveryDate: string;     // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
-        description: string;      // Popis objednávky 
-        orderDate: string;        // ISO 8601 formát, např. "2025-08-27T11:45:52.414Z"
-        ownerId: number;
-        ownerName: string;        // Vlastník sítě 
-        stockId: number;        // Obchodní místo
-        supplierId: number;      
-        supplierName: string;     // Dodvatel
-        transporterId: string;    // Přepravce
-        transporterName: string;  // Přepravce
+            // --- Hlavička dodacího listu ---
+        deliveryDate: string;      // (required) Datum doručení (ISO 8601)
+        orderDate: string;         // (required) Datum objednání (ISO 8601)
+        ownerId: number;           // (required) ID vlastníka
+        ownerName: string;         // (required) Jméno vlastníka
+        stockId: number;           // (required) ID obchodního místa
+        supplierId: number;        // (required) ID dodavatele
+        supplierName: string;      // (required) Jméno dodavatele
+        description?: string;      // Popis (volitelný)
+        transporterId?: string;    // ID přepravce (volitelné)
+        transporterName?: string;  // Jméno přepravce (volitelné)
+
+        // --- Položky dodacího listu ---
+        items?: {
+            goodsDeliveryNoteId: number; // (required)
+            stockCardId: number;         // (required)
+            stockCardName: string;       // (required)
+            amount: number;              // (required)
+            purchPrice: number;          
+            vatValue: number;            
+            vatClsId: number;            
+            itemVat: number;             
+            itemPrice: number;           
+            itemPriceWithVat: number;    
+            plu: string;                 
+            newEan?: string;
+            stockCardExtId?: number;
+            newSalePriceWithoutVat?: number;
+            newSalePriceWithVat?: number;
+
+            // Vnořená tandemová karta (objekt je volitelný, ale pokud existuje, jeho pole jsou povinná)
+            tandemStockCard?: {
+            stockCardId: number;       // (required)
+            stockCardName: string;     // (required)
+            amount: number;            // (required)
+            purchPrice: number;        // (required)
+            vatValue: number;          // (required)
+            vatClsId: number;          // (required)
+            itemVat: number;           // (required)
+            itemPrice: number;         // (required)
+            itemPriceWithVat: number;  // (required)
+            plu: string;               // (required)
+            stockCardExtId?: number;
+            newSalePriceWithoutVat?: number;
+            newSalePriceWithVat?: number;
+        };
+    }[]; // Pole položek na dodacím listu
+}
+
+    /**
+     * Interface pro volitelné parametry API metody getListOfStockCards.
+     */
+    export interface ListOfStockCardsPayload {
+        stkitmType?: 'D' | 'S' | 'W';
+        cgroupId?: number;
+        supplyStatus?: 1 | 2 | 3;
+        withSupplyOnly?: boolean;
+        withSellingPrice?: boolean;
+        notApprovedOnly?: boolean;
+        tandemOnly?: boolean;
+        mainOnly?: boolean;
+        takeMain?: boolean;
+        ownerId?: number;
+        supplierId?: number;
+        vatClsId?: number;
+        ctClsId?: number;
+        lgroupId?: number;
+        category?: string;
+        valid?: boolean;
+        // Parametry pro stránkování a řazení
+        offset?: number;
+        limit?: number;
+        sort?: string;
+
+    [key: string]: any;
     }
+
 
 export class ApiClient {
     static getDashboard() {
@@ -479,60 +546,42 @@ public async getListOfStocks(params: { [key: string]: string | number | string[]
     return response.json();
   }
 
-/**--- GET reports-api/listOfStockCards/{accOwnerId}/{stockId} ---
- * Získá seznam skladových karet pro daný accOwner a sklad.
- * @param {string | number} accOwnerId - ID vlastníka účtu (např. 60193531).
- * @param {string | number} stockId - ID skladu (např. 101).
- * @param {object} params - Objekt s volitelnými query parametry.
- * @param {string[]} [params.columns] - Pole sloupců k vrácení.
- * @param {boolean} [params.valid] - Filtr pro platné karty.
- * @param {boolean} [params.takeMain] - Zda se mají brát hlavní karty.
- * @param {number} [params.offset] - Posun pro stránkování.
- * @param {number} [params.limit] - Počet záznamů na stránku.
- * @param {string} [params.sort] - Řazení (např. '+operator').
- * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (pole skladových karet).
+  
+/**
+ * Získá seznam skladových karet podle zadaných filtrů.
+ * --- GET /reports-api/listOfStockCards/{accOwner}/{stockId} ---
+ * @param {string} accOwner - (required) Identifikace sítě, např. '00174939'.
+ * @param {string | number} stockId - (required) ID skladu nebo obchodního místa.
+ * @param {ListOfStockCardsPayload} params - (optional) Objekt s volitelnými query parametry pro filtrování.
+ * @returns {Promise<any>} Odpověď ze serveru obsahující seznam skladových karet.
  */
 public async getListOfStockCards(
-    accOwnerId: string | number,
-    stockId: string | number,
-    params: {
-        columns?: string[];
-        valid?: boolean;
-        takeMain?: boolean;
-        offset?: number;
-        limit?: number;
-        sort?: string;
-    } = {}
+  accOwner: string,
+  stockId: string | number,
+  params: ListOfStockCardsPayload = {}
 ): Promise<any> {
-    const endpoint = `/reports-api/listOfStockCards/${accOwnerId}/${stockId}`;
-    
-    // Připravíme parametry dotazu z poskytnutého objektu.
-    // Pro sloupce převedeme pole na string oddělený čárkami.
-    const queryParams: { [key: string]: any } = { ...params };
-    if (params.columns) {
-        queryParams.columns = params.columns.join(',');
-    }
+  const endpoint = `/reports-api/listOfStockCards/${accOwner}/${stockId}`;
+  
+  logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
 
-    logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
+  const response = await this.request.get(endpoint, {
+    headers: {
+      'Authorization': `Bearer ${this.token}`,
+      'Accept': 'application/json, text/plain, */*'
+    },
+    // Všechny volitelné parametry se předají zde
+    params: params
+  });
 
-    const response = await this.request.get(endpoint, {
-        headers: {
-            'Authorization': `Bearer ${this.token}`,
-            'Accept': 'application/json, text/plain, */*'
-        },
-        params: queryParams
-    });
+  if (!response.ok()) {
+    const errorText = await response.text();
+    logger.error(`Chyba při získávání seznamu skladových karet pro accOwner ${accOwner}. Status: ${response.status()}`, errorText);
+    throw new Error(`Chyba při získávání seznamu skladových karet. Status: ${response.status()}`);
+  }
 
-    if (!response.ok()) {
-        const errorText = await response.text();
-        logger.error(`Chyba při získávání seznamu skladových karet. Status: ${response.status()}`, errorText);
-        throw new Error(`Chyba při získávání seznamu skladových karet. Status: ${response.status()}`);
-    }
-
-    logger.silly(`Seznam skladových karet byl úspěšně získán.`);
-    return response.json();
-}  
-
+  logger.silly(`Seznam skladových karet pro accOwner ${accOwner} byl úspěšně získán.`);
+  return response.json();
+}
 /**--- POST /auth-api/user/authorization ---
  * Autorizuje uživatele a získá autorizační token.
  * @param {string} operator - Přihlašovací jméno operátora.
@@ -1818,7 +1867,7 @@ public async getStockCardsSupergroupsLocal(
 
        /**
      * Vytvoří nový dodací list (příjemku) pro suché zboží.
-     * --- POST /documents-api/goodsDeliveryNotes/{stockId} ---
+     * --- (PUT) POST /documents-api/goodsDeliveryNotes/{stockId} ---
      * @param {string | number} stockId - ID skladu, pro který se doklad vytváří (path parametr).
      * @param {GoodsDeliveryNotePayload} payload - Data pro vytvoření dodacího listu.
      * @returns {Promise<any>} Odpověď ze serveru, typicky objekt vytvořeného dokladu.
@@ -2015,4 +2064,6 @@ public async getStockCardsSupergroupsLocal(
         logger.silly(`Data o minimální zásobě byla úspěšně získána.`);
         return response.json();
     }
+
+    
 }

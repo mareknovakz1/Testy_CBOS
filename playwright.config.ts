@@ -9,12 +9,31 @@ import { baseURL } from './support/constants'; // Importujeme si naši základn�
 const logLevel = 1; // změňte dle potřeby
 process.env.LOG_LEVEL = String(logLevel);
 
+// Veškerá konfigurace je nyní v rámci jednoho exportu.
 export default defineConfig({
-  workers: 1,
+  // Adresář s testovacími soubory
+  testDir: './tests',
+
+  // Globální časový limit pro každý jednotlivý test
+  timeout: 50 * 1000, // 50 sekund
+  retries: 1, // Počet opakování po neúspěšném testu
+  workers: 1, // Použití jednoho workera pro sériové spouštění testů (jeden po druhém)
   fullyParallel: false,
-  retries: 1, //Počet opakování po neúspěšném testu
-  timeout: 50 * 1000, // s*1000 ms
-  
+
+  // Reportéry, které se mají použít. Více na https://playwright.dev/docs/test-reporters
+ reporter: [
+    ['list'],
+    ['junit', { outputFile: 'results.xml' }],  // 1. Tento reportér vygeneruje základní results.xml
+    ['./custom-junit-reporter.ts', { outputFile: 'results.xml' }]     // 2. Tento reportér se spustí poté a soubor upraví
+  ],
+
+  // Globální nastavení platná pro všechny projekty
+  use: {
+    baseURL: baseURL,
+    trace: 'on-first-retry',
+  },
+
+  // Konfigurace projektů pro hlavní prohlížeče
   projects: [
     {
       name: 'chromium',
@@ -24,8 +43,8 @@ export default defineConfig({
         video: 'retain-on-failure',
         viewport: { width: 1920, height: 1080 }
       },
-       testIgnore: '**/*_API.spec.ts',
-       testMatch: '**/*_E2E.spec.ts',
+      testIgnore: '**/*_API.spec.ts',
+      testMatch: '**/*_E2E.spec.ts',
     },
     {
       name: 'firefox',
@@ -34,8 +53,8 @@ export default defineConfig({
         video: 'retain-on-failure',
         viewport: { width: 1920, height: 1080 }
       },
-       testIgnore: '**/*_API.spec.ts',
-       testMatch: '**/*_E2E.spec.ts',
+      testIgnore: '**/*_API.spec.ts',
+      testMatch: '**/*_E2E.spec.ts',
     },
     {
       name: 'edge',
@@ -45,28 +64,14 @@ export default defineConfig({
         video: 'retain-on-failure',
         viewport: { width: 1920, height: 1080 }
       },
-       testIgnore: '**/*_API.spec.ts',
-       testMatch: '**/*_E2E.spec.ts',
+      testIgnore: '**/*_API.spec.ts',
+      testMatch: '**/*_E2E.spec.ts',
     },
     {
       name: 'API',
       testMatch: '**/*_API.spec.ts',
       testIgnore: '**/*_E2E.spec.ts',
-      use: {
-      },
+      // API testy nepotřebují specifická nastavení prohlížeče v sekci 'use'
     },
   ],
-
-  reporter: [
-    ['list'],
-    ['junit', { outputFile: 'results.xml' }],
-    ['html', { open: 'never' }]
-  ],
-  
-  use: {
-    baseURL: baseURL,
-    //trace: 'on-firts-retry',
-  },
-  
-  testDir: './tests',
 });

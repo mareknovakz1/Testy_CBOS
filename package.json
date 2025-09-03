@@ -3,51 +3,51 @@
   "version": "1.0.0",
   "description": "Testovaci skripty pro CBOS",
   "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "clean:results": "rimraf results.xml",
+    
+    "run:sestavy_reg_full": "npm run clean:results && dotenv -- npx playwright test --grep \"(?=.*@sestavy)(?=.*@regression)\"",
+    "report:sestavy_reg_full": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Full Regression - %{date} %{time}\"",
+    "test:report_sestavy_reg_full": "npm-run-all --continue-on-error --serial run:sestavy_reg_full report:sestavy_reg_full",
+    
+    "run:sestavy_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@sestavy)(?=.*@API)\"",
+    "report:sestavy_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - API Tests - %{date} %{time}\"",
+    "test:report_sestavy_api": "npm-run-all --continue-on-error --serial run:sestavy_api report:sestavy_api",
+   
+    "run:sestavy_e2e": "npm run clean:results && dotenv -- npx playwright test --project chromium --project firefox --project edge --grep \"(?=.*@sestavy)(?=.*@E2E)\"",
+    "report:sestavy_e2e": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - E2E Tests - %{date} %{time}\"", 
+    "test:report_sestavy_e2e": "npm-run-all --continue-on-error --serial run:sestavy_e2e report:sestavy_e2e",
+   
+    "run:sestavy_regression": "npm run clean:results && dotenv -- npx playwright test --project=API -- npx playwright test --project chromium --project firefox --project edge --grep \"(?=.*@sestavy)(?=.*@regression)\"",
+    "report:sestavy_regression": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Kompletní regrese - %{date} %{time}\"",
+    "test:report_sestavy_regression": "npm-run-all --continue-on-error --serial run:sestavy_regression report:sestavy_regression",
+   
+    "run:smoke_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@smoke)(?=.*@critical)\"",
+    "report:smoke_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Smoke Test - %{date} %{time}\" --junit-classname-as-folder single",
+    "test:report_smoke_api_critical": "npm-run-all --continue-on-error --serial run:smoke_api report:smoke_api",
 
- "scripts": {
-  "test": "playwright test",
-  "clean:results": "rimraf results.xml",
-
-  "run:sestavy_reg_full": "npm run clean:results && dotenv -- npx playwright test --grep \"(?=.*@sestavy)(?=.*@regression)\"",
-  "report:sestavy_reg_full": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Full Regression - %{date} %{time}\"",
-  "test:report_sestavy_reg_full": "npm-run-all --continue-on-error --serial run:sestavy_reg_full report:sestavy_reg_full",
-
-  "run:sestavy_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@sestavy)(?=.*@API)\"",
-  "report:sestavy_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - API Tests - %{date} %{time}\"",
-  "test:report_sestavy_api": "npm-run-all --continue-on-error --serial run:sestavy_api report:sestavy_api",
-
-  "run:sestavy_e2e": "npm run clean:results && dotenv -- npx playwright test --project chromium --project firefox --project edge --grep \"(?=.*@sestavy)(?=.*@E2E)\"",
-  "report:sestavy_e2e": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - E2E Tests - %{date} %{time}\"",
-  "test:report_sestavy_e2e": "npm-run-all --continue-on-error --serial run:sestavy_e2e report:sestavy_e2e",
-
-  "run:sestavy_regression": "npm run clean:results && dotenv -- npx playwright test --project=API -- npx playwright test --project chromium --project firefox --project edge --grep \"(?=.*@sestavy)(?=.*@regression)\"",
-  "report:sestavy_regression": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Kompletní regrese - %{date} %{time}\"",
-  "test:report_sestavy_regression": "npm-run-all --continue-on-error --serial run:sestavy_regression report:sestavy_regression",
-
-  "run:smoke_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@smoke)(?=.*@critical)\"",
-  "report:smoke_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Smoke Test - %{date} %{time}\" --junit-ignore-classname --junit-classname-as-folder single",
-  "test:report_smoke_api_critical": "npm-run-all --continue-on-error --serial run:smoke_api report:smoke_api",
-
-  "run:reg_receipts": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@receipts)(?=.*@regression)(?=.*@API)\"",
-  "report:reg_receipts": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Regression Doklady - %{date} %{time}\"",
-  "test:report_reg_receipts": "npm-run-all --continue-on-error --serial run:reg_receipts report:reg_receipts",
-
-  "run:full_reg": "npm run clean:results && dotenv -- npx playwright test --grep \"@smoke|@regression\"",
-  "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression (Smoke + Regression) - %{date} %{time}\"",
-  "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg"
-},
-
+    "run:reg_receipts": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@receipts)(?=.*@regression)(?=.*@API)\"",
+    "report:reg_receipts": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Regression Doklady - %{date} %{time}\"",
+    "test:report_reg_receipts": "npm-run-all --continue-on-error --serial run:reg_receipts report:reg_receipts",
+   
+    "run:full_reg": "npm run clean:results && dotenv -- npx playwright test --grep \"@smoke|@regression\"",
+    "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression (Smoke + Regression) - %{date} %{time}\"",
+    "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg"
+  },
   "keywords": [],
   "author": "Marek Novák",
   "license": "ISC",
   "dependencies": {
-    "tslog": "^4.9.3"
+    "tslog": "^4.9.3",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@playwright/test": "^1.53.2",
     "@testiny/cli": "^1.26.2",
     "@types/d3": "^7.4.3",
     "@types/node": "^24.3.0",
+    "@types/xml-js": "^0.9.0",
     "@types/xml2js": "^0.4.14",
     "dotenv": "^17.2.1",
     "dotenv-cli": "^10.0.0",
