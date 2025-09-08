@@ -33,5 +33,30 @@
     "expectedData": {
       "operator": "MH"
     }
+  },
+{
+    "TC": "TC-04",
+    "name": "Filtrování Druhu dokladu",
+    "filterParams": {
+      "year": 2025,
+      "documentType": 3,
+      "stockId": 230
+    },
+    "expectedData": {
+      "documentType": 3
+    }
+  },
+
+   {
+    "TC": "TC-06",
+    "name": "Filtrování dle nádrže",
+    "filterParams": {
+      "year": 2025,
+      "tankId": 1,
+      "stockId": 230
+    },
+    "expectedData": {
+      "tankId": 1
+    }
   }
 ]

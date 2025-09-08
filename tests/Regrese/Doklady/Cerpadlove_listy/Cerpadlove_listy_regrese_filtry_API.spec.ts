@@ -1,10 +1,10 @@
 /**
- * @file Skladove_Nadrze_Filtry_API.spec.ts
+ * @file Cerpadlove_listy_regrese_filtry_API.spec.ts
  * @author Marek Novák
  * @date 05.09.2025
  *
  * @description
- * API testy pro endpoint getStocksTanks.
+ * API testy pro endpoint GET /reports-api/listOfWetDeliveryNotes
  * Tyto testy ověřují správnou funkčnost filtrování.
  *
  * @logic
@@ -14,7 +14,7 @@
  * @preconditions
  * - Platný autentizační token.
  *
- * @tags @functional, @StocksTanks, @API
+ * @tags @regression @CDL @API @medium @search
  */
 
 import { test, expect } from '../../../../support/fixtures/auth.fixture';
@@ -49,7 +49,7 @@ test.describe('Testy filtrů listOfDrivers', () => {
     allFilterCasesData.forEach(testCase => {
     const { TC, name, filterParams } = testCase;
 
-    test(`${TC} Test filtru: ${name} @regression @CerpadloveDodaciListy @API`, async () => {
+    test(`${TC} Test filtru: ${name} @regression @CDL @API @medium @search`, async () => {
         logger.info(`Spouštím test pro: ${name}`);
 
         const payload = {
@@ -94,6 +94,18 @@ test.describe('Testy filtrů listOfDrivers', () => {
                 if (payload.operator) {
                     logger.trace(`Ověřuji operátora: očekávaná hodnota: ${payload.operator}, Nalezená hodnota: ${item.operator}`);
                      expect(item.operator).toBe(payload.operator);
+                }
+
+                 // Ověření pro 'documetType'
+                if (payload.documentType) {
+                    logger.trace(`Ověřuji druh dokladu: očekávaná hodnota: ${payload.documentType}, Nalezená hodnota: ${item.documetType}`);
+                     expect(item.documentType).toBe(payload.documentType);
+                }
+
+                  // Ověření pro 'tankID'
+                if (payload.tankId) {
+                    logger.trace(`Ověřuji Nádrž (aktuální produkt): očekávaná hodnota: ${payload.tankId}, Nalezená hodnota: ${item.tankId}`);
+                     expect(item.tankId).toBe(payload.tankId);
                 }
             });
 

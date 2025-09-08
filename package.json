@@ -6,7 +6,19 @@
   "scripts": {
     "test": "playwright test",
     "clean:results": "rimraf results.xml",
-    
+
+    "run:smoke": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@smoke)\"",
+    "report:smoke": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Smoke Test - %{date} %{time}\" --junit-classname-as-folder single",
+    "test:report_smoke": "npm-run-all --continue-on-error --serial run:smoke report:smoke",
+
+    "run:full_reg": "npm run clean:results && dotenv -- npx playwright test --project=API --project=chromium --project=firefox --project=edge --grep \"(?=.*@regression)\"",
+    "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression - %{date} %{time}\"",
+    "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg",
+
+
+
+
+  
     "run:sestavy_reg_full": "npm run clean:results && dotenv -- npx playwright test --grep \"(?=.*@sestavy)(?=.*@regression)\"",
     "report:sestavy_reg_full": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Full Regression - %{date} %{time}\"",
     "test:report_sestavy_reg_full": "npm-run-all --continue-on-error --serial run:sestavy_reg_full report:sestavy_reg_full",
@@ -23,21 +35,17 @@
     "report:sestavy_regression": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Kompletní regrese - %{date} %{time}\"",
     "test:report_sestavy_regression": "npm-run-all --continue-on-error --serial run:sestavy_regression report:sestavy_regression",
    
-    "run:smoke_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@smoke)(?=.*@critical)\"",
-    "report:smoke_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Smoke Test - %{date} %{time}\" --junit-classname-as-folder single",
-    "test:report_smoke_api_critical": "npm-run-all --continue-on-error --serial run:smoke_api report:smoke_api",
-
     "run:reg_receipts": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@receipts)(?=.*@regression)(?=.*@API)\"",
     "report:reg_receipts": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Regression Doklady - %{date} %{time}\"",
-    "test:report_reg_receipts": "npm-run-all --continue-on-error --serial run:reg_receipts report:reg_receipts",
-   
-    "run:full_reg": "npm run clean:results && dotenv -- npx playwright test --grep \"@smoke|@regression\"",
-    "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression (Smoke + Regression) - %{date} %{time}\"",
-    "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg",
+    "test:report_reg_receipts": "npm-run-all --continue-on-error --serial run:reg_receipts report:reg_receipts",   
 
     "run:skladoveKarty_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@StockCards)(?=.*@API)\"",
     "report:skladoveKarty_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Skladove karty - API Tests - %{date} %{time}\"",
-    "test:report_skladoveKarty_api": "npm-run-all --continue-on-error --serial run:skladoveKarty_api report:skladoveKarty_api"
+    "test:report_skladoveKarty_api": "npm-run-all --continue-on-error --serial run:skladoveKarty_api report:skladoveKarty_api",
+
+    "run:CDL_regression": "npm run clean:results && dotenv -- npx playwright test --project=API --project=chromium --project=firefox --project=edge --grep \"(?=.*@CDL)(?=.*@regression)\"",
+    "report:CDL_regression": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Čerpadlové dodací listy -regresní testy - %{date} %{time}\"",
+    "test:report_CDL_regression": "npm-run-all --continue-on-error --serial run:CDL_regression report:CDL_regression"
   },
   "keywords": [],
   "author": "Marek Novák",

@@ -20,6 +20,7 @@ test.describe('API Smoke Tests', () => {
 
     // Konstanty pro testování
     const STOCK_ID = '230';
+    const stock_ID_num:number = 230;
 
     /**
      * Hook, který se spustí jednou před všemi testy.
@@ -35,7 +36,7 @@ test.describe('API Smoke Tests', () => {
         logger.info('ApiClient byl úspěšně inicializován s autorizačním tokenem.');
     });
 
-    test('TC-1194: GET /dashboard - Dashboard @Smoke @API @Critical', async () => {
+    test('TC-1194: GET /dashboard - Dashboard @smoke @API @Critical', async () => {
 
         logger.trace('Spouštím test pro endpoint: GET /dashboard');
         // Používáme instanci 'apiClient', nikoliv statickou třídu 'ApiClient'
@@ -47,7 +48,7 @@ test.describe('API Smoke Tests', () => {
         logger.info('Endpoint GET /dashboard vrátil validní HTML obsah.');
     });
 
-    test('TC-1195: GET /reports-api/listOfStocks - Obchodní místa @Smoke @API @Critical', async () => {
+    test('TC-1195: GET /reports-api/listOfStocks - Obchodní místa @smoke @API @Critical', async () => {
         logger.trace('Spouštím test pro endpoint: GET /reports-api/listOfStocks');
         const response = await apiClient.getListOfStocks({ accOwner: ACC_OWNER_ID, limit: 5 });
 
@@ -71,7 +72,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-        test('TC-1196: GET /reports-api/listOfStockCards - Skladové karty @Smoke @API @Critical', async () => {
+        test('TC-1196: GET /reports-api/listOfStockCards - Skladové karty @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfStockCards`);
         const response = await apiClient.getListOfStockCards(ACC_OWNER_ID, STOCK_ID, { limit: 10 });
         
@@ -89,7 +90,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @Smoke @API @Critical', async () => {
+    test('TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/stockCardsGroupsLocal`);
         const response = await apiClient.getStockCardsGroupsLocal(STOCK_ID, { limit: 10 });
 
@@ -107,7 +108,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @Smoke @API @Critical', async () => {
+    test('TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/stockCardsSupergroupsLocal`);
         const response = await apiClient.getStockCardsSupergroupsLocal(STOCK_ID, { limit: 10 });
 
@@ -125,7 +126,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-        test('TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @Smoke @API @Critical', async () => {
+        test('TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/listOfPosTerminals`);
         const response = await apiClient.getListOfPosTerminals(STOCK_ID);
 
@@ -143,7 +144,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @Smoke @API @Critical POS Terminál 2/2', async () => {
+    test('TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @smoke @API @Critical POS Terminál 2/2', async () => {
         const POS_TERMINAL_ID = '23001';
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/listOfHotKeysDefinitions`);
         const response = await apiClient.getListOfHotKeysDefinitions(STOCK_ID, POS_TERMINAL_ID);
@@ -162,7 +163,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-     test('TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @Smoke @API @Critical', async () => {
+     test('TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfPartners`);
         const response = await apiClient.getListOfPartners({ accOwner: ACC_OWNER_ID });
     
@@ -181,7 +182,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-        test('TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @Smoke @API @Critical', async () => {
+        test('TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @smoke @API @Critical', async () => {
         const tableToQuery = 'localCards';
         logger.trace(`Spouštím test pro endpoint: GET /dashboard-api/tablesCountInfo`);
 
@@ -206,7 +207,7 @@ test.describe('API Smoke Tests', () => {
         logger.info(`Endpoint úspěšně vrátil počet záznamů pro tabulku "${tableToQuery}": ${response[tableToQuery]}.`);
     });
 
-    test('TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @Smoke @API @Critical', async () => {
+    test('TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfLocalCards`);
 
         // Zavoláme metodu klienta s parametry pro omezení výsledků
@@ -237,7 +238,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @Smoke @API @Critical', async () => {
+    test('TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfPricesCategories`);
 
         // Zavoláme metodu API klienta
@@ -260,7 +261,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
     
-    test('TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @Smoke @API @Critical', async () => {
+    test('TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfEuroOilCardRequests`);
 
         // Zavoláme metodu API klienta s potřebnými parametry
@@ -291,7 +292,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @Smoke @API @Critical', async () => {
+    test('TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfBonusClasses`);
 
         // Zavoláme metodu API klienta s parametry
@@ -322,7 +323,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @Smoke @API @Critical', async () => {
+    test('TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfUsersReports`);
 
         // Zavoláme metodu API klienta s path a query parametry
@@ -351,7 +352,7 @@ test.describe('API Smoke Tests', () => {
             logger.info(`Endpoint úspěšně vrátil ${normalizedResponse.data.length} uživatelských sestav.`);
         }
     });
-    test('TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @Smoke @API @Critical', async () => {
+    test('TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /balances-api/supplyPeriodsEnums`);
 
         const response = await apiClient.getSupplyPeriodsEnums(STOCK_ID);
@@ -384,10 +385,10 @@ test.describe('API Smoke Tests', () => {
             logger.warn(`Endpoint vrátil prázdný číselník období pro stockId: ${STOCK_ID}.`);
         }
     });
-    test('TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @Smoke @API @Critical', async () => {
+    test('TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /dashboard-api/stocksTanks`);
 
-        const response = await apiClient.getStocksTanks(STOCK_ID);
+        const response = await apiClient.getStocksTanks(stock_ID_num);
 
         logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
 
@@ -419,7 +420,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
- test('TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @Smoke @API @Critical', async () => {
+ test('TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @smoke @API @Critical', async () => {
         const testParams = {
             stockId: STOCK_ID,
             year: 2025,
@@ -457,7 +458,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-   test('TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @Smoke @API @Critical', async () => {
+   test('TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @smoke @API @Critical', async () => {
             const testParams = {
                 stockId: STOCK_ID,
                 year: 2025,
@@ -491,7 +492,7 @@ test.describe('API Smoke Tests', () => {
             }
         });
 
-    test('TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @Smoke @API @Critical', async () => {
+    test('TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @smoke @API @Critical', async () => {
         const testParams = {
             stockId: STOCK_ID,
             dateFrom: '2025-08-01T00:00:00.000Z',
@@ -522,7 +523,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @Smoke @API @Critical', async () => {
+    test('TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @smoke @API @Critical', async () => {
         const testParams = {
             stockId: STOCK_ID,
             dateFrom: '2025-08-01T00:00:00.000Z',
@@ -553,7 +554,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @Smoke @API @Critical', async () => {
+    test('TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @smoke @API @Critical', async () => {
         const testParams = {
             stockId: STOCK_ID,
             dateFrom: '2025-08-01T00:00:00.000Z',
@@ -584,7 +585,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @Smoke @API @Critical', async () => {
+    test('TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @smoke @API @Critical', async () => {
         const testParams = {
             accOwner: ACC_OWNER_ID,
             stockId: STOCK_ID,
@@ -607,7 +608,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @Smoke @API @Critical', async () => {
+    test('TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @smoke @API @Critical', async () => {
         const testParams = {
             stockId: STOCK_ID,
             year: 2025,
@@ -638,7 +639,8 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @Smoke @API @Critical', async () => {
+    /*
+    test('TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @smoke @API @Critical', async () => {
         const testParams = {
             accOwner: ACC_OWNER_ID,
             stockId: STOCK_ID,
@@ -668,9 +670,9 @@ test.describe('API Smoke Tests', () => {
         } else {
             logger.warn(`Endpoint nevrátil žádné čerpadlové dodací listy pro parametry: ${JSON.stringify(testParams)}.`);
         }
-    });
+    });*/
 
-   test('TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @Smoke @API @Critical', async () => {
+   test('TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @smoke @API @Critical', async () => {
         const testParams = {
             year: 2025,
             month: 8,
@@ -702,7 +704,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @Smoke @API @Critical', async () => {
+    test('TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @smoke @API @Critical', async () => {
         const testParams = { 
             year: 2025, 
             month: 8, 
@@ -733,7 +735,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @Smoke @API @Critical', async () => {
+    test('TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @smoke @API @Critical', async () => {
         const testParams = { 
             year: 2025, 
             limit: 10 
@@ -763,7 +765,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @Smoke @API @Critical', async () => {
+    test('TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @smoke @API @Critical', async () => {
         const testParams = { stockId: STOCK_ID, year: 2025, month: 8 };
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfPosSummaries s parametry: ${JSON.stringify(testParams)}`);
 
@@ -780,7 +782,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @Smoke @API @Critical', async () => {
+    test('TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @smoke @API @Critical', async () => {
         const testParams = { 
             accOwner: ACC_OWNER_ID, 
             limit: 10 
@@ -810,7 +812,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @Smoke @API @Critical', async () => {
+    test('TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @smoke @API @Critical', async () => {
         const testParams = { valid: true, scheme: 'cbos' as const };
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfRoles s parametry: ${JSON.stringify(testParams)}`);
 
@@ -827,7 +829,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @Smoke @API @Critical', async () => {
+    test('TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @smoke @API @Critical', async () => {
         const testParams = { 
             valid: true, 
             limit: 10 
@@ -857,7 +859,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @Smoke @API @Critical', async () => {
+    test('TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @smoke @API @Critical', async () => {
         const testParams = { limit: 10 };
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/listOfCardDefinitions s parametry: ${JSON.stringify(testParams)}`);
 
@@ -884,7 +886,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @Smoke @API @Critical', async () => {
+    test('TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @smoke @API @Critical', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /socket-api/registeredClients`);
 
         const response = await apiClient.getRegisteredClients();
@@ -897,7 +899,7 @@ test.describe('API Smoke Tests', () => {
         logger.info(`Endpoint úspěšně vrátil ${response.length} registrovaných klientů.`);
     });
 
-    test('TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @Smoke @API @Critical', async () => {
+    test('TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @smoke @API @Critical', async () => {
         const testParams = { limit: 10 };
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfCardIssuers s parametry: ${JSON.stringify(testParams)}`);
 
@@ -924,7 +926,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-  test('TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @Smoke @API @Critical', async () => {
+  test('TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @smoke @API @Critical', async () => {
         const testParams = { limit: 10 };
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfForeignStocksCCS s parametry: ${JSON.stringify(testParams)}`);
 
@@ -951,7 +953,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @Smoke @API @Critical', async () => {
+    test('TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @smoke @API @Critical', async () => {
         const testParams = { valid: true, limit: 10 };
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/listOfForeignStocks s parametry: ${JSON.stringify(testParams)}`);
 
@@ -978,7 +980,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @Smoke @API @Critical', async () => {
+    test('TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @smoke @API @Critical', async () => {
         const testParams = { 
             accOwner: ACC_OWNER_ID, 
             limit: 10 
@@ -1008,7 +1010,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @Smoke @API @Critical', async () => {
+    test('TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @smoke @API @Critical', async () => {
         const testParams = { 
             limit: 10, 
             valid: true 
@@ -1038,7 +1040,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @Smoke @API @Critical', async () => {
+    test('TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @smoke @API @Critical', async () => {
         const testParams = { 
             limit: 10 
         };
@@ -1067,7 +1069,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @Smoke @API @Critical', async () => {
+    test('TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @smoke @API @Critical', async () => {
         const testParams = { withHistory: false };
         logger.trace(`Spouštím test pro endpoint: GET /administration-api/fsfeature s parametry: ${JSON.stringify(testParams)}`);
 
@@ -1084,7 +1086,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    test('TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @Smoke @API @Critical', async () => {
+    test('TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @smoke @API @Critical', async () => {
         const testParams = { limit: 10 };
         logger.trace(`Spouštím test pro endpoint: GET /reports-api/listOfForeignStockPrices s parametry: ${JSON.stringify(testParams)}`);
 
@@ -1110,7 +1112,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
     
-    test.only('TC-1340 GET /minimalSupply - Minimální zásoba @Smoke @API', async () => {
+    test('TC-1340 GET /minimalSupply - Minimální zásoba @smoke @API', async () => {
         logger.trace(`Spouštím test pro endpoint: GET /minimalSupply`);
 
         // Zavoláme metodu API klienta s povinným accOwner a omezíme počet výsledků
