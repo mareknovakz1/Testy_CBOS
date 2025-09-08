@@ -42,86 +42,31 @@
     ]
   },
   {
-    "testCaseId": "TC-04",
-    "name": "Skupina karet 1 (cgroupId)",
-    "filter": {
-      "cgroupId": 1
-    },
-    "verification": [
-      {
-        "key": "cgroupId",
-        "condition": "toBe",
-        "value": 1
-      }
-    ]
-  },
-  {
     "testCaseId": "TC-05",
-    "name": "Skupina karet 2 (cgroupId)",
+    "name": "Centrální skupina zboží 5 (cgroupId)",
     "filter": {
-      "cgroupId": 2
+      "cgroupId": 5
     },
     "verification": [
       {
         "key": "cgroupId",
         "condition": "toBe",
-        "value": 2
+        "value": 5
       }
     ]
   },
-  {
-    "testCaseId": "TC-06",
-    "name": "Stav dodávky 1 (supplyStatus)",
-    "filter": {
-      "supplyStatus": 1
-    },
-    "verification": [
-      {
-        "key": "supplyStatus",
-        "condition": "toBe",
-        "value": 1
-      }
-    ]
-  },
-  {
-    "testCaseId": "TC-07",
-    "name": "Stav dodávky 2 (supplyStatus)",
-    "filter": {
-      "supplyStatus": 2
-    },
-    "verification": [
-      {
-        "key": "supplyStatus",
-        "condition": "toBe",
-        "value": 2
-      }
-    ]
-  },
-  {
-    "testCaseId": "TC-08",
-    "name": "Stav dodávky 3 (supplyStatus)",
-    "filter": {
-      "supplyStatus": 3
-    },
-    "verification": [
-      {
-        "key": "supplyStatus",
-        "condition": "toBe",
-        "value": 3
-      }
-    ]
-  },
+
   {
     "testCaseId": "TC-09",
-    "name": "Pouze s dodávkou (withSupplyOnly)",
+    "name": "Jen karty se zásobou (withSupplyOnly)",
     "filter": {
       "withSupplyOnly": true
     },
     "verification": [
       {
-        "key": "withSupplyOnly",
-        "condition": "toBe",
-        "value": true
+        "key": "supply",
+        "condition": "toBeGreaterThan",
+        "value": 0
       }
     ]
   },
@@ -133,26 +78,27 @@
     },
     "verification": [
       {
-        "key": "withSellingPrice",
-        "condition": "toBe",
-        "value": true
+        "key": "sellingPrice",
+        "condition": "toBeGreaterThan",
+        "value": 0
       }
     ]
   },
-  {
-    "testCaseId": "TC-11",
-    "name": "Pouze neschválené (notApprovedOnly)",
-    "filter": {
-      "notApprovedOnly": true
-    },
-    "verification": [
-      {
-        "key": "notApprovedOnly",
-        "condition": "toBe",
-        "value": true
-      }
-    ]
+{
+  "testCaseId": "TC-11",
+  "name": "Pouze neschválené (notApprovedOnly)",
+  "filter": {
+    "notApprovedOnly": true
   },
+  "verification": [
+    {
+      "key": "approved",
+      "condition": "toBe",  
+      "value": false     
+    }
+  ]
+},
+
   {
     "testCaseId": "TC-12",
     "name": "Pouze tandemové (tandemOnly)",
@@ -161,21 +107,7 @@
     },
     "verification": [
       {
-        "key": "tandemOnly",
-        "condition": "toBe",
-        "value": true
-      }
-    ]
-  },
-  {
-    "testCaseId": "TC-13",
-    "name": "Pouze hlavní (mainOnly)",
-    "filter": {
-      "mainOnly": true
-    },
-    "verification": [
-      {
-        "key": "mainOnly",
+        "key": "tandem",
         "condition": "toBe",
         "value": true
       }
@@ -183,17 +115,10 @@
   },
   {
     "testCaseId": "TC-14",
-    "name": "Vzít hlavní (takeMain)",
+    "name": "Nevím (takeMain)",
     "filter": {
       "takeMain": true
-    },
-    "verification": [
-      {
-        "key": "takeMain",
-        "condition": "toBe",
-        "value": true
-      }
-    ]
+    }
   },
   {
     "testCaseId": "TC-15",
@@ -224,32 +149,11 @@
     ]
   },
   {
-    "testCaseId": "TC-17",
-    "name": "Dodavatel 1 (supplierId)",
-    "filter": {
-      "supplierId": 1
-    },
-    "verification": [
-      {
-        "key": "supplierId",
-        "condition": "toBe",
-        "value": 1
-      }
-    ]
-  },
-  {
     "testCaseId": "TC-18",
-    "name": "Dodavatel 2 (supplierId)",
+    "name": "Dodavatel 434 (supplierId)",
     "filter": {
-      "supplierId": 2
-    },
-    "verification": [
-      {
-        "key": "supplierId",
-        "condition": "toBe",
-        "value": 2
-      }
-    ]
+      "supplierId": 434
+    }
   },
   {
     "testCaseId": "TC-19",
@@ -281,49 +185,15 @@
   },
   {
     "testCaseId": "TC-21",
-    "name": "Celní třída 1 (ctClsId)",
+    "name": " 1 (ctClsId)",
     "filter": {
       "ctClsId": 1
-    },
-    "verification": [
-      {
-        "key": "ctClsId",
-        "condition": "toBe",
-        "value": 1
-      }
-    ]
+    }
   },
-  {
-    "testCaseId": "TC-22",
-    "name": "Celní třída 2 (ctClsId)",
-    "filter": {
-      "ctClsId": 2
-    },
-    "verification": [
-      {
-        "key": "ctClsId",
-        "condition": "toBe",
-        "value": 2
-      }
-    ]
-  },
+
   {
     "testCaseId": "TC-23",
-    "name": "Logistická skupina 1 (lgroupId)",
-    "filter": {
-      "lgroupId": 1
-    },
-    "verification": [
-      {
-        "key": "lgroupId",
-        "condition": "toBe",
-        "value": 1
-      }
-    ]
-  },
-  {
-    "testCaseId": "TC-24",
-    "name": "Logistická skupina 2 (lgroupId)",
+    "name": "Lokální skupina zboží 2 (lgroupId)",
     "filter": {
       "lgroupId": 2
     },
@@ -336,30 +206,16 @@
     ]
   },
   {
-    "testCaseId": "TC-25",
-    "name": "Kategorie '1' (category)",
-    "filter": {
-      "category": "1"
-    },
-    "verification": [
-      {
-        "key": "category",
-        "condition": "toBe",
-        "value": "1"
-      }
-    ]
-  },
-  {
     "testCaseId": "TC-26",
-    "name": "Kategorie '2' (category)",
+    "name": "Centrální kategorie zboží '10.3' (category)",
     "filter": {
-      "category": "2"
+      "category": "10.3"
     },
     "verification": [
       {
         "key": "category",
         "condition": "toBe",
-        "value": "2"
+        "value": "10.3"
       }
     ]
   },

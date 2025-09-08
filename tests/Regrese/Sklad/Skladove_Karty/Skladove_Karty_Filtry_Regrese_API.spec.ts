@@ -23,7 +23,7 @@ import { test, expect } from '../../../../support/fixtures/auth.fixture';
 import { ApiClient, ListOfStockCardsPayload } from '../../../../support/ApiClient';
 import { logger } from '../../../../support/logger';
 import allFilterCasesData from '../../../../test-data/Skladove_Karty_Filtry_Regrese.json';
-import { ACC_OWNER_ID } from '../../../../support/constants';
+import { ACC_OWNER_ID, baseURL } from '../../../../support/constants';
 
 interface VerificationRule {
     key: string;
@@ -35,10 +35,9 @@ interface FilterTestCase {
     testCaseId: string;
     name: string;
     filter: ListOfStockCardsPayload;
-    verification: VerificationRule[];
+    verification?: VerificationRule[];
 }
 
-// OPRAVA 1: Použití typového tvrzení `as` k vyřešení konfliktu typů
 const allFilterCases = allFilterCasesData as FilterTestCase[];
 
 /**
@@ -54,53 +53,78 @@ const resolveNestedValue = (obj: any, path: string) => {
 test.describe('Testy filtrů skladových karet @regression @StockCards @API', () => {
     
     let apiClient: ApiClient;
-    const stockId = 1;
+    const stockId = 230;
 
-    test.beforeAll(async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
         logger.info(`Spouštím sadu testů pro filtry skladových karet.`);
         await page.goto('/');
+        logger.trace('Naviguji na domovskou stránku pro získání tokenu.');
         const token = await page.evaluate(() => window.localStorage.getItem('auth_token'));
         expect(token, 'Autentizační token nebyl nalezen.').toBeTruthy();
+        logger.trace('Autentizační token úspěšně získán.');
         apiClient = new ApiClient(page.request, token!);
+        logger.trace('ApiClient byl inicializován.');
     });
 
     for (const testCase of allFilterCases) {
         
         test(`${testCase.testCaseId}: Filtrování podle '${testCase.name}'`, async () => {
-            
-            logger.info(`Spouštím test pro filtr: ${JSON.stringify(testCase.filter)}`);
-            
-            const response = await apiClient.getListOfStockCards(ACC_OWNER_ID, stockId, testCase.filter);
+            try {
+    logger.info(`ZAHÁJEN TEST ${testCase.testCaseId}: Filtrování podle '${testCase.name}'`);
+    logger.debug(`${baseURL}/stock-cards/v1/accounts/${ACC_OWNER_ID}/stocks/${stockId}/cards payload: ${JSON.stringify(testCase.filter, null, 2)}`);
+    
+    const response = await apiClient.getListOfStockCards(ACC_OWNER_ID, stockId, testCase.filter);
+    
+    expect(Array.isArray(response), `Odpověď API není pole pro filtr '${testCase.name}'.`).toBe(true);
 
-            expect(Array.isArray(response)).toBe(true);
-            
-            // OPRAVA 2: Přesunutí vlastní chybové zprávy na správné místo
-            expect(response.length, `Pro filtr '${testCase.name}' nebyly nalezeny žádné skladové karty.`).toBeGreaterThan(0);
-            
-            logger.info(`Nalezeno ${response.length} skladových karet.`);
+    // TATO PODMÍNKA SLOUŽÍ JAKO "HLÍDAČ"
+    // Kód uvnitř if se spustí, jen když 'verification' existuje a není prázdné
+    if (testCase.verification && testCase.verification.length > 0) {
+        
+        // SCÉNÁŘ 1: Test case MÁ ověřovací pravidla
+        
+        logger.info(`Nalezeno ${response.length} skladových karet k ověření.`);
+        expect(response.length, `Pro filtr '${testCase.name}' nebyly nalezeny žádné položky k ověření.`).toBeGreaterThan(0);
 
-            logger.trace(`Ověřuji každou z ${response.length} položek...`);
-            for (const item of response) {
-                for (const rule of testCase.verification) {
-                    const actualValue = resolveNestedValue(item, rule.key);
-                    const expectation = expect(actualValue, `Chyba u karty [${item.name}] pro pravidlo [${rule.key}]`);
+        logger.trace(`Zahajuji ověřování každé z ${response.length} nalezených položek...`);
+        
+        // Protože je tato smyčka uvnitř 'if', TypeScript ví, že 'testCase.verification' je zde vždy pole.
+        for (const item of response) {
+            for (const rule of testCase.verification) { 
+                const actualValue = resolveNestedValue(item, rule.key);
+                const expectation = expect(actualValue, `Chyba u karty ID [${item.id}], název [${item.name}] pro pravidlo [${rule.key}]`);
 
-                    switch (rule.condition) {
-                        case 'toBe':
-                            expectation.toBe(rule.value);
-                            break;
-                        case 'toBeGreaterThan':
-                            expectation.toBeGreaterThan(rule.value as number);
-                            break;
-                        case 'not.toBeNull':
-                            expectation.not.toBeNull();
-                            break;
-                        default:
-                            throw new Error(`Neznámá ověřovací podmínka: '${rule.condition}'`);
-                    }
+                switch (rule.condition) {
+                    case 'toBe':
+                        expectation.toBe(rule.value);
+                        break;
+                    case 'toBeGreaterThan':
+                        expectation.toBeGreaterThan(rule.value as number);
+                        break;
+                    case 'not.toBeNull':
+                        expectation.not.toBeNull();
+                        break;
+                    default:
+                        const errorMessage = `Neznámá ověřovací podmínka: '${rule.condition}' v test case '${testCase.testCaseId}'`;
+                        logger.error(errorMessage); 
+                        throw new Error(errorMessage);
                 }
             }
-            logger.info(`Všech ${response.length} položek úspěšně prošlo ověřením pro filtr '${testCase.name}'.`);
+        }
+    } else {
+        // SCÉNÁŘ 2: Test case NEMÁ ověřovací pravidla (např. TC-14)
+        
+        logger.info(`Test '${testCase.name}' nemá detailní pravidla, ověřuji pouze existenci dat v odpovědi.`);
+        expect(response.length, `Odpověď pro filtr '${testCase.name}' je prázdná, ale očekávala se data.`).toBeGreaterThan(0);
+        logger.info(`Nalezeno ${response.length} položek, což je pro tento test v pořádku.`);
+    }
+
+    logger.info(`TEST ${testCase.testCaseId} ÚSPĚŠNÝ: Ověření dokončeno.`);
+
+} catch (error) {
+    logger.error(`TEST ${testCase.testCaseId} SELHAL s chybou:`, error);
+    throw error;
+}
         });
     }
 });

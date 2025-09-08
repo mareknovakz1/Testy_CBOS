@@ -1,0 +1,37 @@
+[
+  {
+    "TC": "TC-01",
+    "name": "Filtrování podle roku",
+    "filterParams": {
+      "year": 2025,
+      "stockId": 230
+    },
+    "expectedData": {
+      "dateDelivery": "dynamic_check"
+    }
+  },
+  {
+    "TC": "TC-02",
+    "name": "Filtrování podle měsíce",
+    "filterParams": {
+      "year": 2025,
+      "month": 9,
+      "stockId": 230
+    },
+    "expectedData": {
+      "dateDelivery": "dynamic_check"
+    }
+  },
+  {
+    "TC": "TC-03",
+    "name": "Filtrování podle operátora",
+    "filterParams": {
+      "year": 2025,
+      "operator": "MH",
+      "stockId": 230
+    },
+    "expectedData": {
+      "operator": "MH"
+    }
+  }
+]

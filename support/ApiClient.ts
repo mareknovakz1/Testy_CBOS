@@ -72,6 +72,7 @@
 
 import { APIRequestContext } from '@playwright/test';
 import { logger } from '../support/logger';
+import { baseURL } from './constants';
 
 
 export interface UserReport {
@@ -156,23 +157,32 @@ export interface UserReport {
     }[]; // Pole položek na dodacím listu
 }
 
+// Payload pro listOfDrivers
+export interface listOfDriversPayload {
+    accOwner: number;
+    valid?: boolean;
+    partnerId?: number;
+
+    [key: string]: any; 
+}
+
     /**
      * Interface pro volitelné parametry API metody getListOfStockCards.
      */
     export interface ListOfStockCardsPayload {
         stkitmType?: 'D' | 'S' | 'W';
         cgroupId?: number;
-        supplyStatus?: 1 | 2 | 3;
+        supplyStatus?: 1 | 2 | 3; //Pravděposobně neyužíváno na UI
         withSupplyOnly?: boolean;
         withSellingPrice?: boolean;
         notApprovedOnly?: boolean;
         tandemOnly?: boolean;
         mainOnly?: boolean;
-        takeMain?: boolean;
+        takeMain?: boolean; 
         ownerId?: number;
         supplierId?: number;
-        vatClsId?: number;
-        ctClsId?: number;
+        vatClsId?: number; //Třída DPH
+        ctClsId?: number; //Třída SD
         lgroupId?: number;
         category?: string;
         valid?: boolean;
@@ -183,6 +193,21 @@ export interface UserReport {
 
     [key: string]: any;
     }
+    //Payload pro listOfWetDeliveryNotes
+    export interface listOfWetDeliveryNotesPayload {
+    stockId: number;
+    year: number;
+    month?: number;
+    day?: number;
+    fullSearch?: string;
+    supplierId?: number;
+    documentType?: number;
+    documentsStatus?: number;
+    tankId?: number;
+    operator?: string;
+    format?: string;
+}
+
 
 
 export class ApiClient {
@@ -573,6 +598,7 @@ public async getListOfStockCards(
     params: params
   });
 
+  logger.info(`/reports-api/listOfStockCards/ Status: ${response.status()}`)
   if (!response.ok()) {
     const errorText = await response.text();
     logger.error(`Chyba při získávání seznamu skladových karet pro accOwner ${accOwner}. Status: ${response.status()}`, errorText);
@@ -994,13 +1020,13 @@ public async getStockCardsSupergroupsLocal(
         logger.silly(`Číselník období byl úspěšně získán.`);
         return response.json();
     }
-    /**
+        /**
      * Získá data o stavech nádrží pro dashboard.
      * --- GET /dashboard-api/stocksTanks/{stockId} ---
-     * @param {string} stockId - ID skladu (povinný path parametr).
-     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (očekává se pole objektů).
+     * @param {number} stockId - ID skladu (povinný path parametr).
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON (pole objektů).
      */
-    public async getStocksTanks(stockId: string): Promise<any> {
+    public async getStocksTanks(stockId: number): Promise<any> {
         const endpoint = `/dashboard-api/stocksTanks/${stockId}`;
         logger.trace(`Odesílám GET požadavek na ${endpoint}`);
 
@@ -1310,13 +1336,13 @@ public async getStockCardsSupergroupsLocal(
         logger.silly(`Seznam objednávek byl úspěšně získán.`);
         return response.json();
     }
-        /**
+  /**
      * Získá seznam čerpadlových dodacích listů.
      * --- GET /reports-api/listOfWetDeliveryNotes ---
      * @param {object} params - Objekt s query parametry.
      * @param {string[]} [params.columns] - Seznam sloupců.
      * @param {string} params.accOwner - ID vlastníka účtu.
-     * @param {string} params.stockId - ID skladu.
+     * @param {number} params.stockId - ID skladu.
      * @param {number | string} params.year - Rok.
      * @param {string} [params.sort] - Řazení.
      * @param {number} [params.offset] - Posun pro stránkování.
@@ -1327,19 +1353,20 @@ public async getStockCardsSupergroupsLocal(
         params: {
             columns?: string[];
             accOwner: string;
-            stockId: string;
+            stockId: number;
             year: number | string;
             sort?: string;
             offset?: number;
             limit?: number;
-        }
+        } & listOfWetDeliveryNotesPayload
     ): Promise<any> {
         const endpoint = '/reports-api/listOfWetDeliveryNotes';
         const queryParams: { [key: string]: any } = { ...params };
+        
         if (params.columns) {
             queryParams.columns = params.columns.join(',');
         }
-        
+
         logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(queryParams)}`);
 
         const response = await this.request.get(endpoint, {
@@ -1350,14 +1377,18 @@ public async getStockCardsSupergroupsLocal(
             params: queryParams
         });
 
-        if (!response.ok()) {
+        logger.info(`URL: ${baseURL}/${endpoint} Status: ${response.status()}`);
+
+        if (response.ok()) {
+            logger.info(`Požadavek na '${endpoint}' byl úspěšný s HTTP status ${response.status()}`);
+            logger.silly(`Seznam čerpadlových dodacích listů byl úspěšně získán.`);
+            return response.json();
+        } else {
+            logger.error(`Požadavek na '${endpoint}' selhal s HTTP status ${response.status()}`);
             const errorText = await response.text();
             logger.error(`Chyba při získávání čerpadlových dodacích listů. Status: ${response.status()}`, errorText);
             throw new Error(`Chyba při získávání čerpadlových dodacích listů. Status: ${response.status()}`);
         }
-
-        logger.silly(`Seznam čerpadlových dodacích listů byl úspěšně získán.`);
-        return response.json();
     }
 
 /**
@@ -2065,5 +2096,35 @@ public async getStockCardsSupergroupsLocal(
         return response.json();
     }
 
-    
+    /**
+     * Získá seznam odběrů podle řidiče.
+     * --- GET /reports-api/listOfDrivers ---
+     * @param {listOfDriversPayload} params - Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfDrivers(
+        params: listOfDriversPayload
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfDrivers';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(endpoint, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        logger.info(`URL: ${baseURL}/${endpoint} Status: ${response.status()}`);
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu řidičů. Status: ${response.status()}`, errorText);
+            throw new Error(`Chyba při získávání seznamu řidičů. Status: ${response.status()}`);
+        }
+
+        logger.silly(`Seznam řidičů byl úspěšně získán.`);
+        return response.json();
+    }
 }

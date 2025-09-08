@@ -1,3 +1,31 @@
+/**
+ * @file Sestavy_regrese-LifeCycle_API.json.spec.ts
+ * @author Marek Novák
+ * @date 03.09.2025
+ *
+ * @description
+ * Regresní API testy pro ověření kompletního životního cyklu uživatelských sestav.
+ * Cílem je zajistit, že sestavy lze dynamicky vytvářet s různými filtry,
+ * ověřit jejich stav po vytvoření a následně je bezchybně smazat.
+ * Testy jsou data-driven a jejich konfigurace je řízena externím JSON souborem.
+ *
+ * @logic
+ * Skript iteruje pole `allReportsConfig`, kde každý objekt definuje jednu sestavu.
+ * Pro každou sestavu provede následující kroky:
+ * 1. Sestaví dynamický payload pomocí `ReportBuilder` na základě konfigurace (typ data, filtry).
+ * 2. Odešle požadavek na vytvoření sestavy přes API.
+ * 3. Ověří, že se sestava objevila v seznamu uživatelských sestav a že její generování na serveru proběhlo v pořádku (počet položek není `null`).
+ * 4. Zkontroluje správnost nastavení příznaku pro sdílení (`public`).
+ * 5. V `finally` bloku zajistí úklid – smazání vytvořené sestavy, i pokud test selhal.
+ * 6. Ověří, že sestava po smazání již v seznamu skutečně není.
+ *
+ * @preconditions
+ * - Pro spuštění je nutné mít platný autentizační token, který se získává přihlášením.
+ * - Testovací data v `Sestavy_regrese-LifeCycle_API.json` musí být validní.
+ *
+ * @tags @regression, @API, @sestavy, @high
+ */
+
 import { test, expect } from '../../../support/fixtures/auth.fixture';
 import { ApiClient } from '../../../support/ApiClient';
 import { ReportBuilder } from '../../../support/ReportBuilder';

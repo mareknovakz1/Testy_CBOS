@@ -25,12 +25,6 @@ export const test = baseTest.extend<MyFixtures>({
     logger.trace("FIXTURE 'authToken': Request kontext vytvořen.");
 
     const url = `${baseURL}/auth-api/user/authorization`;
-    logger.trace({
-        message: "FIXTURE 'authToken': Odesílám POST request pro získání tokenu.",
-        url: url,
-        data: loginhash // POZOR: Nelogujte citlivá data v produkčním prostředí!
-    }, "Detail requestu");
-
     const response = await requestContext.post(url, {
       data: loginhash,
       headers: { 'Content-Type': 'text/plain' }
@@ -51,10 +45,6 @@ export const test = baseTest.extend<MyFixtures>({
 
     logger.silly("FIXTURE 'authToken': Odpověď je OK (status 2xx). Parsuji JSON...");
     const responseJson = await response.json();
-    logger.silly({
-        message: "FIXTURE 'authToken': JSON úspěšně naparsován.",
-        json: responseJson
-    }, "Obsah odpovědi");
 
     const token = responseJson.accessToken;
     logger.trace("FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.");

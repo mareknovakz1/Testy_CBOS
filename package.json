@@ -33,7 +33,11 @@
    
     "run:full_reg": "npm run clean:results && dotenv -- npx playwright test --grep \"@smoke|@regression\"",
     "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression (Smoke + Regression) - %{date} %{time}\"",
-    "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg"
+    "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg",
+
+    "run:skladoveKarty_api": "npm run clean:results && dotenv -- npx playwright test --project=API --grep \"(?=.*@StockCards)(?=.*@API)\"",
+    "report:skladoveKarty_api": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Skladove karty - API Tests - %{date} %{time}\"",
+    "test:report_skladoveKarty_api": "npm-run-all --continue-on-error --serial run:skladoveKarty_api report:skladoveKarty_api"
   },
   "keywords": [],
   "author": "Marek Novák",
