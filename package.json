@@ -15,9 +15,7 @@
     "report:full_reg": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Full Regression - %{date} %{time}\"",
     "test:report_full_reg": "npm-run-all --continue-on-error --serial run:full_reg report:full_reg",
 
-
-
-
+    
   
     "run:sestavy_reg_full": "npm run clean:results && dotenv -- npx playwright test --grep \"(?=.*@sestavy)(?=.*@regression)\"",
     "report:sestavy_reg_full": "dotenv -- npx @testiny/cli automation -P 1 --junit results.xml --run-title-pattern \"Sestavy - Full Regression - %{date} %{time}\"",

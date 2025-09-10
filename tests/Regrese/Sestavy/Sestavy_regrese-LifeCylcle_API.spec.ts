@@ -23,7 +23,7 @@
  * - Pro spuštění je nutné mít platný autentizační token, který se získává přihlášením.
  * - Testovací data v `Sestavy_regrese-LifeCycle_API.json` musí být validní.
  *
- * @tags @regression, @API, @sestavy, @high
+ * @tags @regression @API @sestavy @high
  */
 
 import { test, expect } from '../../../support/fixtures/auth.fixture';

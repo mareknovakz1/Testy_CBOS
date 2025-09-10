@@ -1,0 +1,11 @@
+[
+  {
+    "TC": "TC-001_CreateOrder_ValidData",
+    "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test",
+    "stockId": 230,
+    "ownerId": 1,
+    "ownerName": "ČEPRO, a.s.",
+    "supplierId": 8,
+    "supplierName": "Banner Baterie ČR spol.s r.o."
+  }
+]

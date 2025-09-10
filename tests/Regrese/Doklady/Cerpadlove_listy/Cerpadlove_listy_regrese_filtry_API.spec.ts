@@ -18,7 +18,7 @@
  */
 
 import { test, expect } from '../../../../support/fixtures/auth.fixture';
-import { ApiClient, listOfDriversPayload } from '../../../../support/ApiClient';
+import { ApiClient } from '../../../../support/ApiClient';
 import { logger } from '../../../../support/logger';
 import allFilterCasesData from '../../../../test-data/Cerpadlove_listy_regrese_filtry_API.json';
 import { ACC_OWNER_ID } from '../../../../support/constants';
@@ -52,6 +52,7 @@ test.describe('Testy filtrů listOfDrivers', () => {
     test(`${TC} Test filtru: ${name} @regression @CDL @API @medium @search`, async () => {
         logger.info(`Spouštím test pro: ${name}`);
 
+        logger.silly('Definice payload');
         const payload = {
             accOwner: ACC_OWNER_ID,
             ...filterParams

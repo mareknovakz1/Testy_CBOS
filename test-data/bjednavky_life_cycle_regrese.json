@@ -1,0 +1,16 @@
+[
+    {
+        "TC": "TC-001_CreateOrder_ValidData",
+        "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test",
+        "stockId": 230,
+        "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
+        "supplierId": 2,
+        "supplierName": "Unipetrol RPA s.r.o."
+    }
+    {
+        "TC": "TC-002_CreateOrder_ValidData",
+        "stockId": 230,
+        "year": 2025
+    }
+]

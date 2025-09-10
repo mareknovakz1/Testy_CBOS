@@ -1,105 +1,32 @@
-<testsuites id="" name="" tests="42" failures="1" skipped="0" errors="0" time="33.453024">
-  <testsuite name="Smoke\Moduly_API.spec.ts" timestamp="2025-09-08T12:09:14.259Z" hostname="API" tests="41" failures="0" skipped="0" time="29.378" errors="0">
-    <testcase name="API Smoke Tests › TC-1194: GET /dashboard - Dashboard @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.756" id="TC-1194"/>
-    <testcase name="API Smoke Tests › TC-1195: GET /reports-api/listOfStocks - Obchodní místa @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.757" id="TC-1195"/>
-    <testcase name="API Smoke Tests › TC-1196: GET /reports-api/listOfStockCards - Skladové karty @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.723" id="TC-1196"/>
-    <testcase name="API Smoke Tests › TC-1197: GET /administration-api/stockCardsGroupsLocal - Lokální skupiny @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.659" id="TC-1197"/>
-    <testcase name="API Smoke Tests › TC-1198: GET /administration-api/stockCardsSupergroupsLocal - Lokální nadskupiny @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.701" id="TC-1198">
-      <system-out><![CDATA[2025[0m[0m-09[0m[0m-08[0m[0m 12[0m[0m:09[0m[0m:18[0m[0m.891[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly_API.spec.ts:123[39m[0m[0m]Endpoint vrátil 0 lokálních nadskupin pro stockId: 230.
-]]></system-out>
-    </testcase>
-    <testcase name="API Smoke Tests › TC-1199 GET /administration-api/listOfPosTerminals - Rychlé volby 1/2 - POS Terminály @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.682" id="TC-1199"/>
-    <testcase name="API Smoke Tests › TC-1200 GET /administration-api/listOfHotKeysDefinitions - Rychlé volby @smoke @API @Critical POS Terminál 2/2" classname="Smoke\Moduly_API.spec.ts" time="0.705" id="TC-1200"/>
-    <testcase name="API Smoke Tests › TC-1201 GET /reports-api/listOfPartners - Obchod/Partneři 1/2 @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.968" id="TC-1201"/>
-    <testcase name="API Smoke Tests › TC-1202 GET /dashboard-api/tablesCountInfo - Obchod/Partneři 2/2 @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.727" id="TC-1202"/>
-    <testcase name="API Smoke Tests › TC-1203 GET /reports-api/listOfLocalCards - Obchod/Fleet karty @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.654" id="TC-1203"/>
-    <testcase name="API Smoke Tests › TC-1204 GET /reports-api/listOfPricesCategories - Obchod/ Cenové kategorie @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.701" id="TC-1204"/>
-    <testcase name="API Smoke Tests › TC-1205 GET /reports-api/listOfEuroOilCardRequests - Obchod/Přehled žádostí o Euroil kartu @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.701" id="TC-1205">
-      <system-out><![CDATA[2025[0m[0m-09[0m[0m-08[0m[0m 12[0m[0m:09[0m[0m:24[0m[0m.050[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly_API.spec.ts:289[39m[0m[0m]Endpoint vrátil 0 žádostí o EuroOil karty pro stockId: 230.
-]]></system-out>
-    </testcase>
-    <testcase name="API Smoke Tests › TC-1206 GET /reports-api/listOfBonusClasses - Obchod/Přehled slev a poplatků @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.665" id="TC-1206"/>
-    <testcase name="API Smoke Tests › TC-1207 GET /reports-api/listOfUsersReports - Sestavy/ Uživatelské sestavy @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.821" id="TC-1207"/>
-    <testcase name="API Smoke Tests › TC-1208 GET /balances-api/supplyPeriodsEnums - Sestavy/ Přehled skladových zásob @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.749" id="TC-1208"/>
-    <testcase name="API Smoke Tests › TC-1209 GET /dashboard-api/stocksTanks - Stavy/ Ceník kapalin @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.778" id="TC-1209"/>
-    <testcase name="API Smoke Tests › TC-1210 GET /reports-api/listOfOperators - Doklady/ Účtenky @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.802" id="TC-1210"/>
-    <testcase name="API Smoke Tests › TC-1211 GET /reports-api/listOfReceiptsUdd - Doklady/ Úplné daňové doklady @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.708" id="TC-1211"/>
-    <testcase name="API Smoke Tests › TC-1212 GET /reports-api/listOfPosTankTickets - Doklady/ stvrzenky o složení hotovosti @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.661" id="TC-1212"/>
-    <testcase name="API Smoke Tests › TC-1213 GET /reports-api/listOfPosMoneyOperations - Doklady/Vklady a výběry v hotovosti @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.729" id="TC-1213">
-      <system-out><![CDATA[2025[0m[0m-09[0m[0m-08[0m[0m 12[0m[0m:09[0m[0m:29[0m[0m.999[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly_API.spec.ts:553[39m[0m[0m]Endpoint nevrátil žádné peněžní operace pro parametry: {"stockId":"230","dateFrom":"2025-08-01T00:00:00.000Z","limit":10}.
-]]></system-out>
-    </testcase>
-    <testcase name="API Smoke Tests › TC-1214 GET /reports-api/listOfPosTankVouchers - Doklady/ přeplatkové poukázky @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.839" id="TC-1214"/>
-    <testcase name="API Smoke Tests › TC-1215 GET /reports-api/listOfGoodsInventories - Doklady/ Inventury zboží @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.651" id="TC-1215"/>
-    <testcase name="API Smoke Tests › TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.733" id="TC-1216"/>
-    <testcase name="API Smoke Tests › TC-1218 GET /balances-api/dailyBillances - Uzávěrky/ Denní uzávěrky @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.724" id="TC-1218"/>
-    <testcase name="API Smoke Tests › TC-1219 GET /balances-api/dailyRevenues - Doklady/ poukázané tržby @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.701" id="TC-1219"/>
-    <testcase name="API Smoke Tests › TC-1220 GET /balances-api/turnovers - Doklady/ Účetní uzávěrky @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.714" id="TC-1220"/>
-    <testcase name="API Smoke Tests › TC-1221 GET /reports-api/listOfPosSummaries - Doklady/ Pokladní uzávěrky @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.748" id="TC-1221"/>
-    <testcase name="API Smoke Tests › TC-1222 GET /reports-api/listOfUsers - Nastavení/ Uživatelé @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.644" id="TC-1222"/>
-    <testcase name="API Smoke Tests › TC-1223 GET /reports-api/listOfRoles - Nastavení/ Šablony pro nastavení práv @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.707" id="TC-1223"/>
-    <testcase name="API Smoke Tests › TC-1224 GET /reports-api/listOfVatClasses - Nastavení/ Správa tříd DPH @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.707" id="TC-1224"/>
-    <testcase name="API Smoke Tests › TC-1225 GET /administration-api/listOfCardDefinitions - Nastavení/ Správa ISO kódů karet @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.641" id="TC-1225"/>
-    <testcase name="API Smoke Tests › TC-1226 GET /socket-api/registeredClients - Socket API/ Registrovaní klienti @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.686" id="TC-1226"/>
-    <testcase name="API Smoke Tests › TC-1227 GET /reports-api/listOfCardIssuers - Nastavení/ Správa vydavatelů karet @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.713" id="TC-1227"/>
-    <testcase name="API Smoke Tests › TC-1228 GET /reports-api/listOfForeignStocksCCS - Nastavení/ Správa konkurenčních OM - CCS @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.68" id="TC-1228"/>
-    <testcase name="API Smoke Tests › TC-1229 GET /administration-api/listOfForeignStocks - Nastavení/ Správa konkurenčních OM @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.712" id="TC-1229"/>
-    <testcase name="API Smoke Tests › TC-1230 GET /reports-api/listOfCurrencyRates - Nastavení/ Správa centrálního kurzu EUR @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.708" id="TC-1230"/>
-    <testcase name="API Smoke Tests › TC-1231 GET /administration-api/stockCardsCategories - Nastavení/ Centrální kategorie zboží @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.641" id="TC-1231"/>
-    <testcase name="API Smoke Tests › TC-1232 GET /administration-api/stockCardsGroupsCentral - Nastavení/ Centrální skupiny zboží @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.708" id="TC-1232"/>
-    <testcase name="API Smoke Tests › TC-1233 GET /administration-api/fsfeature - Nastavení/ Centrální parametry systému @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.698" id="TC-1233"/>
-    <testcase name="API Smoke Tests › TC-1339 GET/reports-api/listOfForeignStockPrices - Nastavení/ Ceny konkurenčních cen @smoke @API @Critical" classname="Smoke\Moduly_API.spec.ts" time="0.653" id="TC-1339">
-      <system-out><![CDATA[2025[0m[0m-09[0m[0m-08[0m[0m 12[0m[0m:09[0m[0m:44[0m[0m.073[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Moduly_API.spec.ts:1111[39m[0m[0m]Endpoint nevrátil žádné ceny konkurenčních OM.
-]]></system-out>
-    </testcase>
-    <testcase name="API Smoke Tests › TC-1340 GET /minimalSupply - Minimální zásoba @smoke @API" classname="Smoke\Moduly_API.spec.ts" time="0.723" id="TC-1340"/>
-  </testsuite>
-  <testsuite name="Smoke\Prijemka_lifecycle_API.spec.ts" timestamp="2025-09-08T12:09:14.259Z" hostname="API" tests="1" failures="1" skipped="0" time="1.508" errors="0">
-    <testcase name="Regrese API - Životní cyklus příjemky › Životní cyklus příjemky - vytvoření a kontrola stavu skladu @smoke @API @high @delivery" classname="Smoke\Prijemka_lifecycle_API.spec.ts" time="1.508">
-      <failure message="Prijemka_lifecycle_API.spec.ts:33:9 Životní cyklus příjemky - vytvoření a kontrola stavu skladu @smoke @API @high @delivery" type="FAILURE"><![CDATA[  [API] › Smoke\Prijemka_lifecycle_API.spec.ts:33:9 › Regrese API - Životní cyklus příjemky › Životní cyklus příjemky - vytvoření a kontrola stavu skladu @smoke @API @high @delivery 
-
-    Error: Chyba při získávání seznamu obchodních míst. Status: 400
-
-       at ..\support\ApiClient.ts:567
-
-      565 |     if (!response.ok()) {
-      566 |         logger.error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`, await response.text());
-    > 567 |         throw new Error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`);
-          |               ^
-      568 |     }
-      569 |
-      570 |     logger.silly(`Seznam obchodních míst byl úspěšně získán.`);
-        at ApiClient.getListOfStocks (C:\Users\novakma\Testy_CBOS\support\ApiClient.ts:567:15)
-        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Prijemka_lifecycle_API.spec.ts:38:35
-
-    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
-
-    Error: Chyba při získávání seznamu obchodních míst. Status: 400
-
-       at ..\support\ApiClient.ts:567
-
-      565 |     if (!response.ok()) {
-      566 |         logger.error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`, await response.text());
-    > 567 |         throw new Error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`);
-          |               ^
-      568 |     }
-      569 |
-      570 |     logger.silly(`Seznam obchodních míst byl úspěšně získán.`);
-        at ApiClient.getListOfStocks (C:\Users\novakma\Testy_CBOS\support\ApiClient.ts:567:15)
-        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Prijemka_lifecycle_API.spec.ts:38:35
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    test-results\Smoke-Prijemka_lifecycle_A-fea4f-adu-smoke-API-high-delivery-API-retry1\trace.zip
-    Usage:
-
-        npx playwright show-trace test-results\Smoke-Prijemka_lifecycle_A-fea4f-adu-smoke-API-high-delivery-API-retry1\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]></failure>
-      <system-out><![CDATA[2025[0m[0m-09[0m[0m-08[0m[0m 12[0m[0m:09[0m[0m:45[0m[0m.547[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\support\ApiClient.ts:566[39m[0m[0m]Chyba při získávání seznamu obchodních míst. Status: 400 {"status":400,"message":"APIError: error: column \"stock_id\" does not exist"}
-2025[0m[0m-09[0m[0m-08[0m[0m 12[0m[0m:09[0m[0m:47[0m[0m.462[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\support\ApiClient.ts:566[39m[0m[0m]Chyba při získávání seznamu obchodních míst. Status: 400 {"status":400,"message":"APIError: error: column \"stock_id\" does not exist"}
-
-[[ATTACHMENT|test-results\Smoke-Prijemka_lifecycle_A-fea4f-adu-smoke-API-high-delivery-API-retry1\trace.zip]]
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="3.2018630000000003">
+  <testsuite name="Smoke\Objendvaka_create_api.spec.ts" timestamp="2025-09-10T08:30:50.694Z" hostname="API" tests="1" failures="0" skipped="0" time="1.709" errors="0">
+    <testcase name="Smoke testy - vytvoření a ověření objednávky › TC-001_CreateOrder_ValidData Test POST /documents-api/orders/{stockId} @regression @delivery @api @high @smoke" classname="Smoke\Objendvaka_create_api.spec.ts" time="1.709" id="TC-001">
+      <system-out><![CDATA[2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.143[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.151[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.810[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:33[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.812[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:50[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.815[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:54[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.816[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:64[39m[0m[0m]FIXTURE 'page' (rozšířená): Budu vkládat inicializační skript pro nastavení localStorage...
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:52[0m[0m.820[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:74[39m[0m[0m]FIXTURE 'page' (rozšířená): Inicializační skript byl přidán.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.379[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:78[39m[0m[0m]FIXTURE 'page' (rozšířená): Navigace na '/' dokončena.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.380[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:80[39m[0m[0m]FIXTURE 'page' (rozšířená): Volám 'use(page)' a předávám připravenou stránku testu...
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.381[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Objendvaka_create_api.spec.ts:24[39m[0m[0m]Spouštím sadu testů pro vytvoření objednávky.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.466[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Objendvaka_create_api.spec.ts:26[39m[0m[0m]Naviguji na domovskou stránku pro získání tokenu.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.485[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Objendvaka_create_api.spec.ts:29[39m[0m[0m]Autentizační token úspěšně získán.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.486[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Objendvaka_create_api.spec.ts:31[39m[0m[0m]ApiClient byl inicializován.
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.488[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Objendvaka_create_api.spec.ts:37[39m[0m[0m]Zahajuji testovací případ TC-001_CreateOrder_ValidData pro: POST /documents-api/orders/{stockId}
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.490[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Objendvaka_create_api.spec.ts:51[39m[0m[0m]Odesílám POST požadavek s payloadem: [object Object]
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.491[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\ApiClient.ts:1997[39m[0m[0m]Odesílám POST požadavek na /documents-api/orders/230 s payloadem: {
+  "deliveryDate": "2025-09-11T08:30:51.880Z",
+  "orderDate": "2025-09-11T08:30:51.880Z",
+  "ownerId": 1,
+  "ownerName": "ČEPRO, a.s.",
+  "stockId": 230,
+  "supplierId": 8,
+  "supplierName": "Banner Baterie ČR spol.s r.o.",
+  "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test"
+}
+2025[0m[0m-09[0m[0m-10[0m[0m 08[0m[0m:30[0m[0m:53[0m[0m.717[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\support\ApiClient.ts:2008[39m[0m[0m]URL: http://192.168.130.239:8180//documents-api/orders/230 Status: 201
 ]]></system-out>
     </testcase>
   </testsuite>

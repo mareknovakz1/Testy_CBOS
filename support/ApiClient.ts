@@ -48,7 +48,7 @@
  * getListOfPosMoneyOperations() GET /reports-api/listOfPosMoneyOperations
  * getListOfPosTankVouchers() GET /reports-api/listOfPosTankVouchers
  * getListOfGoodsInventories() GET /reports-api/listOfGoodsInventories
- * getListOfOrders() GET /reports-api/listOfOrders
+ * getListOfOrders() GET /reports-api/listOfOrders 
  * getListOfWetDeliveryNotes() GET /reports-api/listOfWetDeliveryNotes
  * getListOfPosSummaries() GET /reports-api/listOfPosSummaries
  * getListOfUsers() GET /reports-api/listOfUsers
@@ -105,7 +105,7 @@ export interface UserReport {
 
     /**
      * deklarace payload pro: 
-     * createOrder() POST /documents-api/goodsDeliveryNotes/{stockId}
+     * createOrder() POST /api/orders/stockId{stockId}
      */ 
     export interface OrderPayload {
             // --- Hlavička dodacího listu ---
@@ -206,6 +206,25 @@ export interface listOfDriversPayload {
     tankId?: number;
     operator?: string;
     format?: string;
+}
+
+export type GetListOfOrdersPayload = {
+    stockId: number;
+    year: number;
+    month: number;
+    day: number;
+    fullSearch?: string;
+    supplierId?: number;
+    documentsStatus?: number;
+    operator?: string;
+
+    [key: string]: any;
+};
+
+export interface postOrderItemsPayload {
+    orderId: number;
+    stockCardId: number;
+    amount: number;
 }
 
 
@@ -350,12 +369,12 @@ export class ApiClient {
  * @param options - Objekt s parametry pro filtrování, např. { columns, accOwner, cardType, sort }.
  * @returns Odpověď ze serveru ve formátu JSON (pole partnerů).
  */
-public async getListOfPartners(options: {
+    public async getListOfPartners(options: {
     columns?: string[];
     accOwner?: string;
     cardType?: string;
     sort?: string;
-} = {}): Promise<any> {
+    } = {}): Promise<any> {
     
     const endpoint = '/reports-api/listOfPartners';
     
@@ -393,7 +412,7 @@ public async getListOfPartners(options: {
 
     logger.silly(`Seznam partnerů byl úspěšně získán.`);
     return response.json();
-}
+    }
   /** --- GET filterOfReceipts /administration-api/stockCardsCategories/60193531 ---
    * Získá seznam filtrů pro účtenky.
    * @returns Odpověď ze serveru ve formátu JSON (pole filtrů).
@@ -525,51 +544,51 @@ public async getListOfPartners(options: {
         return response.json();
     }
 
-/**--- GET reports-api/listOfStocks
-*Získá sezanm OM
-*Implemenotvané URL pro získání OM
-*reports-api/listOfStocks?columns=id,text,street,city,zip,accOwner,accOwnerName,stockCardsCount,erpExtId,erpEnabled,erpName,valid,transferEnabled,cardEnabled,authEnabled,transferResult,cardResult,authResult,testResult,updated,operator,rate,patternStock,isDistributed,restrictedMode,auxiliaryStorage,franchiserId&accOwner=60193531&sort=street 
-* @param {string} [accOwner] - '00174939' Identifikace sítě, např. 
-* @param {number} [stockId] - Identifikace konkrétního skladu (obchodního místa).
-* @param {number} [cbosScale] - Určuje váhu CBoS práv, pro kterou se mají OM zobrazit.
-* @param {string} [sort='id'] - Název sloupce pro třídění. Pro sestupné řazení přidejte na začátek znaménko mínus (např. '-id').
-* @param {string} [columns] - Čárkou oddělený seznam sloupců, které má API vrátit.
-* @param {number} [limit=25] - Počet záznamů na stránku pro účely stránkování.
-* @param {number} [offset=0] - Počet záznamů, které se mají přeskočit (používá se pro stránkování).
-* @param {string} [q] - Řetězec pro fulltextové vyhledávání napříč relevantními poli.
-* @returns {Promise<Object>} Promise, který vrací objekt s polem obchodních míst v klíči `data` a informacemi o stránkování v klíči `pagination`.
-*/
-public async getListOfStocks(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
-    const endpoint = '/reports-api/listOfStocks';
-    
-    // Sestavení query stringu z objektu params
-    const query = Object.entries(params)
-        .map(([key, value]) => {
-            if (Array.isArray(value)) {
-                return `${key}=${value.join(',')}`;
+    /**--- GET reports-api/listOfStocks
+    *Získá sezanm OM
+    *Implemenotvané URL pro získání OM
+    *reports-api/listOfStocks?columns=id,text,street,city,zip,accOwner,accOwnerName,stockCardsCount,erpExtId,erpEnabled,erpName,valid,transferEnabled,cardEnabled,authEnabled,transferResult,cardResult,authResult,testResult,updated,operator,rate,patternStock,isDistributed,restrictedMode,auxiliaryStorage,franchiserId&accOwner=60193531&sort=street 
+    * @param {string} [accOwner] - '00174939' Identifikace sítě, např. 
+    * @param {number} [stockId] - Identifikace konkrétního skladu (obchodního místa).
+    * @param {number} [cbosScale] - Určuje váhu CBoS práv, pro kterou se mají OM zobrazit.
+    * @param {string} [sort='id'] - Název sloupce pro třídění. Pro sestupné řazení přidejte na začátek znaménko mínus (např. '-id').
+    * @param {string} [columns] - Čárkou oddělený seznam sloupců, které má API vrátit.
+    * @param {number} [limit=25] - Počet záznamů na stránku pro účely stránkování.
+    * @param {number} [offset=0] - Počet záznamů, které se mají přeskočit (používá se pro stránkování).
+    * @param {string} [q] - Řetězec pro fulltextové vyhledávání napříč relevantními poli.
+    * @returns {Promise<Object>} Promise, který vrací objekt s polem obchodních míst v klíči `data` a informacemi o stránkování v klíči `pagination`.
+    */
+    public async getListOfStocks(params: { [key: string]: string | number | string[] | number[] }): Promise<any> {
+        const endpoint = '/reports-api/listOfStocks';
+        
+        // Sestavení query stringu z objektu params
+        const query = Object.entries(params)
+            .map(([key, value]) => {
+                if (Array.isArray(value)) {
+                    return `${key}=${value.join(',')}`;
+                }
+                return `${key}=${value}`;
+            })
+            .join('&');
+        
+        const url = query ? `${endpoint}?${query}` : endpoint;
+        logger.trace(`Odesílám GET požadavek na ${url}`);
+
+        const response = await this.request.get(url, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
             }
-            return `${key}=${value}`;
-        })
-        .join('&');
-    
-    const url = query ? `${endpoint}?${query}` : endpoint;
-    logger.trace(`Odesílám GET požadavek na ${url}`);
+        });
 
-    const response = await this.request.get(url, {
-        headers: {
-            'Authorization': `Bearer ${this.token}`,
-            'Accept': 'application/json, text/plain, */*'
+        if (!response.ok()) {
+            logger.error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`, await response.text());
+            throw new Error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`);
         }
-    });
 
-    if (!response.ok()) {
-        logger.error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`, await response.text());
-        throw new Error(`Chyba při získávání seznamu obchodních míst. Status: ${response.status()}`);
+        logger.silly(`Seznam obchodních míst byl úspěšně získán.`);
+        return response.json();
     }
-
-    logger.silly(`Seznam obchodních míst byl úspěšně získán.`);
-    return response.json();
-  }
 
   
 /**
@@ -1296,46 +1315,6 @@ public async getStockCardsSupergroupsLocal(
         return response.json();
     }
 
-        /**
-     * Získá seznam objednávek zboží.
-     * --- GET /reports-api/listOfOrders ---
-     * @param {object} params - Objekt s query parametry.
-     * @param {string} params.stockId - ID skladu.
-     * @param {number | string} params.year - Rok.
-     * @param {string} [params.sort] - Řazení.
-     * @param {number} [params.offset] - Posun pro stránkování.
-     * @param {number} [params.limit] - Počet záznamů na stránku.
-     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
-     */
-    public async getListOfOrders(
-        params: {
-            stockId: string;
-            year: number | string;
-            sort?: string;
-            offset?: number;
-            limit?: number;
-        }
-    ): Promise<any> {
-        const endpoint = '/reports-api/listOfOrders';
-        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
-
-        const response = await this.request.get(endpoint, {
-            headers: {
-                'Authorization': `Bearer ${this.token}`,
-                'Accept': 'application/json, text/plain, */*'
-            },
-            params: params
-        });
-
-        if (!response.ok()) {
-            const errorText = await response.text();
-            logger.error(`Chyba při získávání seznamu objednávek. Status: ${response.status()}`, errorText);
-            throw new Error(`Chyba při získávání seznamu objednávek. Status: ${response.status()}`);
-        }
-
-        logger.silly(`Seznam objednávek byl úspěšně získán.`);
-        return response.json();
-    }
   /**
      * Získá seznam čerpadlových dodacích listů.
      * --- GET /reports-api/listOfWetDeliveryNotes ---
@@ -1898,7 +1877,7 @@ public async getStockCardsSupergroupsLocal(
 
        /**
      * Vytvoří nový dodací list (příjemku) pro suché zboží.
-     * --- (PUT) POST /documents-api/goodsDeliveryNotes/{stockId} ---
+     * --- POST /documents-api/goodsDeliveryNotes/{stockId} ---
      * @param {string | number} stockId - ID skladu, pro který se doklad vytváří (path parametr).
      * @param {GoodsDeliveryNotePayload} payload - Data pro vytvoření dodacího listu.
      * @returns {Promise<any>} Odpověď ze serveru, typicky objekt vytvořeného dokladu.
@@ -1938,7 +1917,6 @@ public async getStockCardsSupergroupsLocal(
     }
     /**  --- GET //reports-api/listOfForeignStocksPrices/{accOwner}
         * Získá seznam cen konkurenčních OM.
-        * --- GET /reports-api/listOfForeignStocksPrices/{accOwner} ---
         * @param accOwner 
         * @param params Objekt s query parametry.
         * @returns {Promise<any>} Odpověď ze serveru.
@@ -1998,6 +1976,7 @@ public async getStockCardsSupergroupsLocal(
             ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
         });
 
+         logger.info(`URL: ${baseURL}/${endpoint} Status: ${response.status()}`);
         if (!response.ok()) {
             const errorText = await response.text();
             logger.error(`Chyba při získávání detailu objednávky ${orderId}. Status: ${response.status()}`, errorText);
@@ -2009,12 +1988,12 @@ public async getStockCardsSupergroupsLocal(
     }
     /**
      * Odešle nový požadavek na vytvoření objednávky zboží.
-     * --- POST /documents-api/orders/{stockId} ---
+     * --- POST /api/orders/{stockId} ---
      * @param {string | number} stockId - ID skladu, pro který se objednávka vytváří (path parametr).
      * @param {OrderPayload} payload - Data pro vytvoření objednávky.
      * @returns {Promise<any>} Odpověď ze serveru, typicky objekt vytvořené objednávky.
      */
-// Define the payload structure for creating an order
+    // Define the payload structure for creating an order
 
     public async createOrder(
         stockId: string | number,
@@ -2032,6 +2011,7 @@ public async getStockCardsSupergroupsLocal(
             ignoreHTTPSErrors: true // Ekvivalent --insecure z cURL
         });
 
+         logger.info(`URL: ${baseURL}/${endpoint} Status: ${response.status()}`);
         if (!response.ok()) {
             const errorText = await response.text();
             logger.error(`Chyba při vytváření objednávky pro sklad ${stockId}. Status: ${response.status()}`, errorText);
@@ -2086,6 +2066,7 @@ public async getStockCardsSupergroupsLocal(
             }
         });
 
+         logger.info(`URL: ${baseURL}/${endpoint} Status: ${response.status()}`);
         if (!response.ok()) {
             const errorText = await response.text();
             logger.error(`Chyba při získávání minimální zásoby. Status: ${response.status()}`, errorText);
@@ -2126,5 +2107,65 @@ public async getStockCardsSupergroupsLocal(
 
         logger.silly(`Seznam řidičů byl úspěšně získán.`);
         return response.json();
+    }
+
+    /**
+     * Získá seznam objednávek.
+     * --- GET /reports-api/listOfOrders ---
+     * @param {GetListOfOrdersPayload} params - Objekt s query parametry.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async getListOfOrders(
+        params: GetListOfOrdersPayload
+    ): Promise<any> {
+        const endpoint = '/reports-api/listOfOrders';
+        logger.trace(`Odesílám GET požadavek na ${endpoint} s parametry: ${JSON.stringify(params)}`);
+
+        const response = await this.request.get(`${baseURL}${endpoint}`, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*'
+            },
+            params: params
+        });
+
+        logger.info(`URL: ${baseURL}${endpoint} Status: ${response.status}`);
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při získávání seznamu objednávek. Status: ${response.status}`, errorText);
+            throw new Error(`Chyba při získávání seznamu objednávek. Status: ${response.status}`);
+        }
+
+        logger.silly(`Seznam objednávek byl úspěšně získán.`);
+        return response.json();
+    }
+    /**
+     * Vytvoří item na objednávce
+     * @param {postOrderItemsPayload} payload - Objekt s daty pro vytvoření položky objednávky.
+     * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
+     */
+    public async postOrderItems(
+        payload: postOrderItemsPayload
+    ): Promise<any> {
+        const endpoint = '/documents-api/orderItems';
+        logger.trace(`Odesílám POST požadavek na ${endpoint} s payloadem: ${JSON.stringify(payload)}`);
+
+        const response = await this.request.post(`${baseURL}${endpoint}`, {
+            headers: {
+                'Authorization': `Bearer ${this.token}`,
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            data: payload
+        });
+
+        logger.info(`URL: ${baseURL}${endpoint} Status: ${response.status}`);
+
+        if (!response.ok()) {
+            const errorText = await response.text();
+            logger.error(`Chyba při vytváření položky objednávky. Status: ${response.status}`, errorText);
+            throw new Error(`Chyba při vytváření položky objednávky. Status: ${response.status}`);
+        }
     }
 }
