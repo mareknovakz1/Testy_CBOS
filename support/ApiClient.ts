@@ -211,8 +211,8 @@ export interface listOfDriversPayload {
 export type GetListOfOrdersPayload = {
     stockId: number;
     year: number;
-    month: number;
-    day: number;
+    month?: number;
+    day?: number;
     fullSearch?: string;
     supplierId?: number;
     documentsStatus?: number;
@@ -2142,6 +2142,7 @@ public async getStockCardsSupergroupsLocal(
     }
     /**
      * Vytvoří item na objednávce
+     * --- POST /documents-api/orderItems ---
      * @param {postOrderItemsPayload} payload - Objekt s daty pro vytvoření položky objednávky.
      * @returns {Promise<any>} Odpověď ze serveru ve formátu JSON.
      */
@@ -2155,7 +2156,6 @@ public async getStockCardsSupergroupsLocal(
             headers: {
                 'Authorization': `Bearer ${this.token}`,
                 'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
             },
             data: payload
         });
