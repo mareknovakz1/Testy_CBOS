@@ -18,7 +18,7 @@
  */
 
 import { test, expect } from '../../../../support/fixtures/auth.fixture';
-import { ApiClient } from '../../../../support/ApiClient';
+import { ApiClient } from '../../../../support/ApiClient.legacy';
 import { logger } from '../../../../support/logger';
 import allFilterCasesData from '../../../../test-data/Cerpadlove_listy_regrese_filtry_API.json';
 import { ACC_OWNER_ID } from '../../../../support/constants';

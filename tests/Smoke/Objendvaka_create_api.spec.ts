@@ -23,7 +23,7 @@
  */
 
 import { test, expect } from '../../support/fixtures/auth.fixture';
-import { ApiClient, OrderPayload} from '../../support/ApiClient';
+import { ApiClient, OrderPayload} from '../../support/ApiClient.legacy';
 import { logger } from '../../support/logger';
 import allOrderData from '../../test-data/Objednvaka_create_api.json';
 

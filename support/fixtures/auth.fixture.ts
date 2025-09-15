@@ -1,7 +1,7 @@
 // soubor: support/fixtures.ts
 
 import { test as baseTest, expect, request as playwrightRequest } from '@playwright/test';
-import { ApiClient } from '../ApiClient'; // Upravte cestu
+import { ApiClient } from '../ApiClient.legacy'; // Upravte cestu
 import { logger } from '../logger';     // Upravte cestu
 import { loginhash, baseURL } from '../constants'; // Upravte cestu
 

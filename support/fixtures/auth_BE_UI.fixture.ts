@@ -1,7 +1,7 @@
 import { test as baseTest, expect, Page } from '@playwright/test';
 import { logger } from '../logger';
 import { nameOne as username, passwordOne, baseURL } from '../constants';
-import { ApiClient } from '../ApiClient';
+import { ApiClient } from '../ApiClient.legacy';
 
 // Typ pro objekt, který bude naše hlavní fixtura vracet
 type AuthContext = {

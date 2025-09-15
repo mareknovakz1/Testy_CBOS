@@ -20,7 +20,7 @@
  */
 
 import { test, expect } from '../../../../support/fixtures/auth.fixture';
-import { ApiClient, ListOfStockCardsPayload } from '../../../../support/ApiClient';
+import { ApiClient, ListOfStockCardsPayload } from '../../../../support/ApiClient.legacy';
 import { logger } from '../../../../support/logger';
 import allFilterCasesData from '../../../../test-data/Skladove_Karty_Filtry_Regrese.json';
 import { ACC_OWNER_ID, baseURL } from '../../../../support/constants';

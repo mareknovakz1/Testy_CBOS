@@ -1,5 +1,5 @@
 import { expect, test } from '../../../../support/fixtures/auth.fixture';
-import { ApiClient } from '../../../../support/ApiClient';
+import { ApiClient } from '../../../../support/ApiClient.legacy';
 import { logger } from '../../../../support/logger';
 
 /*

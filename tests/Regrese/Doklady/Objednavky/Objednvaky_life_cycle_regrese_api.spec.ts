@@ -22,7 +22,7 @@
 import { test, expect } from '../../../../support/fixtures/auth.fixture';
 import { logger } from '../../../../support/logger';
 import allOrderData from '../../../../test-data/Objednavky_life_cycle_regrese.json';
-import { ApiClient, OrderPayload} from '../../../../support/ApiClient';
+import { ApiClient, OrderPayload} from '../../../../support/ApiClient.legacy';
 
 logger.silly(`Testovací data: ${JSON.stringify(allOrderData, null, 2)}`);
 

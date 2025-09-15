@@ -5,7 +5,7 @@
  * GET reports-api/listOfStocks
  */
 
-import { ApiClient } from "../../support/ApiClient";
+import { ApiClient } from "../../support/ApiClient.legacy";
 import { logger } from "../../support/logger";
 import { expect, test } from '../../support/fixtures/auth.fixture';
 import { ACC_OWNER_ID } from "../../support/constants";

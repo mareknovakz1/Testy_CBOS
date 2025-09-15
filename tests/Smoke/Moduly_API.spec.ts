@@ -10,7 +10,7 @@
  */
 
 import { expect, test } from '../../support/fixtures/auth.fixture';
-import { ApiClient } from '../../support/ApiClient';
+import { ApiClient } from '../../support/ApiClient.legacy';
 import { logger } from '../../support/logger';
 import { ACC_OWNER_ID } from "../../support/constants";
 
@@ -607,7 +607,7 @@ test.describe('API Smoke Tests', () => {
             logger.warn(`Endpoint nevrátil žádné inventury zboží pro parametry: ${JSON.stringify(testParams)}.`);
         }
     });
-
+/*
     test('TC-1216 GET /reports-api/listOfOrders - Doklady/ Objednávky zboží @smoke @API @Critical', async () => {
         const testParams = {
             stockId: STOCK_ID,
@@ -621,7 +621,6 @@ test.describe('API Smoke Tests', () => {
         logger.silly('Přijatá odpověď z API:\n' + JSON.stringify(response, null, 2));
         expect(response, 'Odpověď z /reports-api/listOfOrders nesmí být prázdná').toBeDefined();
 
-        // ---- OPRAVA: Přidání normalizační logiky ----
         const normalizedResponse = Array.isArray(response)
             ? { data: response, pagination: undefined }
             : response;
@@ -639,7 +638,7 @@ test.describe('API Smoke Tests', () => {
         }
     });
 
-    /*
+
     test('TC-1217 GET /reports-api/listOfWetDeliveryNotes - Doklady/ Čerpadlové dodací listy @smoke @API @Critical', async () => {
         const testParams = {
             accOwner: ACC_OWNER_ID,

@@ -71,7 +71,7 @@
 
 
 import { APIRequestContext } from '@playwright/test';
-import { logger } from '../support/logger';
+import { logger } from './logger';
 import { baseURL } from './constants';
 
 

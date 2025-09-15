@@ -1,7 +1,7 @@
 import { test, expect } from '../../../support/fixtures/auth.fixture';
 import { ReportBuilder } from '../../../support/ReportBuilder';
 import { logger } from '../../../support/logger';
-import { ApiClient } from '../../../support/ApiClient';
+import { ApiClient } from '../../../support/ApiClient.legacy';
 
 // Pro lepší typovou bezpečnost definujeme jednoduché rozhraní pro objekt sestavy
 interface Report {
