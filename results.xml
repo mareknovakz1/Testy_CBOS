@@ -1,47 +1,1355 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="3.198336000000127">
-  <testsuite name="Smoke\Smoke_All_Gets_api.spec.ts" timestamp="2025-09-15T20:56:06.620Z" hostname="API" tests="1" failures="1" skipped="0" time="1.006" errors="0">
-    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs › Endpoint &quot;GET /documents-api/goodsInventories/resultPreview/{stockId}/{goodsInventoryId}&quot; should be available" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="1.006">
-      <failure message="Smoke_All_Gets_api.spec.ts:191:17 Endpoint &quot;GET /documents-api/goodsInventories/resultPreview/{stockId}/{goodsInventoryId}&quot; should be available" type="FAILURE"><![CDATA[  [API] › Smoke\Smoke_All_Gets_api.spec.ts:191:17 › API Smoke Tests - GET Endpoints › Authenticated GETs › Endpoint "GET /documents-api/goodsInventories/resultPreview/{stockId}/{goodsInventoryId}" should be available 
-
-    Error: Status kód musí být 2xx
-
-    expect(received).toBeLessThan(expected)
-
-    Expected: < 300
-    Received:   404
-
-      215 |
-      216 |                  // Klíčové ověření: Status kód musí být 2xx
-    > 217 |                  expect(responseStatus, 'Status kód musí být 2xx').toBeLessThan(300);
-          |                                                                    ^
-      218 |                  logger.info(`Test pro "${endpoint.name}" úspěšně dokončen se statusem ${responseStatus}.`);
-      219 |             });
-      220 |         }
-        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Smoke_All_Gets_api.spec.ts:217:68
-]]></failure>
-      <system-out><![CDATA[2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:07[0m[0m.609[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:07[0m[0m.618[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.490[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:33[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.493[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:50[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.500[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:54[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.504[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Smoke_All_Gets_api.spec.ts:64[39m[0m[0m]Inicializuji ApiClient pro autorizované GET endpointy...
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.510[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Smoke_All_Gets_api.spec.ts:67[39m[0m[0m]ApiClient byl úspěšně inicializován.
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.515[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Smoke_All_Gets_api.spec.ts:192[39m[0m[0m]Spouštím smoke test pro: GET /documents-api/goodsInventories/resultPreview/{stockId}/{goodsInventoryId}
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.521[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][6b308e89] ---> GET http://192.168.130.239:8180/documents-api/goodsInventories/resultPreview/230/141 {
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="4.85389">
+  <testsuite name="Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts" timestamp="2025-09-22T20:03:53.871Z" hostname="API" tests="1" failures="0" skipped="0" time="3.469" errors="0">
+    <testcase name="Cyklus pro všechny sestavy, základní projetí, public = false › TC-001 test sestavy D001: Životní cyklus sestavy: Přehled prodejů, @regression @API @sestavy @high" classname="Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts" time="3.469" id="TC-001">
+      <system-out><![CDATA[2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.205[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.214[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.943[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:33[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.949[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:50[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.953[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:54[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.955[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:64[39m[0m[0m]FIXTURE 'page' (rozšířená): Budu vkládat inicializační skript pro nastavení localStorage...
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:55[0m[0m.960[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:74[39m[0m[0m]FIXTURE 'page' (rozšířená): Inicializační skript byl přidán.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:57[0m[0m.968[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:78[39m[0m[0m]FIXTURE 'page' (rozšířená): Navigace na '/' dokončena.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:57[0m[0m.970[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:80[39m[0m[0m]FIXTURE 'page' (rozšířená): Volám 'use(page)' a předávám připravenou stránku testu...
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:57[0m[0m.971[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:38[39m[0m[0m]Spouštím test životního cyklu pro sestavu: 'Přehled prodejů'
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.096[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:40[39m[0m[0m]Naviguji na domovskou stránku pro získání tokenu.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.149[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:43[39m[0m[0m]Autentizační token úspěšně získán.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.151[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:46[39m[0m[0m]ApiClient byl inicializován.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.154[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:48[39m[0m[0m]Deklarace a definicie: const payload
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.156[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:52[39m[0m[0m]Příprava na odeslání http://192.168.130.239:8180/report-api/60193531
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.160[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][af134ee8] ---> POST http://192.168.130.239:8180/reports-api/usersReports/60193531 {
+  params: [90mundefined[39m,
+  data: {
+    name: [32m'Přehled prodejů'[39m,
+    public: [33mfalse[39m,
+    reportDefinitionId: [32m'D001'[39m,
+    settings: {
+      availableFilters: [
+        [32m'stockId'[39m,
+        [32m'stkitmType'[39m,
+        [32m'groupId'[39m,
+        [32m'goodsOwnerId'[39m,
+        [32m'paidBy'[39m,
+        [32m'cardOwnerId'[39m,
+        [32m'cardIssuerId'[39m
+      ],
+      dateModelType: [32m'range'[39m,
+      dateFrom: [32m'2025-08-31T22:00:00.000Z'[39m,
+      dateTo: [1mnull[22m,
+      stockId: [],
+      stkitmType: [],
+      groupId: [],
+      goodsOwnerId: [],
+      paidBy: [],
+      cardOwnerId: [],
+      cardIssuerId: [],
+      sort: [32m''[39m,
+      exportParameters: {
+        tabsParam: [32m''[39m,
+        exportIntoTabs: [33mfalse[39m,
+        exportFileName: [33mfalse[39m,
+        exportDateTime: [33mtrue[39m,
+        summaries: [33mfalse[39m
+      }
+    }
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'af134ee8'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.339[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][af134ee8] <--- 200 POST http://192.168.130.239:8180/reports-api/usersReports/60193531 (154.67 ms)
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.342[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:58[39m[0m[0m]Přečtení Id sestavy
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.343[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:60[39m[0m[0m]Zavolání http://192.168.130.239:8180/reports-api/ListfUserReports/60193531
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.344[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][55f35757] ---> GET http://192.168.130.239:8180/reports-api/listOfUsersReports/60193531 {
   params: {},
   data: [90mundefined[39m,
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'6b308e89'[39m,
+    [32m'X-Request-ID'[39m: [32m'55f35757'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.581[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][6b308e89] <--- 404 GET http://192.168.130.239:8180/documents-api/goodsInventories/resultPreview/230/141 (43.99 ms)
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.587[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:117[39m[0m[0m][N/A] API Error: Status 404 on http://192.168.130.239:8180/documents-api/goodsInventories/resultPreview/230/141 {
-  body: [32m`{"status":404,"message":"the inventory '141' not exist"}`[39m
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.398[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][55f35757] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfUsersReports/60193531 (52.44 ms)
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.400[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:64[39m[0m[0m]Check length of response /reports-api/ListOfUserReports
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.401[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:68[39m[0m[0m]Length of response - Ok
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.403[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:69[39m[0m[0m]Save allReports: [
+  {
+    "id": 2534,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-01T00:00:00.000Z",
+    "items": 342,
+    "name": "Přehled prodejů",
+    "operator": "MN_TETST_AUTOMAT",
+    "public": false,
+    "reportDefinitionId": "D001",
+    "settings": {
+      "sort": "date",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "stkitmType",
+        "groupId",
+        "goodsOwnerId",
+        "paidBy",
+        "cardOwnerId",
+        "cardIssuerId"
+      ],
+      "exportParameters": {
+        "summaries": false,
+        "tabsParam": "",
+        "exportDateTime": true,
+        "exportFileName": false,
+        "exportIntoTabs": false
+      }
+    },
+    "created": "2025-09-22T20:03:58.223Z",
+    "updated": "2025-09-22T20:03:58.000Z",
+    "tableName": "mn_tetst_automat_2534_sales_overview",
+    "outputFormats": [
+      "pdf",
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "pdf",
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "salesOverview",
+      "availableTabs": [
+        "stockId",
+        "stkitmType",
+        "groupId",
+        "goodsOwnerId",
+        "paidBy",
+        "cardOwnerId",
+        "cardIssuerId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2533,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-01T00:00:00.000Z",
+    "items": 342,
+    "name": "Přehled prodejů",
+    "operator": "MN_TETST_AUTOMAT",
+    "public": false,
+    "reportDefinitionId": "D001",
+    "settings": {
+      "sort": "date",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "stkitmType",
+        "groupId",
+        "goodsOwnerId",
+        "paidBy",
+        "cardOwnerId",
+        "cardIssuerId"
+      ],
+      "exportParameters": {
+        "summaries": false,
+        "tabsParam": "",
+        "exportDateTime": true,
+        "exportFileName": false,
+        "exportIntoTabs": false
+      }
+    },
+    "created": "2025-09-22T19:03:36.131Z",
+    "updated": "2025-09-22T19:03:36.000Z",
+    "tableName": "mn_tetst_automat_2533_sales_overview",
+    "outputFormats": [
+      "pdf",
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "pdf",
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "salesOverview",
+      "availableTabs": [
+        "stockId",
+        "stkitmType",
+        "groupId",
+        "goodsOwnerId",
+        "paidBy",
+        "cardOwnerId",
+        "cardIssuerId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2505,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-08-31T22:00:00.000Z",
+    "items": 7,
+    "name": "Přehled konkurenčních cen",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "D005",
+    "settings": {
+      "sort": "stockName,foreignStockName,-updated,product",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "recordStatus"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "recordStatus",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T08:15:39.795Z",
+    "updated": "2025-09-19T10:39:56.000Z",
+    "tableName": "michalp_2505_foreign_stocks",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "foreignStocks",
+      "availableTabs": [
+        "stockId",
+        "recordStatus"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2516,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-08-31T22:00:00.000Z",
+    "items": 17,
+    "name": "Přehled odběrů podle vozidla",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "T003",
+    "settings": {
+      "sort": "carNr",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "groupId",
+        "partnerId",
+        "vehicles"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:57:26.744Z",
+    "updated": "2025-09-19T09:59:24.000Z",
+    "tableName": "michalp_2516_vehicles_transactions",
+    "outputFormats": [
+      "pdf",
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "pdf",
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "vehiclesTransactions",
+      "availableTabs": [
+        "stockId",
+        "groupId",
+        "partnerId",
+        "vehicles"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2515,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-08-31T22:00:00.000Z",
+    "items": 17,
+    "name": "Přehled odběrů podle řidiče",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "T002",
+    "settings": {
+      "sort": "-stockName",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "groupId",
+        "partnerId",
+        "drivers"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:53:42.743Z",
+    "updated": "2025-09-19T09:55:53.000Z",
+    "tableName": "michalp_2515_drivers_transactions",
+    "outputFormats": [
+      "pdf",
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "pdf",
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "driversTransactions",
+      "availableTabs": [
+        "stockId",
+        "groupId",
+        "partnerId",
+        "drivers"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2514,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-01T00:00:00.000Z",
+    "items": 7,
+    "name": "Přehled nedoautorizovaných transakcí",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "T001",
+    "settings": {
+      "sort": "recDatetime",
+      "dateTo": null,
+      "stockId": [
+        230,
+        231
+      ],
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:51:23.030Z",
+    "updated": "2025-09-19T09:52:13.000Z",
+    "tableName": "michalp_2514_receipt_cards_preauth_only",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "receiptCardsPreauthOnly",
+      "availableTabs": [
+        "stockId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2513,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": null,
+    "items": 24,
+    "name": "Přehled minimální zásoby skladových karet",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "S005",
+    "settings": {
+      "sort": "stockName,stockCardName",
+      "availableFilters": [
+        "stockId",
+        "coeficient"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:49:04.871Z",
+    "updated": "2025-09-19T09:49:57.000Z",
+    "tableName": "michalp_2513_minimal_supply",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "minimalSupply",
+      "availableTabs": [
+        "stockId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2512,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-08-31T22:00:00.000Z",
+    "items": 792,
+    "name": "Půlnoční registry stojanů",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "S004",
+    "settings": {
+      "sort": "stockName,-registryDate,tankId,dispenId,nozzleId",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:46:37.626Z",
+    "updated": "2025-09-19T09:47:48.000Z",
+    "tableName": "michalp_2512_daily_registers",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "dailyRegisters",
+      "availableTabs": [
+        "stockId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2511,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-08-31T22:00:00.000Z",
+    "items": 126,
+    "name": "Půlnoční zásoby PHM",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "S003",
+    "settings": {
+      "sort": "stockName,-supplyDate,tankId",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": true,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:43:11.796Z",
+    "updated": "2025-09-19T09:45:29.000Z",
+    "tableName": "michalp_2511_daily_tanks_supply",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "dailyTanksSupply",
+      "availableTabs": [
+        "stockId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2510,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-07-31T22:00:00.000Z",
+    "items": 3,
+    "name": "Přehled přecenění",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "S002",
+    "settings": {
+      "sort": "-startValid",
+      "dateTo": null,
+      "dateFrom": "2025-07-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "stkitmType",
+        "groupId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "groupId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:34:24.844Z",
+    "updated": "2025-09-19T09:37:09.000Z",
+    "tableName": "michalp_2510_sale_price_history",
+    "outputFormats": [
+      "csv2",
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv",
+        "csv2"
+      ],
+      "summary": false,
+      "fileName": "salePriceHistory",
+      "availableTabs": [
+        "stockId",
+        "stkitmType",
+        "groupId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2509,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": null,
+    "items": 10501,
+    "name": "Přehled pohybů zboží",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "S001",
+    "settings": {
+      "day": "0",
+      "sort": "stockCardName",
+      "year": 2025,
+      "month": 6,
+      "dateModelType": "ymd",
+      "availableFilters": [
+        "stockId",
+        "groupId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "groupId",
+        "exportDateTime": true,
+        "exportFileName": true,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:28:08.774Z",
+    "updated": "2025-09-19T09:30:43.000Z",
+    "tableName": "michalp_2509_movements_of_goods",
+    "outputFormats": [
+      "xlsx"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx"
+      ],
+      "summary": false,
+      "fileName": "movementsOfGoods",
+      "availableTabs": [
+        "stockId",
+        "groupId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2508,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": null,
+    "items": 672,
+    "name": "Test",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "P002",
+    "settings": {
+      "sort": "-deliveryDate",
+      "year": 2025,
+      "month": 9,
+      "dateModelType": "ymd",
+      "availableFilters": [
+        "stockId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": true,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:08:23.851Z",
+    "updated": "2025-09-19T09:09:59.000Z",
+    "tableName": "michalp_2508_phm_deliveries_for_fu",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "phmDeliveriesForFU",
+      "availableTabs": [
+        "stockId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2507,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-01T00:00:00.000Z",
+    "items": 62,
+    "name": "Přehled nákupů zboží",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "P001",
+    "settings": {
+      "sort": "date",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "groupId",
+        "supplierId",
+        "plu"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T09:02:08.289Z",
+    "updated": "2025-09-19T09:05:41.000Z",
+    "tableName": "michalp_2507_purchase_of_goods",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "purchaseOfGoods",
+      "availableTabs": [
+        "stockId",
+        "groupId",
+        "supplierId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2506,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-18T22:00:00.000Z",
+    "items": 1569,
+    "name": "Export položek pokladních dokladů",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "D006",
+    "settings": {
+      "sort": "-stockName",
+      "dateTo": null,
+      "stockId": [
+        230
+      ],
+      "dateFrom": "2025-09-18T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "stkitmType",
+        "partnerId",
+        "paidBy"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "paidBy",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T08:26:14.929Z",
+    "updated": "2025-09-19T09:00:10.000Z",
+    "tableName": "michalp_2506_export_sales_detail",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "exportSalesDetail",
+      "availableTabs": [
+        "stockId",
+        "stkitmType",
+        "partnerId",
+        "paidBy"
+      ]
+    },
+    "local": true
+  },
+  {
+    "id": 2504,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-16T22:00:00.000Z",
+    "items": 3,
+    "name": "Přehled smazaných položek účtenek",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "D004",
+    "settings": {
+      "sort": "-deletedDate",
+      "dateTo": null,
+      "stockId": [
+        230
+      ],
+      "dateFrom": "2025-09-16T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "termId",
+        "groupId",
+        "operator",
+        "purchPrice"
+      ],
+      "exportParameters": {
+        "summaries": false,
+        "tabsParam": "operator",
+        "exportDateTime": false,
+        "exportFileName": false,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T08:07:31.800Z",
+    "updated": "2025-09-19T08:11:57.000Z",
+    "tableName": "michalp_2504_receipt_deleted_items",
+    "outputFormats": [
+      "xlsx"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx"
+      ],
+      "summary": false,
+      "fileName": "receiptDeletedItems",
+      "availableTabs": [
+        "stockId",
+        "termId",
+        "groupId",
+        "operator"
+      ]
+    },
+    "local": true
+  },
+  {
+    "id": 2503,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-05-15T22:00:00.000Z",
+    "items": 0,
+    "name": "Přehled prodejů se slevovou kartou",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "D003",
+    "settings": {
+      "sort": "-receipt",
+      "dateTo": null,
+      "dateFrom": "2025-05-15T22:00:00.000Z",
+      "partnerId": [
+        1
+      ],
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "partnerId"
+      ],
+      "exportParameters": {
+        "summaries": false,
+        "tabsParam": "",
+        "exportDateTime": true,
+        "exportFileName": false,
+        "exportIntoTabs": false
+      }
+    },
+    "created": "2025-09-19T08:06:45.500Z",
+    "updated": "2025-09-19T08:06:52.000Z",
+    "tableName": "michalp_2503_discount_cards_overview",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "discountCardsOverview",
+      "availableTabs": [
+        "stockId",
+        "partnerId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2500,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-09-01T00:00:00.000Z",
+    "items": 334,
+    "name": "Přehled prodejů",
+    "operator": "MICHALP",
+    "public": true,
+    "reportDefinitionId": "D001",
+    "settings": {
+      "sort": "date",
+      "dateTo": null,
+      "dateFrom": "2025-08-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "stkitmType",
+        "groupId",
+        "goodsOwnerId",
+        "paidBy",
+        "cardOwnerId",
+        "cardIssuerId"
+      ],
+      "exportParameters": {
+        "summaries": true,
+        "tabsParam": "stockId",
+        "exportDateTime": true,
+        "exportFileName": true,
+        "exportIntoTabs": true
+      }
+    },
+    "created": "2025-09-19T07:42:12.073Z",
+    "updated": "2025-09-19T07:50:49.000Z",
+    "tableName": "michalp_2500_sales_overview",
+    "outputFormats": [
+      "pdf",
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "pdf",
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "salesOverview",
+      "availableTabs": [
+        "stockId",
+        "stkitmType",
+        "groupId",
+        "goodsOwnerId",
+        "paidBy",
+        "cardOwnerId",
+        "cardIssuerId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2320,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-05-31T22:00:00.000Z",
+    "items": 25,
+    "name": "Přehled konkurenčních cen",
+    "operator": "MARTIN_007",
+    "public": true,
+    "reportDefinitionId": "D005",
+    "settings": {
+      "sort": "stockName,foreignStockName,-updated,product",
+      "dateTo": null,
+      "dateFrom": "2025-05-31T22:00:00.000Z",
+      "recordStatus": [
+        1,
+        2
+      ],
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "recordStatus"
+      ],
+      "exportParameters": {
+        "summaries": false,
+        "tabsParam": "",
+        "exportDateTime": true,
+        "exportFileName": false,
+        "exportIntoTabs": false
+      }
+    },
+    "created": "2025-09-10T10:35:39.910Z",
+    "updated": "2025-09-15T14:16:24.000Z",
+    "tableName": "martin_007_2320_foreign_stocks",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "foreignStocks",
+      "availableTabs": [
+        "stockId",
+        "recordStatus"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 2319,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-05-31T22:00:00.000Z",
+    "items": 22,
+    "name": "Přehled konkurenčních cen",
+    "operator": "MH",
+    "public": true,
+    "reportDefinitionId": "D005",
+    "settings": {
+      "sort": "stockName,foreignStockName,-updated,product",
+      "dateTo": null,
+      "dateFrom": "2025-05-31T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "recordStatus"
+      ]
+    },
+    "created": "2025-09-10T10:32:48.578Z",
+    "updated": "2025-09-10T10:37:08.000Z",
+    "tableName": "mh_2319_foreign_stocks",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "foreignStocks",
+      "availableTabs": [
+        "stockId",
+        "recordStatus"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 1650,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-07-31T22:00:00.000Z",
+    "items": 12,
+    "name": "Přehled smazaných položek účtenek",
+    "operator": "MARTIN_007",
+    "public": true,
+    "reportDefinitionId": "D004",
+    "settings": {
+      "sort": "-deletedDate",
+      "dateTo": null,
+      "stockId": [
+        230
+      ],
+      "dateFrom": "2025-07-31T22:00:00.000Z",
+      "purchPrice": "100",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "termId",
+        "groupId",
+        "operator",
+        "purchPrice"
+      ]
+    },
+    "created": "2025-08-28T11:30:29.690Z",
+    "updated": "2025-09-09T13:50:55.000Z",
+    "tableName": null,
+    "outputFormats": [
+      "xlsx"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx"
+      ],
+      "summary": false,
+      "fileName": "receiptDeletedItems",
+      "availableTabs": [
+        "stockId",
+        "termId",
+        "groupId",
+        "operator"
+      ]
+    },
+    "local": true
+  },
+  {
+    "id": 1707,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-05-16T00:00:00.000Z",
+    "items": 0,
+    "name": "Přehled nákupů zboží",
+    "operator": "MARTIN_007",
+    "public": true,
+    "reportDefinitionId": "P001",
+    "settings": {
+      "sort": "date",
+      "dateTo": null,
+      "dateFrom": "2025-05-15T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "groupId",
+        "supplierId",
+        "plu"
+      ]
+    },
+    "created": "2025-09-01T08:11:44.173Z",
+    "updated": "2025-09-01T08:26:44.000Z",
+    "tableName": "martin_007_1707_purchase_of_goods",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "purchaseOfGoods",
+      "availableTabs": [
+        "stockId",
+        "groupId",
+        "supplierId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 188,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-06-02T22:00:00.000Z",
+    "items": 16,
+    "name": "Přehled konkurenčních cen",
+    "operator": "JV",
+    "public": true,
+    "reportDefinitionId": "D005",
+    "settings": {
+      "sort": "-stockName",
+      "dateTo": null,
+      "stockId": [
+        230
+      ],
+      "dateFrom": "2025-06-02T22:00:00.000Z",
+      "otherFilters": [
+        "afterDate"
+      ],
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId"
+      ]
+    },
+    "created": "2025-07-08T14:52:44.791Z",
+    "updated": "2025-08-25T14:32:37.000Z",
+    "tableName": "jv_188_foreign_stocks",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "foreignStocks",
+      "availableTabs": [
+        "stockId",
+        "recordStatus"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 232,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-05-16T00:00:00.000Z",
+    "items": 70,
+    "name": "Přehled nákupů Potraviny",
+    "operator": "MARTIN_007",
+    "public": true,
+    "reportDefinitionId": "P001",
+    "settings": {
+      "sort": "date",
+      "dateTo": null,
+      "stockId": [
+        230,
+        231
+      ],
+      "dateFrom": "2025-05-15T22:00:00.000Z",
+      "supplierId": [
+        8
+      ],
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId",
+        "supplierId",
+        "plu"
+      ]
+    },
+    "created": "2025-08-08T07:11:57.228Z",
+    "updated": "2025-08-08T07:32:40.000Z",
+    "tableName": "martin_007_232_purchase_of_goods",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "purchaseOfGoods",
+      "availableTabs": [
+        "stockId",
+        "groupId",
+        "supplierId"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 165,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": "2025-05-15T22:00:00.000Z",
+    "items": 22,
+    "name": "Přehled konkurenčních cen",
+    "operator": "OCTOPOS",
+    "public": true,
+    "reportDefinitionId": "D005",
+    "settings": {
+      "sort": "-stockName",
+      "dateTo": null,
+      "stockId": [
+        230,
+        231
+      ],
+      "dateFrom": "2025-05-15T22:00:00.000Z",
+      "dateModelType": "range",
+      "availableFilters": [
+        "stockId"
+      ]
+    },
+    "created": "2025-07-02T09:19:46.866Z",
+    "updated": "2025-07-02T09:19:46.000Z",
+    "tableName": "octopos_165_foreign_stocks",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "foreignStocks",
+      "availableTabs": [
+        "stockId",
+        "recordStatus"
+      ]
+    },
+    "local": false
+  },
+  {
+    "id": 92,
+    "accOwner": "60193531",
+    "generated": "true",
+    "checkDateFrom": null,
+    "items": 168,
+    "name": "Přehled dodávek PHM pro FÚ",
+    "operator": "MW",
+    "public": true,
+    "reportDefinitionId": "P002",
+    "settings": {
+      "sort": "-deliveryDate",
+      "year": 2025,
+      "month": 5,
+      "dateModelType": "ymd",
+      "availableFilters": [
+        "stockId"
+      ]
+    },
+    "created": "2025-06-24T12:18:24.868Z",
+    "updated": "2025-06-24T12:18:31.000Z",
+    "tableName": "mw_92_phm_deliveries_for_fu",
+    "outputFormats": [
+      "xlsx",
+      "csv"
+    ],
+    "exportParameters": {
+      "formats": [
+        "xlsx",
+        "csv"
+      ],
+      "summary": false,
+      "fileName": "phmDeliveriesForFU",
+      "availableTabs": [
+        "stockId"
+      ]
+    },
+    "local": false
+  }
+]
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.404[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:71[39m[0m[0m]Define reportsID
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.406[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:77[39m[0m[0m]Check Id is ok ReportsId = 2534
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.408[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:79[39m[0m[0m]Define itemsID
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.410[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:82[39m[0m[0m]Ověřuji, že počet položek (items) v sestavě 'Přehled prodejů' není null.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.413[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:88[39m[0m[0m]Vytvořená sestava 'Přehled prodejů' (ID: undefined) obsahuje 342 položek.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.415[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:92[39m[0m[0m]Remove last User report
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.417[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][3c8417eb] ---> DELETE http://192.168.130.239:8180/reports-api/usersReports/2534 {
+  params: [90mundefined[39m,
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'3c8417eb'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
 }
-2025[0m[0m-09[0m[0m-15[0m[0m 20[0m[0m:56[0m[0m:08[0m[0m.589[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Smoke\Smoke_All_Gets_api.spec.ts:208[39m[0m[0m]Endpoint vrátil očekávaný status 404, který není 2xx.
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.448[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][3c8417eb] <--- 200 DELETE http://192.168.130.239:8180/reports-api/usersReports/2534 (28.61 ms)
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.452[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:96[39m[0m[0m]Call GET /ListOfUserReports
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.453[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][0a99b541] ---> GET http://192.168.130.239:8180/reports-api/listOfUsersReports/60193531 {
+  params: {},
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'0a99b541'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.499[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][0a99b541] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfUsersReports/60193531 (43.95 ms)
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.506[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:99[39m[0m[0m]Define newReportId
+2025[0m[0m-09[0m[0m-22[0m[0m 20[0m[0m:03[0m[0m:58[0m[0m.509[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Sestavy_Life_Cycle_API.spec.ts:101[39m[0m[0m]newReportID = 2533
 ]]></system-out>
     </testcase>
   </testsuite>

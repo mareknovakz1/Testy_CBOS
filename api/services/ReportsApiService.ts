@@ -186,13 +186,13 @@ export class ReportsApiService extends BaseApiClient {
     }
 
     // ========================
-    // Group: Sestavy (Uživatelské reporty)
+    // Group: Sestavy (UserReports)
     // ========================
 
     /**
      * Získá seznam uživatelských reportů pro daný účet.
      */
-    public async getListOfUsersReports(accOwner: string): Promise<ReportTypes.GenericApiResponse> {
+    public async getListOfUsersReports(accOwner: string, payload: ReportTypes.getListOfUsersReports): Promise<ReportTypes.GenericApiResponse> {
         return this.get(`/reports-api/listOfUsersReports/${accOwner}`);
     }
     
@@ -204,9 +204,9 @@ export class ReportsApiService extends BaseApiClient {
     }
 
     /**
-     * Vytvoří nový uživatelský report.
+     * Vytvoří sestavu
      */
-    public async postUserReport(accOwner: string, payload: ReportTypes.CreateUserReportPayload): Promise<ReportTypes.GenericApiResponse> {
+    public async postUserReport(accOwner: string, payload: ReportTypes.postUserReportPayload): Promise<ReportTypes.GenericApiResponse> {
         return this.post(`/reports-api/usersReports/${accOwner}`, payload);
     }
 

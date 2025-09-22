@@ -17,7 +17,7 @@ export default defineConfig({
 
   // Globální časový limit pro každý jednotlivý test
   timeout: 50 * 1000, // 50 sekund
-  retries: 1, // Počet opakování po neúspěšném testu
+  //retries: 1, // Počet opakování po neúspěšném testu
   workers: 1, // Použití jednoho workera pro sériové spouštění testů (jeden po druhém)
   fullyParallel: false,
 

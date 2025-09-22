@@ -1,6 +1,6 @@
 /**
  * @file reports.types.ts
- * @author AI Assistant
+ * @author Marek Novák
  * @date 12.09.2025
  * @description
  * Datové kontrakty pro ReportsApiService.
@@ -121,6 +121,12 @@ export interface GetListOfGoodsDeliveryNotesParams {
     operator?: string;
 }
 
+export interface getListOfUsersReports {
+    offset: number; //inicializační honota offset
+    limit: number; //Doporučeno 1
+    sort: string; //Doporučeno -updatet
+}
+
 export interface GetPartnerTransactionsParams {
     partnerId: number;
     year: number;
@@ -150,11 +156,35 @@ export interface GetUserReportPreviewParams {
 
 //================ Payloads for POST/PUT methods ================
 
-export interface CreateUserReportPayload {
-    settings: object;
-    reportDefinitionId: string;
+
+interface postUserReportParameters {
+    tabsParam: string;
+    exportIntoTabs: boolean;
+    exportFileName: boolean;
+    exportDateTime: boolean;
+    summaries: boolean;
+}
+
+export interface postUserReportPayload {
+    testCaseId: string;
     name: string;
     public: boolean;
+    reportDefinitionId: string;
+    settings: {
+        availableFilters: string[];      
+        dateModelType: string;
+        dateFrom: string;                
+        dateTo: string | null;          
+        stockId: (string | number)[];
+        stkitmType: (string | number)[];
+        groupId: (string | number)[];
+        goodsOwnerId: (string | number)[];
+        paidBy: (string | number)[];
+        cardOwnerId: (string | number)[];
+        cardIssuerId: (string | number)[]; 
+        sort: string;
+        exportParameters: postUserReportParameters; 
+    };
 }
 
 export interface UpdateUserReportPayload {
@@ -166,3 +196,4 @@ export interface UpdateUserReportPayload {
 export interface CreatePriceTagsPayload {
     plus: any[];
 }
+
