@@ -13,6 +13,7 @@ process.env.LOG_LEVEL = String(logLevel);
 // Veškerá konfigurace je nyní v rámci jednoho exportu.
 export default defineConfig({
   // Adresář s testovacími soubory
+  globalSetup: './support/global-setup.ts',
   testDir: './tests',
 
   // Globální časový limit pro každý jednotlivý test

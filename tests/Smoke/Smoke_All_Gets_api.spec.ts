@@ -1,42 +1,47 @@
 /**
  * @file Smoke_All_Gets_api.spec.ts
  * @author Marek Novák
- * @date 11.09.2025
+ * @date 29.09.2025
  * @description
- * Tento soubor obsahuje základní smoke testy pro ověření dostupnosti
- * a správné funkce klíčových GET endpointů v API.
- * Cílem je potvrdit, že každý endpoint je dosažitelný a nevrací serverovou chybu (5xx).
+ * This file contains smoke tests for key API GET endpoints.
+ * It uses a data-driven approach, loading endpoints and parameters from an
+ * external JSON file.
+ * The goal is to confirm that each endpoint is available and returns a
+ * successful 2xx status code, failing on any client (4xx) or server (5xx) errors.
+ * @logic
+ * 1. The test dynamically iterates through endpoints listed in an external JSON file.
+ * 2. Each API call is wrapped in a try...catch block to handle both successful
+ * and unsuccessful responses.
+ * 3. On failure, the numeric HTTP status code is extracted from the error message.
+ * 4. A custom failure message is generated to distinguish between Client Errors
+ * (4xx) and Server Errors (5xx).
+ * 5. A single, strict assertion (`expect(status).toBeLessThan(300)`) verifies
+ * that the response was successful, failing for any non-2xx status.
  */
 
 import { ApiClient } from '../../api/ApiClient';
 import { expect, test } from '../../support/fixtures/auth.fixture';
 import { logger } from '../../support/logger';
-import { ACC_OWNER_ID } from "../../support/constants";
-import { HistogramGeneratorNumber } from 'd3';
+import endpointsToTest from '../../test-data/Smoke_All_Gets.json'; // 
 
-// --- Testovací Data ---
-// Používáme zástupná ID. Očekáváme, že endpointy budou reagovat (např. i chybou 404),
-// ale ne serverovou chybou 5xx.
-const receiptId: number = 84188; //Účtenka
-const PLACEHOLDER_ID: number = 1; // Obecné zástupné ID pro různé endpointy
-const stockId: number = 230; // Obchodní místo
-const PLACEHOLDER_KEY = 'test-key';
-const posSummaries: string = '23001202587'; //
-const receiptUddId: number = 431; //UDD
-const wetDeliveryNoteId: number = 1; //Dodací list
-const goodsDeliveryNoteId: number = 141; //Příjemka zboží
-const goodsInventoryId: number = 141; 
-const orderId: number = 96; //Objednávka
-const caDataId: number = 10;
-const measureId: number = 10;
-const registerId: number = 10;
+// Definice typů pro lepší kontrolu a napovídání
+type ApiService = 'reports' | 'documents' | 'system';
+type EndpointData = {
+  testId: string; 
+  name: string;
+  service: ApiService;
+  method: string;
+  params: any[];
+};
+
+let responseStatus: number;
 
 test.describe('API Smoke Tests - GET Endpoints', () => {
 
     // =============================================================
     // I. Test pro veřejně dostupný endpoint (bez autorizace)
     // =============================================================
-    test('Endpoint GET /api/status should be available and return 200 OK', async ({ request }) => {
+    test(`Endpoint GET /api/status should be available and return 200 OK - real status @smoke @API @high @GETs ${responseStatus}`, async ({ request }) => {
         logger.info('Spouštím smoke test pro veřejný GET /api/status...');
         const publicApiClient = new ApiClient(request, ''); // Klient bez tokenu
 
@@ -53,11 +58,10 @@ test.describe('API Smoke Tests - GET Endpoints', () => {
         logger.info('Test pro GET /api/status úspěšně dokončen.');
     });
 
-
     // =============================================================
-    // II. Testy pro autorizované GET endpointy
+    // II. Testy pro autorizované GET endpointy (řízené JSONem)
     // =============================================================
-    test.describe('Authenticated GETs', () => {
+    test.describe('Authenticated GETs from JSON', () => {
         let apiClient: ApiClient;
 
         test.beforeEach(async ({ request, authToken }) => {
@@ -67,155 +71,60 @@ test.describe('API Smoke Tests - GET Endpoints', () => {
             logger.info('ApiClient byl úspěšně inicializován.');
         });
         
-        // Seznam všech GET metod z DocumentsApiService, které chceme otestovat.
-       const getEndpointsToTest: { name: string; method: () => Promise<any>; }[] = [
-    // === Reports API ===
-    {
-        name: 'GET /reports-api/listOfCtClasses',
-        method: () => apiClient.reports.getListOfCtClasses(),
-    },
-    {
-        name: 'GET /reports-api/partnerTransactions',
-        method: () => apiClient.reports.getPartnerTransactions({ 
-            partnerId: PLACEHOLDER_ID, 
-            year: 2024, 
-            month: 1 
-        }),
-    },
-    {
-        name: 'GET /reports-api/usersReports/{id}',
-        method: () => apiClient.reports.getUserReportById(PLACEHOLDER_ID),
-    },
+        // Dynamically generate tests for each endpoint defined in the JSON file
+       // Dynamically generate tests for each endpoint defined in the JSON file
+for (const endpoint of endpointsToTest as EndpointData[]) {
+    test(`${endpoint.testId}: Endpoint "${endpoint.name}" should be available and return a 2xx status real status: ${responseStatus}`, async () => {
+        logger.info(`Running smoke test for ${endpoint.testId}: ${endpoint.name}`);
+        
+        
+        logger.debug(`Attempting to call ${endpoint.service}.${endpoint.method} with params: ${JSON.stringify(endpoint.params)}`);
+        try {
+            logger.trace('Calling API method...');
+            const service = apiClient[endpoint.service] as any;
+            const methodToCall = service[endpoint.method];
+            if (typeof methodToCall !== 'function') {
+                throw new Error(`Method "${endpoint.method}" does not exist on service "${endpoint.service}".`);
+            }
+            logger.trace('Invoking method...');
+            await methodToCall.apply(service, endpoint.params);
+            responseStatus = 200;
+        } catch (error: any) {
+            const statusMatch = error.message.match(/Status (\d+)/);
+            if (statusMatch) {
+                logger.debug(`Extracted status code from error message: ${statusMatch[1]}`);
+                responseStatus = parseInt(statusMatch[1], 10);
+                logger.error(`Endpoint returned a non-2xx status: ${responseStatus}.`, error.message);
+            } else {
+                logger.debug('No status code found in error message.');
+                logger.error('Could not parse status code from error. Test is failing.', error);
+                throw error;
+            }
+        }
+        logger.trace('Determining final response status for assertion...');
+        logger.debug(`Response status determined: ${responseStatus}`);
 
-    // === Documents API ===
-    {
-        name: 'GET /documents-api/receipts/{stockId}',
-        method: () => apiClient.documents.getReceipt(stockId, { receiptId, format: 'json' }),
-    },
-    {
-        name: 'GET /documents-api/posSummaries/{stockId}/{posSummaryKey}',
-        method: () => apiClient.documents.getPosSummary(stockId, posSummaries, { format: 'json' }),
-    },
-    {
-        name: 'GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}',
-        method: () => apiClient.documents.getReceiptUdd(stockId, receiptUddId, { format: 'json' }),
-    },
-    /*
-    {
-        name: 'GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}/print',
-        method: () => apiClient.documents.getReceiptUddPdf(stockId, receiptUddId),
-    },*/
-    {
-        name: 'GET /documents-api/wetDeliveryNotesAccessories/{stockId}',
-        method: () => apiClient.documents.getWetDeliveryNotesAccessories(stockId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotes/{stockId}/{wetDeliveryNoteId}',
-        method: () => apiClient.documents.getWetDeliveryNote(stockId, wetDeliveryNoteId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotes/caData/{stockId}/{wetDeliveryNoteId}',
-        method: () => apiClient.documents.getWetDeliveryNoteCaDataList(stockId, wetDeliveryNoteId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotes/measures/{stockId}/{wetDeliveryNoteId}',
-        method: () => apiClient.documents.getWetDeliveryNoteMeasuresList(stockId, wetDeliveryNoteId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotes/registers/{stockId}/{wetDeliveryNoteId}',
-        method: () => apiClient.documents.getWetDeliveryNoteRegistersList(stockId, wetDeliveryNoteId),
-    },
-    {
-        name: 'GET /documents-api/info/documentsMaxDate/{stockId}',
-        method: () => apiClient.documents.getDocumentsMaxDate(stockId),
-    },
-    /*
-    *Neopodařilo se mi to dohledat,
-    //Načtení seznamu SK blížící se k minimální skladové zásobě
-    {
-        name: 'GET /documents-api/listOfStockCardsWithMinimalSupply/{stockId}',
-        method: () => apiClient.documents.getStockCardsWithMinimalSupply(stockId),
-    },*/
-    {
-        name: 'GET /documents-api/orders/{stockId}/{orderId}',
-        method: () => apiClient.documents.getOrderDetail(stockId, orderId),
-    },
-    {
-        name: 'GET /documents-api/orders/items/{stockId}/{orderId}',
-        method: () => apiClient.documents.getOrderItems(stockId, orderId),
-    },
-    {
-        name: 'GET /documents-api/goodsDeliveryNotes/items/{stockId}/{goodsDeliveryNoteId}',
-        method: () => apiClient.documents.getGoodsDeliveryNoteItems(stockId, goodsDeliveryNoteId),
-    },
-    {
-        name: 'GET /documents-api/goodsDeliveryNotes/vatRecap/{stockId}/{goodsDeliveryNoteId}',
-        method: () => apiClient.documents.getGoodsDeliveryNoteVatRecap(stockId, goodsDeliveryNoteId),
-    },
-    {
-        name: 'GET /documents-api/goodsInventories/{stockId}/{goodsInventoryId}',
-        method: () => apiClient.documents.getInventoryDetail(stockId, goodsInventoryId),
-    },
-    {
-        name: 'GET /documents-api/goodsInventories/items/{stockId}/{goodsInventoryId}',
-        method: () => apiClient.documents.getInventoryItems(stockId, goodsInventoryId),
-    },
-    {
-        name: 'GET /documents-api/goodsInventories/resultPreview/{stockId}/{goodsInventoryId}',
-        method: () => apiClient.documents.getInventoryResultPreview(stockId, goodsInventoryId),
-    },
-    {
-        name: 'GET /documents-api/goodsInventories/finalize/{stockId}/{goodsInventoryId}',
-        method: () => apiClient.documents.finalizeInventory(stockId, goodsInventoryId),
-    },
-    {
-        name: 'GET /documents-api/goodsInventories/protocol/{stockId}/{goodsInventoryId}',
-        method: () => apiClient.documents.getInventoryProtocol(stockId, goodsInventoryId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotesCaData/{stockId}/{wetDeliveryNoteId}/{caDataId}',
-        method: () => apiClient.documents.getWetDeliveryNoteCaDataDetail(stockId, wetDeliveryNoteId, caDataId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotesMeasures/{stockId}/{wetDeliveryNoteId}/{measureId}',
-        method: () => apiClient.documents.getWetDeliveryNoteMeasureDetail(stockId, wetDeliveryNoteId, measureId),
-    },
-    {
-        name: 'GET /documents-api/wetDeliveryNotesRegisters/{stockId}/{wetDeliveryNoteId}/{registerId}',
-        method: () => apiClient.documents.getWetDeliveryNoteRegisterDetail(stockId, wetDeliveryNoteId, registerId),
-    },
-];
+        // --- NEW AND IMPROVED ASSERTION BLOCK ---
+        const isSuccess = responseStatus < 300;
+        
+        logger.trace('Preparing assertion for response status...');
+        let failureMessage = `Test failed because the API returned a non-2xx status.`;
+        if (!isSuccess) {
+            let failureType = 'Unexpected Response';
+            if (responseStatus >= 500) failureType = 'Server Error';
+            else if (responseStatus >= 400) failureType = 'Client Error';
+            else if (responseStatus >= 300) failureType = 'Redirection';
+            
+            // This detailed message will now be the primary output on failure
+            failureMessage += `\n\n  - Received Status: ${responseStatus} (${failureType})`;
+        }
 
-        // Dynamické generování testů pro každý definovaný endpoint
-        for (const endpoint of getEndpointsToTest) {
-            test(`Endpoint "${endpoint.name}" should be available`, async () => {
-                logger.info(`Spouštím smoke test pro: ${endpoint.name}`);
-                
-                let responseStatus: number;
-
-                try {
-                    // Voláme metodu, která vrací naparsovanou odpověď
-                    // V případě chyby (např. 404) se vyhodí výjimka, kterou odchytíme
-                    await endpoint.method();
-                    // Pokud kód došel sem, znamená to status 2xx, což je v pořádku.
-                    responseStatus = 200; // Předpokládáme úspěch
-                } catch (error: any) {
-                    // BaseApiClient vyhazuje chybu, která obsahuje status kód
-                    // Hledáme status v chybové zprávě
-                    const statusMatch = error.message.match(/Status (\d+)/);
-                    if (statusMatch) {
-                        responseStatus = parseInt(statusMatch[1], 10);
-                        logger.warn(`Endpoint vrátil očekávaný status ${responseStatus}, který není 2xx.`);
-                    } else {
-                        // Pokud status nenajdeme, test selže
-                        logger.error('V chybě nebyl nalezen status kód. Test selhává.', error);
-                        throw error;
-                    }
+        // This assertion provides a much clearer failure report
+        expect(isSuccess, failureMessage).toBe(true);
+        
+            if (isSuccess) {
+                logger.info(`Test for "${endpoint.name}" completed successfully with status ${responseStatus}.`);
                 }
-
-                 // Klíčové ověření: Status kód musí být 2xx
-                 expect(responseStatus, 'Status kód musí být 2xx').toBeLessThan(300);
-                 logger.info(`Test pro "${endpoint.name}" úspěšně dokončen se statusem ${responseStatus}.`);
             });
         }
     });

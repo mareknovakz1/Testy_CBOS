@@ -1,81 +1,72 @@
+/**
+ * @file logger.ts
+ * @author Marek Novák
+ * @date 29.09.2025
+ * @description
+ * Centralized logging setup using the `tslog` library.
+ * Logs go both to the console (pretty, colored) and to a
+ * timestamped log file in the `artefacts/logs` directory.
+ *
+ * Log level can be controlled via the LOG_LEVEL environment variable.
+ * Levels:
+ *   0 = silly
+ *   1 = trace
+ *   2 = debug
+ *   3 = info  (default)
+ *   4 = warn
+ *   5 = error
+ *   6 = fatal
+ */
+
 import { Logger, ILogObj, ISettings } from "tslog";
 import fs from "fs";
 import path from "path";
 
-//ÚROVEŇ LOGOVÁNÍ SE ŘÍDÍ V PLAYWRIGHT_CONFIG
-// Čteme úroveň logu z proměnné prostředí. Pokud není nastavena, použije se 'info'.
-// Možné hodnoty: 0:"silly", 1:"trace", 2:"debug", 3:"info", 4:"warn" a "state", 5:"error", 6:"fatal"
-// Úroveň logování se dá řidit pomocí command prompt
-// $env:LOG_LEVEL="2"; npx playwright test  (POZNÁMKA: Nově se používají čísla)
-// Pro `minLevel` se ve verzi 4+ používají čísla, nikoli text.
-//Logy se ukláadají do test-result/logs
+// --- Determine log level ---
+const parsedLevel = Number(process.env.LOG_LEVEL);
+const minLevel: number = Number.isNaN(parsedLevel) ? 3 : parsedLevel; // default to info(3)
 
-const minLevel: number = Number(process.env.LOG_LEVEL) || 0; // Výchozí úroveň je 'info' (3)
+// Get the shared log file path from the environment variable
+const logFilePath = process.env.LOG_FILE_PATH || path.join("artefacts", "logs", "fallback.log");
 
-// --- Vytvoření složky a souboru pro logy ---
-const logDir = path.join('artefacts', 'logs');
-fs.mkdirSync(logDir, { recursive: true });
-// Use a timestamped log file name for each run
-const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-const logFilePath = path.join(logDir, `${timestamp}.log`);
-
+// --- Base settings shared by all loggers ---
 const baseSettings: Partial<ISettings<ILogObj>> = {
-    minLevel: minLevel
+  minLevel: minLevel,
 };
 
-// --- Logger POUZE pro hezký barevný výstup v konzoli ---
+// --- Console logger (pretty, colored output) ---
 export const logger: Logger<ILogObj> = new Logger({
-    ...baseSettings,
-    name: "ConsoleLogger",
-    prettyLogTemplate: "{{yyyy}}-{{mm}}-{{dd}} {{hh}}:{{MM}}:{{ss}}.{{ms}} {{logLevelName}} [{{filePathWithLine}}]",
-    prettyErrorTemplate: "{{errorName}} {{errorMessage}}\nerror stack:\n{{errorStack}}",
-    prettyErrorStackTemplate: "  • {{fileName}}:{{lineNumber}}:{{columnNumber}}\n    {{method}}",
-    prettyErrorParentNamesSeparator: ":",
-    prettyErrorLoggerNameDelimiter: ":",
-    // prettyErrorPropertyDelimiter removed (not a valid property)
-    // prettyErrorValueDelimiter removed (not a valid property)
-    prettyInspectOptions: {
-        colors: true,
-        compact: false,
-        depth: 5,
-    },
+  ...baseSettings,
+  name: "ConsoleLogger",
+  prettyLogTemplate:
+    "{{yyyy}}-{{mm}}-{{dd}} {{hh}}:{{MM}}:{{ss}}.{{ms}} {{logLevelName}} [{{fileNameWithLine}}]",
+  prettyErrorTemplate:
+    "{{errorName}} {{errorMessage}}\nerror stack:\n{{errorStack}}",
+  prettyErrorStackTemplate:
+    "  • {{fileName}}:{{lineNumber}}:{{columnNumber}}\n    {{method}}",
+  prettyErrorParentNamesSeparator: ":",
+  prettyErrorLoggerNameDelimiter: ":",
+  prettyInspectOptions: {
+    colors: true,
+    compact: false,
+    depth: 5,
+  },
 });
 
-// --- Oddělený logger POUZE pro zápis do souboru ---
-const fileLogger: Logger<ILogObj> = new Logger({
-    ...baseSettings,
-    name: "FileLogger",
-    type: "hidden",
-});
+// --- Helper: convert absolute path to project-relative ---
+const getRelativePath = (fullPath: string) =>
+  path.relative(process.cwd(), fullPath).replace(/\\/g, "/");
 
-// Transport zapisující do souboru, bez env a s relativní cestou
-const getRelativePath = (fullPath: string) => {
-    return path.relative(process.cwd(), fullPath).replace(/\\/g, '/');
+// --- Transport: append all logs into file ---
+const fileTransport = (logObject: any) => {
+  const pathObj = logObject._meta.path;
+  const relPath = pathObj?.fullFilePath
+    ? getRelativePath(pathObj.fullFilePath)
+    : "unknown_path";
+
+  const logMessage = `${logObject._meta.date.toISOString()} ${logObject._meta.logLevelName.toUpperCase()} ${relPath}\n\t${logObject[0]}\n`;
+  fs.appendFileSync(logFilePath, logMessage, "utf-8");
 };
 
-fileLogger.attachTransport((logObject) => {
-    const pathObj = logObject._meta.path;
-    let relPath = "unknown_path";
-    if (pathObj && pathObj.fullFilePath) {
-        relPath = getRelativePath(pathObj.fullFilePath);
-    }
-    const logMessage = `${logObject._meta.date.toISOString()} ${logObject._meta.logLevelName.toUpperCase()} ${relPath}\n\t${logObject[0]}\n`;
-    fs.appendFileSync(logFilePath, logMessage, 'utf-8');
-});
-
-// --- Přeposílání logů do fileLogger i ze všech loggerů ---
-const allLoggers = [logger, fileLogger];
-allLoggers.forEach((logInstance) => {
-    logInstance.attachTransport((logObject) => {
-        const pathObj = logObject._meta.path;
-        let relPath = "unknown_path";
-        let pathInfo = "";
-        if (pathObj && pathObj.fullFilePath) {
-            relPath = getRelativePath(pathObj.fullFilePath);
-            pathInfo = ` ${JSON.stringify(pathObj)}`;
-        }
-        const logMessage = `${logObject._meta.date.toISOString()} ${logObject._meta.logLevelName.toUpperCase()} ${relPath}${pathInfo}\n\t${logObject[0]}\n`;
-        fs.appendFileSync(logFilePath, logMessage, 'utf-8');
-    });
-});
-
+// --- Attach transport so console logs are mirrored to file ---
+logger.attachTransport(fileTransport);

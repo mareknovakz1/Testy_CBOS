@@ -3,24 +3,24 @@
  * @author Marek Novák
  * @date 11.09.2025
  * @description
- * Tento soubor obsahuje DocumentsApiService, specializovanou službu pro komunikaci
- * s dokumentačními endpointy API.
+ * This file contains DocumentsApiService, a specialized service for communicating
+ * with the document-related API endpoints.
  * * @classdesc
- * DocumentsApiService dědí od BaseApiClient a přidává metody specifické pro
- * operace s dokumenty, jako je získání seznamu dokumentů nebo vytvoření nového dokumentu.
+ * DocumentsApiService extends BaseApiClient and adds methods specific to
+ * document operations, such as fetching a list of documents or creating a new one.
  * */
 
 import { BaseApiClient } from '../BaseApiClient';
 import * as t from '../types/documents';
 
 export class DocumentsApiService extends BaseApiClient {
-    
+
     // ========================
     // Group: Info
     // ========================
 
     /**
-     * Načtení informací o datech dokumentů pro sklad.
+     * Loads information about the latest document dates for a stock.
      */
     public async getDocumentsMaxDate(stockId: number): Promise<t.GenericApiResponse> {
         return this.get(`/documents-api/info/documentsMaxDate/${stockId}`);
@@ -34,231 +34,262 @@ export class DocumentsApiService extends BaseApiClient {
         return this.post(`/documents-api/orders/${stockId}`, payload);
     }
 
-     /**
-     *  Vytvoření šablony z příjemky[cite: 5].
+    /**
+     * Creates a template from a delivery note.
      */
     public async copyOrderFromDeliveryNote(stockId: number, goodsDeliveryNoteId: number): Promise<t.OrderResponse> {
         return this.post(`/documents-api/orders/copyFromDeliveryNotes/${stockId}/${goodsDeliveryNoteId}`, {});
     }
 
     /**
-     *  Vytvoření šablony z objednávky
+     * Creates a template from an order.
      */
     public async copyOrderFromOrder(stockId: number, orderId: number): Promise<t.OrderResponse> {
         return this.post(`/documents-api/orders/copyFromDeliveryNotes/${stockId}/${orderId}`, {});
     }
 
 
-    //Načtení seznamu SK blížící se k minimální skladové zásobě
+    // Loads a list of stock cards approaching their minimum stock level.
     public async getStockCardsWithMinimalSupply(stockId: number): Promise<t.GenericApiResponse> {
         return this.get(`/documents-api/listOfStockCardsWithMinimalSupply/${stockId}`);
     }
 
     /**
-     *  Načte detail objednávky
+     * Loads the details of an order.
      */
     public async getOrderDetail(stockId: number, orderId: number): Promise<t.OrderResponse> {
         return this.get(`/documents-api/orders/${stockId}/${orderId}`);
     }
 
     /**
-     *  Editace objednávky
+     * Edits an order.
      */
     public async updateOrder(stockId: number, orderId: number, payload: t.UpdateOrderPayload): Promise<void> {
         return this.put(`/documents-api/orders/${stockId}/${orderId}`, payload);
     }
 
     /**
-     *  Smaže objednávku
+     * Deletes an order.
      */
     public async deleteOrder(stockId: number, orderId: number): Promise<void> {
         return this.delete(`/documents-api/orders/${stockId}/${orderId}`);
     }
 
     /**
-     *  Odeslání objednávky
+     * Sends an order.
      */
     public async sendOrder(stockId: number, payload: t.SendOrderPayload): Promise<void> {
         return this.put(`/documents-api/orders/ordersSend/${stockId}`, payload);
     }
 
     /**
-     *  Seznam položek objednávky
+     * List of order items.
      */
     public async getOrderItems(stockId: number, orderId: number): Promise<t.OrderItemListResponse> {
         return this.get(`/documents-api/orders/items/${stockId}/${orderId}`);
     }
 
     /**
-     *  Schválení objednávky
+     * Approves an order.
      */
     public async approveOrder(stockId: number, orderId: number): Promise<void> {
         return this.put(`/documents-api/orders/valid/${stockId}/${orderId}`, {});
     }
 
     /**
-     *  Přidání položky do objednávky
+     * Adds an item to an order.
      */
     public async addOrderItem(stockId: number, payload: t.AddOrderItemPayload): Promise<void> {
         return this.post(`/documents-api/orders/${stockId}`, payload);
     }
 
     /**
-     *  Úprava položky v objednávce
+     * Updates an item in an order.
      */
     public async updateOrderItem(stockId: number, ordersItemId: number, payload: t.UpdateOrderItemPayload): Promise<void> {
         return this.put(`/documents-api/ordersItems/${stockId}/${ordersItemId}`, payload);
     }
 
-    
+    /**
+     * Deletes an item from an order.
+     * [MISSING ENDPOINT ADDED]
+     */
+    public async deleteOrderItem(stockId: number, ordersItemId: number): Promise<void> {
+        return this.delete(`/documents-api/ordersItems/${stockId}/${ordersItemId}`);
+    }
+
+
     // ========================
     // Group: GoodsDeliveryNotes
     // ========================
-   
+
     /**
-     * 
-     * Vytvoře
+     * Creates a goods delivery note.
      */
     public async postGoodsDeliveryNote(stockId: number, payload: t.CreateGoodsDeliveryNotePayload): Promise<t.GoodsDeliveryNoteResponse> {
         return this.post(`/documents-api/goodsDeliveryNotes/${stockId}`, payload);
     }
 
-     // ========================
-    // Group: GoodsDeliveryNotes (Chybějící metody)
+    /**
+     * Loads the details of a goods delivery note.
+     * [MISSING ENDPOINT ADDED]
+     */
+    public async getGoodsDeliveryNote(stockId: number, goodsDeliveryNoteId: number): Promise<t.GoodsDeliveryNoteResponse> {
+        return this.get(`/documents-api/goodsDeliveryNotes/${stockId}/${goodsDeliveryNoteId}`);
+    }
+
+    // ========================
+    // Group: GoodsDeliveryNotes (Missing methods)
     // ========================
 
     /**
-     * [cite_start]Vytvoření příjemky na zvoleném OM (Obchodním místě)[cite: 18].
+     * Creates a delivery note at the selected stock (business location).
      */
     public async restockGoodsDeliveryNote(stockId: number, goodsDeliveryNoteId: number): Promise<void> {
         return this.post(`/documents-api/goodsDeliveryNotes/restock/${stockId}/${goodsDeliveryNoteId}`, {});
     }
 
     /**
-     * [cite_start]Editace příjemky/výdejky[cite: 19].
+     * Edits a goods delivery note.
      */
     public async updateGoodsDeliveryNote(stockId: number, goodsDeliveryNoteId: number, payload: t.UpdateGoodsDeliveryNotePayload): Promise<void> {
         return this.put(`/documents-api/goodsDeliveryNotes/${stockId}/${goodsDeliveryNoteId}`, payload);
     }
 
     /**
-     * [cite_start]Smaže příjemku / výdejku[cite: 20].
+     * Deletes a goods delivery note.
      */
     public async deleteGoodsDeliveryNote(stockId: number, goodsDeliveryNoteId: number): Promise<void> {
         return this.delete(`/documents-api/goodsDeliveryNotes/${stockId}/${goodsDeliveryNoteId}`);
     }
 
     /**
-     * [cite_start]Načte položky konkrétní příjemky/výdejky[cite: 21].
+     * Loads the items of a specific goods delivery note.
      */
     public async getGoodsDeliveryNoteItems(stockId: number, goodsDeliveryNoteId: number): Promise<t.GoodsDeliveryNoteItemResponse> {
         return this.get(`/documents-api/goodsDeliveryNotes/items/${stockId}/${goodsDeliveryNoteId}`);
     }
 
     /**
-     * [cite_start]Načte přehled daní konkrétní příjemky[cite: 22].
+     * Loads the tax summary for a specific delivery note.
      */
     public async getGoodsDeliveryNoteVatRecap(stockId: number, goodsDeliveryNoteId: number): Promise<t.VatRecapResponse> {
         return this.get(`/documents-api/goodsDeliveryNotes/vatRecap/${stockId}/${goodsDeliveryNoteId}`);
     }
-    
+
     /**
-     * [cite_start]Naskladnění příjemky[cite: 23].
+     * Performs stock-in for a delivery note.
      */
     public async changeSupplyGoodsDeliveryNote(stockId: number, goodsDeliveryNoteId: number): Promise<void> {
         return this.post(`/documents-api/goodsDeliveryNotes/changeSupply/${stockId}/${goodsDeliveryNoteId}`, {});
     }
 
     /**
-     * [cite_start]Schválení příjemky[cite: 24].
+     * Approves a delivery note.
      */
     public async approveGoodsDeliveryNote(stockId: number, goodsDeliveryNoteId: number): Promise<void> {
         return this.post(`/documents-api/goodsDeliveryNotes/valid/${stockId}/${goodsDeliveryNoteId}`, {});
     }
 
     /**
-     * [cite_start]Založení položky příjemky[cite: 25].
+     * Creates a delivery note item.
      */
     public async addGoodsDeliveryNoteItem(stockId: number, payload: t.AddGoodsDeliveryNoteItemPayload): Promise<t.GoodsDeliveryNoteItemResponse> {
         return this.post(`/documents-api/goodsDeliveryNotesItems/${stockId}`, payload);
     }
 
     /**
-     * [cite_start]Editace položky příjemky[cite: 31].
+     * Edits a delivery note item.
      */
     public async updateGoodsDeliveryNoteItem(stockId: number, goodsDeliveryNotesItemId: number, payload: t.UpdateGoodsDeliveryNoteItemPayload): Promise<void> {
         return this.put(`/documents-api/goodsDeliveryNotesItems/${stockId}/${goodsDeliveryNotesItemId}`, payload);
     }
 
     /**
-     * [cite_start]Smazání položky příjemky[cite: 34].
+     * Deletes a delivery note item.
      */
     public async deleteGoodsDeliveryNoteItem(stockId: number, goodsDeliveryNotesItemId: number): Promise<void> {
         return this.delete(`/documents-api/goodsDeliveryNotesItems/${stockId}/${goodsDeliveryNotesItemId}`);
     }
-    
+
     // ========================
     // Group: GoodsInventories
     // ========================
 
     /**
-     * [cite_start]Založení inventury[cite: 36].
+     * Creates an inventory.
      */
     public async createInventory(payload: t.CreateInventoryPayload): Promise<t.InventoryResponse> {
         return this.post(`/documents-api/goodsInventories`, payload);
     }
 
     /**
-     * [cite_start]Detail inventury[cite: 35].
+     * Inventory details.
      */
     public async getInventoryDetail(stockId: number, goodsInventoryId: number): Promise<t.InventoryResponse> {
         return this.get(`/documents-api/goodsInventories/${stockId}/${goodsInventoryId}`);
     }
 
     /**
-     * [cite_start]Smazání inventury[cite: 36].
+     * Edits inventory details.
+     * [MISSING ENDPOINT ADDED]
+     */
+    public async updateInventory(stockId: number, goodsInventoryId: number, payload: t.CreateInventoryPayload): Promise<void> {
+        return this.put(`/documents-api/goodsInventories/${stockId}/${goodsInventoryId}`, payload);
+    }
+
+    /**
+     * Deletes an inventory.
      */
     public async deleteInventory(stockId: number, goodsInventoryId: number): Promise<void> {
         return this.delete(`/documents-api/goodsInventories/${stockId}/${goodsInventoryId}`);
     }
 
     /**
-     * [cite_start]Načtení seznamu položek inventury[cite: 37].
+     * Loads the list of inventory items.
      */
     public async getInventoryItems(stockId: number, goodsInventoryId: number): Promise<t.InventoryItemListResponse> {
         return this.get(`/documents-api/goodsInventories/items/${stockId}/${goodsInventoryId}`);
     }
-    
+
     /**
-     * [cite_start]Přidání položky do inventury[cite: 38].
+     * Adds an item to an inventory.
      */
     public async addInventoryItemSupply(stockId: number, payload: t.AddInventoryItemSupplyPayload): Promise<t.InventoryItemSupplyResponse> {
         return this.post(`/documents-api/goodsInventoriesItemsSupply/${stockId}`, payload);
     }
 
     /**
-     * [cite_start]Smazání položky inventury[cite: 39].
+     * Edits an item in an inventory.
+     * [MISSING ENDPOINT ADDED]
+     */
+    public async updateInventoryItemSupply(stockId: number, goodsInventoryItemSupplyId: number, payload: t.AddInventoryItemSupplyPayload): Promise<void> {
+        return this.put(`/documents-api/goodsInventoriesItemsSupply/${stockId}/${goodsInventoryItemSupplyId}`, payload);
+    }
+
+    /**
+     * Deletes an inventory item.
      */
     public async deleteInventoryItemSupply(stockId: number, goodsInventoryItemSupplyId: number): Promise<void> {
         return this.delete(`/documents-api/goodsInventoriesItemsSupply/${stockId}/${goodsInventoryItemSupplyId}`);
     }
 
     /**
-     * [cite_start]Vyvolání kontroly inventury[cite: 40].
+     * Initiates an inventory check/preview.
      */
     public async getInventoryResultPreview(stockId: number, goodsInventoryId: number): Promise<t.InventoryPreviewResponse> {
         return this.get(`/documents-api/goodsInventories/resultPreview/${stockId}/${goodsInventoryId}`);
     }
-    
+
     /**
-     * [cite_start]Vyvolání dokončení inventury[cite: 41].
+     * Initiates the finalization of an inventory.
      */
     public async finalizeInventory(stockId: number, goodsInventoryId: number): Promise<t.GenericApiResponse> {
         return this.get(`/documents-api/goodsInventories/finalize/${stockId}/${goodsInventoryId}`);
     }
 
     /**
-     * [cite_start]Získání protokolu o inventuře[cite: 42].
+     * Gets the inventory protocol/report.
      */
     public async getInventoryProtocol(stockId: number, goodsInventoryId: number): Promise<t.GenericApiResponse> {
         return this.get(`/documents-api/goodsInventories/protocol/${stockId}/${goodsInventoryId}`);
@@ -267,136 +298,145 @@ export class DocumentsApiService extends BaseApiClient {
     // ========================
     // Group: Receipts & posSummaries
     // ========================
-    
+
     /**
-     * Načtení detailu účtenky.
+     * Loads receipt details.
      */
     public async getReceipt(stockId: number, params: t.GetReceiptsParams): Promise<t.ReceiptResponse> {
         return this.get(`/documents-api/receipts/${stockId}`, params);
     }
-    
+
     /**
-     * Načtení detailu pokladní uzávěrky.
+     * Loads POS summary details.
      */
     public async getPosSummary(stockId: number, posSummaryKey: string, params: t.GetPosSummaryParams = {}): Promise<t.PosSummaryResponse> {
         return this.get(`/documents-api/posSummaries/${stockId}/${posSummaryKey}`, params);
     }
 
     // ========================
-    // Group: receiptUdd (Úplný daňový doklad)
+    // Group: receiptUdd (Full Tax Document)
     // ========================
 
     /**
-     * Detail úplného daňového dokladu.
+     * Full tax document details.
      */
     public async getReceiptUdd(stockId: number, receiptUddId: number, params: t.GetReceiptUddParams = {}): Promise<t.ReceiptUddResponse> {
         return this.get(`/documents-api/receiptsUdd/${stockId}/${receiptUddId}`, params);
     }
-    
+
     /**
-     * Update úplného daňového dokladu.
+     * Updates the full tax document.
      */
     public async putReceiptUdd(stockId: number, receiptUddId: number, payload: t.UpdateReceiptUddPayload): Promise<void> {
         return this.put(`/documents-api/receiptsUdd/${stockId}/${receiptUddId}`, payload);
     }
-    
+
     /**
-     * Stažení PDF úplného daňového dokladu.
+     * Downloads the PDF of the full tax document.
      */
     public async getReceiptUddPdf(stockId: number, receiptUddId: number): Promise<t.GenericApiResponse> {
         return this.get(`/documents-api/receiptsUdd/${stockId}/${receiptUddId}/print`, { format: 'pdf' });
     }
-    
+
     // ========================
     // Group: WetDeliveryNotes Accessories
     // ========================
-    
+
     /**
-     * [cite_start]Načtení detailu CaData[cite: 62].
+     * Loads CaData details.
      */
     public async getWetDeliveryNoteCaDataDetail(stockId: number, wetDeliveryNoteId: number, caDataId: number): Promise<t.WetDeliveryNoteCaDataResponse> {
         return this.get(`/documents-api/wetDeliveryNotesCaData/${stockId}/${wetDeliveryNoteId}/${caDataId}`);
     }
 
     /**
-     * [cite_start]Načtení detailu měření[cite: 67].
+     * Loads measurement details.
      */
     public async getWetDeliveryNoteMeasureDetail(stockId: number, wetDeliveryNoteId: number, measureId: number): Promise<t.WetDeliveryNoteMeasureResponse> {
         return this.get(`/documents-api/wetDeliveryNotesMeasures/${stockId}/${wetDeliveryNoteId}/${measureId}`);
     }
 
     /**
-     * [cite_start]Načtení detailu registru[cite: 72].
+     * Loads register details.
      */
     public async getWetDeliveryNoteRegisterDetail(stockId: number, wetDeliveryNoteId: number, registerId: number): Promise<t.WetDeliveryNoteRegisterResponse> {
         return this.get(`/documents-api/wetDeliveryNotesRegisters/${stockId}/${wetDeliveryNoteId}/${registerId}`);
     }
-    
+
     /**
-     * Smazání registru.
-     * POZNÁMKA: V dokumentaci chybí explicitní DELETE pro tento endpoint, ale typicky k PUT/GET/POST existuje i DELETE.
-     * Doplňuji na základě konvence. Pokud API metodu nepodporuje, bude vracet chybu.
+     * Deletes a register.
+     * NOTE: The documentation is missing an explicit DELETE for this endpoint, but typically a DELETE exists
+     * alongside PUT/GET/POST. Adding it based on convention. If the API doesn't support this method, it will return an error.
      */
     public async deleteWetDeliveryNoteRegister(stockId: number, wetDeliveryNoteId: number, registerId: number): Promise<void> {
         return this.delete(`/documents-api/wetDeliveryNotesRegisters/${stockId}/${wetDeliveryNoteId}/${registerId}`);
     }
-    
+
     /**
-     * Načtení příslušenství.
+     * Loads accessories.
      */
     public async getWetDeliveryNotesAccessories(stockId: number): Promise<t.WetDeliveryNoteAccessoryResponse[]> {
         return this.get(`/documents-api/wetDeliveryNotesAccessories/${stockId}`);
     }
-    
+
     /**
-     * Založení příslušenství.
+     * Creates an accessory.
      */
     public async postWetDeliveryNotesAccessory(stockId: number, payload: t.CreateWetDeliveryNoteAccessoryPayload): Promise<t.WetDeliveryNoteAccessoryResponse> {
         return this.post(`/documents-api/wetDeliveryNotesAccessories/${stockId}`, payload);
     }
-    
+
     /**
-     * Update příslušenství.
-     * Poznámka: API používá POST pro update.
+     * Updates an accessory.
+     * Note: The API uses POST for updates.
      */
     public async postWetDeliveryNotesAccessoryUpdate(stockId: number, accessoryId: number, payload: t.UpdateWetDeliveryNoteAccessoryPayload): Promise<void> {
         return this.post(`/documents-api/wetDeliveryNotesAccessories/${stockId}/${accessoryId}`, payload);
     }
+
+    /**
+     * Deletes an accessory.
+     * [MISSING ENDPOINT ADDED]
+     */
+    public async deleteWetDeliveryNotesAccessory(stockId: number, accessoryId: number): Promise<void> {
+        return this.delete(`/documents-api/wetDeliveryNotesAccessories/${stockId}/${accessoryId}`);
+    }
+
 
     // ========================
     // Group: WetDeliveryNotes
     // ========================
 
     /**
-     * Založení "mokrého" dodacího listu.
+     * Creates a "wet" delivery note (for liquids/fuel).
      */
     public async postWetDeliveryNote(stockId: number, payload: t.CreateWetDeliveryNotePayload): Promise<t.WetDeliveryNoteResponse> {
         return this.post(`/documents-api/wetDeliveryNotes/${stockId}`, payload);
     }
-    
+
     /**
-     * Detail "mokrého" dodacího listu.
+     * Details of a "wet" delivery note.
      */
     public async getWetDeliveryNote(stockId: number, wetDeliveryNoteId: number): Promise<t.WetDeliveryNoteResponse> {
         return this.get(`/documents-api/wetDeliveryNotes/${stockId}/${wetDeliveryNoteId}`);
     }
 
     /**
-     * Editace "mokrého" dodacího listu.
+     * Edits a "wet" delivery note.
      */
     public async putWetDeliveryNote(stockId: number, wetDeliveryNoteId: number, payload: t.UpdateWetDeliveryNotePayload): Promise<void> {
         return this.put(`/documents-api/wetDeliveryNotes/${stockId}/${wetDeliveryNoteId}`, payload);
     }
-    
+
     /**
-     * Vyřazení (smazání) "mokrého" dodacího listu.
+     * Discards (deletes) a "wet" delivery note.
      */
     public async deleteWetDeliveryNote(stockId: number, wetDeliveryNoteId: number): Promise<void> {
         return this.delete(`/documents-api/wetDeliveryNotes/${stockId}/${wetDeliveryNoteId}`);
     }
 
     /**
-     * Založení inventury "mokrého" dodacího listu.
+     * Creates an inventory for a "wet" delivery note.
      */
     public async postWetDeliveryNoteInventory(stockId: number, payload: t.CreateWetDeliveryNoteInventoryPayload): Promise<t.WetDeliveryNoteResponse> {
         return this.post(`/documents-api/wetDeliveryNotesInventory/${stockId}`, payload);
@@ -415,7 +455,7 @@ export class DocumentsApiService extends BaseApiClient {
     public async getWetDeliveryNoteRegistersList(stockId: number, wetDeliveryNoteId: number): Promise<t.GenericApiResponse> {
         return this.get(`/documents-api/wetDeliveryNotes/registers/${stockId}/${wetDeliveryNoteId}`);
     }
-    
+
     // --- CaData ---
     public async postWetDeliveryNoteCaData(stockId: number, wetDeliveryNoteId: number, payload: t.CreateWetDeliveryNoteCaDataPayload): Promise<t.WetDeliveryNoteCaDataResponse> {
         return this.post(`/documents-api/wetDeliveryNotesCaData/${stockId}/${wetDeliveryNoteId}`, payload);
@@ -424,11 +464,11 @@ export class DocumentsApiService extends BaseApiClient {
     public async putWetDeliveryNoteCaData(stockId: number, wetDeliveryNoteId: number, caDataId: number, payload: t.UpdateWetDeliveryNoteCaDataPayload): Promise<t.WetDeliveryNoteCaDataResponse> {
         return this.put(`/documents-api/wetDeliveryNotesCaData/${stockId}/${wetDeliveryNoteId}/${caDataId}`, payload);
     }
-    
+
     public async deleteWetDeliveryNoteCaData(stockId: number, wetDeliveryNoteId: number, caDataId: number): Promise<void> {
         return this.delete(`/documents-api/wetDeliveryNotesCaData/${stockId}/${wetDeliveryNoteId}/${caDataId}`);
     }
-    
+
     // --- Measures ---
     public async postWetDeliveryNoteMeasure(stockId: number, wetDeliveryNoteId: number, payload: t.CreateWetDeliveryNoteMeasurePayload): Promise<t.WetDeliveryNoteMeasureResponse> {
         return this.post(`/documents-api/wetDeliveryNotesMeasures/${stockId}/${wetDeliveryNoteId}`, payload);
@@ -446,7 +486,7 @@ export class DocumentsApiService extends BaseApiClient {
     public async postWetDeliveryNoteRegister(stockId: number, wetDeliveryNoteId: number, payload: t.CreateWetDeliveryNoteRegisterPayload): Promise<t.WetDeliveryNoteRegisterResponse> {
         return this.post(`/documents-api/wetDeliveryNotesRegisters/${stockId}/${wetDeliveryNoteId}`, payload);
     }
-    
+
     public async putWetDeliveryNoteRegister(stockId: number, wetDeliveryNoteId: number, registerId: number, payload: t.UpdateWetDeliveryNoteRegisterPayload): Promise<t.WetDeliveryNoteRegisterResponse> {
         return this.put(`/documents-api/wetDeliveryNotesRegisters/${stockId}/${wetDeliveryNoteId}/${registerId}`, payload);
     }
@@ -454,17 +494,17 @@ export class DocumentsApiService extends BaseApiClient {
     // --- Actions ---
 
     /**
-     * Naskladnění.
+     * Stock-in.
      */
     public async postWetDeliveryNoteChangeSupply(stockId: number, wetDeliveryNoteId: number): Promise<t.GenericApiResponse> {
         return this.post(`/documents-api/wetDeliveryNotes/changeSupply/${stockId}/${wetDeliveryNoteId}`, {});
     }
 
     /**
-     * Schválení.
+     * Approval.
      */
     public async postWetDeliveryNoteValid(stockId: number, wetDeliveryNoteId: number, params?: { procesOfConversion: string }): Promise<t.GenericApiResponse> {
-        // Playwright posílá 'params' jako query string automaticky, pokud je metoda GET. Pro POST je potřeba je přidat do URL manuálně.
+        // Playwright automatically sends 'params' as a query string for GET methods. For POST, they need to be added to the URL manually.
         const endpoint = `/documents-api/wetDeliveryNotes/valid/${stockId}/${wetDeliveryNoteId}`;
         const urlWithParams = params ? `${endpoint}?${new URLSearchParams(params)}` : endpoint;
         return this.post(urlWithParams, {});

@@ -1,14 +1,15 @@
 /**
  * @file ReportsApiService.ts
  * @author Marek Novák
- * @date 11.09.2025
+ * @date 29.09.2025
  * @description
- * Tento soubor obsahuje ReportsApiService, specializovanou službu pro komunikaci
- * s reportovacími endpointy API.
- * * @classdesc
- * ReportsApiService dědí od BaseApiClient a přidává metody specifické pro
- * operace s reporty, jako je získání seznamu reportů nebo vytvoření nového reportu.
- * */
+ * This file contains the ReportsApiService, a dedicated service class for
+ * interacting with the reporting-related endpoints of the API.
+ * @classdesc
+ * The ReportsApiService extends the BaseApiClient and provides specific
+ * methods for report-related operations, such as fetching various lists
+ * and generating reports.
+ */
 
 import { BaseApiClient } from '../BaseApiClient';
 import * as ReportTypes from '../types/reports';
@@ -164,8 +165,13 @@ export class ReportsApiService extends BaseApiClient {
     public async getListOfOrders(params: { stockId: number; year: number; month?: number; day?: number; fullSearch?: string; supplierId?: number; documentsStatus?: number; operator?: string; }): Promise<ReportTypes.GenericApiResponse> {
         return this.get('/reports-api/listOfOrders', params);
     }
-
-    // ... a tak dále pro všechny ostatní "listOf" endpointy
+    
+    /**
+     * *Zobrazí senznam registrů.
+     */
+    public async getListOfRegisters(params: { stockId?: number; sort?: number; offset?: number; limit?: number; format?: string;}): Promise<ReportTypes.GenericApiResponse> {
+        return this.get('/reports-api/listOfRegisters', params);
+    }
     
     // ========================
     // Group: Reporty

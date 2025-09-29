@@ -1,9 +1,9 @@
 // soubor: support/fixtures.ts
 
 import { test as baseTest, expect, request as playwrightRequest } from '@playwright/test';
-import { ApiClient } from '../ApiClient.legacy'; // Upravte cestu
-import { logger } from '../logger';     // Upravte cestu
-import { loginhash, baseURL } from '../constants'; // Upravte cestu
+import { ApiClient } from '../ApiClient.legacy'; 
+import { logger } from '../logger';     
+import { loginhash, baseURL } from '../constants'; 
 
 // 1. Definujeme si typy pro naše nové fixtures
 type MyFixtures = {
