@@ -20,11 +20,10 @@ export class ReportsApiService extends BaseApiClient {
     // Group: Seznamy
     // ========================
 
-    /*
     //Sestaví seznam vydavatelů karet.
     public async getListOfCardIssuers(params: ReportTypes.GetListOfCardIssuersParams = {}): Promise<ReportTypes.GenericApiResponse> {
         return this.get('/reports-api/listOfCardIssuers', params);
-    }*/
+    }
 
     /**
      * Načte seznam bonusových tříd.

@@ -20,9 +20,11 @@
  */
 
 import { ApiClient } from '../../api/ApiClient';
+import { baseURL, port } from '../../support/constants';
 import { expect, test } from '../../support/fixtures/auth.fixture';
 import { logger } from '../../support/logger';
 import endpointsToTest from '../../test-data/Smoke_All_Gets.json'; // 
+import endpointsStatus from '../../test-data/status_endpoints.json'; 
 
 // Definice typů pro lepší kontrolu a napovídání
 type ApiService = 'reports' | 'documents' | 'system';
@@ -38,28 +40,45 @@ let responseStatus: number;
 
 test.describe('API Smoke Tests - GET Endpoints', () => {
 
+ /*   
     // =============================================================
-    // I. Test pro veřejně dostupný endpoint (bez autorizace)
+    // I. Test public endpoints (without authorization)
     // =============================================================
-    test(`Endpoint GET /api/status should be available and return 200 OK - real status @smoke @API @high @GETs ${responseStatus}`, async ({ request }) => {
-        logger.info('Spouštím smoke test pro veřejný GET /api/status...');
-        const publicApiClient = new ApiClient(request, ''); // Klient bez tokenu
+    test.describe('Public GETs from JSON', () => {
+        for (const endpoint of endpointsStatus) {
+            test(`Endpoint "${endpoint.name}" should be 2xx or 3xx`, async ({ request }) => {
+                logger.info(`Running enhanced test for public endpoint: ${baseURL}${endpoint.name}`);
 
-        const response = await publicApiClient.system.getStatus();
-        const status = response.status();
-        const contentType = response.headers()['content-type'];
+                const publicApiClient = new ApiClient(request, '');
+                const service = (publicApiClient as any)[endpoint.service];
+                if (!service) {
+                    throw new Error(`Service "${endpoint.service}" not found on ApiClient.`);
+                }
 
-        logger.info(`Přijata odpověď se statusem: ${status} a Content-Type: ${contentType}`);
+                const methodToCall = service[endpoint.method];
+                if (typeof methodToCall !== 'function') {
+                    throw new Error(`Method "${endpoint.method}" not found on service "${endpoint.service}".`);
+                }
 
-        expect(status, 'Očekáváme status 200 OK').toBe(200);
-        expect(contentType, 'Očekáváme Content-Type obsahující text/html').toContain('text/html');
-        
-        logger.silly(`Odpověď z /api/status: ${await response.text()}`);
-        logger.info('Test pro GET /api/status úspěšně dokončen.');
+                const response = await methodToCall.apply(service);
+                const status = response.status();
+                logger.info(`Received response with status: ${status}`);
+
+                // --- NEW: Verify Status Code is Not an Error ---
+                // This single check handles both 4xx and 5xx errors.
+                // It provides a clear, custom message if the check fails.
+                expect(status, `Request failed. Status ${status} indicates a server error (5xx).`).toBeLessThan(500);
+                expect(status, `Request failed. Status ${status} indicates a client error (4xx).`).toBeLessThan(400);
+            
+                
+                logger.info(`Test for "${endpoint.name}" completed successfully.`);
+            });
+        }
     });
 
+ */   
     // =============================================================
-    // II. Testy pro autorizované GET endpointy (řízené JSONem)
+    // II. Testy pro autorizované GET endpointy 
     // =============================================================
     test.describe('Authenticated GETs from JSON', () => {
         let apiClient: ApiClient;

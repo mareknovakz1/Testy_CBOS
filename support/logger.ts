@@ -41,9 +41,9 @@ export const logger: Logger<ILogObj> = new Logger({
   prettyLogTemplate:
     "{{yyyy}}-{{mm}}-{{dd}} {{hh}}:{{MM}}:{{ss}}.{{ms}} {{logLevelName}} [{{fileNameWithLine}}]",
   prettyErrorTemplate:
-    "{{errorName}} {{errorMessage}}\nerror stack:\n{{errorStack}}",
+    "{{errorName}} {{errorMessage}} error stack: {{errorStack}}",
   prettyErrorStackTemplate:
-    "  • {{fileName}}:{{lineNumber}}:{{columnNumber}}\n    {{method}}",
+    "  • {{fileName}}:{{lineNumber}}:{{columnNumber}} {{method}}",
   prettyErrorParentNamesSeparator: ":",
   prettyErrorLoggerNameDelimiter: ":",
   prettyInspectOptions: {

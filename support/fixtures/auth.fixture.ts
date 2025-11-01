@@ -1,14 +1,17 @@
 // soubor: support/fixtures.ts
 
 import { test as baseTest, expect, request as playwrightRequest } from '@playwright/test';
-import { ApiClient } from '../ApiClient.legacy'; 
-import { logger } from '../logger';     
-import { loginhash, baseURL } from '../constants'; 
+import { ApiClient } from '../../api/ApiClient';
+import { logger } from '../logger';
+// Zde importujeme přihlašovací údaje, nikoliv starý token
+import { baseURL, nameOne, passwordOne } from '../constants';
+// Přidáme import Bufferu pro kódování do Base64
+import { Buffer } from 'buffer';
 
 // 1. Definujeme si typy pro naše nové fixtures
 type MyFixtures = {
-  authToken: string;    // Fixture, která vrací jen string s tokenem
-  authPage: void;       // Fixture, která jen přihlásí stránku (nic nevrací)
+  authToken: string; // Fixture, která vrací jen string s tokenem
+  authPage: void; // Fixture, která jen přihlásí stránku (nic nevrací)
   apiClient: ApiClient; // Fixture, která vrací připravený a autorizovaný ApiClient
 };
 
@@ -24,11 +27,26 @@ export const test = baseTest.extend<MyFixtures>({
     const requestContext = await playwrightRequest.newContext();
     logger.trace("FIXTURE 'authToken': Request kontext vytvořen.");
 
+    // --- OPRAVENÁ ČÁST ZAČÍNÁ ZDE ---
+
+    // Vytvoříme tělo požadavku s přihlašovacími údaji
+    const loginPayload = {
+      operator: nameOne,
+      password: passwordOne
+    };
+
+    // Zakódujeme tělo do Base64, jak server očekává
+    const base64Payload = Buffer.from(JSON.stringify(loginPayload)).toString('base64');
+
     const url = `${baseURL}/auth-api/user/authorization`;
+    
+    // Posíláme správný Base64 payload
     const response = await requestContext.post(url, {
-      data: loginhash,
+      data: base64Payload,
       headers: { 'Content-Type': 'text/plain' }
     });
+
+    // --- OPRAVENÁ ČÁST KONČÍ ZDE ---
 
     logger.trace(`FIXTURE 'authToken': Odpověď přijata se statusem ${response.status()}.`);
 
@@ -46,6 +64,7 @@ export const test = baseTest.extend<MyFixtures>({
     logger.silly("FIXTURE 'authToken': Odpověď je OK (status 2xx). Parsuji JSON...");
     const responseJson = await response.json();
 
+    // Očekáváme, že v odpovědi bude pole 'accessToken'
     const token = responseJson.accessToken;
     logger.trace("FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.");
     expect(token, "Token ('accessToken') nebyl nalezen v odpovědi z API!").toBeTruthy();

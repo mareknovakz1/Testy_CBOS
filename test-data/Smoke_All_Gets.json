@@ -25,133 +25,126 @@
     "name": "GET /documents-api/receipts/{stockId}",
     "service": "documents",
     "method": "getReceipt",
-    "params": [101, { "receiptId": 398, "format": "json" }]
+    "params": [230, { "receiptId": 398, "format": "json" }]
   },
   {
     "testId": "TC-005",
     "name": "GET /documents-api/posSummaries/{stockId}/{posSummaryKey}",
     "service": "documents",
     "method": "getPosSummary",
-    "params": [101, "10101202551", { "format": "json" }]
+    "params": [230, "10101202551", { "format": "json" }]
   },
   {
     "testId": "TC-006",
     "name": "GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}",
     "service": "documents",
     "method": "getReceiptUdd",
-    "params": [101, 7, { "format": "json" }]
+    "params": [230, 7, { "format": "json" }]
   },
   {
     "testId": "TC-007",
     "name": "GET /documents-api/wetDeliveryNotesAccessories/{stockId}",
     "service": "documents",
     "method": "getWetDeliveryNotesAccessories",
-    "params": [101]
+    "params": [230]
   },
   {
     "testId": "TC-008",
     "name": "GET /documents-api/wetDeliveryNotes/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNote",
-    "params": [101, 6]
+    "params": [230, 6]
   },
   {
     "testId": "TC-009",
     "name": "GET /documents-api/wetDeliveryNotes/caData/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataList",
-    "params": [101, 6]
+    "params": [230, 6]
   },
   {
     "testId": "TC-010",
     "name": "GET /documents-api/wetDeliveryNotes/measures/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNoteMeasuresList",
-    "params": [101, 6]
+    "params": [230, 6]
   },
   {
     "testId": "TC-011",
     "name": "GET /documents-api/wetDeliveryNotes/registers/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNoteRegistersList",
-    "params": [101, 6]
+    "params": [230, 6]
   },
   {
     "testId": "TC-012",
     "name": "GET /documents-api/info/documentsMaxDate/{stockId}",
     "service": "documents",
     "method": "getDocumentsMaxDate",
-    "params": [101]
+    "params": [230]
   },
   {
     "testId": "TC-013",
     "name": "GET /documents-api/orders/{stockId}/{orderId}",
     "service": "documents",
     "method": "getOrderDetail",
-    "params": [101, 15]
+    "params": [230, 15]
   },
   {
     "testId": "TC-014",
     "name": "GET /documents-api/orders/items/{stockId}/{orderId}",
     "service": "documents",
     "method": "getOrderItems",
-    "params": [101, 96]
+    "params": [230, 96]
   },
   {
     "testId": "TC-015",
     "name": "GET /documents-api/goodsDeliveryNotes/items/{stockId}/{goodsDeliveryNoteId}",
     "service": "documents",
     "method": "getGoodsDeliveryNoteItems",
-    "params": [101, 7]
+    "params": [230, 7]
   },
   {
     "testId": "TC-016",
     "name": "GET /documents-api/goodsDeliveryNotes/vatRecap/{stockId}/{goodsDeliveryNoteId}",
     "service": "documents",
     "method": "getGoodsDeliveryNoteVatRecap",
-    "params": [101, 157]
+    "params": [230, 157]
   },
   {
     "testId": "TC-017",
     "name": "GET /documents-api/goodsInventories/{stockId}/{goodsInventoryId}",
     "service": "documents",
     "method": "getInventoryDetail",
-    "params": [101, 1]
+    "params": [230, 1]
   },
   {
     "testId": "TC-018",
     "name": "GET /documents-api/goodsInventories/items/{stockId}/{goodsInventoryId}",
     "service": "documents",
     "method": "getInventoryItems",
-    "params": [101, 1]
+    "params": [230, 1]
   },
   {
     "testId": "TC-020",
     "name": "GET /documents-api/goodsInventories/protocol/{stockId}/{goodsInventoryId}",
     "service": "documents",
     "method": "getInventoryProtocol",
-    "params": [101, 1]
+    "params": [230, 1]
   },
   {
     "testId": "TC-021",
     "name": "GET /documents-api/wetDeliveryNotesCaData/{stockId}/{wetDeliveryNoteId}/{caDataId}",
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataDetail",
-    "params": [101, 1, 1]
+    "params": [230, 1, 1]
   },
   {
     "testId": "TC-022",
     "name": "GET /documents-api/wetDeliveryNotesMeasures/{stockId}/{wetDeliveryNoteId}/{measureId}",
     "service": "documents",
     "method": "getWetDeliveryNoteMeasureDetail",
-    "params": [101, 6, 10]
-  },
-  {
-    "testId": "TC-023",
-    "name": "GET /reports-api/status",
-    "service": "reports",
-    "method": "getStatus",
-    "params": []
+    "params": [230, 6, 10]
   },
   {
     "testId": "TC-024",
@@ -165,7 +158,7 @@
     "name": "GET /reports-api/listOfRegisters",
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 101 }]
+    "params": [{ "stockId": 230 }]
   },
   {
     "testId": "TC-026",
@@ -189,20 +182,6 @@
     "params": [{ "accOwner": "00174939" }]
   },
   {
-    "testId": "TC-029",
-    "name": "GET /reports-api/listOfEuroOilCardRequests",
-    "service": "reports",
-    "method": "getListOfEuroOilCardRequests",
-    "params": [{ "stockId": 230 }]
-  },
-  {
-    "testId": "TC-030",
-    "name": "GET /reports-api/listOfCurrencyRates",
-    "service": "reports",
-    "method": "getListOfCurrencyRates",
-    "params": []
-  },
-  {
     "testId": "TC-031",
     "name": "GET /reports-api/listOfForeignStocksCCS",
     "service": "reports",
@@ -222,27 +201,6 @@
     "service": "reports",
     "method": "getListOfPricesCategories",
     "params": []
-  },
-  {
-    "testId": "TC-034",
-    "name": "GET /reports-api/listOfReceipts",
-    "service": "reports",
-    "method": "getListOfReceipts",
-    "params": [{ "stockId": 1, "year": 2025, "month": 9 }]
-  },
-  {
-    "testId": "TC-035",
-    "name": "GET /reports-api/listOfReceiptsUdd",
-    "service": "reports",
-    "method": "getListOfReceiptsUdd",
-    "params": [{ "stockId": 1, "year": 2025 }]
-  },
-  {
-    "testId": "TC-036",
-    "name": "GET /reports-api/listOfStockCards/{accOwner}/{stockId}",
-    "service": "reports",
-    "method": "getListOfStockCards",
-    "params": ["00174939", 1]
   },
   {
     "testId": "TC-037",
@@ -280,153 +238,6 @@
     "params": [{ "scheme": "cbos" }]
   },
   {
-    "testId": "TC-042",
-    "name": "GET /reports-api/listOfGoodsDeliveryNotes",
-    "service": "reports",
-    "method": "getListOfGoodsDeliveryNotes",
-    "params": [{ "stockId": 1, "year": 2025, "sign": "+" }]
-  },
-  {
-    "testId": "TC-043",
-    "name": "GET /reports-api/listOfGoodsInventories",
-    "service": "reports",
-    "method": "getListOfGoodsInventories",
-    "params": [{ "stockId": 1, "year": 2025 }]
-  },
-  {
-    "testId": "TC-044",
-    "name": "GET /reports-api/listOfOrders",
-    "service": "reports",
-    "method": "getListOfOrders",
-    "params": [{ "stockId": 1, "year": 2025 }]
-  },
-  {
-    "testId": "TC-045",
-    "name": "GET /reports-api/listOfOperators",
-    "service": "reports",
-    "method": "getListOfOperators",
-    "params": [{ "stockId": 1, "year": 2025, "documentType": "R" }]
-  },
-  {
-    "testId": "TC-046",
-    "name": "GET /reports-api/listOfPosSummaries",
-    "service": "reports",
-    "method": "getListOfPosSummaries",
-    "params": [{ "stockId": 1, "year": 2025 }]
-  },
-  {
-    "testId": "TC-047",
-    "name": "GET /reports-api/listOfPosTankTickets",
-    "service": "reports",
-    "method": "getListOfPosTankTickets",
-    "params": [{ "stockId": 1, "dateFrom": "2025-09-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-048",
-    "name": "GET /reports-api/listOfPosMoneyOperations",
-    "service": "reports",
-    "method": "getListOfPosMoneyOperations",
-    "params": [{ "stockId": 1, "dateFrom": "2025-09-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-049",
-    "name": "GET /reports-api/listOfPosTankVouchers",
-    "service": "reports",
-    "method": "getListOfPosTankVouchers",
-    "params": [{ "stockId": 1, "dateFrom": "2025-09-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-050",
-    "name": "GET /reports-api/listOfWetDeliveryNotes",
-    "service": "reports",
-    "method": "getListOfWetDeliveryNotes",
-    "params": [{ "stockId": 1, "year": 2025 }]
-  },
-  {
-    "testId": "TC-051",
-    "name": "GET /reports-api/listOfDrivers",
-    "service": "reports",
-    "method": "getListOfDrivers",
-    "params": [{ "accOwner": "60193524" }]
-  },
-  {
-    "testId": "TC-052",
-    "name": "GET /reports-api/listOfVehicles",
-    "service": "reports",
-    "method": "getListOfVehicles",
-    "params": [{ "accOwner": "60193524" }]
-  },
-  {
-    "testId": "TC-053",
-    "name": "GET /reports-api/stockCardTransactions",
-    "service": "reports",
-    "method": "getStockCardTransactions",
-    "params": [{ "stockCardId": 1, "dateFrom": "2025-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-054",
-    "name": "GET /reports-api/receiptDeletedItems",
-    "service": "reports",
-    "method": "getReceiptDeletedItems",
-    "params": [{ "stockId": 1, "year": 2025, "dateFrom": "2024-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-055",
-    "name": "GET /reports-api/selfUsageTransactions",
-    "service": "reports",
-    "method": "getSelfUsageTransactions",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2025-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-056",
-    "name": "GET /reports-api/cashCollections",
-    "service": "reports",
-    "method": "getCashCollections",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2025-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-057",
-    "name": "GET /reports-api/dailyRegisters",
-    "service": "reports",
-    "method": "getDailyRegisters",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2025-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-058",
-    "name": "GET /reports-api/dailyTanksSupply",
-    "service": "reports",
-    "method": "getDailyTanksSupply",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2025-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-059",
-    "name": "GET /reports-api/exportSalesDetail",
-    "service": "reports",
-    "method": "getExportSalesDetail",
-    "params": [{ "accOwner": "00174939", "year": 2025, "month": 9 }]
-  },
-  {
-    "testId": "TC-060",
-    "name": "GET /reports-api/listOfSalesAgr",
-    "service": "reports",
-    "method": "getListOfSalesAgr",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2024-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-061",
-    "name": "GET /reports-api/lpgSalesDeliveries",
-    "service": "reports",
-    "method": "getLpgSalesDeliveries",
-    "params": [{ "accOwner": "00174939", "year": 2025 }]
-  },
-  {
-    "testId": "TC-062",
-    "name": "GET /reports-api/movementsOfGoods",
-    "service": "reports",
-    "method": "getMovementsOfGoods",
-    "params": [{ "accOwner": "00174939", "year": 2025, "month": 9 }]
-  },
-  {
     "testId": "TC-063",
     "name": "GET /reports-api/listOfUsersReports/{accOwner}",
     "service": "reports",
@@ -434,95 +245,11 @@
     "params": ["00174939"]
   },
   {
-    "testId": "TC-064",
-    "name": "GET /reports-api/userReportPreview/{id}",
-    "service": "reports",
-    "method": "getUserReportPreview",
-    "params": ["12345"]
-  },
-  {
-    "testId": "TC-065",
-    "name": "GET /reports-api/phmDeliveriesForFu",
-    "service": "reports",
-    "method": "getPhmDeliveriesForFu",
-    "params": [{ "accOwner": "00174939", "year": 2025, "month": 9 }]
-  },
-  {
-    "testId": "TC-066",
-    "name": "GET /reports-api/phmSalesForFU",
-    "service": "reports",
-    "method": "getPhmSalesForFU",
-    "params": [{ "accOwner": "00174939", "year": 2025, "month": 9 }]
-  },
-  {
-    "testId": "TC-067",
-    "name": "GET /reports-api/purchaseOfGoods",
-    "service": "reports",
-    "method": "getPurchaseOfGoods",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2024-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-068",
-    "name": "GET /reports-api/salePriceHistory",
-    "service": "reports",
-    "method": "getSalePriceHistory",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2024-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-069",
-    "name": "GET /reports-api/minimalSupply",
-    "service": "reports",
-    "method": "getMinimalSupply",
-    "params": [{ "accOwner": "00174939" }]
-  },
-  {
-    "testId": "TC-070",
-    "name": "GET /reports-api/vehiclesTransactions",
-    "service": "reports",
-    "method": "getVehiclesTransactions",
-    "params": [{ "accOwner": "00174939", "dateFrom": "2024-01-01T00:00:00.000Z" }]
-  },
-  {
-    "testId": "TC-071",
-    "name": "GET /reports-api/wetPriceList",
-    "service": "reports",
-    "method": "getWetPriceList",
-    "params": [{ "stockId": 1 }]
-  },
-  {
-    "testId": "TC-072",
-    "name": "GET /documents-api/listOfStockCardsWithMinimalSupply/{stockId}",
-    "service": "documents",
-    "method": "getStockCardsWithMinimalSupply",
-    "params": [101]
-  },
-  {
     "testId": "TC-073",
     "name": "GET /documents-api/goodsDeliveryNotes/{stockId}/{goodsDeliveryNoteId}",
     "service": "documents",
     "method": "getGoodsDeliveryNote",
-    "params": [101, 7]
-  },
-  {
-    "testId": "TC-074",
-    "name": "GET /documents-api/goodsInventories/resultPreview/{stockId}/{goodsInventoryId}",
-    "service": "documents",
-    "method": "getInventoryResultPreview",
-    "params": [101, 1]
-  },
-  {
-    "testId": "TC-075",
-    "name": "GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}/print",
-    "service": "documents",
-    "method": "getReceiptUddPdf",
-    "params": [101, 7]
-  },
-  {
-    "testId": "TC-076",
-    "name": "GET /documents-api/wetDeliveryNotesRegisters/{stockId}/{wetDeliveryNoteId}/{registerId}",
-    "service": "documents",
-    "method": "getWetDeliveryNoteRegisterDetail",
-    "params": [101, 6, 1]
+    "params": [230, 7]
   },
   {
     "testId": "TC-077",
@@ -530,13 +257,6 @@
     "service": "administration",
     "method": "getStatus",
     "params": []
-  },
-  {
-    "testId": "TC-078",
-    "name": "GET /administration-api/erpParameters/{account}",
-    "service": "administration",
-    "method": "getErpParameters",
-    "params": ["00174939"]
   },
   {
     "testId": "TC-079",
@@ -557,13 +277,6 @@
     "name": "GET /administration-api/vatClasses/{id}",
     "service": "administration",
     "method": "getVatClass",
-    "params": [1]
-  },
-  {
-    "testId": "TC-082",
-    "name": "GET /administration-api/stocks/{id}",
-    "service": "administration",
-    "method": "getStock",
     "params": [1]
   },
   {
@@ -616,248 +329,10 @@
     "params": [1]
   },
   {
-    "testId": "TC-090",
-    "name": "GET /administration-api/listOfHotKeysDefinitions/{stockId}/{posTerminalKey}",
-    "service": "administration",
-    "method": "getHotKeyDefinitions",
-    "params": [1, "TERM1"]
-  },
-  {
-    "testId": "TC-091",
-    "name": "GET /administration-api/users/{operator}",
-    "service": "administration",
-    "method": "getUser",
-    "params": ["ADMIN"]
-  },
-  {
-    "testId": "TC-092",
-    "name": "GET /administration-api/users/rights/{operator}/{scheme}",
-    "service": "administration",
-    "method": "getUserRightsForEdit",
-    "params": ["ADMIN", "cbos"]
-  },
-  {
     "testId": "TC-093",
     "name": "GET /administration-api/massOperations/listOfChangedItems/{changeType}",
     "service": "administration",
     "method": "getListOfChangedItems",
     "params": ["owner"]
-  },
-  {
-    "testId": "TC-094",
-    "name": "GET /administration-api/cardIssuers/{id}",
-    "service": "administration",
-    "method": "getCardIssuer",
-    "params": [1]
-  },
-  {
-    "testId": "TC-095",
-    "name": "GET /administration-api/cardIssuers/{issuerId}/conversions",
-    "service": "administration",
-    "method": "getCardIssuerConversions",
-    "params": [1]
-  },
-  {
-    "testId": "TC-096",
-    "name": "GET /administration-api/stockCardsGroupsLocal/{stockId}",
-    "service": "administration",
-    "method": "getLocalItemGroups",
-    "params": [1]
-  },
-  {
-    "testId": "TC-097",
-    "name": "GET /administration-api/stockCardsGroupsLocal/{stockId}/{groupId}",
-    "service": "administration",
-    "method": "getLocalItemGroup",
-    "params": [1, 1]
-  },
-  {
-    "testId": "TC-098",
-    "name": "GET /administration-api/stockCardsSupergroupsLocal/{stockId}",
-    "service": "administration",
-    "method": "getLocalItemSupergroups",
-    "params": [1]
-  },
-  {
-    "testId": "TC-099",
-    "name": "GET /administration-api/stockCardsSupergroupsLocal/{stockId}/{groupId}",
-    "service": "administration",
-    "method": "getLocalItemSupergroup",
-    "params": [1, 1]
-  },
-  {
-    "testId": "TC-100",
-    "name": "GET /administration-api/stockCardsCategories/{accOwner}",
-    "service": "administration",
-    "method": "getItemCategories",
-    "params": ["00174939"]
-  },
-  {
-    "testId": "TC-101",
-    "name": "GET /administration-api/stockCardsCategories/{accOwner}/{categoryId}",
-    "service": "administration",
-    "method": "getItemCategory",
-    "params": ["00174939", 1]
-  },
-  {
-    "testId": "TC-102",
-    "name": "GET /administration-api/stockCardsGroupsCentral/{accOwner}",
-    "service": "administration",
-    "method": "getCentralItemGroups",
-    "params": ["00174939"]
-  },
-  {
-    "testId": "TC-103",
-    "name": "GET /administration-api/stockCardsGroupsCentral/{accOwner}/{groupId}/{startValid}",
-    "service": "administration",
-    "method": "getCentralItemGroup",
-    "params": ["00174939", 1, "2024-01-01T00:00:00.000Z"]
-  },
-  {
-    "testId": "TC-104",
-    "name": "GET /administration-api/listOfCurrencyRates/{accOwner}",
-    "service": "administration",
-    "method": "getCurrencyRatesList",
-    "params": ["00174939"]
-  },
-  {
-    "testId": "TC-105",
-    "name": "GET /administration-api/currencyRates/{accOwner}",
-    "service": "administration",
-    "method": "getCurrencyRate",
-    "params": ["00174939"]
-  },
-  {
-    "testId": "TC-106",
-    "name": "GET /administration-api/bonusClasses/{classId}",
-    "service": "administration",
-    "method": "getBonusClass",
-    "params": [1]
-  },
-  {
-    "testId": "TC-107",
-    "name": "GET /administration-api/listOfBonusClassesItems/{bonusClassesId}",
-    "service": "administration",
-    "method": "getBonusClassItems",
-    "params": ["1"]
-  },
-  {
-    "testId": "TC-108",
-    "name": "GET /administration-api/bonusClassesItems/{itemId}",
-    "service": "administration",
-    "method": "getBonusClassItem",
-    "params": [1]
-  },
-  {
-    "testId": "TC-109",
-    "name": "GET /administration-api/bonusClassesItemsBounds/{boundId}",
-    "service": "administration",
-    "method": "getBonusClassItemBound",
-    "params": [1]
-  },
-  {
-    "testId": "TC-110",
-    "name": "GET /administration-api/bonusClassesConditions/{conditionId}",
-    "service": "administration",
-    "method": "getBonusClassCondition",
-    "params": [1]
-  },
-  {
-    "testId": "TC-111",
-    "name": "GET /administration-api/listOfBonusClassesConditions/{bonusClassesId}",
-    "service": "administration",
-    "method": "getBonusClassConditions",
-    "params": ["1"]
-  },
-  {
-    "testId": "TC-112",
-    "name": "GET /administration-api/listOfForeignStocks/{accOwner}/{stockId}",
-    "service": "administration",
-    "method": "getForeignStocks",
-    "params": ["00174939", 1]
-  },
-  {
-    "testId": "TC-113",
-    "name": "GET /administration-api/foreignStocks/{stockId}/{id}",
-    "service": "administration",
-    "method": "getForeignStock",
-    "params": [1, 1]
-  },
-  {
-    "testId": "TC-114",
-    "name": "GET /administration-api/foreignStocksPrices/{stockId}/{id}",
-    "service": "administration",
-    "method": "getForeignStockPrice",
-    "params": [1, 1]
-  },
-  {
-    "testId": "TC-115",
-    "name": "GET /administration-api/foreignStocksCCS",
-    "service": "administration",
-    "method": "getForeignStockCCS",
-    "params": [{ "fullSearch": "Some CCS" }]
-  },
-  {
-    "testId": "TC-116",
-    "name": "GET /administration-api/registers/{stockId}/{registerTimestamp}",
-    "service": "administration",
-    "method": "getRegister",
-    "params": [1, 1672531200000]
-  },
-  {
-    "testId": "TC-117",
-    "name": "GET /administration-api/registers/{stockId}/{dateFrom}/{dateTo}",
-    "service": "administration",
-    "method": "getRegisterByDateRange",
-    "params": [1, 1672531200000, 1672617600000]
-  },
-  {
-    "testId": "TC-118",
-    "name": "GET /administration-api/registers/inputPrepare/{stockId}",
-    "service": "administration",
-    "method": "prepareRegisterInput",
-    "params": [1]
-  },
-  {
-    "testId": "TC-119",
-    "name": "GET /administration-api/enums",
-    "service": "administration",
-    "method": "getEnums",
-    "params": []
-  },
-  {
-    "testId": "TC-120",
-    "name": "GET /administration-api/enums/{name}",
-    "service": "administration",
-    "method": "getEnumByName",
-    "params": ["SomeEnum"]
-  },
-  {
-    "testId": "TC-121",
-    "name": "GET /administration-api/menuDefinitions",
-    "service": "administration",
-    "method": "getMenuDefinitions",
-    "params": []
-  },
-  {
-    "testId": "TC-122",
-    "name": "GET /administration-api/languages",
-    "service": "administration",
-    "method": "getTranslations",
-    "params": []
-  },
-  {
-    "testId": "TC-123",
-    "name": "GET /administration-api/priceCategories/{categoryId}",
-    "service": "administration",
-    "method": "getPriceCategoryItems",
-    "params": [1]
-  },
-  {
-    "testId": "TC-124",
-    "name": "GET /administration-api/priceCategories/{categoryId}/{itemId}",
-    "service": "administration",
-    "method": "getPriceCategoryItemPrices",
-    "params": [1, 1]
   }
 ]

@@ -1,24 +1,30 @@
-[
-    {
-        "TC": "TC-001",
-        "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test",
-        "stockId": 230,
-        "ownerId": 1,
-        "ownerName": "ČEPRO, a.s.",
-        "supplierId": 8,
-        "supplierName": "Banner Baterie ČR spol.s r.o.",
-        "transporterId": "7",
-        "transporterName": "VELKÁ PECKA s.r.o."
-
+{
+  "TC_001": {
+    "step1_CreateOrder": {
+      "name": "POST documents-api/orders",
+      "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test",
+      "stockId": 230,
+      "ownerId": 1,
+      "ownerName": "ČEPRO, a.s.",
+      "supplierId": 8,
+      "supplierName": "Banner Baterie ČR spol.s r.o.",
+      "transporterId": "7",
+      "transporterName": "VELKÁ PECKA s.r.o."
     },
-    {
-        "TC": "TC-002",
-        "stockId": 230,
-        "year": 2025
+    "step2_GetOrdersList": {
+      "name": "GET reports-api/orders",
+      "stockId": 230,
+      "year": 2025
     },
-    {
-        "TC": "TC-003",
-        "amount": 5,
-        "StockCardId": 1152
+    "step3_GetStockCard": {
+      "name": "GET reports-api/listOfStockCards",
+      "PLU": 13,
+      "stockId": 230
+    },
+    "step4_AddOrderItem": {
+      "name": "POST documents-api/orderitems",
+      "stockCardId": 13,
+      "stockId": 230
     }
-]
+  }
+}

@@ -99,8 +99,8 @@ export class DocumentsApiService extends BaseApiClient {
     /**
      * Adds an item to an order.
      */
-    public async addOrderItem(stockId: number, payload: t.AddOrderItemPayload): Promise<void> {
-        return this.post(`/documents-api/orders/${stockId}`, payload);
+    public async postOrderItem(stockId: number, payload: t.AddOrderItemPayload): Promise<void> {
+        return this.post(`/documents-api/ordersitems/${stockId}`, payload);
     }
 
     /**
