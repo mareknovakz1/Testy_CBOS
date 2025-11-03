@@ -30,7 +30,7 @@ type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export class BaseApiClient {
     protected request: APIRequestContext;                             // Instance Playwright request kontextu
     protected authToken: string | null;                               // Autorizační token, může být null
-    protected baseURL: string;                                        // Základní URL pro všechny požadavky
+    public baseURL: string;                                      // Základní URL pro všechny požadavky
 
     constructor(request: APIRequestContext, authToken: string | null) {
         this.request = request;                                       // Uložení request kontextu z testu
@@ -94,9 +94,9 @@ export class BaseApiClient {
         logger.info(`[${requestId}] <--- ${response.status()} ${method} ${url} (${duration} ms)`);
         
         // Logování detailů odpovědi na úrovni 'silly' pro snadné zapnutí/vypnutí v konfiguraci
-        const responseBody = await response.text();
+        //const responseBody = await response.text();
         logger.silly(`[${requestId}] Response Headers:`, response.headers());
-        logger.silly(`[${requestId}] Response Body:`, responseBody);
+        //logger.silly(`[${requestId}] Response Body:`, responseBody);
 
         return response; // Vrácení celé, nezměněné odpovědi
     }

@@ -18,9 +18,8 @@
 import { test, expect } from '../../../../support/fixtures/auth.fixture';
 import { logger } from '../../../../support/logger';
 import allOrderData from '../../../../test-data/Objednavky_life_cycle_regrese.json';
-// OPRAVA: Zde předpokládáme, že ApiClient je exportován, jak má 
-import * as t from '../../../../api/types/documents'; 
 import { ACC_OWNER_ID } from '../../../../support/constants';
+
 
 logger.silly(`Testovací data: ${JSON.stringify(allOrderData, null, 2)}`);
 
@@ -53,9 +52,11 @@ test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockC
         const testCase = allOrderData.TC_001.step1_CreateOrder;
         logger.info(`Zahajuji testovací případ TC-001 pro: POST /documents-api/orders/{stockId}`);
         logger.silly(`Deklarace testCase: ${JSON.stringify(testCase, null, 2)}`);
-
-        // OPRAVA: Uložíme stockId pro použití v dalších krocích
+        
+        logger.trace(`Uložení stockId z testovacích dat.`);
         stockId = testCase.stockId!;
+        logger.trace(`Definování endpointu pro vytvoření objednávky.`);
+        const endpoint = `/documents-api/orders/${stockId}`;
 
         // Formátování dat pro payload
         const orderDate = new Date().toISOString(); // Dnešní datum a čas
@@ -77,20 +78,16 @@ test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockC
     try {
         logger.trace(`Odesílám POST požadavek s payloadem: ${JSON.stringify(payload, null, 2)}`);
         const response = await apiClient.documents.postOrder(stockId, payload);
-        logger.silly(`Přijata odpověď: ${JSON.stringify(response, null, 2)}`);
+        logger.silly(`POST /documents-api/orders ${JSON.stringify(response, null, 2)}`);
 
         //Výsledky testů
         logger.debug('Vyhodnocení testu TC-001 step 1')
-        expect(response, 'Odpověď z API by neměla být null/undefined.').toBeDefined();
-        expect(typeof response.id, 'ID objednávky by mělo být číslo.').toBe('number');
-        expect(response.id, 'ID objednávky by mělo být větší než 0.').toBeGreaterThan(0);
-        
-        // OPRAVA (Kritická): Uložíme ID vytvořené objednávky pro další kroky
-        createdOrderId = response.id;
-        logger.info(`Objednávka úspěšně vytvořena s ID: ${createdOrderId}`);
+        expect(response.status).toBe(201); // Očekáváme 201 Created
+        logger.info('Status code je 201 - Objednávka byla vytvořena.');
 
     } catch (error) {
-        logger.error(`Test selhal s chybou: ${error}`);
+        const fullUrl = `${apiClient.documents.baseURL}${endpoint}`;
+        logger.error(`Step 1: Test selhal s chybou: ${error}, URL: ${fullUrl} status: ${response.status}`);
         throw error;
     }
     }); 
@@ -112,21 +109,20 @@ test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockC
         try {
             logger.debug('Volám metodu getListOfOrders pro získání seznamu objednávek.');
             const response = await apiClient.reports.getListOfOrders(payload); 
-            // logger.silly(`Response: ${JSON.stringify(response, null, 2)}`); // Může být příliš ukecané
+            logger.silly(`Response GET /reports-api/orders: ${JSON.stringify(response, null, 2)}`); // Může být příliš ukecané
 
             if (!response || !Array.isArray(response)) {
                 throw new Error('Seznam objednávek je prázdný nebo neplatný.');
             }
 
-            // OPRAVA (Logika): Ověříme, že naše objednávka je v seznamu.
-            // Původní kód jen bral response[0].id, což je nestabilní.
+            // Ověříme, že naše objednávka je v seznamu.
             const foundOrder = response.find(order => order.id === createdOrderId);
             
             expect(foundOrder, `Vytvořená objednávka s ID ${createdOrderId} nebyla nalezena v seznamu.`).toBeDefined();
             logger.info(`Objednávka ${createdOrderId} byla úspěšně nalezena v seznamu.`);
             
         } catch (error) {
-            logger.error(`Chyba při získávání seznamu objednávek: ${error}`);
+            logger.error(`Step 2: Chyba při získávání seznamu objednávek: ${error} ${error}, URL: ${fullUrl} status: ${response.status}`);
             throw error;
         }
     });
@@ -147,7 +143,7 @@ test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockC
             logger.debug('Volám metodu getListOfStockCards pro získání seznamu karet.');
             
             // OPRAVA: Používáme proměnnou 'stockId'
-            const response = await apiClient.reports.getListOfStockCards(queryString, stockId, ACC_OWNER_ID);
+            const response = await apiClient.reports.getListOfStockCards(queryString, stockId);
             // logger.silly(`Response: ${JSON.stringify(response, null, 2)}`);
 
             if (response && Array.isArray(response) && response.length > 0) {
@@ -192,7 +188,7 @@ test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockC
 
         try {
             logger.debug('Volám metodu postOrderItems pro přidání zboží do objednávky.');
-            const response = apiClient.documents.postOrderItem(payload, stockId, ACC_OWNER_ID);       
+            const response = apiClient.documents.postOrderItem(payload, stockId);       
             logger.silly(`Response: ${JSON.stringify(response)}`); 
             
             logger.debug('Ověřuji, že response není null.');

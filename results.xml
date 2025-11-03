@@ -1,34 +1,36 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="1.9262490000000003">
-  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-01T07:16:12.816Z" hostname="API" tests="1" failures="1" skipped="0" time="0.815" errors="0">
-    <testcase name="TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="0.815" id="TC-001">
-      <failure message="Objednvaky_life_cycle_regrese_api.spec.ts:39:5 TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium" type="FAILURE"><![CDATA[  [API] › Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:39:5 › TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium › Krok 1:  POST /documents-api/orders/{stockId}  
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="2.030729">
+  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-03T07:33:58.440Z" hostname="API" tests="1" failures="1" skipped="0" time="1.054" errors="0">
+    <testcase name="TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.054" id="TC-001">
+      <failure message="Objednvaky_life_cycle_regrese_api.spec.ts:38:5 TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium" type="FAILURE"><![CDATA[  [API] › Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:38:5 › TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium › Krok 1:  POST /documents-api/orders/{stockId}  
 
-    TypeError: Cannot read properties of null (reading 'id')
+    ReferenceError: response is not defined
 
-      85 |         logger.debug('Vyhodnocení testu TC-001 step 1')
-      86 |         expect(response, 'Odpověď z API by neměla být null/undefined.').toBeDefined();
-    > 87 |         expect(typeof response.id, 'ID objednávky by mělo být číslo.').toBe('number');
-         |                                ^
-      88 |         expect(response.id, 'ID objednávky by mělo být větší než 0.').toBeGreaterThan(0);
-      89 |         
-      90 |         // OPRAVA (Kritická): Uložíme ID vytvořené objednávky pro další kroky
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:87:32
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:51:5
+      88 |     } catch (error) {
+      89 |         const fullUrl = `${apiClient.documents.baseURL}${endpoint}`;
+    > 90 |         logger.error(`Step 1: Test selhal s chybou: ${error}, URL: ${fullUrl} status: ${response.status}`);
+         |                                                                                         ^
+      91 |         throw error;
+      92 |     }
+      93 |     }); 
+        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:90:89
+        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:50:5
 ]]></failure>
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:13[0m[0m.811[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:26[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:13[0m[0m.824[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:28[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.485[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:51[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.489[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:69[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.493[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:73[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.495[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:108[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.498[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:111[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.499[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:113[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.501[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:47[39m[0m[0m]Spouštím sadu testů pro vytvoření objednávky.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.504[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:48[39m[0m[0m]ApiClient byl inicializován fixturou.
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.508[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:54[39m[0m[0m]Zahajuji testovací případ TC-001 pro: POST /documents-api/orders/{stockId}
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.509[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:78[39m[0m[0m]Odesílám POST požadavek s payloadem: {
-  "orderDate": "2025-11-01T07:16:14.509Z",
-  "deliveryDate": "2025-11-02T07:16:14.501Z",
+      <system-out><![CDATA[2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:33[0m[0m:59[0m[0m.325[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:26[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:33[0m[0m:59[0m[0m.340[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:28[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.159[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:51[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.161[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:69[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.165[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:73[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.166[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:108[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.168[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:111[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.169[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:113[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.172[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:46[39m[0m[0m]Spouštím sadu testů pro vytvoření objednávky.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.174[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:47[39m[0m[0m]ApiClient byl inicializován fixturou.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.179[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:53[39m[0m[0m]Zahajuji testovací případ TC-001 pro: POST /documents-api/orders/{stockId}
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.181[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:56[39m[0m[0m]Uložení stockId z testovacích dat.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.184[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:58[39m[0m[0m]Definování endpointu pro vytvoření objednávky.
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.185[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:79[39m[0m[0m]Odesílám POST požadavek s payloadem: {
+  "orderDate": "2025-11-03T07:34:00.185Z",
+  "deliveryDate": "2025-11-04T07:34:00.171Z",
   "ownerId": 1,
   "ownerName": "ČEPRO, a.s.",
   "supplierId": 8,
@@ -37,11 +39,11 @@
   "transporterName": "VELKÁ PECKA s.r.o.",
   "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test"
 }
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.513[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][c08f18b3] ---> POST http://192.168.130.239:8180/documents-api/orders/230 {
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.189[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][96217347] ---> POST http://192.168.130.239:8180/documents-api/orders/230 {
   params: [90mundefined[39m,
   data: {
-    orderDate: [32m'2025-11-01T07:16:14.509Z'[39m,
-    deliveryDate: [32m'2025-11-02T07:16:14.501Z'[39m,
+    orderDate: [32m'2025-11-03T07:34:00.185Z'[39m,
+    deliveryDate: [32m'2025-11-04T07:34:00.171Z'[39m,
     ownerId: [33m1[39m,
     ownerName: [32m'ČEPRO, a.s.'[39m,
     supplierId: [33m8[39m,
@@ -53,13 +55,12 @@
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'c08f18b3'[39m,
+    [32m'X-Request-ID'[39m: [32m'96217347'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.585[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][c08f18b3] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/230 (60.04 ms)
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.594[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:85[39m[0m[0m]Vyhodnocení testu TC-001 step 1
-2025[0m[0m-11[0m[0m-01[0m[0m 07[0m[0m:16[0m[0m:14[0m[0m.600[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:95[39m[0m[0m]Test selhal s chybou: TypeError: Cannot read properties of null (reading 'id')
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.360[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][96217347] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/230 (159.85 ms)
+2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.363[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:84[39m[0m[0m]Vyhodnocení testu TC-001 step 1
 ]]></system-out>
     </testcase>
   </testsuite>

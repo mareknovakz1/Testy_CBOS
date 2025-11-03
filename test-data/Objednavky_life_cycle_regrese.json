@@ -18,7 +18,7 @@
     },
     "step3_GetStockCard": {
       "name": "GET reports-api/listOfStockCards",
-      "PLU": 13,
+      "PLU": 104922,
       "stockId": 230
     },
     "step4_AddOrderItem": {
