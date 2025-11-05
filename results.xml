@@ -1,66 +1,137 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="2.030729">
-  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-03T07:33:58.440Z" hostname="API" tests="1" failures="1" skipped="0" time="1.054" errors="0">
-    <testcase name="TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.054" id="TC-001">
-      <failure message="Objednvaky_life_cycle_regrese_api.spec.ts:38:5 TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium" type="FAILURE"><![CDATA[  [API] › Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:38:5 › TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium › Krok 1:  POST /documents-api/orders/{stockId}  
-
-    ReferenceError: response is not defined
-
-      88 |     } catch (error) {
-      89 |         const fullUrl = `${apiClient.documents.baseURL}${endpoint}`;
-    > 90 |         logger.error(`Step 1: Test selhal s chybou: ${error}, URL: ${fullUrl} status: ${response.status}`);
-         |                                                                                         ^
-      91 |         throw error;
-      92 |     }
-      93 |     }); 
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:90:89
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:50:5
-]]></failure>
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:33[0m[0m:59[0m[0m.325[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:26[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:33[0m[0m:59[0m[0m.340[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:28[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.159[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:51[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.161[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:69[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.165[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:73[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.166[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:108[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.168[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:111[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.169[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:113[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.172[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:46[39m[0m[0m]Spouštím sadu testů pro vytvoření objednávky.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.174[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:47[39m[0m[0m]ApiClient byl inicializován fixturou.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.179[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:53[39m[0m[0m]Zahajuji testovací případ TC-001 pro: POST /documents-api/orders/{stockId}
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.181[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:56[39m[0m[0m]Uložení stockId z testovacích dat.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.184[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:58[39m[0m[0m]Definování endpointu pro vytvoření objednávky.
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.185[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:79[39m[0m[0m]Odesílám POST požadavek s payloadem: {
-  "orderDate": "2025-11-03T07:34:00.185Z",
-  "deliveryDate": "2025-11-04T07:34:00.171Z",
-  "ownerId": 1,
-  "ownerName": "ČEPRO, a.s.",
-  "supplierId": 8,
-  "supplierName": "Banner Baterie ČR spol.s r.o.",
-  "transporterId": 7,
-  "transporterName": "VELKÁ PECKA s.r.o.",
-  "description": "Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test"
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="1.9660590000000002">
+  <testsuite name="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" timestamp="2025-11-05T22:14:47.434Z" hostname="API" tests="1" failures="0" skipped="0" time="0.945" errors="0">
+    <testcase name="TC-Sestavy: Krok 1: POST /usersReports, Krok 2: GET /listOfUsersReports, Krok 3: DELETE /usersReports @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.945">
+      <system-out><![CDATA[2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:48[0m[0m.378[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:48[0m[0m.385[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:48[0m[0m.386[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:48[0m[0m.387[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"MNA","password":"1"}
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:48[0m[0m.390[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:48[0m[0m.391[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.240:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.069[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.071[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.073[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.079[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.084[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:95[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.089[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:98[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.091[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:100[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.095[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:39[39m[0m[0m]Spouštím test životního cyklu sestavy: Přehled prodejů (D001) - 1762380889095
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.096[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:40[39m[0m[0m]ApiClient byl inicializován fixturou.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.099[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:45[39m[0m[0m]Krok 1: Vytváření nové sestavy: Přehled prodejů (D001) - 1762380889095
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.100[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:59[39m[0m[0m]Payload pro /reports-api/usersReports/60193531: {
+  "name": "Přehled prodejů (D001) - 1762380889095",
+  "public": false,
+  "reportDefinitionId": "D001",
+  "settings": {
+    "availableFilters": [
+      "stockId",
+      "stkitmType",
+      "groupId",
+      "goodsOwnerId",
+      "paidBy",
+      "cardOwnerId",
+      "cardIssuerId"
+    ],
+    "dateModelType": "range",
+    "dateFrom": "2025-10-31T23:00:00.000Z",
+    "dateTo": null,
+    "stockId": [],
+    "stkitmType": [],
+    "groupId": [],
+    "goodsOwnerId": [],
+    "paidBy": [],
+    "cardOwnerId": [],
+    "cardIssuerId": [],
+    "sort": "",
+    "exportParameters": {
+      "tabsParam": "",
+      "exportIntoTabs": false,
+      "exportFileName": false,
+      "exportDateTime": true,
+      "summaries": false
+    }
+  }
 }
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.189[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][96217347] ---> POST http://192.168.130.239:8180/documents-api/orders/230 {
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.102[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:62[39m[0m[0m]Odesílám POST požadavek na /reports-api/usersReports/60193531
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.103[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][04a83b77] ---> POST http://192.168.130.240:8180/reports-api/usersReports/60193531 {
   params: [90mundefined[39m,
   data: {
-    orderDate: [32m'2025-11-03T07:34:00.185Z'[39m,
-    deliveryDate: [32m'2025-11-04T07:34:00.171Z'[39m,
-    ownerId: [33m1[39m,
-    ownerName: [32m'ČEPRO, a.s.'[39m,
-    supplierId: [33m8[39m,
-    supplierName: [32m'Banner Baterie ČR spol.s r.o.'[39m,
-    transporterId: [33m7[39m,
-    transporterName: [32m'VELKÁ PECKA s.r.o.'[39m,
-    description: [32m'Automaticky vytvořená objednávka k rychlému ověření POST - Smoke test'[39m
+    name: [32m'Přehled prodejů (D001) - 1762380889095'[39m,
+    public: [33mfalse[39m,
+    reportDefinitionId: [32m'D001'[39m,
+    settings: {
+      availableFilters: [
+        [32m'stockId'[39m,
+        [32m'stkitmType'[39m,
+        [32m'groupId'[39m,
+        [32m'goodsOwnerId'[39m,
+        [32m'paidBy'[39m,
+        [32m'cardOwnerId'[39m,
+        [32m'cardIssuerId'[39m
+      ],
+      dateModelType: [32m'range'[39m,
+      dateFrom: [32m'2025-10-31T23:00:00.000Z'[39m,
+      dateTo: [1mnull[22m,
+      stockId: [],
+      stkitmType: [],
+      groupId: [],
+      goodsOwnerId: [],
+      paidBy: [],
+      cardOwnerId: [],
+      cardIssuerId: [],
+      sort: [32m''[39m,
+      exportParameters: {
+        tabsParam: [32m''[39m,
+        exportIntoTabs: [33mfalse[39m,
+        exportFileName: [33mfalse[39m,
+        exportDateTime: [33mtrue[39m,
+        summaries: [33mfalse[39m
+      }
+    }
   },
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'96217347'[39m,
+    [32m'X-Request-ID'[39m: [32m'04a83b77'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.360[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][96217347] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/230 (159.85 ms)
-2025[0m[0m-11[0m[0m-03[0m[0m 07[0m[0m:34[0m[0m:00[0m[0m.363[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:84[39m[0m[0m]Vyhodnocení testu TC-001 step 1
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.206[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][04a83b77] <--- 200 POST http://192.168.130.240:8180/reports-api/usersReports/60193531 (96.15 ms)
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.208[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:66[39m[0m[0m]Krok 1: Sestava úspěšně vytvořena (Status 201 OK).
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.210[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:78[39m[0m[0m]Krok 2: Ověření vytvoření sestavy a čtení dat.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.212[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:88[39m[0m[0m]Parametry pro /reports-api/listOfUsersReports/60193531: {"offset":0,"limit":1,"sort":"-updated"}
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.213[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:91[39m[0m[0m]Odesílám GET požadavek na /reports-api/listOfUsersReports/60193531
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.215[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][e20812f3] ---> GET http://192.168.130.240:8180/reports-api/listOfUsersReports/60193531 {
+  params: {
+    offset: [33m0[39m,
+    limit: [33m1[39m,
+    sort: [32m'-updated'[39m
+  },
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'e20812f3'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.260[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][e20812f3] <--- 200 GET http://192.168.130.240:8180/reports-api/listOfUsersReports/60193531 (43.95 ms)
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.265[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:110[39m[0m[0m]Krok 2: Sestava 'Přehled prodejů (D001) - 1762380889095' úspěšně nalezena s ID: 1325.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.266[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:114[39m[0m[0m]Nalezen počet položek (itemsCount): undefined
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.267[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:122[39m[0m[0m]Krok 2: Sestava obsahuje undefined položek.
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.269[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:141[39m[0m[0m]Krok 3: Mažu vytvořenou sestavu s ID: 1325
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.270[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:144[39m[0m[0m]Odesílám DELETE požadavek na /reports-api/usersReports/1325
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.271[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][f5d039c4] ---> DELETE http://192.168.130.240:8180/reports-api/usersReports/1325 {
+  params: [90mundefined[39m,
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'f5d039c4'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.307[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][f5d039c4] <--- 200 DELETE http://192.168.130.240:8180/reports-api/usersReports/1325 (33.84 ms)
+2025[0m[0m-11[0m[0m-05[0m[0m 22[0m[0m:14[0m[0m:49[0m[0m.309[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:148[39m[0m[0m]Krok 3: Sestava s ID 1325 úspěšně smazána.
 ]]></system-out>
     </testcase>
   </testsuite>

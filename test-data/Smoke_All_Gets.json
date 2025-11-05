@@ -25,126 +25,126 @@
     "name": "GET /documents-api/receipts/{stockId}",
     "service": "documents",
     "method": "getReceipt",
-    "params": [230, { "receiptId": 398, "format": "json" }]
+    "params": [101, { "receiptId": 398, "format": "json" }]
   },
   {
     "testId": "TC-005",
     "name": "GET /documents-api/posSummaries/{stockId}/{posSummaryKey}",
     "service": "documents",
     "method": "getPosSummary",
-    "params": [230, "10101202551", { "format": "json" }]
+    "params": [101, "10101202551", { "format": "json" }]
   },
   {
     "testId": "TC-006",
     "name": "GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}",
     "service": "documents",
     "method": "getReceiptUdd",
-    "params": [230, 7, { "format": "json" }]
+    "params": [101, 7, { "format": "json" }]
   },
   {
     "testId": "TC-007",
     "name": "GET /documents-api/wetDeliveryNotesAccessories/{stockId}",
     "service": "documents",
     "method": "getWetDeliveryNotesAccessories",
-    "params": [230]
+    "params": [101]
   },
   {
     "testId": "TC-008",
     "name": "GET /documents-api/wetDeliveryNotes/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNote",
-    "params": [230, 6]
+    "params": [101, 6]
   },
   {
     "testId": "TC-009",
     "name": "GET /documents-api/wetDeliveryNotes/caData/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataList",
-    "params": [230, 6]
+    "params": [101, 6]
   },
   {
     "testId": "TC-010",
     "name": "GET /documents-api/wetDeliveryNotes/measures/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNoteMeasuresList",
-    "params": [230, 6]
+    "params": [101, 6]
   },
   {
     "testId": "TC-011",
     "name": "GET /documents-api/wetDeliveryNotes/registers/{stockId}/{wetDeliveryNoteId}",
     "service": "documents",
     "method": "getWetDeliveryNoteRegistersList",
-    "params": [230, 6]
+    "params": [101, 6]
   },
   {
     "testId": "TC-012",
     "name": "GET /documents-api/info/documentsMaxDate/{stockId}",
     "service": "documents",
     "method": "getDocumentsMaxDate",
-    "params": [230]
+    "params": [101]
   },
   {
     "testId": "TC-013",
     "name": "GET /documents-api/orders/{stockId}/{orderId}",
     "service": "documents",
     "method": "getOrderDetail",
-    "params": [230, 15]
+    "params": [101, 15]
   },
   {
     "testId": "TC-014",
     "name": "GET /documents-api/orders/items/{stockId}/{orderId}",
     "service": "documents",
     "method": "getOrderItems",
-    "params": [230, 96]
+    "params": [101, 96]
   },
   {
     "testId": "TC-015",
     "name": "GET /documents-api/goodsDeliveryNotes/items/{stockId}/{goodsDeliveryNoteId}",
     "service": "documents",
     "method": "getGoodsDeliveryNoteItems",
-    "params": [230, 7]
+    "params": [101, 7]
   },
   {
     "testId": "TC-016",
     "name": "GET /documents-api/goodsDeliveryNotes/vatRecap/{stockId}/{goodsDeliveryNoteId}",
     "service": "documents",
     "method": "getGoodsDeliveryNoteVatRecap",
-    "params": [230, 157]
+    "params": [101, 157]
   },
   {
     "testId": "TC-017",
     "name": "GET /documents-api/goodsInventories/{stockId}/{goodsInventoryId}",
     "service": "documents",
     "method": "getInventoryDetail",
-    "params": [230, 1]
+    "params": [101, 1]
   },
   {
     "testId": "TC-018",
     "name": "GET /documents-api/goodsInventories/items/{stockId}/{goodsInventoryId}",
     "service": "documents",
     "method": "getInventoryItems",
-    "params": [230, 1]
+    "params": [101, 1]
   },
   {
     "testId": "TC-020",
     "name": "GET /documents-api/goodsInventories/protocol/{stockId}/{goodsInventoryId}",
     "service": "documents",
     "method": "getInventoryProtocol",
-    "params": [230, 1]
+    "params": [101, 1]
   },
   {
     "testId": "TC-021",
     "name": "GET /documents-api/wetDeliveryNotesCaData/{stockId}/{wetDeliveryNoteId}/{caDataId}",
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataDetail",
-    "params": [230, 1, 1]
+    "params": [101, 1, 1]
   },
   {
     "testId": "TC-022",
     "name": "GET /documents-api/wetDeliveryNotesMeasures/{stockId}/{wetDeliveryNoteId}/{measureId}",
     "service": "documents",
     "method": "getWetDeliveryNoteMeasureDetail",
-    "params": [230, 6, 10]
+    "params": [101, 6, 10]
   },
   {
     "testId": "TC-024",
@@ -158,7 +158,7 @@
     "name": "GET /reports-api/listOfRegisters",
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 230 }]
+    "params": [{ "stockId": 101 }]
   },
   {
     "testId": "TC-026",
@@ -249,7 +249,7 @@
     "name": "GET /documents-api/goodsDeliveryNotes/{stockId}/{goodsDeliveryNoteId}",
     "service": "documents",
     "method": "getGoodsDeliveryNote",
-    "params": [230, 7]
+    "params": [101, 7]
   },
   {
     "testId": "TC-077",

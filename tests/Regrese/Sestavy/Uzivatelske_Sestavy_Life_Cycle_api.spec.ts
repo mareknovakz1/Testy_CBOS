@@ -1,0 +1,157 @@
+/**
+ * @file Sestavy_life_cycle_api.spec.ts
+ * @author Marek Novák 
+ * @date 05.11.2025
+ * @description
+ * Regresní E2E API test pro kompletní životní cyklus uživatelské sestavy.
+ *
+ * @logic
+ * Krok 1: Vytvoření sestavy (POST /reports-api/usersReports)
+ * Krok 2: Ověření vytvoření a čtení dat (GET /reports-api/listOfUsersReports)
+ * Krok 3: Smazání sestavy (DELETE /reports-api/usersReports/{id})
+ *
+ * @tags @regression @report @api @medium
+ */
+
+import { test, expect } from '../../../support/fixtures/auth.fixture';
+import { logger } from '../../../support/logger';
+import * as ReportTypes from '../../../api/types/reports';
+import { ACC_OWNER_ID } from '../../../support/constants';
+import allReportData from '../../../test-data/Sestavy_life_cycle_regrese.json';
+
+logger.silly(`Testovací data: ${JSON.stringify(allReportData, null, 2)}`);
+
+// Série testů
+test(`TC-Sestavy: Krok 1: POST /usersReports, Krok 2: GET /listOfUsersReports, Krok 3: DELETE /usersReports @regression @report @api @medium`, async ({ apiClient }) => {
+
+    // Proměnné sdílené mezi kroky
+    let createdReportId: number;
+    
+    // OPRAVA: Získáme základní název z testovacích dat
+    const baseReportName = allReportData.TC_Sestavy_001.step1_CreateReport.name;
+    // Vytvoříme unikátní název, abychom sestavu spolehlivě našli
+    const uniqueReportName = `${baseReportName} - ${Date.now()}`;
+    
+    // Proměnné pro logování v 'catch' bloku
+    let endpoint: string;
+    let response: any;
+
+    logger.info(`Spouštím test životního cyklu sestavy: ${uniqueReportName}`);
+    logger.trace('ApiClient byl inicializován fixturou.');
+
+    // Krok 1: Vytvoření sestavy
+    await test.step('Krok 1: POST /reports-api/usersReports/{accOwner}', async () => {
+        endpoint = `/reports-api/usersReports/${ACC_OWNER_ID}`;
+        logger.info(`Krok 1: Vytváření nové sestavy: ${uniqueReportName}`);
+
+        // OPRAVA: Načteme data pro krok 1 z JSON souboru
+        const testCase = allReportData.TC_Sestavy_001.step1_CreateReport;
+
+        // OPRAVA: Sestavíme payload s použitím dat z JSONu
+        const payload: ReportTypes.postUserReportPayload = {
+            name: uniqueReportName, // Stále používáme unikátní jméno
+            public: testCase.public,
+            reportDefinitionId: testCase.reportDefinitionId,
+            // Použijeme 'as any' pro snadné přetypování z JSONu
+            settings: testCase.settings as any 
+        };
+        
+        logger.debug(`Payload pro ${endpoint}: ${JSON.stringify(payload, null, 2)}`);
+
+        try {
+            logger.trace(`Odesílám POST požadavek na ${endpoint}`);
+            response = await apiClient.reports.postUserReport(ACC_OWNER_ID, payload);
+            logger.silly(`Přijata odpověď: ${JSON.stringify(response, null, 2)}`);
+            
+            logger.info('Krok 1: Sestava úspěšně vytvořena (Status 201 OK).');
+
+        } catch (error) {
+            const fullUrl = `${apiClient.reports.baseURL}${endpoint}`;
+            logger.error(`Krok 1: Test selhal s chybou: ${error}, URL: ${fullUrl}`);
+            throw error;
+        }
+    });
+
+    // Krok 2: Přečtení ID a validace
+    await test.step('Krok 2: GET /reports-api/listOfUsersReports/{accOwner}', async () => {
+        endpoint = `/reports-api/listOfUsersReports/${ACC_OWNER_ID}`;
+        logger.info(`Krok 2: Ověření vytvoření sestavy a čtení dat.`);
+        
+        // OPRAVA: Načteme data pro krok 2 z JSON souboru
+        const testCase = allReportData.TC_Sestavy_001.step2_GetReportList;
+        const params: ReportTypes.getListOfUsersReports = {
+            offset: testCase.offset,
+            limit: testCase.limit, 
+            sort: testCase.sort 
+        };
+
+        logger.debug(`Parametry pro ${endpoint}: ${JSON.stringify(params)}`);
+
+        try {
+            logger.trace(`Odesílám GET požadavek na ${endpoint}`);
+            
+            // Používáme zděděnou metodu .get() pro spolehlivé předání parametrů
+            response = await apiClient.reports.get(endpoint, params);
+            
+            logger.silly(`Přijata odpověď: ${JSON.stringify(response, null, 2)}`);
+
+            if (!response || !Array.isArray(response) || response.length === 0) {
+                logger.error('Krok 2: Seznam sestav je prázdný nebo neplatný.');
+                throw new Error('Odpověď ze seznamu sestav je prázdná.');
+            }
+
+            const lastReport = response[0];
+            
+            // Ověříme, že je to ta, kterou jsme právě vytvořili
+            expect(lastReport.name, `Nalezená sestava '${lastReport.name}' neodpovídá vytvořené '${uniqueReportName}'`).toBe(uniqueReportName);
+
+            createdReportId = lastReport.id;
+            expect(createdReportId, "Nalezená sestava nemá platné ID.").toBeGreaterThan(0);
+            logger.info(`Krok 2: Sestava '${uniqueReportName}' úspěšně nalezena s ID: ${createdReportId}.`);
+
+            // Validace 'itemsCount' dle tvého plánu
+            const itemsCount = lastReport.itemsCount; 
+            logger.debug(`Nalezen počet položek (itemsCount): ${itemsCount}`);
+
+            if (itemsCount === null) {
+                logger.error('Krok 2: Počet položek (itemsCount) je "null", což značí chybu.');
+                throw new Error('Počet položek v sestavě je null.');
+            } else if (itemsCount === 0) {
+                logger.warn('Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.');
+            } else {
+                logger.info(`Krok 2: Sestava obsahuje ${itemsCount} položek.`);
+            }
+
+        } catch (error) {
+            const fullUrl = `${apiClient.reports.baseURL}${endpoint}?${new URLSearchParams(params as any)}`;
+            logger.error(`Krok 2: Test selhal s chybou: ${error}, URL: ${fullUrl}`);
+            throw error;
+        }
+    });
+
+    // Krok 3: Smazání sestavy (Úklid)
+    await test.step('Krok 3: DELETE /reports-api/usersReports/{id} (Úklid)', async () => {
+        
+        if (!createdReportId) {
+            logger.error('Krok 3: Nelze provést úklid, protože ID sestavy (createdReportId) nebylo získáno v Kroku 2.');
+            throw new Error("createdReportId chybí pro Krok 3.");
+        }
+        
+        endpoint = `/reports-api/usersReports/${createdReportId}`;
+        logger.info(`Krok 3: Mažu vytvořenou sestavu s ID: ${createdReportId}`);
+
+        try {
+            logger.trace(`Odesílám DELETE požadavek na ${endpoint}`);
+            response = await apiClient.reports.deleteUserReport(createdReportId);
+            logger.silly(`Přijata odpověď: ${JSON.stringify(response, null, 2)}`);
+
+            logger.info(`Krok 3: Sestava s ID ${createdReportId} úspěšně smazána.`);
+
+        } catch (error) {
+            const fullUrl = `${apiClient.reports.baseURL}${endpoint}`;
+            logger.error(`Krok 3: Úklid selhal s chybou: ${error}, URL: ${fullUrl}`);
+            throw error;
+        }
+    });
+
+});

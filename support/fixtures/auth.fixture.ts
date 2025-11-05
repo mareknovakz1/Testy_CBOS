@@ -3,8 +3,7 @@
 import { test as baseTest, expect, request as playwrightRequest } from '@playwright/test';
 import { ApiClient } from '../../api/ApiClient';
 import { logger } from '../logger';
-// Zde importujeme přihlašovací údaje, nikoliv starý token
-import { baseURL, nameOne, passwordOne } from '../constants';
+import { baseURL, username, passwordOne } from '../constants';
 // Přidáme import Bufferu pro kódování do Base64
 import { Buffer } from 'buffer';
 
@@ -19,37 +18,31 @@ type MyFixtures = {
 export const test = baseTest.extend<MyFixtures>({
 
   // --- ZÁKLADNÍ FIXTURE PRO ZÍSKÁNÍ TOKENU ---
-  // Tato fixture nemá žádné závislosti a jejím jediným úkolem je získat token.
-  // Je znovupoužitelná pro ostatní fixtures.
   authToken: async ({}, use) => {
     logger.silly("FIXTURE 'authToken': Start.");
     logger.trace("FIXTURE 'authToken': Budu vytvářet nový request kontext...");
     const requestContext = await playwrightRequest.newContext();
     logger.trace("FIXTURE 'authToken': Request kontext vytvořen.");
 
-    // --- OPRAVENÁ ČÁST ZAČÍNÁ ZDE ---
-
-    // Vytvoříme tělo požadavku s přihlašovacími údaji
+    logger.trace("Definuji loginPayload pro přihlášení...");
     const loginPayload = {
-      operator: nameOne,
+      operator: username,
       password: passwordOne
     };
+   logger.trace(`Přihlašovací údaji: ${JSON.stringify(loginPayload)}`);
 
-    // Zakódujeme tělo do Base64, jak server očekává
+    logger.trace("FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...");
     const base64Payload = Buffer.from(JSON.stringify(loginPayload)).toString('base64');
-
     const url = `${baseURL}/auth-api/user/authorization`;
     
-    // Posíláme správný Base64 payload
+    logger.trace(`FIXTURE 'authToken': Odesílám POST požadavek na '${url}' s Base64... `);
     const response = await requestContext.post(url, {
       data: base64Payload,
       headers: { 'Content-Type': 'text/plain' }
     });
-
-    // --- OPRAVENÁ ČÁST KONČÍ ZDE ---
-
     logger.trace(`FIXTURE 'authToken': Odpověď přijata se statusem ${response.status()}.`);
 
+    logger.debug("FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...");
     if (!response.ok()) {
       const responseBody = await response.text();
       logger.fatal({
@@ -75,19 +68,14 @@ export const test = baseTest.extend<MyFixtures>({
     logger.silly("FIXTURE 'authToken': Fixture dokončila svou práci po 'use'.");
   },
 
-  // --- FIXTURE PRO AUTOMATICKÉ PŘIHLÁŠENÍ STRÁNKY (vaše původní logika) ---
-  // Tato fixture závisí na 'authToken'. Vezme si token a vloží ho do stránky.
-  // Nahrazuje vaši původní úpravu 'page' fixture.
   page: async ({ page, authToken }, use) => {
     logger.silly("FIXTURE 'page' (rozšířená): Start.");
     logger.trace("FIXTURE 'page' (rozšířená): Budu vkládat inicializační skript pro nastavení localStorage...");
     
     await page.addInitScript(token => {
-      // Tento kód se spustí v kontextu prohlížeče, proto zde nemůžeme použít 'logger'.
-      // Místo toho používáme console.log, který se zobrazí v konzoli prohlížeče.
-      console.log(`[InitScript] Vkládám 'auth_token' do localStorage...`);
+      logger.debug(`[InitScript] Vkládám 'auth_token' do localStorage...`);
       window.localStorage.setItem('auth_token', token);
-      console.log(`[InitScript] Token byl úspěšně vložen.`);
+      logger.debug(`[InitScript] Token byl úspěšně vložen.`);
     }, authToken);
 
     logger.trace("FIXTURE 'page' (rozšířená): Inicializační skript byl přidán.");
@@ -102,7 +90,6 @@ export const test = baseTest.extend<MyFixtures>({
   },
 
   // --- FIXTURE PRO PŘIPRAVENÝ A AUTORIZOVANÝ API KLIENT ---
-  // Tato fixture závisí na 'authToken' a 'request'.
   apiClient: async ({ request, authToken }, use) => {
     logger.silly("FIXTURE 'apiClient': Start.");
     logger.trace("FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.");

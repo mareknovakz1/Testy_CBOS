@@ -166,7 +166,6 @@ interface postUserReportParameters {
 }
 
 export interface postUserReportPayload {
-    testCaseId: string;
     name: string;
     public: boolean;
     reportDefinitionId: string;
