@@ -20,7 +20,7 @@ import * as ReportTypes from '../../../api/types/reports';
 import { ACC_OWNER_ID } from '../../../support/constants';
 import allReportData from '../../../test-data/Sestavy_life_cycle_regrese.json';
 
-logger.silly(`Načtena testovací data: ${JSON.stringify(allReportData, null, 2)}`);
+//logger.silly(`Načtena testovací data: ${JSON.stringify(allReportData, null, 2)}`);
 
 // OPRAVA: Projdeme všechny klíče v JSON souboru (např. "TC_Sestavy_001", "TC_Sestavy_002", ...)
 for (const testCaseKey of Object.keys(allReportData)) {
@@ -118,7 +118,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
                 logger.info(`Krok 2: Sestava '${uniqueReportName}' úspěšně nalezena s ID: ${createdReportId}.`);
 
                 // Validace 'itemsCount' dle tvého plánu
-                const itemsCount = lastReport.itemsCount; 
+                const itemsCount = lastReport.items; 
                 logger.debug(`Nalezen počet položek (itemsCount): ${itemsCount}`);
 
                 if (itemsCount === null) {
@@ -130,6 +130,15 @@ for (const testCaseKey of Object.keys(allReportData)) {
                     logger.info(`Krok 2: Sestava obsahuje ${itemsCount} položek.`);
                 }
 
+                logger.debug(`Sestava '${uniqueReportName}' má vlastnost public: ${lastReport.public}`);
+                if (testCaseData.step1_CreateReport.public === false) {
+                     expect(lastReport.public, `Sestava '${uniqueReportName}' by neměla být veřejná.`).toBe(false);
+                }
+
+                createdReportId = lastReport.id;
+
+                createdReportId = lastReport.id;
+
             } catch (error) {
                 const fullUrl = `${apiClient.reports.baseURL}${endpoint}?${new URLSearchParams(params as any)}`;
                 logger.error(`Krok 2 (${testCaseKey}): Test selhal s chybou: ${error}, URL: ${fullUrl}`);
@@ -137,7 +146,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
             }
         });
 
-        // Krok 3: Smazání sestavy (Úklid)
+        //Krok 3: Smazání sestavy (Úklid)
         await test.step('Krok 3: DELETE /reports-api/usersReports/{id} (Úklid)', async () => {
             
             if (!createdReportId) {

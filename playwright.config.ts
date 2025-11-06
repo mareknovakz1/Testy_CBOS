@@ -7,7 +7,7 @@ import { baseURL } from './support/constants'; // Importujeme si naši základn�
 
 
 // Nastavte zde úroveň logování (0=silly, 1=trace, 2=debug, 3=info, 4=warn, 5=error, 6=fatal)
-const logLevel = 1; // změňte dle potřeby
+const logLevel = 2; // změňte dle potřeby
 process.env.LOG_LEVEL = String(logLevel);
 
 // Veškerá konfigurace je nyní v rámci jednoho exportu.
@@ -18,7 +18,7 @@ export default defineConfig({
 
   // Globální časový limit pro každý jednotlivý test
   timeout: 50 * 1000, // 50 sekund
-  //retries: 1, // Počet opakování po neúspěšném testu
+  retries: 1, // Počet opakování po neúspěšném testu
   workers: 1, // Použití jednoho workera pro sériové spouštění testů (jeden po druhém)
   fullyParallel: false,
 
@@ -46,7 +46,7 @@ export default defineConfig({
         viewport: { width: 1920, height: 1080 }
       },
       testIgnore: '**/*_API.spec.ts',
-      testMatch: '**/*_E2E.spec.ts',
+      testMatch: '**/*_UI.spec.ts',
     },
     {
       name: 'firefox',
@@ -56,7 +56,7 @@ export default defineConfig({
         viewport: { width: 1920, height: 1080 }
       },
       testIgnore: '**/*_API.spec.ts',
-      testMatch: '**/*_E2E.spec.ts',
+      testMatch: '**/*_UI.spec.ts',
     },
     {
       name: 'edge',
@@ -67,12 +67,12 @@ export default defineConfig({
         viewport: { width: 1920, height: 1080 }
       },
       testIgnore: '**/*_API.spec.ts',
-      testMatch: '**/*_E2E.spec.ts',
+      testMatch: '**/*_UI.spec.ts',
     },
     {
       name: 'API',
       testMatch: '**/*_API.spec.ts',
-      testIgnore: '**/*_E2E.spec.ts',
+      testIgnore: '**/*_UI.spec.ts',
       // API testy nepotřebují specifická nastavení prohlížeče v sekci 'use'
     },
   ],

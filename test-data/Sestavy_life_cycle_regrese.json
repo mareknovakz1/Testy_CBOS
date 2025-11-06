@@ -16,7 +16,7 @@
           "cardIssuerId"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "stkitmType": [],
@@ -56,7 +56,7 @@
         ],
         "dateModelType": "ymd",
         "year": 2025,
-        "month": 11,
+        "month": 1,
         "day": "0",
         "stockId": [],
         "sort": "",
@@ -90,7 +90,7 @@
           "partnerId"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "partnerId": [
@@ -129,7 +129,7 @@
           "operator"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [
           101
@@ -168,7 +168,7 @@
           "recordStatus"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "recordStatus": [],
@@ -205,7 +205,7 @@
           "paidBy"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [
           101
@@ -246,7 +246,7 @@
           "plu"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "groupId": [],
@@ -284,7 +284,7 @@
         ],
         "dateModelType": "ymd",
         "year": 2025,
-        "month": 11,
+        "month": 1,
         "day": "0",
         "stockId": [],
         "sort": "",
@@ -319,7 +319,7 @@
         ],
         "dateModelType": "ymd",
         "year": 2025,
-        "month": 11,
+        "month": 1,
         "day": "0",
         "stockId": [],
         "groupId": [],
@@ -355,7 +355,7 @@
           "groupId"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "stkitmType": [],
@@ -390,7 +390,7 @@
           "stockId"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "sort": "",
@@ -454,7 +454,7 @@
           "stockId"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "sort": "",
@@ -490,7 +490,7 @@
           "drivers"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "groupId": [],
@@ -529,7 +529,7 @@
           "vehicles"
         ],
         "dateModelType": "range",
-        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [],
         "groupId": [],
