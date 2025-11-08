@@ -125,7 +125,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
                     logger.error('Krok 2: Počet položek (itemsCount) je "null", což značí chybu.');
                     throw new Error('Počet položek v sestavě je null.');
                 } else if (itemsCount === 0) {
-                    logger.warn('Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.');
+                    logger.warn(`${lastReport.testCaseID} ${lastReport.reportDefinitionId} ${lastReport.name} Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.`);
                 } else {
                     logger.info(`Krok 2: Sestava obsahuje ${itemsCount} položek.`);
                 }
