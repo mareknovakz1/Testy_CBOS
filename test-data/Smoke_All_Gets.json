@@ -641,10 +641,66 @@
   },
    {
   "testId": "TC-080",
-    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle Čísla žádosti",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty",
     "tags": [ "@api","@smoke", "@high", "@eurooil", "@list"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
     "params": [101]
+  },
+     {
+  "testId": "TC-081",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle id",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+id", "limit":10, "offset":0 }]
+  },
+      {
+  "testId": "TC-082",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle Zadáno",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+created", "limit":10, "offset":0 }]
+  },
+    {
+  "testId": "TC-083",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle Telefonu",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+phone", "limit":10, "offset":0 }]
+  },
+  {
+  "testId": "TC-084",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle emailu",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+email", "limit":10, "offset":0 }]
+  },
+      {
+  "testId": "TC-085",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle města",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+city", "limit":10, "offset":0 }]
+  },
+      {
+  "testId": "TC-086",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle Měsíční odběr CZK",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+consumption", "limit":10, "offset":0 }]
+  },
+      {
+  "testId": "TC-087",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle Operátora",
+    "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101, { "sort": "+operator", "limit":10, "offset":0 }]
   }
 ]
