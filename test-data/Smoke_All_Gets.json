@@ -762,9 +762,130 @@
    {
     "testId": "TC-095",
     "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů",
-    "tags": [ "@api","@smoke", "@high", "@udd", "@list", "@test"],
+    "tags": [ "@api","@smoke", "@high", "@udd", "@list"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
     "params": [101, 2025, "00174939"]
-  }
+  },
+    {
+    "testId": "TC-096",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Typu účtenky",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+receiptType", "limit":10, "offset":0}]
+  },
+ {
+    "testId": "TC-097",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle IČO",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+company", "limit":10, "offset":0}]
+  },
+    {
+    "testId": "TC-098",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Čísla dokladu",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+receipt", "limit":10, "offset":0}]
+  },
+    {
+    "testId": "TC-099",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle DIČ",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+dic", "limit":10, "offset":0}]
+  },
+    {
+    "testId": "TC-100",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Typu účtenky",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+receiptType", "limit":10, "offset":0}]
+  },
+    {
+    "testId": "TC-101",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Jméno zákazníka/Název firmy",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+company", "limit":10, "offset":0}]
+  },
+    {
+    "testId": "TC-102",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Vytvořeno",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+created", "limit":10, "offset":0}]
+  },
+    {
+    "testId": "TC-103",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Vytvořil",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+createdByOperator", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-104",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Poslední úpravy",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+updated", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-105",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Upravil",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+updatedByOperator", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-106",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle výtisků",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+printCount", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-107",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Naposledy vytisknuto",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+prinitngDate", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-108",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Vytiskl",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+prinitngByOperator", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-109",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Stornováno",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+canceled", "limit":10, "offset":0}]
+    },
+    {
+    "testId": "TC-110",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Stornoval",
+    "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939", {"sort": "+canceledByOperator", "limit":10, "offset":0}]
+    }
+  
 ]
