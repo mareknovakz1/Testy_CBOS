@@ -94,9 +94,9 @@ export class BaseApiClient {
         logger.info(`[${requestId}] <--- ${response.status()} ${method} ${url} (${duration} ms)`);
         
         // Logování detailů odpovědi na úrovni 'silly' pro snadné zapnutí/vypnutí v konfiguraci
-        //const responseBody = await response.text();
+        const responseBody = await response.text();
         logger.silly(`[${requestId}] Response Headers:`, response.headers());
-        //logger.silly(`[${requestId}] Response Body:`, responseBody);
+        logger.silly(`[${requestId}] Response Body:`, responseBody);
 
         return response; // Vrácení celé, nezměněné odpovědi
     }

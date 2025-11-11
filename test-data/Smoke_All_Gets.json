@@ -1,338 +1,642 @@
 [
   {
     "testId": "TC-001",
+    "name": "/administration-api/StockCardsSupergroupsLocal/ - Seznam lokálních nadskupin zboží řazení podle Operátora",
+    "tags": [ "@api","@smoke", "@medium", "@supergroupsLocal", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsSupergroupsLocal",
+    "params": [101, {"sort":"+operator", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-002",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav",
+    "tags": [ "@api","@smoke", "@high", "@reports", "@list" ],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": []
+  },
+  {
+    "testId": "TC-003",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle názvu",
+    "tags": [ "@api","@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{"sort":"+name", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-004",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Čísla sestavy",
+    "tags": [ "@api","@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{"sort":"+id", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-005",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Typu sestavy",
+    "tags": [ "@api","@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{"sort":"+public", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-006",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{"sort":"+updated", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-007",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Operátora",
+    "tags": [ "@api","@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{"sort":"+updated", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-008",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle názvu",
+    "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 101, {"sort":"stockCardName", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-009",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Druhu zboží",
+    "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 101, {"sort":"+stkitmType", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-010",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Centrální skupny",
+    "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 101, {"sort":"+cgroupId", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-011",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Centrální kategorie",
+    "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 101, {"sort":"+category", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-012",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Lokální skupiny",
+    "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 101, {"sort":"+lgroupId", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-013",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle id",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "id"}]
+  },
+  {
+    "testId": "TC-014",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Názvu",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "text"}]
+  },
+  {
+    "testId": "TC-015",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Ulice",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "street"}]
+  },
+  {
+    "testId": "TC-016",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Města",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "city"}]
+  },
+  {
+    "testId": "TC-017",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle PSČ",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "zip"}]
+  },
+  {
+    "testId": "TC-018",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Provozovatele ČS",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "franchiserId"}]
+  },
+  {
+    "testId": "TC-019",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "updated"}]
+  },
+  {
+    "testId": "TC-020",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Kurzu Operátora",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "operator"}]
+  },
+  {
+    "testId": "TC-021",
     "name": "GET /reports-api/listOfCtClasses",
+    "tags": [ "@api","@smoke", "@high", "@list"],
     "service": "reports",
     "method": "getListOfCtClasses",
     "params": []
   },
   {
-    "testId": "TC-002",
+    "testId": "TC-022",
     "name": "GET /reports-api/partnerTransactions",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "reports",
     "method": "getPartnerTransactions",
     "params": [{ "partnerId": 1, "year": 2025, "month": 9 }]
   },
   {
-    "testId": "TC-003",
+    "testId": "TC-023",
     "name": "GET /reports-api/usersReports/{id}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "reports",
     "method": "getUserReportById",
     "params": [1]
   },
   {
-    "testId": "TC-004",
+    "testId": "TC-024",
     "name": "GET /documents-api/receipts/{stockId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getReceipt",
     "params": [101, { "receiptId": 398, "format": "json" }]
   },
   {
-    "testId": "TC-005",
+    "testId": "TC-025",
     "name": "GET /documents-api/posSummaries/{stockId}/{posSummaryKey}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getPosSummary",
     "params": [101, "10101202551", { "format": "json" }]
   },
   {
-    "testId": "TC-006",
+    "testId": "TC-026",
     "name": "GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getReceiptUdd",
     "params": [101, 7, { "format": "json" }]
   },
   {
-    "testId": "TC-007",
+    "testId": "TC-027",
     "name": "GET /documents-api/wetDeliveryNotesAccessories/{stockId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNotesAccessories",
     "params": [101]
   },
   {
-    "testId": "TC-008",
+    "testId": "TC-028",
     "name": "GET /documents-api/wetDeliveryNotes/{stockId}/{wetDeliveryNoteId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNote",
     "params": [101, 6]
   },
   {
-    "testId": "TC-009",
+    "testId": "TC-029",
     "name": "GET /documents-api/wetDeliveryNotes/caData/{stockId}/{wetDeliveryNoteId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataList",
     "params": [101, 6]
   },
   {
-    "testId": "TC-010",
+    "testId": "TC-030",
     "name": "GET /documents-api/wetDeliveryNotes/measures/{stockId}/{wetDeliveryNoteId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteMeasuresList",
     "params": [101, 6]
   },
   {
-    "testId": "TC-011",
+    "testId": "TC-031",
     "name": "GET /documents-api/wetDeliveryNotes/registers/{stockId}/{wetDeliveryNoteId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteRegistersList",
     "params": [101, 6]
   },
   {
-    "testId": "TC-012",
+    "testId": "TC-032",
     "name": "GET /documents-api/info/documentsMaxDate/{stockId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getDocumentsMaxDate",
     "params": [101]
   },
   {
-    "testId": "TC-013",
+    "testId": "TC-033",
     "name": "GET /documents-api/orders/{stockId}/{orderId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getOrderDetail",
     "params": [101, 15]
   },
   {
-    "testId": "TC-014",
-    "name": "GET /documents-api/orders/items/{stockId}/{orderId}",
-    "service": "documents",
-    "method": "getOrderItems",
-    "params": [101, 96]
-  },
-  {
-    "testId": "TC-015",
-    "name": "GET /documents-api/goodsDeliveryNotes/items/{stockId}/{goodsDeliveryNoteId}",
-    "service": "documents",
-    "method": "getGoodsDeliveryNoteItems",
-    "params": [101, 7]
-  },
-  {
-    "testId": "TC-016",
+    "testId": "TC-034",
     "name": "GET /documents-api/goodsDeliveryNotes/vatRecap/{stockId}/{goodsDeliveryNoteId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getGoodsDeliveryNoteVatRecap",
     "params": [101, 157]
   },
   {
-    "testId": "TC-017",
+    "testId": "TC-035",
     "name": "GET /documents-api/goodsInventories/{stockId}/{goodsInventoryId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getInventoryDetail",
     "params": [101, 1]
   },
   {
-    "testId": "TC-018",
+    "testId": "TC-036",
     "name": "GET /documents-api/goodsInventories/items/{stockId}/{goodsInventoryId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getInventoryItems",
     "params": [101, 1]
   },
   {
-    "testId": "TC-020",
+    "testId": "TC-037",
     "name": "GET /documents-api/goodsInventories/protocol/{stockId}/{goodsInventoryId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getInventoryProtocol",
     "params": [101, 1]
   },
   {
-    "testId": "TC-021",
+    "testId": "TC-038",
     "name": "GET /documents-api/wetDeliveryNotesCaData/{stockId}/{wetDeliveryNoteId}/{caDataId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataDetail",
     "params": [101, 1, 1]
   },
   {
-    "testId": "TC-022",
+    "testId": "TC-039",
     "name": "GET /documents-api/wetDeliveryNotesMeasures/{stockId}/{wetDeliveryNoteId}/{measureId}",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteMeasureDetail",
     "params": [101, 6, 10]
   },
   {
-    "testId": "TC-024",
+    "testId": "TC-040",
     "name": "GET /reports-api/listOfCardIssuers",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "reports",
     "method": "getListOfCardIssuers",
     "params": []
   },
   {
-    "testId": "TC-025",
-    "name": "GET /reports-api/listOfRegisters",
+    "testId": "TC-041",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí",
+    "tags": [ "@api","@smoke", "@high"],
     "service": "reports",
     "method": "getListOfRegisters",
     "params": [{ "stockId": 101 }]
   },
   {
-    "testId": "TC-026",
+    "testId": "TC-042",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle data vytvoření",
+    "tags": [ "@api","@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 101, "sort": "+created", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-043",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle data odečtu hodnot",
+    "tags": [ "@api","@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 101, "sort": "+registerTimestamp", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-044",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle Typu záznamu",
+    "tags": [ "@api","@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 101, "sort": "+reason", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-045",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle Operárora",
+    "tags": [ "@api","@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 101, "sort": "+operator", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-046",
     "name": "GET /reports-api/listOfBonusClasses",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfBonusClasses",
     "params": [{ "accOwner": "00174939" }]
   },
   {
-    "testId": "TC-027",
-    "name": "GET /reports-api/listOfLocalCards",
+    "testId": "TC-047",
+    "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet",
+    "tags": [ "@api","@smoke", "@medium", "@fleet"],
     "service": "reports",
     "method": "getListOfLocalCards",
     "params": [{ "accOwner": "00174939" }]
   },
   {
-    "testId": "TC-028",
-    "name": "GET /reports-api/listOfPartners",
+    "testId": "TC-048",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů",
+    "tags": [ "@api","@smoke", "@high", "@list","@partners"],
     "service": "reports",
     "method": "getListOfPartners",
     "params": [{ "accOwner": "00174939" }]
   },
   {
-    "testId": "TC-031",
+    "testId": "TC-049",
     "name": "GET /reports-api/listOfForeignStocksCCS",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfForeignStocksCCS",
     "params": []
   },
   {
-    "testId": "TC-032",
+    "testId": "TC-050",
     "name": "GET /reports-api/listOfForeignStocksPrices",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfForeignStocksPrices",
     "params": [{ "accOwner": "00174939" }]
   },
   {
-    "testId": "TC-033",
+    "testId": "TC-051",
     "name": "GET /reports-api/listOfPricesCategories",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfPricesCategories",
     "params": []
   },
   {
-    "testId": "TC-037",
+    "testId": "TC-052",
     "name": "GET /reports-api/listOfRootStockCards",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfRootStockCards",
     "params": []
   },
   {
-    "testId": "TC-038",
+    "testId": "TC-053",
     "name": "GET /reports-api/listOfStocks",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfStocks",
     "params": []
   },
   {
-    "testId": "TC-039",
+    "testId": "TC-054",
     "name": "GET /reports-api/listOfUsers",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfUsers",
     "params": []
   },
   {
-    "testId": "TC-040",
+    "testId": "TC-055",
     "name": "GET /reports-api/listOfVatClasses",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfVatClasses",
     "params": []
   },
   {
-    "testId": "TC-041",
+    "testId": "TC-056",
     "name": "GET /reports-api/listOfRoles",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfRoles",
     "params": [{ "scheme": "cbos" }]
   },
   {
-    "testId": "TC-063",
+    "testId": "TC-057",
     "name": "GET /reports-api/listOfUsersReports/{accOwner}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfUsersReports",
     "params": ["00174939"]
   },
   {
-    "testId": "TC-073",
+    "testId": "TC-058",
     "name": "GET /documents-api/goodsDeliveryNotes/{stockId}/{goodsDeliveryNoteId}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "documents",
     "method": "getGoodsDeliveryNote",
     "params": [101, 7]
   },
   {
-    "testId": "TC-077",
+    "testId": "TC-059",
     "name": "GET /administration-api/status",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getStatus",
     "params": []
   },
   {
-    "testId": "TC-079",
+    "testId": "TC-060",
     "name": "GET /administration-api/accountsParameters/{account}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getAccountsParameters",
     "params": ["00174939"]
   },
   {
-    "testId": "TC-080",
+    "testId": "TC-061",
     "name": "GET /administration-api/ctClasses/{id}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getCtClass",
     "params": [1]
   },
   {
-    "testId": "TC-081",
+    "testId": "TC-062",
     "name": "GET /administration-api/vatClasses/{id}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getVatClass",
     "params": [1]
   },
   {
-    "testId": "TC-083",
+    "testId": "TC-063",
     "name": "GET /administration-api/stocks/fsfeatures/{stockId}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getCurrentLocalFsFeatures",
     "params": [1]
   },
   {
-    "testId": "TC-084",
+    "testId": "TC-064",
     "name": "GET /administration-api/stocks/{stockId}/fsfeatureDefinitions",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getLocalFsFeatureDefinitions",
     "params": [1]
   },
   {
-    "testId": "TC-085",
+    "testId": "TC-065",
     "name": "GET /administration-api/fsfeatureDefinitions/{accOwner}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getCentralFsFeatureDefinitions",
     "params": ["00174939"]
   },
   {
-    "testId": "TC-086",
+    "testId": "TC-066",
     "name": "GET /administration-api/fsfeature/{accOwner}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getCentralFsFeatures",
     "params": ["00174939"]
   },
   {
-    "testId": "TC-087",
+    "testId": "TC-067",
     "name": "GET /administration-api/partners/{id}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getPartner",
     "params": [1]
   },
   {
-    "testId": "TC-088",
+    "testId": "TC-068",
     "name": "GET /administration-api/partners/{id}/status",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getPartnerStatus",
     "params": [1]
   },
   {
-    "testId": "TC-089",
+    "testId": "TC-069",
     "name": "GET /administration-api/partners/{partnerId}/payments",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getPartnerPayments",
     "params": [1]
   },
   {
-    "testId": "TC-093",
+    "testId": "TC-070",
     "name": "GET /administration-api/massOperations/listOfChangedItems/{changeType}",
+    "tags": [ "@api","@smoke", "@medium"],
     "service": "administration",
     "method": "getListOfChangedItems",
     "params": ["owner"]
+  },
+  {
+    "testId": "TC-071",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle názvu partnera",
+    "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "+company", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-071",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle IČO",
+    "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "+ico", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-071",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle názvu DIČ",
+    "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "+dic", "limit":10, "offset":0 }]
+  },
+  {
+    "testId": "TC-071",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Ulice",
+    "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "+street", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-071",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Města",
+    "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "+city", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-071",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Poslední změny",
+    "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "+updated", "limit":10, "offset":0 }]
+  },
+  {
+  "testId": "TC-047",
+    "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Čísla karty (elektornické karty)",
+    "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "+cardNr", "limit":10, "offset":0 }]
+  },
+  {
+  "testId": "TC-047",
+    "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Čísla karty (tištěné)",
+    "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "+cardLabel", "limit":10, "offset":0 }]
+  },
+  {
+  "testId": "TC-047",
+    "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Typu karty",
+    "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "+cardType", "limit":10, "offset":0 }]
+  },
+  {
+  "testId": "TC-047",
+    "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "+updated", "limit":10, "offset":0 }]
   }
 ]

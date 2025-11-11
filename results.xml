@@ -1,222 +1,33 @@
-<testsuites id="" name="" tests="15" failures="0" skipped="11" errors="0" time="6.0366219999999995">
-  <testsuite name="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" timestamp="2025-11-06T21:09:40.674Z" hostname="API" tests="15" failures="0" skipped="11" time="4.937" errors="0">
-    <testcase name="TC_Sestavy_001: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.145">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.375[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.389[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:46[39m[0m[0m]Spouštím test životního cyklu sestavy: Přehled prodejů (D001) - 1762463382389 (Definice: D001)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.395[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:52[39m[0m[0m]Krok 1: Vytváření nové sestavy: Přehled prodejů (D001) - 1762463382389
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.399[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:66[39m[0m[0m]Payload pro /reports-api/usersReports/60193531: {
-  "name": "Přehled prodejů (D001) - 1762463382389",
-  "public": false,
-  "reportDefinitionId": "D001",
-  "settings": {
-    "availableFilters": [
-      "stockId",
-      "stkitmType",
-      "groupId",
-      "goodsOwnerId",
-      "paidBy",
-      "cardOwnerId",
-      "cardIssuerId"
-    ],
-    "dateModelType": "range",
-    "dateFrom": "2025-07-03T23:00:00.000Z",
-    "dateTo": null,
-    "stockId": [],
-    "stkitmType": [],
-    "groupId": [],
-    "goodsOwnerId": [],
-    "paidBy": [],
-    "cardOwnerId": [],
-    "cardIssuerId": [],
-    "sort": "",
-    "exportParameters": {
-      "tabsParam": "",
-      "exportIntoTabs": false,
-      "exportFileName": false,
-      "exportDateTime": true,
-      "summaries": false
-    }
-  }
-}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.662[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][2667a8b9] <--- 200 POST http://192.168.130.240:8180/reports-api/usersReports/60193531 (259.61 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.666[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:73[39m[0m[0m]Krok 1: Sestava úspěšně vytvořena (Status 201 OK).
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.668[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:85[39m[0m[0m]Krok 2: Ověření vytvoření sestavy a čtení dat.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.669[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:96[39m[0m[0m]Parametry pro /reports-api/listOfUsersReports/60193531: {"offset":0,"limit":1,"sort":"-updated"}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.708[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][30e230b9] <--- 200 GET http://192.168.130.240:8180/reports-api/listOfUsersReports/60193531 (35.77 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.714[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:118[39m[0m[0m]Krok 2: Sestava 'Přehled prodejů (D001) - 1762463382389' úspěšně nalezena s ID: 1455.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.715[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:122[39m[0m[0m]Nalezen počet položek (itemsCount): 1616
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.717[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:130[39m[0m[0m]Krok 2: Sestava obsahuje 1616 položek.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.719[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:133[39m[0m[0m]Sestava 'Přehled prodejů (D001) - 1762463382389' má vlastnost public: false
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.724[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:158[39m[0m[0m]Krok 3: Mažu vytvořenou sestavu s ID: 1455
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.765[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][77ee764d] <--- 200 DELETE http://192.168.130.240:8180/reports-api/usersReports/1455 (37.65 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:42[0m[0m.768[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:165[39m[0m[0m]Krok 3: Sestava s ID 1455 úspěšně smazána.
-]]></system-out>
-    </testcase>
-    <testcase name="TC_Sestavy_002: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.238">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.688[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.692[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:46[39m[0m[0m]Spouštím test životního cyklu sestavy: Přehled prodejů PHM pro FÚ - 1762463383692 (Definice: D002)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.694[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:52[39m[0m[0m]Krok 1: Vytváření nové sestavy: Přehled prodejů PHM pro FÚ - 1762463383692
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.696[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:66[39m[0m[0m]Payload pro /reports-api/usersReports/60193531: {
-  "name": "Přehled prodejů PHM pro FÚ - 1762463383692",
-  "public": false,
-  "reportDefinitionId": "D002",
-  "settings": {
-    "availableFilters": [
-      "stockId"
-    ],
-    "dateModelType": "ymd",
-    "year": 2025,
-    "month": 1,
-    "day": "0",
-    "stockId": [],
-    "sort": "",
-    "exportParameters": {
-      "tabsParam": "",
-      "exportIntoTabs": false,
-      "exportFileName": false,
-      "exportDateTime": true,
-      "summaries": false
-    }
-  }
-}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.882[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][7c9d383d] <--- 200 POST http://192.168.130.240:8180/reports-api/usersReports/60193531 (183.21 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.885[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:73[39m[0m[0m]Krok 1: Sestava úspěšně vytvořena (Status 201 OK).
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.887[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:85[39m[0m[0m]Krok 2: Ověření vytvoření sestavy a čtení dat.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.888[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:96[39m[0m[0m]Parametry pro /reports-api/listOfUsersReports/60193531: {"offset":0,"limit":1,"sort":"-updated"}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.938[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][cd19fdb7] <--- 200 GET http://192.168.130.240:8180/reports-api/listOfUsersReports/60193531 (48.21 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.943[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:118[39m[0m[0m]Krok 2: Sestava 'Přehled prodejů PHM pro FÚ - 1762463383692' úspěšně nalezena s ID: 1456.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.945[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:122[39m[0m[0m]Nalezen počet položek (itemsCount): 0
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.950[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:128[39m[0m[0m]undefined Přehled prodejů PHM pro FÚ - 1762463383692 Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.952[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:133[39m[0m[0m]Sestava 'Přehled prodejů PHM pro FÚ - 1762463383692' má vlastnost public: false
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:43[0m[0m.959[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:158[39m[0m[0m]Krok 3: Mažu vytvořenou sestavu s ID: 1456
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.008[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][51d87b91] <--- 200 DELETE http://192.168.130.240:8180/reports-api/usersReports/1456 (46.25 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.012[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:165[39m[0m[0m]Krok 3: Sestava s ID 1456 úspěšně smazána.
-]]></system-out>
-    </testcase>
-    <testcase name="TC_Sestavy_003: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.85">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.683[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.687[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:46[39m[0m[0m]Spouštím test životního cyklu sestavy: Přehled prodejů se slevovou kartou - 1762463384687 (Definice: D003)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.688[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:52[39m[0m[0m]Krok 1: Vytváření nové sestavy: Přehled prodejů se slevovou kartou - 1762463384687
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.690[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:66[39m[0m[0m]Payload pro /reports-api/usersReports/60193531: {
-  "name": "Přehled prodejů se slevovou kartou - 1762463384687",
-  "public": false,
-  "reportDefinitionId": "D003",
-  "settings": {
-    "availableFilters": [
-      "stockId",
-      "partnerId"
-    ],
-    "dateModelType": "range",
-    "dateFrom": "2025-07-03T23:00:00.000Z",
-    "dateTo": null,
-    "stockId": [],
-    "partnerId": [
-      1
-    ],
-    "sort": "",
-    "exportParameters": {
-      "tabsParam": "",
-      "exportIntoTabs": false,
-      "exportFileName": false,
-      "exportDateTime": true,
-      "summaries": false
-    }
-  }
-}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.759[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][65e2a373] <--- 200 POST http://192.168.130.240:8180/reports-api/usersReports/60193531 (66.04 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.761[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:73[39m[0m[0m]Krok 1: Sestava úspěšně vytvořena (Status 201 OK).
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.763[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:85[39m[0m[0m]Krok 2: Ověření vytvoření sestavy a čtení dat.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.767[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:96[39m[0m[0m]Parametry pro /reports-api/listOfUsersReports/60193531: {"offset":0,"limit":1,"sort":"-updated"}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.804[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][cf2eaa79] <--- 200 GET http://192.168.130.240:8180/reports-api/listOfUsersReports/60193531 (34.13 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.809[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:118[39m[0m[0m]Krok 2: Sestava 'Přehled prodejů se slevovou kartou - 1762463384687' úspěšně nalezena s ID: 1457.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.810[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:122[39m[0m[0m]Nalezen počet položek (itemsCount): 0
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.813[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:128[39m[0m[0m]undefined Přehled prodejů se slevovou kartou - 1762463384687 Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.821[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:133[39m[0m[0m]Sestava 'Přehled prodejů se slevovou kartou - 1762463384687' má vlastnost public: false
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.828[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:158[39m[0m[0m]Krok 3: Mažu vytvořenou sestavu s ID: 1457
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.867[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][468361a8] <--- 200 DELETE http://192.168.130.240:8180/reports-api/usersReports/1457 (33.40 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:44[0m[0m.870[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:165[39m[0m[0m]Krok 3: Sestava s ID 1457 úspěšně smazána.
-]]></system-out>
-    </testcase>
-    <testcase name="TC_Sestavy_004: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.855">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.549[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.553[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:46[39m[0m[0m]Spouštím test životního cyklu sestavy: Přehled smazaných položek účtenek - 1762463385553 (Definice: D004)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.556[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:52[39m[0m[0m]Krok 1: Vytváření nové sestavy: Přehled smazaných položek účtenek - 1762463385553
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.560[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:66[39m[0m[0m]Payload pro /reports-api/usersReports/60193531: {
-  "name": "Přehled smazaných položek účtenek - 1762463385553",
-  "public": false,
-  "reportDefinitionId": "D004",
-  "settings": {
-    "availableFilters": [
-      "stockId",
-      "termId",
-      "groupId",
-      "operator"
-    ],
-    "dateModelType": "range",
-    "dateFrom": "2025-07-03T23:00:00.000Z",
-    "dateTo": null,
-    "stockId": [
-      101
-    ],
-    "termId": [],
-    "groupId": [],
-    "operator": [],
-    "sort": "",
-    "exportParameters": {
-      "tabsParam": "",
-      "exportIntoTabs": false,
-      "exportFileName": false,
-      "exportDateTime": true,
-      "summaries": false
-    }
-  }
-}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.615[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][b0a7bcce] <--- 200 POST http://192.168.130.240:8180/reports-api/usersReports/60193531 (52.44 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.617[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:73[39m[0m[0m]Krok 1: Sestava úspěšně vytvořena (Status 201 OK).
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.619[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:85[39m[0m[0m]Krok 2: Ověření vytvoření sestavy a čtení dat.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.621[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:96[39m[0m[0m]Parametry pro /reports-api/listOfUsersReports/60193531: {"offset":0,"limit":1,"sort":"-updated"}
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.659[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][4b1aaf7f] <--- 200 GET http://192.168.130.240:8180/reports-api/listOfUsersReports/60193531 (36.31 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.665[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:118[39m[0m[0m]Krok 2: Sestava 'Přehled smazaných položek účtenek - 1762463385553' úspěšně nalezena s ID: 1458.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.666[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:122[39m[0m[0m]Nalezen počet položek (itemsCount): 29
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.669[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:130[39m[0m[0m]Krok 2: Sestava obsahuje 29 položek.
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.672[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:133[39m[0m[0m]Sestava 'Přehled smazaných položek účtenek - 1762463385553' má vlastnost public: false
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.677[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:158[39m[0m[0m]Krok 3: Mažu vytvořenou sestavu s ID: 1458
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.734[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][5c010b06] <--- 200 DELETE http://192.168.130.240:8180/reports-api/usersReports/1458 (55.21 ms)
-2025[0m[0m-11[0m[0m-06[0m[0m 21[0m[0m:09[0m[0m:45[0m[0m.735[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:165[39m[0m[0m]Krok 3: Sestava s ID 1458 úspěšně smazána.
-]]></system-out>
-    </testcase>
-    <testcase name="TC_Sestavy_005: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.849">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_006: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_007: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_008: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_009: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_010: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_011: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_012: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_013: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_014: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
-    <testcase name="TC_Sestavy_015: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0">
-      <skipped/>
-    </testcase>
+<testsuites id="" name="" tests="29" failures="0" skipped="0" errors="0" time="21.864811">
+  <testsuite name="Smoke\Smoke_All_Gets_api.spec.ts" timestamp="2025-11-11T08:31:36.924Z" hostname="API" tests="29" failures="0" skipped="0" time="20.844" errors="0">
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-001: Endpoint &quot;/administration-api/StockCardsSupergroupsLocal/ - Seznam lokálních nadskupin zboží řazení podle Operátora&quot; @api @smoke @medium @supergroupsLocal @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.676" id="TC-001"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-003: Endpoint &quot;/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle názvu&quot; @api @smoke @medium @reports @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.775" id="TC-003"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-004: Endpoint &quot;/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Čísla sestavy&quot; @api @smoke @medium @reports @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.691" id="TC-004"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-005: Endpoint &quot;/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Typu sestavy&quot; @api @smoke @medium @reports @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.717" id="TC-005"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-006: Endpoint &quot;/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Poslední změny&quot; @api @smoke @medium @reports @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.647" id="TC-006"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-007: Endpoint &quot;/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Operátora&quot; @api @smoke @medium @reports @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.632" id="TC-007"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-008: Endpoint &quot;/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle názvu&quot; @api @smoke @medium stockCards @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.692" id="TC-008"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-009: Endpoint &quot;/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Druhu zboží&quot; @api @smoke @medium stockCards @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.683" id="TC-009"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-010: Endpoint &quot;/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Centrální skupny&quot; @api @smoke @medium stockCards @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.696" id="TC-010"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-011: Endpoint &quot;/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Centrální kategorie&quot; @api @smoke @medium stockCards @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.709" id="TC-011"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-012: Endpoint &quot;/reports-api/listOfStockCards/ - Seznam skladových karet řaazení podle Lokální skupiny&quot; @api @smoke @medium stockCards @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.668" id="TC-012"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-013: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle id&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.684" id="TC-013"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-014: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Názvu&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.682" id="TC-014"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-015: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Ulice&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.637" id="TC-015"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-016: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Města&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.647" id="TC-016"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-017: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle PSČ&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.659" id="TC-017"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-018: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Provozovatele ČS&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.671" id="TC-018"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-019: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Poslední změny&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.656" id="TC-019"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-020: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Kurzu Operátora&quot; @api @smoke @medium stocks @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="1.665" id="TC-020"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-071: Endpoint &quot;GET /reports-api/listOfPartners Seznam partnerů řazení podle názvu partnera&quot; @api @smoke @high @sort @partners" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.647" id="TC-071"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-071: Endpoint &quot;GET /reports-api/listOfPartners Seznam partnerů řazení podle IČO&quot; @api @smoke @high @sort @partners" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.662" id="TC-071"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-071: Endpoint &quot;GET /reports-api/listOfPartners Seznam partnerů řazení podle názvu DIČ&quot; @api @smoke @high @sort @partners" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.681" id="TC-071"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-071: Endpoint &quot;GET /reports-api/listOfPartners Seznam partnerů řazení podle Ulice&quot; @api @smoke @high @sort @partners" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.633" id="TC-071"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-071: Endpoint &quot;GET /reports-api/listOfPartners Seznam partnerů řazení podle Města&quot; @api @smoke @high @sort @partners" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.634" id="TC-071"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-071: Endpoint &quot;GET /reports-api/listOfPartners Seznam partnerů řazení podle Poslední změny&quot; @api @smoke @high @sort @partners" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.785" id="TC-071"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-047: Endpoint &quot;GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Čísla karty (elektornické karty)&quot; @api @smoke @medium @fleet @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.932" id="TC-047"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-047: Endpoint &quot;GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Čísla karty (tištěné)&quot; @api @smoke @medium @fleet @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.658" id="TC-047"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-047: Endpoint &quot;GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Typu karty&quot; @api @smoke @medium @fleet @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.676" id="TC-047"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-047: Endpoint &quot;GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Poslední změny&quot; @api @smoke @medium @fleet @sort" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.649" id="TC-047"/>
   </testsuite>
 </testsuites>

@@ -31,6 +31,7 @@ type ApiService = 'reports' | 'documents' | 'system';
 type EndpointData = {
   testId: string; 
   name: string;
+  tags: string[];
   service: ApiService;
   method: string;
   params: any[];
@@ -90,12 +91,24 @@ test.describe('API Smoke Tests - GET Endpoints', () => {
             logger.info('ApiClient byl úspěšně inicializován.');
         });
         
-        // Dynamically generate tests for each endpoint defined in the JSON file
-       // Dynamically generate tests for each endpoint defined in the JSON file
+ // Dynamicky generuje testy pro každý endpoint definovaný v JSON souboru
 for (const endpoint of endpointsToTest as EndpointData[]) {
-    test(`${endpoint.testId}: Endpoint "${endpoint.name}" should be available and return a 2xx status real status: ${responseStatus}`, async () => {
-        logger.info(`Running smoke test for ${endpoint.testId}: ${endpoint.name}`);
-        
+
+    const tagsString = (endpoint.tags && endpoint.tags.length > 0) 
+                ? ` ${endpoint.tags.join(' ')}` 
+                : '';
+
+const testTitle = `${endpoint.testId}: Endpoint "${endpoint.name}"${tagsString}`;
+    
+            // KROK 3: Použijeme nový název v testu
+            test(testTitle, async () => {
+                
+                // KROK 4: Deklarujeme 'responseStatus' uvnitř testu, ne globálně
+                let responseStatus: number; 
+    
+                logger.info(`Running smoke test for ${endpoint.testId}: ${endpoint.name}`);
+                
+                logger.debug(`Attempting to call ${endpoint.service}.${endpoint.method} with params: ${JSON.stringify(endpoint.params)}`);  
         
         logger.debug(`Attempting to call ${endpoint.service}.${endpoint.method} with params: ${JSON.stringify(endpoint.params)}`);
         try {

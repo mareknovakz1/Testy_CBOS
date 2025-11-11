@@ -1,6 +1,6 @@
 /**
  * @file administration.types.ts
- * @author AI Assistant
+ * @author Marek Novák
  * @date 29.09.2025
  * @description
  * Data contracts for AdministrationApiService.
@@ -340,4 +340,24 @@ export interface WebSocketEventParams {
     accOwner?: string;
     all?: boolean;
     logoutReason?: string;
+}
+
+// ========================
+// Lokální nadskupiny zboží
+// ========================
+
+export interface stockCardsSupergroupsLocal {
+    offset: number;
+    limit: number;
+    sort?: string;
+}
+
+// ========================
+// Lokální nadskupiny zboží
+// ========================
+
+export interface stockCardgroupsLocal {
+    offset: number;
+    limit: number;
+    sort?: string;
 }

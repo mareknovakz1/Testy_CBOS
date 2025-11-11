@@ -8,7 +8,7 @@
  */
 
 import { BaseApiClient } from '../BaseApiClient';
-import * as t from '../types/administration'; // Placeholder for type definitions
+import * as t from '../types/administrion'; // Placeholder for type definitions
 
 export class AdministrationApiService extends BaseApiClient {
 
@@ -456,8 +456,31 @@ export class AdministrationApiService extends BaseApiClient {
     /**
      * Sends a WebSocket event to clients.
      * @param params - The event parameters.
-     */
+     
     public async sendWebSocketEvent(params: t.WebSocketEventParams): Promise<void> {
         return this.post(`/administration-api/sendToWebSocket`, {}, params);
+    }*/
+    
+    // ==============================
+    // Group: Lokální nadskupiny zboží
+    // ===============================
+
+    /**
+     * Lokální nadskupiny zboží - načtení seznamu nadskupin pro dané OBCHODNÍ MÍSTO
+     * @param stockId - ID obchodního místa (skladu)
+     */
+    public async getStockCardsSupergroupsLocal(stockId: number): Promise<t.GenericApiResponse> {
+    return this.get(`/administration-api/stockCardsSupergroupsLocal/${stockId}`);
+    }
+     // ==============================
+    // Group: Lokální skupiny zboží
+    // ===============================
+
+    /**
+     * Lokální nadskupiny zboží - načtení seznamu nadskupin pro dané OBCHODNÍ MÍSTO
+     * @param stockId - ID obchodního místa (skladu)
+     */
+     public async getStockCardsGroupsLocal(stockId: number): Promise<t.GenericApiResponse> {
+    return this.get(`/administration-api/stockCardsGroupsLocal/${stockId}`);
     }
 }
