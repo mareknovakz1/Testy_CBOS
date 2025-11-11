@@ -361,8 +361,8 @@
   },
   {
     "testId": "TC-046",
-    "name": "GET /reports-api/listOfBonusClasses",
-    "tags": [ "@api","@smoke", "@medium"],
+    "name": "GET /reports-api/listOfBonusClasses Přehled slev a poplatků",
+    "tags": [ "@api","@smoke", "@high", "@bonuses", "@list"],
     "service": "reports",
     "method": "getListOfBonusClasses",
     "params": [{ "accOwner": "00174939" }]
@@ -702,5 +702,69 @@
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
     "params": [101, { "sort": "+operator", "limit":10, "offset":0 }]
+  },
+    {
+    "testId": "TC-088",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle id",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "+id", "limit":10, "offset":0 }]
+  },
+    {
+    "testId": "TC-089",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Názvu slevy/poplatku",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939","sort": "+specification", "limit":10, "offset":0 }]
+  },
+      {
+    "testId": "TC-090",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Začátku platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "+startValidDate", "limit":10, "offset":0 }]
+  },
+    {
+    "testId": "TC-091",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Začátku platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "+startValidDate", "limit":10, "offset":0 }]
+  },
+    {
+    "testId": "TC-092",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "+updated", "limit":10, "offset":0 }]
+  },
+    {
+    "testId": "TC-093",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Začátku platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "+startValidDate", "limit":10, "offset":0 }]
+  },
+    {
+    "testId": "TC-094",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno Operátora",
+    "tags": [ "@api","@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "+startValidDate", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-095",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů",
+    "tags": [ "@api","@smoke", "@high", "@udd", "@list", "@test"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [101, 2025, "00174939"]
   }
 ]
