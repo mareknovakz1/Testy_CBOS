@@ -568,7 +568,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+company", "limit":10, "offset":0 }]
   },
   {
-    "testId": "TC-071",
+    "testId": "TC-072",
     "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle IČO",
     "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
     "service": "reports",
@@ -576,7 +576,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+ico", "limit":10, "offset":0 }]
   },
   {
-    "testId": "TC-071",
+    "testId": "TC-073",
     "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle názvu DIČ",
     "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
     "service": "reports",
@@ -584,7 +584,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+dic", "limit":10, "offset":0 }]
   },
   {
-    "testId": "TC-071",
+    "testId": "TC-074",
     "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Ulice",
     "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
     "service": "reports",
@@ -592,7 +592,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+street", "limit":10, "offset":0 }]
   },
    {
-    "testId": "TC-071",
+    "testId": "TC-075",
     "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Města",
     "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
     "service": "reports",
@@ -600,7 +600,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+city", "limit":10, "offset":0 }]
   },
    {
-    "testId": "TC-071",
+    "testId": "TC-076",
     "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Poslední změny",
     "tags": [ "@api","@smoke", "@high", "@sort", "@partners"],
     "service": "reports",
@@ -616,7 +616,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+cardNr", "limit":10, "offset":0 }]
   },
   {
-  "testId": "TC-047",
+  "testId": "TC-077",
     "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Čísla karty (tištěné)",
     "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
     "service": "reports",
@@ -624,7 +624,7 @@
     "params": [{ "accOwner": "00174939", "sort": "+cardLabel", "limit":10, "offset":0 }]
   },
   {
-  "testId": "TC-047",
+  "testId": "TC-078",
     "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Typu karty",
     "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
     "service": "reports",
@@ -632,11 +632,19 @@
     "params": [{ "accOwner": "00174939", "sort": "+cardType", "limit":10, "offset":0 }]
   },
   {
-  "testId": "TC-047",
+  "testId": "TC-079",
     "name": "GET /reports-api/listOfLocalCards - Serznam Fleet karet řazeno podle Poslední změny",
     "tags": [ "@api","@smoke", "@medium", "@fleet", "@sort"],
     "service": "reports",
     "method": "getListOfLocalCards",
     "params": [{ "accOwner": "00174939", "sort": "+updated", "limit":10, "offset":0 }]
+  },
+   {
+  "testId": "TC-080",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Serznam Přehled žádostí o EuroOil karty řazeno podle Čísla žádosti",
+    "tags": [ "@api","@smoke", "@high", "@eurooil", "@list"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [101]
   }
 ]

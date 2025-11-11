@@ -23,8 +23,7 @@ import { ApiClient } from '../../api/ApiClient';
 import { baseURL, port } from '../../support/constants';
 import { expect, test } from '../../support/fixtures/auth.fixture';
 import { logger } from '../../support/logger';
-import endpointsToTest from '../../test-data/Smoke_All_Gets.json'; // 
-import endpointsStatus from '../../test-data/status_endpoints.json'; 
+import endpointsToTest from '../../test-data/Smoke_All_Gets.json'; 
 
 // Definice typů pro lepší kontrolu a napovídání
 type ApiService = 'reports' | 'documents' | 'system';
