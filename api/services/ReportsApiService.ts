@@ -233,9 +233,14 @@ export class ReportsApiService extends BaseApiClient {
     public async getUserReportPreview(id: string, params: ReportTypes.GetUserReportPreviewParams = {}): Promise<ReportTypes.GenericApiResponse> {
         return this.get(`/reports-api/userReportPreview/${id}`, params);
     }
- 
-    //Vytvoří cenovky
-  /*  public async postPriceTags(stockId: number, payload: ReportTypes.CreatePriceTagsPayload, params: { format?: 'pdf', orientation?: string } = {}): Promise<ReportTypes.GenericApiResponse> {
-        return this.post(`/priceTags`, payload, { params: { stockId, ...params } });*/
+
+    /**
+ * Získá seznam stvrzenek o složení hotovosti.
+ * @param params Objekt s parametry { stockId, dateFrom, dateTo?, format? }.
+ */
+    public async getListOfPosTankTickets(params: ReportTypes.GetListOfPosTankTicketsParams): Promise<t.GenericApiResponse> {
+    // BaseApiClient automaticky převede 'params' objekt na query string
+    return this.get(`/reports-api/listOfPosTankTickets`, params);
+}
     
 }

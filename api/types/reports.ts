@@ -196,3 +196,12 @@ export interface CreatePriceTagsPayload {
     plus: any[];
 }
 
+/**
+ * Parametry pro GET /reports-api/listOfPosTankTickets
+ */
+export interface GetListOfPosTankTicketsParams {
+    stockId: number;
+    dateFrom: string;
+    dateTo?: string | null;
+    format?: string;
+}

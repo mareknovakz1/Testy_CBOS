@@ -886,6 +886,69 @@
     "service": "reports",
     "method": "getListOfReceiptsUdd",
     "params": [101, 2025, "00174939", {"sort": "+canceledByOperator", "limit":10, "offset":0}]
-    }
-  
+    },
+   {
+    "testId": "TC-111",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti",
+    "tags": [ "@api","@smoke", "@high", "@pos", "@list", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z"}]
+  },
+   {
+    "testId": "TC-112",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Vystavena",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+generationTimestamp", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-113",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Číslo stvrzenky",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+ticketNr", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-114",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Vytištěna",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+printedTimestamp", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-115",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Expiruje",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+expDate", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-116",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Akceptováno",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+acceptedTimestamp", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-117",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Účtenka (Hotovostní)",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+cashReceiptId", "limit":10, "offset":0 }]
+  },
+   {
+    "testId": "TC-118",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Vydaná přeplatková poukázka",
+    "tags": [ "@api","@smoke", "@medium", "@pos", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+voucherId", "limit":10, "offset":0 }]
+  }
 ]
