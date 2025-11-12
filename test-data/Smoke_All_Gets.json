@@ -1185,14 +1185,62 @@
   },
   {
     "testId": "TC-137",
-    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a objednávky",
-    "tags": [ "@api","@smoke", "@high", "@pos", "@list", "@test"],
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky",
+    "tags": [ "@api","@smoke", "@high", "@goodsDeliveries", "@list"],
     "service": "reports",
     "method": "getListOfGoodsDeliveryNotes",
     "params": [{
         "stockId": 101,
         "year": 2025
     }]
+  },
+  {
+    "testId": "TC-138",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Doklad",
+    "tags": [ "@api","@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+documentLabel"
+    }]
+  },
+  {
+    "testId": "TC-139",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Datum dokladu",
+    "tags": [ "@api","@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+deliveryDate"
+    }]
+  },
+  {
+    "testId": "TC-140",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Datum naskladnění",
+    "tags": [ "@api","@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+changeSupplyDate"
+    }]
+  },
+  {
+    "testId": "TC-141",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Datum schválení",
+    "tags": [ "@api","@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+validDate"
+    }]
   }
-
 ]
+

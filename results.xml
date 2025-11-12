@@ -1,6 +1,9 @@
-<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="2.814739">
-  <testsuite name="Smoke\Smoke_All_Gets_api.spec.ts" timestamp="2025-11-12T12:37:03.064Z" hostname="API" tests="2" failures="0" skipped="0" time="1.583" errors="0">
-    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-129: Endpoint &quot;GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Číslo poukázky (ID)&quot; @api @smoke @medium @pos @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.842" id="TC-129"/>
-    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-137: Endpoint &quot;GET /reports-api/listOfGoodsDeliveryNotes Příjemky a objednávky&quot; @api @smoke @high @pos @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.741" id="TC-137"/>
+<testsuites id="" name="" tests="5" failures="0" skipped="0" errors="0" time="5.826569">
+  <testsuite name="Smoke\Smoke_All_Gets_api.spec.ts" timestamp="2025-11-12T12:46:44.572Z" hostname="API" tests="5" failures="0" skipped="0" time="3.779" errors="0">
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-137: Endpoint &quot;GET /reports-api/listOfGoodsDeliveryNotes Příjemky a objednávky&quot; @api @smoke @high @pos @list @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.773" id="TC-137"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-138: Endpoint &quot;GET /reports-api/listOfGoodsDeliveryNotes řazení podle Doklad&quot; @api @smoke @medium @pos @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.722" id="TC-138"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-139: Endpoint &quot;GET /reports-api/listOfGoodsDeliveryNotes řazení podle Datum dokladu&quot; @api @smoke @medium @pos @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.749" id="TC-139"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-140: Endpoint &quot;GET /reports-api/listOfGoodsDeliveryNotes řazení podle Datum naskladnění&quot; @api @smoke @medium @pos @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.836" id="TC-140"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-141: Endpoint &quot;GET /reports-api/listOfGoodsDeliveryNotes řazení podle Datum schválení&quot; @api @smoke @medium @pos @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.699" id="TC-141"/>
   </testsuite>
 </testsuites>
