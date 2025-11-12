@@ -1241,6 +1241,89 @@
         "year": 2025,
         "sort": "+validDate"
     }]
+  },
+  {
+    "testId": "TC-142",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur",
+    "tags": [ "@api","@smoke", "@high", "@inventory"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025
+    }]
+  },
+  {
+    "testId": "TC-143",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Doklad",
+    "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+documentLabel"
+    }]
+  },
+  {
+    "testId": "TC-144",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Popis inventury",
+    "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+description"
+    }]
+  },
+  {
+    "testId": "TC-145",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Založena",
+    "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+created"
+    }]
+  },
+  {
+    "testId": "TC-146",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Aktualizováno",
+    "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+updated"
+    }]
+  },
+  {
+    "testId": "TC-147",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Spuštěna kontrola",
+    "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+checked"
+    }]
+  },
+  {
+    "testId": "TC-147",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena",
+    "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+finish"
+    }]
   }
 ]
 
