@@ -1,65 +1,11 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="3.335343">
-  <testsuite name="Smoke\Smoke_All_Gets_api.spec.ts" timestamp="2025-11-12T14:11:40.505Z" hostname="API" tests="1" failures="1" skipped="0" time="1.466" errors="0">
-    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-147: Endpoint &quot;GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena&quot; @api @smoke @medium @inventory @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="1.466" id="TC-147">
-      <failure message="Smoke_All_Gets_api.spec.ts:103:17 TC-147: Endpoint &quot;GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena&quot; @api @smoke @medium @inventory @sort @test" type="FAILURE"><![CDATA[  [API] › Smoke\Smoke_All_Gets_api.spec.ts:103:17 › API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-147: Endpoint "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena" @api @smoke @medium @inventory @sort @test 
-
-    Error: Test failed because the API returned a non-2xx status.
-
-      - Received Status: 400 (Client Error)
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-      152 |
-      153 |         // This assertion provides a much clearer failure report
-    > 154 |         expect(isSuccess, failureMessage).toBe(true);
-          |                                           ^
-      155 |         
-      156 |             if (isSuccess) {
-      157 |                 logger.info(`Test for "${endpoint.name}" completed successfully with status ${responseStatus}.`);
-        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Smoke_All_Gets_api.spec.ts:154:43
-
-    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
-
-    Error: Test failed because the API returned a non-2xx status.
-
-      - Received Status: 400 (Client Error)
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: true
-    Received: false
-
-      152 |
-      153 |         // This assertion provides a much clearer failure report
-    > 154 |         expect(isSuccess, failureMessage).toBe(true);
-          |                                           ^
-      155 |         
-      156 |             if (isSuccess) {
-      157 |                 logger.info(`Test for "${endpoint.name}" completed successfully with status ${responseStatus}.`);
-        at C:\Users\novakma\Testy_CBOS\tests\Smoke\Smoke_All_Gets_api.spec.ts:154:43
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    test-results\Smoke-Smoke_All_Gets_api-A-2cd9e--medium-inventory-sort-test-API-retry1\trace.zip
-    Usage:
-
-        npx playwright show-trace test-results\Smoke-Smoke_All_Gets_api-A-2cd9e--medium-inventory-sort-test-API-retry1\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]></failure>
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-12[0m[0m 14[0m[0m:11[0m[0m:42[0m[0m.018[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:117[39m[0m[0m][N/A] API Error: Status 400 on http://192.168.130.240:8180/reports-api/listOfGoodsInventories?stockId=101&year=2025&sort=%2Bfinish {
-  body: [32m'{"status":400,"message":"APIError: error: column \\"finish\\" does not exist"}'[39m
-}
-2025[0m[0m-11[0m[0m-12[0m[0m 14[0m[0m:11[0m[0m:42[0m[0m.022[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\tests\Smoke\Smoke_All_Gets_api.spec.ts:128[39m[0m[0m]TC-147 GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena Endpoint returned a non-2xx status: 400. [N/A] API Error: Status 400 on http://192.168.130.240:8180/reports-api/listOfGoodsInventories?stockId=101&year=2025&sort=%2Bfinish
-2025[0m[0m-11[0m[0m-12[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.592[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:117[39m[0m[0m][N/A] API Error: Status 400 on http://192.168.130.240:8180/reports-api/listOfGoodsInventories?stockId=101&year=2025&sort=%2Bfinish {
-  body: [32m'{"status":400,"message":"APIError: error: column \\"finish\\" does not exist"}'[39m
-}
-2025[0m[0m-11[0m[0m-12[0m[0m 14[0m[0m:11[0m[0m:43[0m[0m.595[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\tests\Smoke\Smoke_All_Gets_api.spec.ts:128[39m[0m[0m]TC-147 GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena Endpoint returned a non-2xx status: 400. [N/A] API Error: Status 400 on http://192.168.130.240:8180/reports-api/listOfGoodsInventories?stockId=101&year=2025&sort=%2Bfinish
-
-[[ATTACHMENT|test-results\Smoke-Smoke_All_Gets_api-A-2cd9e--medium-inventory-sort-test-API-retry1\trace.zip]]
-]]></system-out>
-    </testcase>
+<testsuites id="" name="" tests="7" failures="0" skipped="0" errors="0" time="5.911669">
+  <testsuite name="Smoke\Smoke_All_Gets_api.spec.ts" timestamp="2025-11-12T14:23:48.326Z" hostname="API" tests="7" failures="0" skipped="0" time="4.88" errors="0">
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-149: Endpoint &quot;GET /reports-api/listOfOrders Seznam objednávek (základní)&quot; @api @smoke @high @order @list @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.704" id="TC-149"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-150: Endpoint &quot;GET /reports-api/listOfOrders řazení podle Doklad&quot; @api @smoke @medium @order @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.701" id="TC-150"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-151: Endpoint &quot;GET /reports-api/listOfOrders řazení podle Datum vytvoření&quot; @api @smoke @medium @order @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.664" id="TC-151"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-152: Endpoint &quot;GET /reports-api/listOfOrders řazení podle Datum objednání&quot; @api @smoke @medium @order @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.674" id="TC-152"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-153: Endpoint &quot;GET /reports-api/listOfOrders řazení podle Datum uzavření&quot; @api @smoke @medium @order @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.704" id="TC-153"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-154: Endpoint &quot;GET /reports-api/listOfOrders řazení podle Dodavatel zboží&quot; @api @smoke @medium @order @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.681" id="TC-154"/>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-155: Endpoint &quot;GET /reports-api/listOfOrders řazení podle Poslední změny&quot; @api @smoke @medium @order @list @sort @test" classname="Smoke\Smoke_All_Gets_api.spec.ts" time="0.752" id="TC-155"/>
   </testsuite>
 </testsuites>

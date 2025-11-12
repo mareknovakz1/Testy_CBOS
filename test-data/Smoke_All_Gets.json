@@ -1314,7 +1314,7 @@
     }]
   },
   {
-    "testId": "TC-147",
+    "testId": "TC-148",
     "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena",
     "tags": [ "@api","@smoke", "@medium", "@inventory", "@sort"],
     "service": "reports",
@@ -1324,6 +1324,90 @@
         "year": 2025,
         "sort": "+finish"
     }]
+  },
+  {
+    "testId": "TC-149",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek (základní)",
+    "tags": [ "@api","@smoke", "@high", "@order", "@list", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025
+    }]
+  },
+  {
+    "testId": "TC-150",
+    "name": "GET /reports-api/listOfOrders řazení podle Doklad",
+    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+documentLabel"
+    }]
+  },
+  {
+    "testId": "TC-151",
+    "name": "GET /reports-api/listOfOrders řazení podle Datum vytvoření",
+    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+created"
+    }]
+  },
+  {
+    "testId": "TC-152",
+    "name": "GET /reports-api/listOfOrders řazení podle Datum objednání",
+    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+orderDate"
+    }]
+  },
+  {
+    "testId": "TC-153",
+    "name": "GET /reports-api/listOfOrders řazení podle Datum uzavření",
+    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+validDate"
+    }]
+  },
+  {
+    "testId": "TC-154",
+    "name": "GET /reports-api/listOfOrders řazení podle Dodavatel zboží",
+    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+supplierName"
+    }]
+  },
+  {
+    "testId": "TC-155",
+    "name": "GET /reports-api/listOfOrders řazení podle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{
+        "stockId": 101,
+        "year": 2025,
+        "sort": "+updated"
+    }]
   }
 ]
+
 
