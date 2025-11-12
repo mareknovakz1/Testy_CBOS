@@ -125,7 +125,7 @@ const testTitle = `${endpoint.testId}: Endpoint "${endpoint.name}"${tagsString}`
             if (statusMatch) {
                 logger.debug(`Extracted status code from error message: ${statusMatch[1]}`);
                 responseStatus = parseInt(statusMatch[1], 10);
-                logger.error(`Endpoint returned a non-2xx status: ${responseStatus}.`, error.message);
+                logger.error(`${endpoint.testId} ${endpoint.name} Endpoint returned a non-2xx status: ${responseStatus}.`, error.message);
             } else {
                 logger.debug('No status code found in error message.');
                 logger.error('Could not parse status code from error. Test is failing.', error);

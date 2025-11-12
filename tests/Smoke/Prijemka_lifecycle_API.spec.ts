@@ -30,7 +30,7 @@ test.describe("Regrese API - Životní cyklus příjemky", () => {
     const ORDERED_QUANTITY = 1;
     const UNIT_PRICE = 100.0;
 
-    test.skip('Životní cyklus příjemky - vytvoření a kontrola stavu skladu @regression @API @high @delivery', async () => {
+    test.skip('Životní cyklus příjemky - vytvoření a kontrola stavu skladu', async () => {
         logger.info('--- Začátek testu: Životní cyklus příjemky ---');
 
         // Krok 1: Získání počátečního stavu skladu

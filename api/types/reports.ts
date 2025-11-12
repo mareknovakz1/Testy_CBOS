@@ -205,3 +205,23 @@ export interface GetListOfPosTankTicketsParams {
     dateTo?: string | null;
     format?: string;
 }
+
+export interface GetListOfPosMoneyOperationsParams {
+    stockId: number;
+    dateFrom: string;
+    dateTo?: string | null;
+    format?: string;
+}
+
+/**
+ * Parametry pro GET /reports-api/listOfPosTankVouchers
+ */
+export interface GetListOfPosTankVouchersParams {
+    stockId: number;
+    dateFrom: string;
+    dateTo?: string | null;
+    expired?: boolean;
+    reserved?: boolean;
+    accepted?: boolean;
+    format?: string;
+}

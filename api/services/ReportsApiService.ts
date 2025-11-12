@@ -13,6 +13,7 @@
 
 import { BaseApiClient } from '../BaseApiClient';
 import * as ReportTypes from '../types/reports';
+import * as t from '../types/reports'; // Ujisti se, že máš správný import
 
 export class ReportsApiService extends BaseApiClient {
   
@@ -145,7 +146,7 @@ export class ReportsApiService extends BaseApiClient {
     }
 
     /**
-     * Sestaví seznam příjemek / výdejek.
+     * Seznam příjemek / výdejek.
      */
     public async getListOfGoodsDeliveryNotes(params: ReportTypes.GetListOfGoodsDeliveryNotesParams): Promise<ReportTypes.GenericApiResponse> {
         return this.get('/reports-api/listOfGoodsDeliveryNotes', params);
@@ -241,6 +242,22 @@ export class ReportsApiService extends BaseApiClient {
     public async getListOfPosTankTickets(params: ReportTypes.GetListOfPosTankTicketsParams): Promise<t.GenericApiResponse> {
     // BaseApiClient automaticky převede 'params' objekt na query string
     return this.get(`/reports-api/listOfPosTankTickets`, params);
-}
-    
+    }
+
+    /**
+     * Získá seznam vkladů a výběrů hotovosti.
+     * @param params Objekt s parametry { stockId, dateFrom, dateTo?, format? }.
+     */
+    public async getListOfPosMoneyOperations(params: ReportTypes.GetListOfPosMoneyOperationsParams): Promise<t.GenericApiResponse> {
+    // BaseApiClient automaticky převede 'params' objekt na query string
+    return this.get(`/reports-api/listOfPosMoneyOperations`, params);
+    }
+    /**
+     * Získá seznam přeplatkových poukázek.
+     * @param params Objekt s parametry { stockId, dateFrom, ... }.
+     */
+    public async getListOfPosTankVouchers(params: ReportTypes.GetListOfPosTankVouchersParams): Promise<t.GenericApiResponse> {
+    // BaseApiClient automaticky převede 'params' objekt na query string
+    return this.get(`/reports-api/listOfPosTankVouchers`, params);
+    }
 }

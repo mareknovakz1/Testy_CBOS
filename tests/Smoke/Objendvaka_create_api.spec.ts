@@ -19,7 +19,7 @@
  * - Platný autentizační token získaný přihlášením.
  * - Testovací data v `Objednvaka_create_api.json` musí být validní.
  * 
- * @tags @smoke @API @order @high
+ * @tags
  */
 
 import { test, expect } from '../../support/fixtures/auth.fixture';
@@ -56,7 +56,7 @@ test.describe('Smoke testy - vytvoření a ověření objednávky', () => {
   });
 
   // Test pro vytvoření objednávky
-  test(`${allOrderData[0].TC} Test POST /documents-api/orders/{stockId} @regression @order @api @high @smoke`, async () => {
+  test(`${allOrderData[0].TC} Test POST /documents-api/orders/{stockId}`, async () => {
     const testCase = allOrderData[0];
     logger.info(`Zahajuji testovací případ ${testCase.TC} pro: POST /documents-api/orders/{stockId}`);
     
