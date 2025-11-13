@@ -389,3 +389,20 @@ export interface CardDefinition {
     updated: string; // ISO datum
     // ... a další pole
 }
+
+
+/**
+ * Parametry pro GET /administration-api/stockCardsGroupsCentral
+ */
+export interface GetStockCardsGroupsCentralParams {
+    vatclsId?: string | number;
+    ctclsId?: string | number;
+    withHistory?: boolean;
+    withEdit?: boolean;
+    withItems?: boolean;
+    withPlanned?: boolean;
+    // Parametry pro řazení/stránkování
+    sort?: string;
+    limit?: number;
+    offset?: number;
+}

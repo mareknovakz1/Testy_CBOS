@@ -46,6 +46,13 @@ export interface GetListOfPartnersParams {
     allStocks?: boolean;
 }
 
+export interface GetListOfForeignStocksCCSParams {
+  offset?: number;
+  limit?: number;
+  sort?: string;
+  columns?: string; // This must be a string, e.g., "id,name,city"
+}
+
 export interface GetListOfForeignStocksPricesParams {
     accOwner: string;
     stockId?: number;

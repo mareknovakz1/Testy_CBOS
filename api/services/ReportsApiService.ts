@@ -68,12 +68,14 @@ export class ReportsApiService extends BaseApiClient {
         return this.get('/reports-api/listOfCurrencyRates', { accOwner });
     }
 
-    /**
-     * Sestaví seznam konkurenčních obchodních míst - CCS.
-     */
-    public async getListOfForeignStocksCCS(columns?: string): Promise<ReportTypes.GenericApiResponse> {
-        return this.get('/reports-api/listOfForeignStocksCCS', { columns });
-    }
+ /**
+ * Sestaví seznam konkurenčních obchodních míst - CCS.
+ * @param params Objekt s query parametry (sort, limit, offset, atd.)
+ */
+public async getListOfForeignStocksCCS(params: ReportTypes.GetListOfForeignStocksCCSParams): Promise<ReportTypes.GenericApiResponse> {
+    // This passes the params {sort, offset, limit} directly
+    return this.get('/reports-api/listOfForeignStocksCCS', params);
+}
 
     /**
      * Sestaví seznam konkurenčních cen.
@@ -268,5 +270,5 @@ export class ReportsApiService extends BaseApiClient {
 public async getListOfWetDeliveryNotes(params: ReportTypes.GetListOfWetDeliveryNotesParams): Promise<t.GenericApiResponse> {
     // BaseApiClient automaticky převede 'params' objekt na query string
     return this.get(`/reports-api/listOfWetDeliveryNotes`, params);
-}
+    }
 }

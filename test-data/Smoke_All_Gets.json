@@ -313,8 +313,8 @@
   },
   {
     "testId": "TC-040",
-    "name": "GET /reports-api/listOfCardIssuers",
-    "tags": [ "@api","@smoke", "@high"],
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet",
+    "tags": [ "@api","@smoke", "@high", "@cards", "@list"],
     "service": "reports",
     "method": "getListOfCardIssuers",
     "params": []
@@ -1669,7 +1669,7 @@
   {
     "testId": "TC-175",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet (základní)",
-    "tags": [ "@api","@smoke", "@high", "@cards", "@list", "@test"],
+    "tags": [ "@api","@smoke", "@high", "@cards", "@list"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"limit": 10, "offset": 0}]
@@ -1677,7 +1677,7 @@
   {
     "testId": "TC-176",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle ISO karty",
-    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"sort":"-iso", "limit":10, "offset":0}]
@@ -1685,7 +1685,7 @@
   {
     "testId": "TC-177",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Název karty",
-    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"sort":"+cardName", "limit":10, "offset":0}]
@@ -1693,7 +1693,7 @@
   {
     "testId": "TC-178",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Typ vydavatele karet",
-    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"sort":"+issuerCardType", "limit":10, "offset":0}]
@@ -1701,7 +1701,7 @@
   {
     "testId": "TC-179",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Začátek platnosti",
-    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"sort":"+startValid", "limit":10, "offset":0}]
@@ -1709,7 +1709,7 @@
   {
     "testId": "TC-180",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Konec platnosti",
-    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"sort":"+endValid", "limit":10, "offset":0}]
@@ -1717,10 +1717,250 @@
   {
     "testId": "TC-181",
     "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Poslední změny",
-    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
     "service": "administration",
     "method": "getListOfCardDefinitions",
     "params": ["60193531", {"sort":"+updated", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-182",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle ID",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{"sort": "+id"}]
+  },
+  {
+    "testId": "TC-183",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Název vydavatele",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{"sort": "+issuerName"}]
+  },
+  {
+    "testId": "TC-184",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Typ vydavatele",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{"sort": "+issuerType"}]
+  },
+  {
+    "testId": "TC-185",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Číselník skupin",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{"sort": "+groupsConversionBy"}]
+  },
+  {
+    "testId": "TC-186",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{"sort": "+updated"}]
+  },
+  {
+    "testId": "TC-187",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{"sort": "+operator"}]
+  },
+ {
+    "testId": "TC-188",
+    "name": "GET /reports-api/listOfForeignStocksCCS ...",
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{
+        "sort": "+ccsId"}]
+  },
+  {
+    "testId": "TC-189",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Konkurenční obchodní místo",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+name"}]
+  },
+  {
+    "testId": "TC-190",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Město",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+city"}]
+  },
+  {
+    "testId": "TC-191",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Ulice",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+street"}]
+  },
+  {
+    "testId": "TC-192",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Okres",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+district"}]
+  },
+  {
+    "testId": "TC-193",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Země",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+country"}]
+  },
+  {
+    "testId": "TC-194",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+updated"}]
+  },
+  {
+    "testId": "TC-195",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{"sort": "+operator"}]
+  },
+  {
+    "testId": "TC-196",
+    "name": "GET /reports-api/listOfCurrencyRates Seznam centrálních kurzů (základní)",
+    "tags": [ "@api","@smoke", "@high", "@currency", "@list"],
+    "service": "reports",
+    "method": "getListOfCurrencyRates",
+    "params": [{
+        "accOwner": "60193531"
+    }]
+  },
+  {
+    "testId": "TC-197",
+    "name": "GET /reports-api/listOfCurrencyRates Seznam centrálních kurzů řazeno dle Začátek platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@currency", "@sort"],
+    "service": "reports",
+    "method": "getListOfCurrencyRates",
+    "params": [{
+        "accOwner": "60193531",
+        "sort": "+startValidDate"
+    }]
+  },
+  {
+    "testId": "TC-198",
+    "name": "GET /reports-api/listOfCurrencyRates Seznam centrálních kurzů řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@currency", "@sort"],
+    "service": "reports",
+    "method": "getListOfCurrencyRates",
+    "params": [{
+        "accOwner": "60193531",
+        "sort": "+operator"
+    }]
+  },
+  {
+    "testId": "TC-199",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží (základní)",
+    "tags": [ "@api","@smoke", "@high", "@groups", "@list"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531"]
+  },
+  {
+    "testId": "TC-200",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Číslo",
+    "tags": [ "@api","@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", {"sort": "+id"}]
+  },
+  {
+    "testId": "TC-201",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Název",
+    "tags": [ "@api","@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", {"sort": "+name"}]
+  },
+  {
+    "testId": "TC-202",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Začátek platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", {"sort": "+startValid"}]
+  },
+  {
+    "testId": "TC-203",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", {"sort": "+updated"}]
+  },
+  {
+    "testId": "TC-204",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", {"sort": "+operator"}]
+  },
+  {
+    "testId": "TC-205",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému (základní)",
+    "tags": [ "@api","@smoke", "@high", "@fsfeature", "@list"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", {"limit": 10, "offset": 0}]
+  },
+  {
+    "testId": "TC-206",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Skupina",
+    "tags": [ "@api","@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", {"sort": "+group", "limit": 10, "offset": 0}]
+  },
+  {
+    "testId": "TC-207",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Jméno parametru",
+    "tags": [ "@api","@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", {"sort": "+name", "limit": 10, "offset": 0}]
+  },
+  {
+    "testId": "TC-208",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Platnost",
+    "tags": [ "@api","@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", {"sort": "+startValidDate", "limit": 10, "offset": 0}]
+  },
+  {
+    "testId": "TC-209",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", {"sort": "+updated", "limit": 10, "offset": 0}]
+  },
+  {
+    "testId": "TC-210",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", {"sort": "+operator", "limit": 10, "offset": 0}]
   }
 ]
 

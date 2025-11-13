@@ -497,4 +497,18 @@ export class AdministrationApiService extends BaseApiClient {
     // BaseApiClient automaticky převede 'params' na query string
     return this.get(`/administration-api/listOfCardDefinitions/${accOwner}`, params);
     }
+
+    /**
+   * Sestaví seznam centrálních skupin zboží.
+   * @param accOwner Identifikace sítě (povinný parametr cesty)
+   * @param params Objekt s volitelnými query parametry (vatclsId, ctclsId, sort, atd.)
+   */
+  public async getStockCardsGroupsCentral(
+    accOwner: string,
+    params?: t.GetStockCardsGroupsCentralParams
+  ): Promise<t.GenericApiResponse> {
+    
+    // BaseApiClient automaticky převede 'params' na query string
+    return this.get(`/administration-api/stockCardsGroupsCentral/${accOwner}`, params);
+  }
 }
