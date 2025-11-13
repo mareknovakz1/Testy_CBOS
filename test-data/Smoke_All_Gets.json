@@ -5,7 +5,7 @@
     "tags": [ "@api","@smoke", "@medium", "@supergroupsLocal", "@sort"],
     "service": "administration",
     "method": "getStockCardsSupergroupsLocal",
-    "params": [101, {"sort":"+operator", "limit":10, "offset":0}]
+    "params": [231, {"sort":"+operator", "limit":10, "offset":0}]
   },
   {
     "testId": "TC-002",
@@ -61,7 +61,7 @@
     "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
     "service": "reports",
     "method": "getListOfStockCards",
-    "params": ["60193531", 101, {"sort":"stockCardName", "limit":10, "offset":0}]
+    "params": ["60193531", 231, {"sort":"stockCardName", "limit":10, "offset":0}]
   },
   {
     "testId": "TC-009",
@@ -69,7 +69,7 @@
     "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
     "service": "reports",
     "method": "getListOfStockCards",
-    "params": ["60193531", 101, {"sort":"+stkitmType", "limit":10, "offset":0}]
+    "params": ["60193531", 231, {"sort":"+stkitmType", "limit":10, "offset":0}]
   },
   {
     "testId": "TC-010",
@@ -77,7 +77,7 @@
     "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
     "service": "reports",
     "method": "getListOfStockCards",
-    "params": ["60193531", 101, {"sort":"+cgroupId", "limit":10, "offset":0}]
+    "params": ["60193531", 231, {"sort":"+cgroupId", "limit":10, "offset":0}]
   },
   {
     "testId": "TC-011",
@@ -85,7 +85,7 @@
     "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
     "service": "reports",
     "method": "getListOfStockCards",
-    "params": ["60193531", 101, {"sort":"+category", "limit":10, "offset":0}]
+    "params": ["60193531", 231, {"sort":"+category", "limit":10, "offset":0}]
   },
   {
     "testId": "TC-012",
@@ -93,7 +93,7 @@
     "tags": [ "@api","@smoke", "@medium", "stockCards", "@sort"],
     "service": "reports",
     "method": "getListOfStockCards",
-    "params": ["60193531", 101, {"sort":"+lgroupId", "limit":10, "offset":0}]
+    "params": ["60193531", 231, {"sort":"+lgroupId", "limit":10, "offset":0}]
   },
   {
     "testId": "TC-013",
@@ -189,7 +189,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getReceipt",
-    "params": [101, { "receiptId": 398, "format": "json" }]
+    "params": [231, { "receiptId": 398, "format": "json" }]
   },
   {
     "testId": "TC-025",
@@ -197,15 +197,15 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getPosSummary",
-    "params": [101, "10101202551", { "format": "json" }]
+    "params": [231, "23101202551", { "format": "json" }]
   },
   {
     "testId": "TC-026",
-    "name": "GET /documents-api/receiptsUdd/{stockId}/{receiptUddId}",
-    "tags": [ "@api","@smoke", "@high"],
+    "name": "GET /documents-api/receiptsUdd/{stockId}/{receiptUddId} detail účtenky UDD",
+    "tags": [ "@api","@smoke", "@high", "@udd"],
     "service": "documents",
     "method": "getReceiptUdd",
-    "params": [101, 7, { "format": "json" }]
+    "params": [231, 6, { "format": "json" }]
   },
   {
     "testId": "TC-027",
@@ -213,7 +213,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNotesAccessories",
-    "params": [101]
+    "params": [231]
   },
   {
     "testId": "TC-028",
@@ -221,7 +221,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNote",
-    "params": [101, 6]
+    "params": [231, 6]
   },
   {
     "testId": "TC-029",
@@ -229,7 +229,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataList",
-    "params": [101, 6]
+    "params": [231, 6]
   },
   {
     "testId": "TC-030",
@@ -237,7 +237,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteMeasuresList",
-    "params": [101, 6]
+    "params": [231, 6]
   },
   {
     "testId": "TC-031",
@@ -245,7 +245,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteRegistersList",
-    "params": [101, 6]
+    "params": [231, 6]
   },
   {
     "testId": "TC-032",
@@ -253,7 +253,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getDocumentsMaxDate",
-    "params": [101]
+    "params": [231]
   },
   {
     "testId": "TC-033",
@@ -261,7 +261,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getOrderDetail",
-    "params": [101, 15]
+    "params": [231, 15]
   },
   {
     "testId": "TC-034",
@@ -269,7 +269,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getGoodsDeliveryNoteVatRecap",
-    "params": [101, 157]
+    "params": [231, 157]
   },
   {
     "testId": "TC-035",
@@ -277,7 +277,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getInventoryDetail",
-    "params": [101, 1]
+    "params": [231, 1]
   },
   {
     "testId": "TC-036",
@@ -285,7 +285,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getInventoryItems",
-    "params": [101, 1]
+    "params": [231, 1]
   },
   {
     "testId": "TC-037",
@@ -293,7 +293,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getInventoryProtocol",
-    "params": [101, 1]
+    "params": [231, 1]
   },
   {
     "testId": "TC-038",
@@ -301,7 +301,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteCaDataDetail",
-    "params": [101, 1, 1]
+    "params": [231, 1, 1]
   },
   {
     "testId": "TC-039",
@@ -309,7 +309,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "documents",
     "method": "getWetDeliveryNoteMeasureDetail",
-    "params": [101, 6, 10]
+    "params": [231, 6, 10]
   },
   {
     "testId": "TC-040",
@@ -325,7 +325,7 @@
     "tags": [ "@api","@smoke", "@high"],
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 101 }]
+    "params": [{ "stockId": 231 }]
   },
   {
     "testId": "TC-042",
@@ -333,7 +333,7 @@
     "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 101, "sort": "+created", "limit":10, "offset":0 }]
+    "params": [{ "stockId": 231, "sort": "+created", "limit":10, "offset":0 }]
   },
   {
     "testId": "TC-043",
@@ -341,7 +341,7 @@
     "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 101, "sort": "+registerTimestamp", "limit":10, "offset":0 }]
+    "params": [{ "stockId": 231, "sort": "+registerTimestamp", "limit":10, "offset":0 }]
   },
   {
     "testId": "TC-044",
@@ -349,7 +349,7 @@
     "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 101, "sort": "+reason", "limit":10, "offset":0 }]
+    "params": [{ "stockId": 231, "sort": "+reason", "limit":10, "offset":0 }]
   },
   {
     "testId": "TC-045",
@@ -357,7 +357,7 @@
     "tags": [ "@api","@smoke", "@medium"],
     "service": "reports",
     "method": "getListOfRegisters",
-    "params": [{ "stockId": 101, "sort": "+operator", "limit":10, "offset":0 }]
+    "params": [{ "stockId": 231, "sort": "+operator", "limit":10, "offset":0 }]
   },
   {
     "testId": "TC-046",
@@ -461,7 +461,7 @@
     "tags": [ "@api","@smoke", "@medium"],
     "service": "documents",
     "method": "getGoodsDeliveryNote",
-    "params": [101, 7]
+    "params": [231, 7]
   },
   {
     "testId": "TC-059",
@@ -645,7 +645,7 @@
     "tags": [ "@api","@smoke", "@high", "@eurooil", "@list"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101]
+    "params": [231]
   },
      {
   "testId": "TC-081",
@@ -653,7 +653,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+id", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+id", "limit":10, "offset":0 }]
   },
       {
   "testId": "TC-082",
@@ -661,7 +661,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+created", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+created", "limit":10, "offset":0 }]
   },
     {
   "testId": "TC-083",
@@ -669,7 +669,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+phone", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+phone", "limit":10, "offset":0 }]
   },
   {
   "testId": "TC-084",
@@ -677,7 +677,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+email", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+email", "limit":10, "offset":0 }]
   },
       {
   "testId": "TC-085",
@@ -685,7 +685,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+city", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+city", "limit":10, "offset":0 }]
   },
       {
   "testId": "TC-086",
@@ -693,7 +693,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+consumption", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+consumption", "limit":10, "offset":0 }]
   },
       {
   "testId": "TC-087",
@@ -701,7 +701,7 @@
     "tags": [ "@api","@smoke", "@medium", "@eurooil", "@sort"],
     "service": "reports",
     "method": "getListOfEuroOilCardRequests",
-    "params": [101, { "sort": "+operator", "limit":10, "offset":0 }]
+    "params": [231, { "sort": "+operator", "limit":10, "offset":0 }]
   },
     {
     "testId": "TC-088",
@@ -765,7 +765,7 @@
     "tags": [ "@api","@smoke", "@high", "@udd", "@list"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939"]
+    "params": [231, 2025, "00174939"]
   },
     {
     "testId": "TC-096",
@@ -773,7 +773,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+receiptType", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+receiptType", "limit":10, "offset":0}]
   },
  {
     "testId": "TC-097",
@@ -781,7 +781,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+company", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+company", "limit":10, "offset":0}]
   },
     {
     "testId": "TC-098",
@@ -789,7 +789,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+receipt", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+receipt", "limit":10, "offset":0}]
   },
     {
     "testId": "TC-099",
@@ -797,7 +797,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+dic", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+dic", "limit":10, "offset":0}]
   },
     {
     "testId": "TC-100",
@@ -805,15 +805,15 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+receiptType", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+receiptType", "limit":10, "offset":0}]
   },
     {
-    "testId": "TC-101",
+    "testId": "TC-231",
     "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Jméno zákazníka/Název firmy",
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+company", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+company", "limit":10, "offset":0}]
   },
     {
     "testId": "TC-102",
@@ -821,7 +821,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+created", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+created", "limit":10, "offset":0}]
   },
     {
     "testId": "TC-103",
@@ -829,7 +829,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+createdByOperator", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+createdByOperator", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-104",
@@ -837,7 +837,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+updated", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+updated", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-105",
@@ -845,7 +845,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+updatedByOperator", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+updatedByOperator", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-106",
@@ -853,7 +853,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+printCount", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+printCount", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-107",
@@ -861,7 +861,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+prinitngDate", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+prinitngDate", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-108",
@@ -869,7 +869,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+prinitngByOperator", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+prinitngByOperator", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-109",
@@ -877,7 +877,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+canceled", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+canceled", "limit":10, "offset":0}]
     },
     {
     "testId": "TC-110",
@@ -885,7 +885,7 @@
     "tags": [ "@api","@smoke", "@medium", "@udd", "@sort"],
     "service": "reports",
     "method": "getListOfReceiptsUdd",
-    "params": [101, 2025, "00174939", {"sort": "+canceledByOperator", "limit":10, "offset":0}]
+    "params": [231, 2025, "00174939", {"sort": "+canceledByOperator", "limit":10, "offset":0}]
     },
    {
     "testId": "TC-111",
@@ -893,7 +893,7 @@
     "tags": [ "@api","@smoke", "@high", "@pos", "@list"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z"}]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z"}]
   },
    {
     "testId": "TC-112",
@@ -901,7 +901,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+generationTimestamp", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+generationTimestamp", "limit":10, "offset":0 }]
   },
    {
     "testId": "TC-113",
@@ -909,7 +909,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+ticketNr", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+ticketNr", "limit":10, "offset":0 }]
   },
    {
     "testId": "TC-114",
@@ -917,7 +917,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+printedTimestamp", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+printedTimestamp", "limit":10, "offset":0 }]
   },
    {
     "testId": "TC-115",
@@ -925,7 +925,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+expDate", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+expDate", "limit":10, "offset":0 }]
   },
    {
     "testId": "TC-116",
@@ -933,7 +933,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+acceptedTimestamp", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+acceptedTimestamp", "limit":10, "offset":0 }]
   },
    {
     "testId": "TC-117",
@@ -941,7 +941,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+cashReceiptId", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+cashReceiptId", "limit":10, "offset":0 }]
   },
    {
     "testId": "TC-118",
@@ -949,7 +949,7 @@
     "tags": [ "@api","@smoke", "@medium", "@pos", "@sort"],
     "service": "reports",
     "method": "getListOfPosTankTickets",
-    "params": [{"stockId": 101,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+voucherId", "limit":10, "offset":0 }]
+    "params": [{"stockId": 231,"dateFrom": "2025-10-01T00:00:00.000Z", "sort": "+voucherId", "limit":10, "offset":0 }]
   },
   {
     "testId": "TC-119",
@@ -958,7 +958,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z"
     }]
@@ -970,7 +970,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+type"
@@ -983,7 +983,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+datetime"
@@ -996,7 +996,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+stockName"
@@ -1009,7 +1009,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+termName"
@@ -1022,7 +1022,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+text"
@@ -1035,7 +1035,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+amount"
@@ -1048,7 +1048,7 @@
     "service": "reports",
     "method": "getListOfPosMoneyOperations",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+operator"
@@ -1061,7 +1061,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z"
     }]
@@ -1073,7 +1073,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+termName"
@@ -1086,7 +1086,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+voucherId"
@@ -1099,7 +1099,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+generationTimestamp"
@@ -1112,7 +1112,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+expDate"
@@ -1125,7 +1125,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+acceptedTimestamp"
@@ -1138,7 +1138,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+tankTicketKey"
@@ -1151,7 +1151,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+reservedTimestamp"
@@ -1164,7 +1164,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+reservedPlace"
@@ -1177,7 +1177,7 @@
     "service": "reports",
     "method": "getListOfPosTankVouchers",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "dateFrom": "2025-10-01T00:00:00.000Z",
         "dateTo": "2025-12-31T23:59:59.999Z",
         "sort": "+nominalValue"
@@ -1190,7 +1190,7 @@
     "service": "reports",
     "method": "getListOfGoodsDeliveryNotes",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025
     }]
   },
@@ -1201,7 +1201,7 @@
     "service": "reports",
     "method": "getListOfGoodsDeliveryNotes",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+documentLabel"
     }]
@@ -1213,7 +1213,7 @@
     "service": "reports",
     "method": "getListOfGoodsDeliveryNotes",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+deliveryDate"
     }]
@@ -1225,7 +1225,7 @@
     "service": "reports",
     "method": "getListOfGoodsDeliveryNotes",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+changeSupplyDate"
     }]
@@ -1237,7 +1237,7 @@
     "service": "reports",
     "method": "getListOfGoodsDeliveryNotes",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+validDate"
     }]
@@ -1249,7 +1249,7 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025
     }]
   },
@@ -1260,7 +1260,7 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+documentLabel"
     }]
@@ -1272,7 +1272,7 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+description"
     }]
@@ -1284,7 +1284,7 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+created"
     }]
@@ -1296,7 +1296,7 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+updated"
     }]
@@ -1308,7 +1308,7 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+checked"
     }]
@@ -1320,93 +1320,407 @@
     "service": "reports",
     "method": "getListOfGoodsInventories",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
-        "sort": "+finish"
+        "sort": "+finalized"
     }]
   },
   {
     "testId": "TC-149",
-    "name": "GET /reports-api/listOfOrders Seznam objednávek (základní)",
-    "tags": [ "@api","@smoke", "@high", "@order", "@list", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek",
+    "tags": [ "@api","@smoke", "@high", "@order", "@list"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025
     }]
   },
   {
     "testId": "TC-150",
-    "name": "GET /reports-api/listOfOrders řazení podle Doklad",
-    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Doklad",
+    "tags": [ "@api","@smoke", "@medium", "@order","@sort"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+documentLabel"
     }]
   },
   {
     "testId": "TC-151",
-    "name": "GET /reports-api/listOfOrders řazení podle Datum vytvoření",
-    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Datum vytvoření",
+    "tags": [ "@api","@smoke", "@medium", "@order","@sort"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+created"
     }]
   },
   {
     "testId": "TC-152",
-    "name": "GET /reports-api/listOfOrders řazení podle Datum objednání",
-    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Datum objednání",
+    "tags": [ "@api","@smoke", "@medium", "@order","@sort"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+orderDate"
     }]
   },
   {
     "testId": "TC-153",
-    "name": "GET /reports-api/listOfOrders řazení podle Datum uzavření",
-    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Datum uzavření",
+    "tags": [ "@api","@smoke", "@medium", "@order","@sort"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+validDate"
     }]
   },
   {
     "testId": "TC-154",
-    "name": "GET /reports-api/listOfOrders řazení podle Dodavatel zboží",
-    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Dodavatel zboží",
+    "tags": [ "@api","@smoke", "@medium", "@order","@sort"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+supplierName"
     }]
   },
   {
     "testId": "TC-155",
-    "name": "GET /reports-api/listOfOrders řazení podle Poslední změny",
-    "tags": [ "@api","@smoke", "@medium", "@order", "@list", "@sort", "@test"],
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@order","@sort"],
     "service": "reports",
     "method": "getListOfOrders",
     "params": [{
-        "stockId": 101,
+        "stockId": 231,
         "year": 2025,
         "sort": "+updated"
     }]
+  },{
+    "testId": "TC-156",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů",
+    "tags": [ "@api","@smoke", "@high", "@wetdeliverynotes", "@list"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{
+        "stockId": 231,
+        "year": 2025
+    }]
+  },
+  {
+    "testId": "TC-157",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Doklad",
+    "tags": [ "@api","@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{
+        "stockId": 231,
+        "year": 2025,
+        "sort": "+documentLabel"
+    }]
+  },
+  {
+    "testId": "TC-158",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Datum dokladu",
+    "tags": [ "@api","@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{
+        "stockId": 231,
+        "year": 2025,
+        "sort": "+deliveryDate"
+    }]
+  },
+  {
+    "testId": "TC-159",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Naskladněno/vyskladněno",
+    "tags": [ "@api","@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{
+        "stockId": 231,
+        "year": 2025,
+        "sort": "+changeSupplyDate"
+    }]
+  },
+  {
+    "testId": "TC-160",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Datum schválení",
+    "tags": [ "@api","@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{
+        "stockId": 231,
+        "year": 2025,
+        "sort": "+validDate"
+    }]
+  },
+  {
+    "testId": "TC-161",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů (základní)",
+    "tags": [ "@api","@smoke", "@high", "@users", "@list"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{
+        "accOwner": "60193531"
+    }]
+  },
+  {
+    "testId": "TC-162",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Přihlašovací kód uživatele",
+    "tags": [ "@api","@smoke", "@medium", "@users","@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{
+        "accOwner": "60193531",
+        "sort": "+operator"
+    }]
+  },
+  {
+    "testId": "TC-163",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Jméno uživatele",
+    "tags": [ "@api","@smoke", "@medium", "@users","@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{
+        "accOwner": "60193531",
+        "sort": "+name"
+    }]
+  },
+  {
+    "testId": "TC-164",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Přístupová karta",
+    "tags": [ "@api","@smoke", "@medium", "@users","@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{
+        "accOwner": "60193531",
+        "sort": "+cardNumber"
+    }]
+  },
+  {
+    "testId": "TC-165",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Naposledy přihlášen",
+    "tags": [ "@api","@smoke", "@medium", "@users","@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{
+        "accOwner": "60193531",
+        "sort": "+lastLoginTimestamp"
+    }]
+  },
+{
+    "testId": "TC-166",
+    "name": "GET /reports-api/listOfRoles Seznam šablon práv (základní)",
+    "tags": [ "@api","@smoke", "@high", "@roles", "@list"],
+    "service": "reports",
+    "method": "getListOfRoles",
+    "params": [{
+        "scheme": "cbos"
+    }]
+  },
+  {
+    "testId": "TC-167",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH (základní)",
+    "tags": [ "@api","@smoke", "@high", "@vat", "@list"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{}]
+  },
+  {
+    "testId": "TC-168",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Třída (Názvu)",
+    "tags": [ "@api","@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{
+        "sort": "+name"
+    }]
+  },
+  {
+    "testId": "TC-169",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Sazba",
+    "tags": [ "@api","@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{
+        "sort": "+value"
+    }]
+  },
+  {
+    "testId": "TC-170",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Začátek platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{
+        "sort": "+startValidDate"
+    }]
+  },
+  {
+    "testId": "TC-171",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{
+        "sort": "+updated"
+    }]
+  },
+  {
+    "testId": "TC-172",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{
+        "sort": "+operator"
+    }]
+  },
+  {
+    "testId": "TC-167",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní (základní)",
+    "tags": [ "@api","@smoke", "@high", "@ctclasses", "@list"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{}]
+  },
+  {
+    "testId": "TC-168",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle ID",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+id"
+    }]
+  },
+  {
+    "testId": "TC-169",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Třída",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+name"
+    }]
+  },
+  {
+    "testId": "TC-170",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Sazba [kč]",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+value"
+    }]
+  },
+  {
+    "testId": "TC-171",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Nomenklatura",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+ckncs"
+    }]
+  },
+  {
+    "testId": "TC-172",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Začátek platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+startValidDate"
+    }]
+  },
+  {
+    "testId": "TC-173",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+updated"
+    }]
+  },
+  {
+    "testId": "TC-174",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Operátor",
+    "tags": [ "@api","@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{
+        "sort": "+operator"
+    }]
+  },
+  {
+    "testId": "TC-175",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet (základní)",
+    "tags": [ "@api","@smoke", "@high", "@cards", "@list", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"limit": 10, "offset": 0}]
+  },
+  {
+    "testId": "TC-176",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle ISO karty",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"sort":"-iso", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-177",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Název karty",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"sort":"+cardName", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-178",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Typ vydavatele karet",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"sort":"+issuerCardType", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-179",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Začátek platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"sort":"+startValid", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-180",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Konec platnosti",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"sort":"+endValid", "limit":10, "offset":0}]
+  },
+  {
+    "testId": "TC-181",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Poslední změny",
+    "tags": [ "@api","@smoke", "@medium", "@cards", "@sort", "@test"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", {"sort":"+updated", "limit":10, "offset":0}]
   }
 ]
 

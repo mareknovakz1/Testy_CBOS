@@ -361,3 +361,31 @@ export interface stockCardgroupsLocal {
     limit: number;
     sort?: string;
 }
+
+
+// Interface for one item in the list
+export interface CardDefinition {
+  id: number;
+  name: string;
+  iso: string;
+  // ... add other properties returned in the list
+}
+
+// Interface for the query parameters
+export interface GetListOfCardDefinitionsParams {
+  offset?: number;
+  limit?: number;
+  sort?: string;
+  // ... add any other optional query params
+}
+
+export interface CardDefinition {
+    id: number;
+    iso: string;
+    cardName: string;
+    issuerCardType: string;
+    startValid: string; // ISO datum
+    endValid: string | null; // ISO datum
+    updated: string; // ISO datum
+    // ... a další pole
+}

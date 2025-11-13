@@ -260,4 +260,13 @@ export class ReportsApiService extends BaseApiClient {
     // BaseApiClient automaticky převede 'params' objekt na query string
     return this.get(`/reports-api/listOfPosTankVouchers`, params);
     }
+
+    /**
+ * Získá seznam čerpadlových dodacích listů.
+ * @param params Objekt s parametry { stockId, year, ... }.
+ */
+public async getListOfWetDeliveryNotes(params: ReportTypes.GetListOfWetDeliveryNotesParams): Promise<t.GenericApiResponse> {
+    // BaseApiClient automaticky převede 'params' objekt na query string
+    return this.get(`/reports-api/listOfWetDeliveryNotes`, params);
+}
 }

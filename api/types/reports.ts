@@ -225,3 +225,20 @@ export interface GetListOfPosTankVouchersParams {
     accepted?: boolean;
     format?: string;
 }
+
+/**
+ * Parametry pro GET /reports-api/listOfWetDeliveryNotes
+ */
+export interface GetListOfWetDeliveryNotesParams {
+    stockId: number;
+    year: number;
+    month?: number;
+    day?: number;
+    fullSearch?: string;
+    supplierId?: number;
+    documentType?: number;
+    documentsStatus?: number;
+    tankId?: number;
+    operator?: string;
+    format?: string;
+}

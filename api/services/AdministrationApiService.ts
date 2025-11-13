@@ -483,4 +483,18 @@ export class AdministrationApiService extends BaseApiClient {
      public async getStockCardsGroupsLocal(stockId: number): Promise<t.GenericApiResponse> {
     return this.get(`/administration-api/stockCardsGroupsLocal/${stockId}`);
     }
+
+    /**
+     * Získá seznam definic karet pro daný účet.
+     * @param accOwner Identifikace sítě (např. "60193531")
+     * @param params Objekt s volitelnými query parametry (offset, limit, sort)
+     */
+    public async getListOfCardDefinitions(
+    accOwner: string,
+    params?: t.GetListOfCardDefinitionsParams
+    ): Promise<t.GenericApiResponse> {
+    
+    // BaseApiClient automaticky převede 'params' na query string
+    return this.get(`/administration-api/listOfCardDefinitions/${accOwner}`, params);
+    }
 }
