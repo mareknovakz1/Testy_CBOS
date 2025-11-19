@@ -2,7 +2,8 @@
   "TC_Sestavy_001": {
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-001",
-      "name": "Přehled prodejů (D001)",
+      "name": "Přehled prodejů",
+      "tags": ["@regression", "@report", "@api", "@high"],
       "public": false,
       "reportDefinitionId": "D001",
       "settings": {
@@ -48,6 +49,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-002",
       "name": "Přehled prodejů PHM pro FÚ",
+       "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "D002",
       "settings": {
@@ -56,7 +58,7 @@
         ],
         "dateModelType": "ymd",
         "year": 2025,
-        "month": 1,
+        "month": 7,
         "day": "0",
         "stockId": [],
         "sort": "",
@@ -82,6 +84,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-003",
       "name": "Přehled prodejů se slevovou kartou",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "D003",
       "settings": {
@@ -119,6 +122,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-004",
       "name": "Přehled smazaných položek účtenek",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "D004",
       "settings": {
@@ -132,7 +136,7 @@
         "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [
-          101
+          230
         ],
         "termId": [],
         "groupId": [],
@@ -160,6 +164,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-005",
       "name": "Přehled konkurenčních cen",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "D005",
       "settings": {
@@ -195,6 +200,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-006",
       "name": "Export položek pokladních dokladů",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "D006",
       "settings": {
@@ -208,7 +214,7 @@
         "dateFrom": "2025-07-03T23:00:00.000Z",
         "dateTo": null,
         "stockId": [
-          101
+          230
         ],
         "stkitmType": [],
         "partnerId": [],
@@ -236,6 +242,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-007",
       "name": "Přehled nákupů zboží",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "P001",
       "settings": {
@@ -276,6 +283,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-008",
       "name": "Přehled dodávek PHM pro FÚ",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "P002",
       "settings": {
@@ -284,7 +292,7 @@
         ],
         "dateModelType": "ymd",
         "year": 2025,
-        "month": 1,
+        "month": 7,
         "day": "0",
         "stockId": [],
         "sort": "",
@@ -310,6 +318,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-009",
       "name": "Přehled pohybů zboží",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "S001",
       "settings": {
@@ -319,7 +328,7 @@
         ],
         "dateModelType": "ymd",
         "year": 2025,
-        "month": 1,
+        "month": 7,
         "day": "0",
         "stockId": [],
         "groupId": [],
@@ -346,6 +355,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-010",
       "name": "Přehled přecenění",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "S002",
       "settings": {
@@ -383,6 +393,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-011",
       "name": "Půlnoční zásoby PHM",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "S003",
       "settings": {
@@ -416,6 +427,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-012",
       "name": "Přehled minimální zásoby skladových karet",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "S005",
       "settings": {
@@ -447,6 +459,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-013",
       "name": "Přehled nedoautorizovaných transakcí",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "T001",
       "settings": {
@@ -480,6 +493,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-014",
       "name": "Přehled odběrů podle řidiče",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "T002",
       "settings": {
@@ -519,6 +533,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-015",
       "name": "Přehled odběrů podle vozidla",
+      "tags": ["@regression", "@report", "@api", "@medium"],
       "public": false,
       "reportDefinitionId": "T003",
       "settings": {

@@ -18,26 +18,66 @@ import { test, expect } from '../../../support/fixtures/auth.fixture';
 import { logger } from '../../../support/logger';
 import * as ReportTypes from '../../../api/types/reports';
 import { ACC_OWNER_ID } from '../../../support/constants';
-import allReportData from '../../../test-data/Sestavy_life_cycle_regrese.json';
+import allReportData from '../../../test-data/Sestavy_life_cycle_regrese.json'; 
 
-//logger.silly(`Načtena testovací data: ${JSON.stringify(allReportData, null, 2)}`);
+logger.silly(`Načtena testovací data: ${JSON.stringify(allReportData, null, 2)}`);
+logger.debug('Probíhá příprava testovacích dat');
 
-// OPRAVA: Projdeme všechny klíče v JSON souboru (např. "TC_Sestavy_001", "TC_Sestavy_002", ...)
+// Definujeme typ pro data z JSONu
+type ReportStepData = {
+  testCaseId: string;
+  name: string;
+  tags?: string[]; // Tagy jsou volitelné
+  public: boolean;
+  reportDefinitionId: string;
+  settings: any;
+};
+
+type ReportTestCase = {
+  step1_CreateReport: ReportStepData;
+  step2_GetReportList: {
+    offset: number;
+    limit: number;
+    sort: string;
+  };
+  step3_DeleteReport: {
+    name: string;
+  };
+};
+
+type EndpointData = any;
+
+logger.debug('Spouštím regresní testy životního cyklu uživatelských sestav podle definic v JSONu.');
 for (const testCaseKey of Object.keys(allReportData)) {
 
-    // Dynamicky vytvoříme test pro každý klíč
-    test(`${testCaseKey}: Krok 1: POST, Krok 2: GET, Krok 3: DELETE @regression @report @api @medium`, async ({ apiClient }) => {
+    const rawCase = allReportData[testCaseKey as keyof typeof allReportData] as unknown;
+    const testCaseData = rawCase as ReportTestCase;
+    logger.trace(`Připravená data pro testovací případ '${testCaseKey}': ${JSON.stringify(testCaseData, null, 2)}`);
 
-        // OPRAVA: Načteme data pro aktuální test case
-        const testCaseData = allReportData[testCaseKey as keyof typeof allReportData];
+    if (!testCaseData || !testCaseData.step1_CreateReport) {
+        logger.fatal(` TestCase '${testCaseKey}' má neplatnou strukturu. Data:`);
+        logger.fatal(JSON.stringify(testCaseData, null, 2));
+        continue;
+    }
+
+    const step1 = testCaseData.step1_CreateReport;
+    const tags = step1.tags ?? [];
+    const tagsString = tags.length > 0 ? ` ${tags.join(' ')}` : '';
+
+    const testTitle = `${testCaseKey}: ${step1.name} ${tagsString}`;
+
+
+    test(testTitle, async ({ apiClient }) => {
 
         // Proměnné sdílené mezi kroky
         let createdReportId: number;
         
         // Získáme základní název z testovacích dat
+        logger.trace('Deklarace unikátního názvu sestavy pro tento test.');
         const baseReportName = testCaseData.step1_CreateReport.name;
         // Vytvoříme unikátní název, abychom sestavu spolehlivě našli
         const uniqueReportName = `${baseReportName} - ${Date.now()}`;
+        logger.debug(`Generuji unikátní název sestavy pro testovací případ '${testCaseKey}': ${uniqueReportName}`);
         
         // Proměnné pro logování v 'catch' bloku
         let endpoint: string;
@@ -59,7 +99,6 @@ for (const testCaseKey of Object.keys(allReportData)) {
                 name: uniqueReportName, // Stále používáme unikátní jméno
                 public: testCase.public,
                 reportDefinitionId: testCase.reportDefinitionId,
-                // Použijeme 'as any' pro snadné přetypování z JSONu
                 settings: testCase.settings as any 
             };
             
@@ -125,19 +164,15 @@ for (const testCaseKey of Object.keys(allReportData)) {
                     logger.error('Krok 2: Počet položek (itemsCount) je "null", což značí chybu.');
                     throw new Error('Počet položek v sestavě je null.');
                 } else if (itemsCount === 0) {
-                    logger.warn(`${lastReport.testCaseID} ${lastReport.reportDefinitionId} ${lastReport.name} Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.`);
+                    logger.warn(`${testCaseData.step1_CreateReport.testCaseId} ${testCaseData.step1_CreateReport.reportDefinitionId} ${lastReport.name} Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.`);
                 } else {
                     logger.info(`Krok 2: Sestava obsahuje ${itemsCount} položek.`);
                 }
 
                 logger.debug(`Sestava '${uniqueReportName}' má vlastnost public: ${lastReport.public}`);
                 if (testCaseData.step1_CreateReport.public === false) {
-                     expect(lastReport.public, `Sestava '${uniqueReportName}' by neměla být veřejná.`).toBe(false);
+                    expect(lastReport.public, `Sestava '${uniqueReportName}' by neměla být veřejná.`).toBe(false);
                 }
-
-                createdReportId = lastReport.id;
-
-                createdReportId = lastReport.id;
 
             } catch (error) {
                 const fullUrl = `${apiClient.reports.baseURL}${endpoint}?${new URLSearchParams(params as any)}`;
@@ -146,7 +181,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
             }
         });
 
-        //Krok 3: Smazání sestavy (Úklid)
+        // Krok 3: Smazání sestavy (Úklid)
         await test.step('Krok 3: DELETE /reports-api/usersReports/{id} (Úklid)', async () => {
             
             if (!createdReportId) {
@@ -166,10 +201,10 @@ for (const testCaseKey of Object.keys(allReportData)) {
 
             } catch (error) {
                 const fullUrl = `${apiClient.reports.baseURL}${endpoint}`;
+
                 logger.error(`Krok 3 (${testCaseKey}): Úklid selhal s chybou: ${error}, URL: ${fullUrl}`);
                 throw error;
             }
         });
-
     }); // Konec bloku test
-} // Konec cyklu for
+} 
