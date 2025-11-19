@@ -568,5 +568,490 @@
     "step3_DeleteReport": {
       "name": "Úklid vytvořené sestavy"
     }
+  },
+  "TC_Sestavy_016": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-016",
+      "name": "Přehled prodejů - sdílená sestava",
+      "tags": ["@regression", "@report", "@api", "@high"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": [
+          "stockId",
+          "stkitmType",
+          "groupId",
+          "goodsOwnerId",
+          "paidBy",
+          "cardOwnerId",
+          "cardIssuerId"
+        ],
+        "dateModelType": "range",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+"TC_Sestavy_017": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-017",
+      "name": "Přehled prodejů - Všechna seskupení",
+      "tags": ["@regression", "@report", "@api", "@high", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel", "plu", "recText", "paidByLabel", "vatValue", "cardIssuerLabel", "localCardOwnerLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_018": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-018",
+      "name": "Přehled prodejů - Seskupení bez localCardOwnerLabel",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel", "plu", "recText", "paidByLabel", "vatValue", "cardIssuerLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_019": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-019",
+      "name": "Přehled prodejů - Seskupení bez cardIssuerLabel",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel", "plu", "recText", "paidByLabel", "vatValue"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_020": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-020",
+      "name": "Přehled prodejů - Seskupení bez vatValue",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel", "plu", "recText", "paidByLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_021": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-021",
+      "name": "Přehled prodejů - Seskupení bez paidByLabel",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel", "plu", "recText"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_022": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-022",
+      "name": "Přehled prodejů - Seskupení bez recText",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel", "plu"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_023": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-023",
+      "name": "Přehled prodejů - Seskupení bez plu",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel", "groupLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_024": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-024",
+      "name": "Přehled prodejů - Seskupení bez groupLabel",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel", "stkitmTypeLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_025": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-025",
+      "name": "Přehled prodejů - Seskupení bez stkitmTypeLabel",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel", "stockLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_026": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-026",
+      "name": "Přehled prodejů - Seskupení bez stockLabel",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date", "monthLabel"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
+  },
+  "TC_Sestavy_027": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-027",
+      "name": "Přehled prodejů - Seskupení jen podle data",
+      "tags": ["@regression", "@report", "@api", "@medium", "@grouping"],
+      "public": false,
+      "reportDefinitionId": "D001",
+      "settings": {
+        "availableFilters": ["stockId", "stkitmType", "groupId", "goodsOwnerId", "paidBy", "cardOwnerId", "cardIssuerId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-10-31T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "stkitmType": [],
+        "groupId": [],
+        "goodsOwnerId": [],
+        "paidBy": [],
+        "cardOwnerId": [],
+        "cardIssuerId": [],
+        
+        "grouping": ["date"],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
   }
 }

@@ -20,7 +20,6 @@
  */
 
 import { ApiClient } from '../../api/ApiClient';
-import { baseURL, port } from '../../support/constants';
 import { expect, test } from '../../support/fixtures/auth.fixture';
 import { logger } from '../../support/logger';
 import endpointsToTest from '../../test-data/Smoke_All_Gets.json'; 

@@ -169,10 +169,12 @@ for (const testCaseKey of Object.keys(allReportData)) {
                     logger.info(`Krok 2: Sestava obsahuje ${itemsCount} položek.`);
                 }
 
-                logger.debug(`Sestava '${uniqueReportName}' má vlastnost public: ${lastReport.public}`);
-                if (testCaseData.step1_CreateReport.public === false) {
-                    expect(lastReport.public, `Sestava '${uniqueReportName}' by neměla být veřejná.`).toBe(false);
-                }
+                const expectedPublicState = testCaseData.step1_CreateReport.public;
+                logger.debug(`Sestava '${uniqueReportName}' má vlastnost public: ${lastReport.public}. Očekáváno: ${expectedPublicState}`);
+                
+                expect(lastReport.public, 
+                    `Vlastnost 'public' u sestavy '${uniqueReportName}' neodpovídá testovacím datům.`
+                ).toBe(expectedPublicState);
 
             } catch (error) {
                 const fullUrl = `${apiClient.reports.baseURL}${endpoint}?${new URLSearchParams(params as any)}`;
@@ -180,7 +182,6 @@ for (const testCaseKey of Object.keys(allReportData)) {
                 throw error;
             }
         });
-
         // Krok 3: Smazání sestavy (Úklid)
         await test.step('Krok 3: DELETE /reports-api/usersReports/{id} (Úklid)', async () => {
             
