@@ -49,7 +49,7 @@ test.describe('Testy filtrů listOfDrivers', () => {
     allFilterCasesData.forEach(testCase => {
     const { TC, name, filterParams } = testCase;
 
-    test(`${TC} Test filtru: ${name} @regression @CDL @API @medium @search`, async () => {
+    test(`${TC} Test filtru: ${name}`, async () => {
         logger.info(`Spouštím test pro: ${name}`);
 
         logger.silly('Definice payload');

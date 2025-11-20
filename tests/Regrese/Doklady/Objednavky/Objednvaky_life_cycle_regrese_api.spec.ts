@@ -35,7 +35,7 @@ function getTomorrowDate(): Date {
 }
 
 //Série testů
-test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems @regression @order @api @medium`, async ({ apiClient }) => {
+test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockCards Krok 4: POST /orderItems `, async ({ apiClient }) => {
 
     // OPRAVA: Tyto proměnné musí být v hlavním scope testu, aby byly sdíleny mezi kroky
     let createdOrderId: number; 
@@ -110,28 +110,28 @@ test(`TC-001: Krok 1: POST /orders Krok 2: GET /orders Krok 3: GET /listOfStockC
         logger.trace(`Payload pro ${endpoint}: ${JSON.stringify(payload)}`);
 
         try {
-            logger.debug('Volám metodu getListOfOrders pro získání seznamu objednávek.');
-            const response = await apiClient.reports.getListOfOrders(payload); 
+            logger.debug('Volám metodu getListOfOrders pro získání seznamu objednávek.');
+            const response = await apiClient.reports.getListOfOrders(payload); 
 
-            // Ověříme, že odpověď je pole a že není prázdné
-            if (!response || !Array.isArray(response) || response.length === 0) {
-                throw new Error('Seznam objednávek je prázdný nebo neplatný.');
-            }
+            // Ověříme, že odpověď je pole a že není prázdné
+            if (!response || !Array.isArray(response) || response.length === 0) {
+                throw new Error('Seznam objednávek je prázdný nebo neplatný.');
+            }
 
-            // OPZískání ID vytvořené objednávky
-            const foundOrder = response[0];
+            // OPZískání ID vytvořené objednávky
+            const foundOrder = response[0];
             logger.trace('Ověřuji, že nalezená objednávka má platné ID.');
-            expect(foundOrder, "V seznamu nebyla nalezena žádná objednávka.").toBeDefined();
+            expect(foundOrder, "V seznamu nebyla nalezena žádná objednávka.").toBeDefined();
             logger.debug(`Nalezená objednávka má ID: ${foundOrder.id}`);
             expect(foundOrder.id, "První objednávka v seznamu nemá ID.").toBeGreaterThan(0);
             logger.debug('Ověření ID objednávky proběhlo úspěšně.');
-            createdOrderId = foundOrder.id;
-            
-        } catch (error) {
+            createdOrderId = foundOrder.id;
+            
+        } catch (error) {
             const fullUrl = `${apiClient.reports.baseURL}${endpoint}`;
-            logger.error(`Step 2: Chyba při získávání seznamu objednávek: ${error}, URL: ${fullUrl}`);
-            throw error;
-        }
+            logger.error(`Step 2: Chyba při získávání seznamu objednávek: ${error}, URL: ${fullUrl}`);
+            throw error;
+        }
     });
 
     // Krok 3: Vyhledání skladové karty (Stock Card)

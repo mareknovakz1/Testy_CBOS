@@ -1358,5 +1358,37 @@
     "step3_DeleteReport": {
       "name": "Úklid vytvořené sestavy"
     }
+  },
+  "TC_Sestavy_036": {
+    "step1_CreateReport": {
+      "testCaseId": "TC-Sestavy-S004",
+      "name": "Půlnoční registry stojanů",
+      "tags": ["@regression", "@report", "@api", "@medium"],
+      "public": false,
+      "reportDefinitionId": "S004",
+      "settings": {
+        "availableFilters": ["stockId"],
+        "dateModelType": "range",
+        "dateFrom": "2025-07-03T23:00:00.000Z",
+        "dateTo": null,
+        "stockId": [],
+        "sort": "",
+        "exportParameters": {
+          "tabsParam": "",
+          "exportIntoTabs": false,
+          "exportFileName": false,
+          "exportDateTime": true,
+          "summaries": false
+        }
+      }
+    },
+    "step2_GetReportList": {
+      "offset": 0,
+      "limit": 1,
+      "sort": "-updated"
+    },
+    "step3_DeleteReport": {
+      "name": "Úklid vytvořené sestavy"
+    }
   }
 }
