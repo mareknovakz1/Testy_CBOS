@@ -9,15 +9,41 @@
 
 //================ Orders ================
 export interface CreateOrderPayload {
-    orderDate: string; // "2024-12-01"
-    deliveryDate: string; // "2024-12-10"
-    ownerId: number;
-    ownerName: string;
-    supplierId: number;
-    supplierName: string;
-    transporterId?: number;
-    transporterName?: string;
-    description?: string;
+    orderDate: string; // Datum vytvoření objednávky
+    deliveryDate: string; // Datum dodání zboží
+    stockId: number; //Obchodní místo
+    ownerId: number; //
+    ownerName: string; //Vlastní zboží
+    supplierId: number; 
+    supplierName: string; //Dodavatel zboží
+    transporterId?: number; //Dopravce zboží
+    transporterName?: string; //Dopravce zboží
+    description?: string; //Popis (číslo) objednávky
+}
+
+
+export interface GetListOfStockCardsParams {
+    stkitmType?: 'D' | 'S' | 'W';
+    cgroupId?: number;
+    supplyStatus?: 1 | 2 | 3;
+    withSupplyOnly?: boolean;
+    withSellingPrice?: boolean;
+    notApprovedOnly?: boolean;
+    tandemOnly?: boolean;
+    mainOnly?: boolean;
+    takeMain?: boolean;
+    ownerId?: number;
+    supplierId?: number;
+    vatClsId?: number;
+    ctClsId?: number;
+    lgroupId?: number;
+    category?: string;
+    valid?: boolean;
+    search?: string;
+    searchType?: 'EAN' | 'PLU' | 'fullSearch';
+    accOwner?: string; // Opraveno z 'accOnwer' na 'accOwner'
+    stockId?: number;
+    for?: string;      // Přidáno pro kontext 'orders'
 }
 
 export interface UpdateOrderPayload {

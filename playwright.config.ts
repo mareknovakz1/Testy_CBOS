@@ -7,7 +7,7 @@ import { baseURL } from './support/constants'; // Importujeme si naši základn�
 
 
 // Nastavte zde úroveň logování (0=silly, 1=trace, 2=debug, 3=info, 4=warn, 5=error, 6=fatal)
-const logLevel = 4; // změňte dle potřeby
+const logLevel = 1; // změňte dle potřeby
 process.env.LOG_LEVEL = String(logLevel);
 
 // Veškerá konfigurace je nyní v rámci jednoho exportu.
@@ -18,7 +18,7 @@ export default defineConfig({
 
   // Globální časový limit pro každý jednotlivý test
   timeout: 50 * 1000, // 50 sekund
-  retries: 1, // Počet opakování po neúspěšném testu
+  retries: 0, // Počet opakování po neúspěšném testu
   workers: 1, // Použití jednoho workera pro sériové spouštění testů (jeden po druhém)
   fullyParallel: false,
 

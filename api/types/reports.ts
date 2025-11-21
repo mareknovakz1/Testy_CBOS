@@ -106,6 +106,11 @@ export interface GetListOfStockCardsParams {
     lgroupId?: number;
     category?: string;
     valid?: boolean;
+    search?: string;
+    searchType?: 'EAN' | 'PLU' | 'fullSearch';
+    accOwner?: string; // Opraveno z 'accOnwer' na 'accOwner'
+    stockId?: number;
+    for?: string;      // Přidáno pro kontext 'orders'
 }
 
 export interface GetListOfRolesParams {

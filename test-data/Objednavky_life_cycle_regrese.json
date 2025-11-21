@@ -2,8 +2,9 @@
   "TC_001": {
     "step1_CreateOrder": {
       "name": "POST documents-api/orders",
+      "tags": ["regression", "api", "life_cycle", "@high", "@order", "@test"],
       "description": "Automaticky vytvořená objednávka k rychlému ověření POST",
-      "stockId": 230,
+      "stockId": 231,
       "ownerId": 1,
       "ownerName": "ČEPRO, a.s.",
       "supplierId": 8,
@@ -13,18 +14,27 @@
     },
     "step2_GetOrdersList": {
       "name": "GET reports-api/orders",
-      "stockId": 230,
+      "stockId": 231,
       "year": 2025
     },
     "step3_GetStockCard": {
       "name": "GET reports-api/listOfStockCards",
-      "PLU": 104922,
-      "stockId": 230
+      "stockId": 231,
+      "PLU": 102067,
+      "params": {
+        "search": "102067",
+        "searchType": "PLU",
+        "stockId": 231,
+        "ownerId": 1,
+        "supplierId": 8,
+        "stkitmType": "D",
+        "for": "orders"
+      }
     },
     "step4_AddOrderItem": {
       "name": "POST documents-api/orderitems",
       "stockCardId": 13,
-      "stockId": 230
+      "stockId": 231
     }
   }
 }

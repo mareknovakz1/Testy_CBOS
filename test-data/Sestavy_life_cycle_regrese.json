@@ -1058,7 +1058,7 @@
     "step1_CreateReport": {
       "testCaseId": "TC-Sestavy-028",
       "name": "Přehled prodejů - Seskupení jen podle data",
-      "tags": ["@regression", "@report", "@api", "@medium", "@filter", "@test"],
+      "tags": ["@regression", "@report", "@api", "@medium", "@filter"],
       "public": false,
       "reportDefinitionId": "D001",
       "settings": {

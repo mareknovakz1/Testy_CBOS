@@ -52,7 +52,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
 
     const rawCase = allReportData[testCaseKey as keyof typeof allReportData] as unknown;
     const testCaseData = rawCase as ReportTestCase;
-    logger.trace(`Připravená data pro testovací případ '${testCaseKey}': ${JSON.stringify(testCaseData, null, 2)}`);
+    logger.silly(`Připravená data pro testovací případ '${testCaseKey}': ${JSON.stringify(testCaseData, null, 2)}`);
 
     if (!testCaseData || !testCaseData.step1_CreateReport) {
         logger.fatal(` TestCase '${testCaseKey}' má neplatnou strukturu. Data:`);
@@ -102,7 +102,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
                 settings: testCase.settings as any 
             };
             
-            logger.debug(`Payload pro ${endpoint}: ${JSON.stringify(payload, null, 2)}`);
+            logger.trace(`Payload pro ${endpoint}: ${JSON.stringify(payload, null, 2)}`);
 
             try {
                 logger.trace(`Odesílám POST požadavek na ${endpoint}`);
@@ -132,7 +132,7 @@ for (const testCaseKey of Object.keys(allReportData)) {
                 sort: testCase.sort 
             };
 
-            logger.debug(`Parametry pro ${endpoint}: ${JSON.stringify(params)}`);
+            logger.trace(`Parametry pro ${endpoint}: ${JSON.stringify(params)}`);
 
             try {
                 logger.trace(`Odesílám GET požadavek na ${endpoint}`);

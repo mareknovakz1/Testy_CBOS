@@ -1,43 +1,113 @@
-<testsuites id="" name="" tests="36" failures="0" skipped="0" errors="0" time="53.032035">
-  <testsuite name="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" timestamp="2025-11-20T12:57:32.865Z" hostname="API" tests="36" failures="0" skipped="0" time="51.442" errors="0">
-    <testcase name="TC_Sestavy_001: Přehled prodejů  @regression @report @api @high" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.249"/>
-    <testcase name="TC_Sestavy_002: Přehled prodejů PHM pro FÚ  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.398"/>
-    <testcase name="TC_Sestavy_003: Přehled prodejů se slevovou kartou  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.9">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-20[0m[0m 12[0m[0m:57[0m[0m:37[0m[0m.523[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts:167[39m[0m[0m]TC-Sestavy-003 D003 Přehled prodejů se slevovou kartou - 1763643457366 Krok 2: Počet položek (itemsCount) je 0. Sestava je prázdná, ale test pokračuje.
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="2.509599">
+  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-21T10:00:52.374Z" hostname="API" tests="1" failures="1" skipped="0" time="1.207" errors="0">
+    <testcase name="TC_001: Life Cycle Objednávky regression api life_cycle @high @order @test" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.207">
+      <failure message="Objednvaky_life_cycle_regrese_api.spec.ts:58:9 TC_001: Life Cycle Objednávky regression api life_cycle @high @order @test" type="FAILURE"><![CDATA[  [API] › Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:58:9 › TC_001: Life Cycle Objednávky regression api life_cycle @high @order @test › Krok 4: POST /documents-api/orderItems 
+
+    ApiError: [N/A] API Error: Status 409 on http://192.168.130.239:8180/documents-api/ordersitems/231
+
+       at ..\api\BaseApiClient.ts:118
+
+      116 |             const errorMessage = `[${requestId}] API Error: Status ${response.status()} on ${response.url()}`;
+      117 |             logger.error(errorMessage, { body: responseBodyText });   // ...zalogujeme chybu
+    > 118 |             throw new ApiError(errorMessage, response.status(), responseBodyText); // ...a vyhodíme naši vlastní chybovou třídu
+          |                   ^
+      119 |         }
+      120 |         
+      121 |         if (response.status() === 204 || responseBodyText.length === 0) { // Pokud je odpověď 'No Content' nebo prázdná...
+        at DocumentsApiService._handleAndParseResponse (C:\Users\novakma\Testy_CBOS\api\BaseApiClient.ts:118:19)
+        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:158:13
+        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:150:9
+]]></failure>
+      <system-out><![CDATA[2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:53[0m[0m.477[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:53[0m[0m.482[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:53[0m[0m.484[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:53[0m[0m.485[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:53[0m[0m.488[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:53[0m[0m.491[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.273[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.274[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.276[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.281[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.283[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:95[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.285[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:98[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.287[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:100[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.291[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:69[39m[0m[0m]Spouštím test: TC_001 | Unikátní ID: AutoTest_TC_001_1763719254291_15
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.297[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][555be122] ---> POST http://192.168.130.239:8180/documents-api/orders/231 {
+  params: [90mundefined[39m,
+  data: {
+    orderDate: [32m'2025-11-21T10:00:54.296Z'[39m,
+    deliveryDate: [32m'2025-11-22T10:00:54.291Z'[39m,
+    description: [32m'AutoTest_TC_001_1763719254291_15'[39m,
+    ownerName: [32m'ČEPRO, a.s.'[39m,
+    ownerId: [33m1[39m,
+    stockId: [33m231[39m,
+    supplierId: [33m8[39m,
+    supplierName: [32m'Banner Baterie ČR spol.s r.o.'[39m
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'555be122'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.346[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][555be122] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/231 (38.76 ms)
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.351[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:89[39m[0m[0m]Krok 1 OK: Objednávka vytvořena.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.353[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][5131801f] ---> GET http://192.168.130.239:8180/reports-api/listOfOrders {
+  params: {
+    stockId: [33m231[39m,
+    year: [33m2025[39m
+  },
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'5131801f'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.492[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][5131801f] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfOrders (135.01 ms)
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.498[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:102[39m[0m[0m]Krok 2 OK: Objednávka nalezena pod ID 70.
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.500[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:121[39m[0m[0m]Step 3 params z JSONu: {"search":"102067","searchType":"PLU","stockId":231,"ownerId":1,"supplierId":8,"stkitmType":"D","for":"orders"}
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.502[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][6e914def] ---> GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 {
+  params: {
+    search: [32m'102067'[39m,
+    searchType: [32m'PLU'[39m,
+    stockId: [33m231[39m,
+    ownerId: [33m1[39m,
+    supplierId: [33m8[39m,
+    stkitmType: [32m'D'[39m,
+    for: [32m'orders'[39m
+  },
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'6e914def'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.568[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][6e914def] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 (64.11 ms)
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.572[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:136[39m[0m[0m]Krok 3 OK: Nalezena karta PLU 102067 (ID: 175)
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.574[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][7ae6dba2] ---> POST http://192.168.130.239:8180/documents-api/ordersitems/231 {
+  params: [90mundefined[39m,
+  data: {
+    orderId: [33m70[39m,
+    stockCardId: [33m175[39m,
+    amount: [33m5[39m
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'7ae6dba2'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.651[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][7ae6dba2] <--- 409 POST http://192.168.130.239:8180/documents-api/ordersitems/231 (76.07 ms)
+2025[0m[0m-11[0m[0m-21[0m[0m 10[0m[0m:00[0m[0m:54[0m[0m.657[0m[0m [31m[1mERROR[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:117[39m[0m[0m][N/A] API Error: Status 409 on http://192.168.130.239:8180/documents-api/ordersitems/231 {
+  body: [32m'{"status":409,"message":"stockcard is already in opened order"}'[39m
+}
 ]]></system-out>
     </testcase>
-    <testcase name="TC_Sestavy_004: Přehled smazaných položek účtenek  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.841"/>
-    <testcase name="TC_Sestavy_005: Přehled konkurenčních cen  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.933"/>
-    <testcase name="TC_Sestavy_006: Export položek pokladních dokladů  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="17.095"/>
-    <testcase name="TC_Sestavy_007: Přehled nákupů zboží  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.202"/>
-    <testcase name="TC_Sestavy_008: Přehled dodávek PHM pro FÚ  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.901"/>
-    <testcase name="TC_Sestavy_009: Přehled pohybů zboží  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.318"/>
-    <testcase name="TC_Sestavy_010: Přehled přecenění  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.955"/>
-    <testcase name="TC_Sestavy_011: Půlnoční zásoby PHM  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.867"/>
-    <testcase name="TC_Sestavy_012: Přehled minimální zásoby skladových karet  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.922"/>
-    <testcase name="TC_Sestavy_013: Přehled nedoautorizovaných transakcí  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.828"/>
-    <testcase name="TC_Sestavy_014: Přehled odběrů podle řidiče  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.898"/>
-    <testcase name="TC_Sestavy_015: Přehled odběrů podle vozidla  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.923"/>
-    <testcase name="TC_Sestavy_016: Přehled prodejů - sdílená sestava  @regression @report @api @high" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.052"/>
-    <testcase name="TC_Sestavy_017: Přehled prodejů - Všechna seskupení  @regression @report @api @high @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.876"/>
-    <testcase name="TC_Sestavy_018: Přehled prodejů - Seskupení bez localCardOwnerLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.889"/>
-    <testcase name="TC_Sestavy_019: Přehled prodejů - Seskupení bez cardIssuerLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.933"/>
-    <testcase name="TC_Sestavy_020: Přehled prodejů - Seskupení bez vatValue  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.856"/>
-    <testcase name="TC_Sestavy_021: Přehled prodejů - Seskupení bez paidByLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.978"/>
-    <testcase name="TC_Sestavy_022: Přehled prodejů - Seskupení bez recText  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.843"/>
-    <testcase name="TC_Sestavy_023: Přehled prodejů - Seskupení bez plu  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.924"/>
-    <testcase name="TC_Sestavy_024: Přehled prodejů - Seskupení bez groupLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.841"/>
-    <testcase name="TC_Sestavy_025: Přehled prodejů - Seskupení bez stkitmTypeLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.905"/>
-    <testcase name="TC_Sestavy_026: Přehled prodejů - Seskupení bez stockLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.862"/>
-    <testcase name="TC_Sestavy_027: Přehled prodejů - Seskupení jen podle data  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.885"/>
-    <testcase name="TC_Sestavy_028: Přehled prodejů - Seskupení jen podle data  @regression @report @api @medium @filter @test" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.434"/>
-    <testcase name="TC_Sestavy_029: Přehled nákupů zboží - Všechna seskupení  @regression @report @api @high @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.164"/>
-    <testcase name="TC_Sestavy_030: Přehled nákupů zboží - Seskupení bez documentLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.882"/>
-    <testcase name="TC_Sestavy_031: Přehled nákupů zboží - Seskupení bez groupLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.932"/>
-    <testcase name="TC_Sestavy_032: Přehled nákupů zboží - Seskupení bez stockLabel  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.873"/>
-    <testcase name="TC_Sestavy_033: Přehled nákupů zboží - Seskupení jen podle PLU  @regression @report @api @medium @grouping" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.85"/>
-    <testcase name="TC_Sestavy_034: Přehled pohybů zboží - valid onlyWithMove  @regression @report @api @medium @filter" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.893"/>
-    <testcase name="TC_Sestavy_035: Přehled pohybů zboží - valid onlyWithMove  @regression @report @api @medium @filter" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="0.876"/>
-    <testcase name="TC_Sestavy_036: Půlnoční registry stojanů  @regression @report @api @medium" classname="Regrese\Sestavy\Uzivatelske_Sestavy_Life_Cycle_api.spec.ts" time="1.464"/>
   </testsuite>
 </testsuites>
