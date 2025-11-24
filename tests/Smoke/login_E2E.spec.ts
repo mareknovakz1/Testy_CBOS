@@ -25,7 +25,7 @@ aiTest.describe('CBOS - Smoke Login Test', () => {
         }
     });
 
-    aiTest('Přihlášení uživatele TESTING_AUTOMAT pomocí AI @e2e, @login, @test2', async ({ ai, page }) => {
+    aiTest('Přihlášení uživatele TESTING_AUTOMAT pomocí AI @e2e, @login', async ({ ai, page }) => {
         logger.info('--- START SCÉNÁŘE: PŘIHLÁŠENÍ ---');
 
         // --- 1. KROK: UŽIVATELSKÉ JMÉNO ---

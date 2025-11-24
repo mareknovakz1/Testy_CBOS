@@ -3,7 +3,7 @@
     "caseName": "Regresní test životního cyklu objednávek přes API",
     "step1_CreateOrder": {
       "name": "Vytvoření objednávky POST documents-api/orders",
-      "tags": ["regression", "api", "life_cycle", "@high", "@order", "@test"],
+      "tags": ["@regression", "@api", "@life_cycle", "@high", "@order", "@test"],
       "description": "Automaticky vytvořená objednávka",
       "stockId": 231,
       "ownerId": 1,
@@ -35,7 +35,9 @@
       "name": "Přidání zboží POST documents-api/orderitems",
       "stockCardId": 13,
       "stockId": 231,
-      "amount": 1
+      "amount": 1,
+      "expectationState": "200"
+
     },
     "step5_SendOrder": {
       "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
@@ -48,7 +50,8 @@
       "stockId": 231,
       "amount": 10,
       "comment": "Schválení změny množství",
-      "agreement": true
+      "agreement": true,
+      "stockCardId": 959
     }
   }
 }

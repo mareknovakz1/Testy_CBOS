@@ -73,6 +73,19 @@ export interface UpdateOrderPayload {
     commentary?: string;
 }
 
+export interface CreateOrderPayload {
+    orderDate: string;
+    deliveryDate: string;
+    stockId: number; // <--- MAKE SURE THIS IS HERE!
+    ownerId: number;
+    ownerName: string;
+    supplierId: number;
+    supplierName: string;
+    transporterId?: number;
+    transporterName?: string;
+    description?: string;
+}
+
 export interface SendOrderPayload {
     orderId: number;
     email?: string;

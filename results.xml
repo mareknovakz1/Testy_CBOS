@@ -1,55 +1,131 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="148.67645199999998">
-  <testsuite name="Smoke\login_E2E.spec.ts" timestamp="2025-11-24T08:35:38.219Z" hostname="chromium" tests="1" failures="0" skipped="0" time="147.019" errors="0">
-    <testcase name="CBOS - Smoke Login Test › Přihlášení uživatele TESTING_AUTOMAT pomocí AI @e2e, @login, @test2" classname="Smoke\login_E2E.spec.ts" time="147.019">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:35[0m[0m:41[0m[0m.433[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:13[39m[0m[0m][CBOS Test] Otevírám aplikaci: http://192.168.130.239:8180/login
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:55[0m[0m.225[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:19[39m[0m[0m][CBOS Test] Čekám na stav "networkidle" (načtení skriptů)...
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.673[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:22[39m[0m[0m][CBOS Test] Stránka je stabilní (networkidle).
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.678[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\ai-test.ts:20[39m[0m[0m][AiFixture] Inicializuji SmartFinder pro test: Smoke_login_E2E_spec_ts_CBOS___Smoke_Login_Test_P_ihl__en__u_ivatele_TESTING_AUTOMAT_pomoc__AI__e2e___login___test2
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.682[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\llm-service.ts:16[39m[0m[0m][GeminiService] Inicializuji model "gemini-flash-latest.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.688[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\locator-store.ts:24[39m[0m[0m][LocatorStore] Inicializace pro soubor: Smoke_login_E2E_spec_ts_CBOS___Smoke_Login_Test_P_ihl__en__u_ivatele_TESTING_AUTOMAT_pomoc__AI__e2e___login___test2.locators.json
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.695[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\locator-store.ts:40[39m[0m[0m][LocatorStore] Načteno 5 záznamů.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.702[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:29[39m[0m[0m]--- START SCÉNÁŘE: PŘIHLÁŠENÍ ---
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.705[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:33[39m[0m[0m][KROK 1] Volám AI pro nalezení inputu uživatele...
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.711[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\ai-test.ts:31[39m[0m[0m][AiFixture] Volání ai('cbos-login-username')
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.716[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:24[39m[0m[0m][SmartFinder] Start hledání pro klíč: "cbos-login-username"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.719[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:27[39m[0m[0m][SmartFinder] Hledám element podle popisu: "Input pole (textové pole) pro zadání uživatelského jména nebo loginu."
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.722[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:31[39m[0m[0m][SmartFinder] V paměti nalezen selektor: ".box .field:nth-child(1) input"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.793[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:38[39m[0m[0m][SmartFinder] Cache Hit: Selektor ".box .field:nth-child(1) input" je stále platný.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.795[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:37[39m[0m[0m][KROK 1] Ověřuji viditelnost pole pro jméno.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.830[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:41[39m[0m[0m][KROK 1] Vyplňuji uživatele: TESTING_AUTOMAT
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.870[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:47[39m[0m[0m][KROK 2] Volám AI pro nalezení inputu hesla...
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.872[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\ai-test.ts:31[39m[0m[0m][AiFixture] Volání ai('cbos-login-password')
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.875[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:24[39m[0m[0m][SmartFinder] Start hledání pro klíč: "cbos-login-password"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.877[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:27[39m[0m[0m][SmartFinder] Hledám element podle popisu: "Input pole pro zadání hesla (typ elementu je password)."
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.879[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:31[39m[0m[0m][SmartFinder] V paměti nalezen selektor: "input[type="password"]"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.905[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:38[39m[0m[0m][SmartFinder] Cache Hit: Selektor "input[type="password"]" je stále platný.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.906[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:51[39m[0m[0m][KROK 2] Ověřuji viditelnost pole pro heslo.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.923[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:55[39m[0m[0m][KROK 2] Vyplňuji heslo (hodnota skryta).
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.954[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:61[39m[0m[0m][KROK 3] Volám AI pro nalezení tlačítka Přihlásit...
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.957[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\ai-test.ts:31[39m[0m[0m][AiFixture] Volání ai('cbos-login-submit-btn')
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.961[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:24[39m[0m[0m][SmartFinder] Start hledání pro klíč: "cbos-login-submit-btn"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.964[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:27[39m[0m[0m][SmartFinder] Hledám element podle popisu: "Tlačítko pro odeslání přihlašovacího formuláře (Login, Přihlásit se, Vstoupit)."
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.966[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:31[39m[0m[0m][SmartFinder] V paměti nalezen selektor: "button[type="submit"]"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.987[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:38[39m[0m[0m][SmartFinder] Cache Hit: Selektor "button[type="submit"]" je stále platný.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:56[0m[0m.989[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:65[39m[0m[0m][KROK 3] Ověřuji viditelnost tlačítka.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:57[0m[0m.011[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:69[39m[0m[0m][KROK 3] Klikám na tlačítko přihlásit.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:57[0m[0m.080[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:74[39m[0m[0m][KROK 4] Čekám na reakci systému po odeslání...
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.089[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:80[39m[0m[0m]--- START BLOKU: DETEKCE VÝBĚRU SÍTĚ ---
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.091[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:81[39m[0m[0m][KROK 5] Spouštím logiku pro případný mezikrok s výběrem sítě.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.093[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:84[39m[0m[0m]--- START BLOKU: DETEKCE VÝBĚRU SÍTĚ ---
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.095[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\ai-test.ts:31[39m[0m[0m][AiFixture] Volání ai('network-confirm-btn')
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.096[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:24[39m[0m[0m][SmartFinder] Start hledání pro klíč: "network-confirm-btn"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.098[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:27[39m[0m[0m][SmartFinder] Hledám element podle popisu: "Tlačítko pro potvrzení výběru sítě (Potvrdit, Pokračovat, Vstoupit)."
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.100[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:31[39m[0m[0m][SmartFinder] V paměti nalezen selektor: ".box button[type="submit"]"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.121[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:38[39m[0m[0m][SmartFinder] Cache Hit: Selektor ".box button[type="submit"]" je stále platný.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.134[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:92[39m[0m[0m][CBOS Test] DETEKOVÁN MEZIKROK: Výběr sítě.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.136[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\ai-test.ts:31[39m[0m[0m][AiFixture] Volání ai('network-combobox')
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.139[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:24[39m[0m[0m][SmartFinder] Start hledání pro klíč: "network-combobox"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.141[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:27[39m[0m[0m][SmartFinder] Hledám element podle popisu: "Combobox (select element) pro výběr vlastníka sítě/účtu."
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.144[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:31[39m[0m[0m][SmartFinder] V paměti nalezen selektor: "#account"
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.171[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\ai-core\smart-finder.ts:38[39m[0m[0m][SmartFinder] Cache Hit: Selektor "#account" je stále platný.
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.184[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:98[39m[0m[0m][CBOS Test] Vybírám síť ID: 60193531
-2025[0m[0m-11[0m[0m-24[0m[0m 08[0m[0m:37[0m[0m:59[0m[0m.276[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\login_E2E.spec.ts:112[39m[0m[0m][CBOS Test] Čekám na načtení dashboardu...
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="3.022501">
+  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-24T14:42:42.113Z" hostname="API" tests="1" failures="0" skipped="0" time="1.729" errors="0">
+    <testcase name="TC_001: Krok 1: POST /orders ...  @regression @api @life_cycle @high @order @test" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.729">
+      <system-out><![CDATA[2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.170[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.174[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.176[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.178[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.179[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.179[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.974[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.976[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.978[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.981[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.983[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:95[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.984[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:98[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.985[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:100[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.987[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:81[39m[0m[0m]Spouštím test: TC_001 Regresní test životního cyklu objednávek přes API
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:43[0m[0m.995[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][17443a23] ---> POST http://192.168.130.239:8180/documents-api/orders/231 {
+  params: [90mundefined[39m,
+  data: {
+    orderDate: [32m'2025-11-24T14:42:43.993Z'[39m,
+    deliveryDate: [32m'2025-11-25T14:42:43.987Z'[39m,
+    description: [32m'AutoTest_TC_001_1763995363987_586'[39m,
+    ownerName: [32m'ČEPRO, a.s.'[39m,
+    ownerId: [33m1[39m,
+    stockId: [33m231[39m,
+    supplierId: [33m8[39m,
+    supplierName: [32m'Banner Baterie ČR spol.s r.o.'[39m
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'17443a23'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.102[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][17443a23] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/231 (92.83 ms)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.105[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:103[39m[0m[0m]Krok 1 OK: Objednávka vytvořena.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.108[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][52345f23] ---> GET http://192.168.130.239:8180/reports-api/listOfOrders {
+  params: {
+    stockId: [33m231[39m,
+    year: [33m2025[39m
+  },
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'52345f23'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.308[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][52345f23] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfOrders (197.93 ms)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.312[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:118[39m[0m[0m]Krok 2 OK: Objednávka nalezena pod ID 127.
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.313[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:134[39m[0m[0m]Step 3 params z JSONu: {"search":"040328","searchType":"PLU","stockId":231,"ownerId":1,"supplierId":8,"stkitmType":"D","for":"orders"}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.315[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][d8907d4f] ---> GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 {
+  params: {
+    search: [32m'040328'[39m,
+    searchType: [32m'PLU'[39m,
+    stockId: [33m231[39m,
+    ownerId: [33m1[39m,
+    supplierId: [33m8[39m,
+    stkitmType: [32m'D'[39m,
+    for: [32m'orders'[39m
+  },
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'd8907d4f'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.469[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][d8907d4f] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 (151.88 ms)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.477[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:148[39m[0m[0m]Krok 3 OK: Nalezena karta PLU 040328 (ID: 959)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.479[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:176[39m[0m[0m]Step 4: Odesílám požadavek. Očekávám status: 200
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.484[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][83ab703e] ---> POST http://192.168.130.239:8180/documents-api/ordersitems/231 {
+  params: [90mundefined[39m,
+  data: {
+    orderId: [33m127[39m,
+    stockCardId: [33m959[39m,
+    amount: [33m1[39m
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'83ab703e'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.760[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][83ab703e] <--- 201 POST http://192.168.130.239:8180/documents-api/ordersitems/231 (273.15 ms)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.764[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:194[39m[0m[0m]Krok 4 OK: Požadavek proběhl s očekávaným výsledkem (Status/Success).
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.767[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:216[39m[0m[0m]Odesílám PUT na /documents-api/orders/ordersSend/231. Payload: {"stockId":231,"orderId":127,"sendOrder":false,"saveEmail":false}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.769[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][82c0d2e4] ---> PUT http://192.168.130.239:8180/documents-api/orders/ordersSend/231 {
+  params: [90mundefined[39m,
+  data: {
+    stockId: [33m231[39m,
+    orderId: [33m127[39m,
+    sendOrder: [33mfalse[39m,
+    saveEmail: [33mfalse[39m
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'82c0d2e4'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.805[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][82c0d2e4] <--- 204 PUT http://192.168.130.239:8180/documents-api/orders/ordersSend/231 (35.50 ms)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.811[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:220[39m[0m[0m]Krok 5 OK: Objednávka 127 byla zpracována (SendOrder).
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.813[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:244[39m[0m[0m]Odesílám PUT na /documents-api/ordersItems/231/127. Payload: {"orderId":127,"stockCardId":959,"amount":10,"comment":"Schválení změny množství","agreement":true}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.817[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][378ca5eb] ---> PUT http://192.168.130.239:8180/documents-api/ordersItems/231/127 {
+  params: [90mundefined[39m,
+  data: {
+    orderId: [33m127[39m,
+    stockCardId: [33m959[39m,
+    amount: [33m10[39m,
+    comment: [32m'Schválení změny množství'[39m,
+    agreement: [33mtrue[39m
+  },
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'378ca5eb'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.875[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][378ca5eb] <--- 204 PUT http://192.168.130.239:8180/documents-api/ordersItems/231/127 (56.26 ms)
+2025[0m[0m-11[0m[0m-24[0m[0m 14[0m[0m:42[0m[0m:44[0m[0m.879[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:255[39m[0m[0m]Krok 6 OK: Položka undefined byla schválena/upravena.
 ]]></system-out>
     </testcase>
   </testsuite>

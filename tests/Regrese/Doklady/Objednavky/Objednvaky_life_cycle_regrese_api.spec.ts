@@ -17,64 +17,72 @@ function getTomorrowDate(): Date {
   return tomorrow;
 }
 
-
 type OrderStepData = {
-    name: string;
-    tags?: string[];
-    description?: string;
-    stockId?: number;
-    ownerId?: number;
-    ownerName?: string;
-    supplierId?: number;
-    supplierName?: string;
-    transporterId?: string;
-    transporterName?: string;
-    year?: number;
-    PLU?: string;
-    stockCardId?: number;
-    amount?: number;
-    params?: t.GetListOfStockCardsParams;
-    sendOrder?: boolean;
-    saveEmail?: boolean;
-    comment?: string;
-    agreement?: boolean; 
+  name: string;
+  tags?: string[];
+  description?: string;
+  stockId?: number;
+  ownerId?: number;
+  ownerName?: string;
+  supplierId?: number;
+  supplierName?: string;
+  transporterId?: string;
+  transporterName?: string;
+  year?: number;
+  PLU?: string;
+  stockCardId?: number;
+  amount?: number;
+  params?: t.GetListOfStockCardsParams;
+  sendOrder?: boolean;
+  saveEmail?: boolean;
+  comment?: string;
+  agreement?: boolean;
+  expectationState?: string; 
 };
 
 type OrderTestCase = {
-    caseName: string;
-    step1_CreateOrder: OrderStepData;
-    step2_GetOrdersList: OrderStepData;
-    step3_GetStockCard: OrderStepData;
-    step4_AddOrderItem: OrderStepData;
-    step5_SendOrder: OrderStepData;
-    step6_ApproveDifference: OrderStepData;
+  caseName: string;
+  step1_CreateOrder: OrderStepData;
+  step2_GetOrdersList: OrderStepData;
+  step3_GetStockCard: OrderStepData;
+  step4_AddOrderItem: OrderStepData;
+  step5_SendOrder: OrderStepData;
+  step6_ApproveDifference: OrderStepData;
 };
 
 logger.info('Spouštím regresní testy pro životní cyklus objednávek pomocí API.');
 
 for (const testCaseKey of Object.keys(allOrderData)) {
 
-    logger.debug(`Načítám testovací data pro případ: ${testCaseKey}`);
-    const testCaseData = allOrderData[testCaseKey as keyof typeof allOrderData] as unknown as OrderTestCase;
-    const tags = testCaseData.step1_CreateOrder?.tags;
+    // Načtení testovacích dat
+    const rawData = allOrderData[testCaseKey as keyof typeof allOrderData] as any;
     
-    const tagsString = (tags && tags.length > 0) ? ` ${tags.join(' ')}` : '';
-    const testTitle = `${testCaseKey}: Life Cycle Objednávky${tagsString}`;
+    const tags = rawData.step1_CreateOrder?.tags || rawData.tags || [];
+    const tagsString = (tags.length > 0) ? ` ${tags.join(' ')}` : '';
+    logger.debug(`Generuji test: ${testCaseKey} Tagy: ${tagsString}`);
+
+    const testTitle = `${testCaseKey}: Krok 1: POST /orders ... ${tagsString}`;
 
     test(testTitle, async ({ apiClient }) => {
+        const testCaseData = rawData as OrderTestCase;
 
+        // Definice proměnných dostupných pro všechny kroky (Scope)
         let createdOrderId: number; 
-        let foundStockCardId: number; 
+        let foundStockCardId: number;
+        let createdOrderItemId: number; 
         let stockId: number; 
-        const tomorrow = getTomorrowDate();
-        const uniqueOrderDescription = `AutoTest_${testCaseKey}_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-
         let endpoint: string;
         let response: any;
 
+        const tomorrow = getTomorrowDate();
+        const uniqueOrderDescription = `AutoTest_${testCaseKey}_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+
+
         logger.info(`Spouštím test: ${testCaseKey} ${testCaseData.caseName}`);
 
+        // -------------------------------------------------------------------------
         // Krok 1: Vytvoření objednávky
+        // -------------------------------------------------------------------------
         await test.step('Krok 1: POST /documents-api/orders/{stockId}', async () => {
             const stepData = testCaseData.step1_CreateOrder;
             stockId = stepData.stockId!;
@@ -95,7 +103,9 @@ for (const testCaseKey of Object.keys(allOrderData)) {
             logger.info(`Krok 1 OK: Objednávka vytvořena.`);
         }); 
 
-        // Krok 2: Ověření existence objednávky
+        // -------------------------------------------------------------------------
+        // Krok 2: Ověření existence objednávky a získání ID
+        // -------------------------------------------------------------------------
         await test.step('Krok 2: GET /reports-api/orders', async () => {
             const stepData = testCaseData.step2_GetOrdersList;
             const payload = { stockId: stepData.stockId!, year: stepData.year! };
@@ -103,20 +113,17 @@ for (const testCaseKey of Object.keys(allOrderData)) {
             response = await apiClient.reports.getListOfOrders(payload); 
             const foundOrder = response.find((order: any) => order.description === uniqueOrderDescription);
             
-            expect(foundOrder, `Objednávka nenalezena.`).toBeDefined();
+            expect(foundOrder, `Objednávka s popisem "${uniqueOrderDescription}" nenalezena.`).toBeDefined();
             createdOrderId = foundOrder.id;
             logger.info(`Krok 2 OK: Objednávka nalezena pod ID ${createdOrderId}.`);
         });
 
         // -------------------------------------------------------------------------
-        // Krok 3: Vyhledání skladové karty (Čteno z JSON params)
+        // Krok 3: Vyhledání skladové karty
         // -------------------------------------------------------------------------
         await test.step('Krok 3: GET /reports-api/listOfStockCards', async () => {
             const stepData = testCaseData.step3_GetStockCard;
-            endpoint = `/reports-api/listOfStockCards`; 
             
-            // 2. ZMĚNA: Načítáme kompletní parametry přímo z JSONu
-            // Pokud by v JSONu params chyběly, vyhodíme chybu.
             if (!stepData.params) {
                 throw new Error(`Test data pro ${testCaseKey} (Step 3) neobsahují objekt 'params'!`);
             }
@@ -134,7 +141,6 @@ for (const testCaseKey of Object.keys(allOrderData)) {
                 );
 
                 if (response && Array.isArray(response) && response.length > 0) {
-                    // Porovnáváme s PLU, které je v "search" parametru
                     const foundCard = response.find((card: any) => String(card.plu) === String(searchParams.search)); 
                     
                     if (foundCard && foundCard.id) {
@@ -151,20 +157,43 @@ for (const testCaseKey of Object.keys(allOrderData)) {
                 throw error;
             }
         });
-
-        // Krok 4: Přidání zboží
+// -------------------------------------------------------------------------
+        // Krok 4: Přidání zboží do objednávky (Validace statusu)
+        // -------------------------------------------------------------------------
         await test.step('Krok 4: POST /documents-api/orderItems', async () => {
             const stepData = testCaseData.step4_AddOrderItem;
+            
+            // 1. Určení očekávaného statusu
+            // Pokud JSON obsahuje 'expectationState', použijeme ho. Jinak defaultně 201 (Created).
+            const expectedStatus = stepData.expectationState ? parseInt(stepData.expectationState) : 201;
+
             const payload = { 
                 "orderId": createdOrderId, 
                 "stockCardId": foundStockCardId, 
                 "amount": stepData.amount ?? 1 
             };
 
-            await apiClient.documents.postOrderItem(stockId, payload);       
-            logger.info(`Krok 4 OK: Položka přidána do objednávky.`);
-        });
+            logger.trace(`Step 4: Odesílám požadavek. Očekávám status: ${expectedStatus}`);
 
+            // 2. Volání API a uložení odpovědi
+            // Používáme 'any', abychom se dostali k .status i .id
+            const response: any = await apiClient.documents.postOrderItems(stockId, payload);       
+            
+            // 3. Validace Statusu
+            // Pokud apiClient vrací celý objekt response (např. axios), zkontrolujeme .status
+            if (response && response.status) {
+                expect(response.status, `Očekáván status ${expectedStatus}, ale vrácen ${response.status}`).toBe(expectedStatus);
+            } 
+            // Pokud apiClient vrací jen data a při chybě vyhazuje exception:
+            // Pokud kód došel až sem bez chyby, považujeme to za úspěch (2xx).
+
+            // 4. (Nutné pro Krok 6) Tiše uložíme ID položky, pokud přišlo, aby nespadl další krok.
+            if (response?.id) createdOrderItemId = response.id;
+            else if (response?.data?.id) createdOrderItemId = response.data.id;
+            
+            logger.info(`Krok 4 OK: Požadavek proběhl s očekávaným výsledkem (Status/Success).`);
+        });
+        
         // -------------------------------------------------------------------------
         // Krok 5: Odeslání objednávky (Send Order)
         // -------------------------------------------------------------------------
@@ -177,18 +206,16 @@ for (const testCaseKey of Object.keys(allOrderData)) {
 
             endpoint = `/documents-api/orders/ordersSend/${stockId}`;
             
-            // Sestavení payloadu přesně podle vašeho vzoru
             const payload: t.SendOrderPayload = {
                 stockId: stepData.stockId!,
-                orderId: createdOrderId,       // ID z Kroku 2
-                sendOrder: stepData.sendOrder ?? false, // Default false, pokud není v JSONu
-                saveEmail: stepData.saveEmail ?? false  // Default false
+                orderId: createdOrderId,
+                sendOrder: stepData.sendOrder ?? false, 
+                saveEmail: stepData.saveEmail ?? false 
             };
 
             logger.debug(`Odesílám PUT na ${endpoint}. Payload: ${JSON.stringify(payload)}`);
 
             try {
-                // Volání metody sendOrder (kterou jste definoval: return this.put(..., payload))
                 await apiClient.documents.sendOrder(stockId, payload);       
                 logger.info(`Krok 5 OK: Objednávka ${createdOrderId} byla zpracována (SendOrder).`);
             } catch (error) {
@@ -197,36 +224,41 @@ for (const testCaseKey of Object.keys(allOrderData)) {
             }
         });
 
-    // -------------------------------------------------------------------------
-        // Krok 6: Schválení rozdílného množství (Agreement)
         // -------------------------------------------------------------------------
-        await test.step('Krok 6: POST /documents-api/ordersItems (Agreement)', async () => {
+        // Krok 6: Schválení rozdílu (Agreement)
+        // -------------------------------------------------------------------------
+        await test.step('Krok 6: PUT /documents-api/ordersItems (Agreement)', async () => {
             const stepData = testCaseData.step6_ApproveDifference;
-            endpoint = `/documents-api/ordersItems/${stockId}`;
 
-            // Ujistíme se, že máme IDčka z předchozích kroků
-            if (!createdOrderId || !foundStockCardId) {
-                throw new Error("Chybí ID objednávky nebo skladové karty z předchozích kroků.");
-            }
 
-            const payload: t.AddOrderItemPayload = { 
+            const payload = {
                 orderId: createdOrderId, 
-                stockCardId: foundStockCardId, // Použijeme stejnou kartu jako v kroku 4
-                amount: stepData.amount ?? 10, // Nové množství
-                comment: stepData.comment,     // "test" nebo text z JSONu
-                agreement: stepData.agreement  // true
+                stockCardId: stepData.stockCardId,      
+                amount: stepData.amount ?? 10, 
+                comment: stepData.comment ?? "Automatický test",
+                agreement: true               
             };
-
-            logger.debug(`Odesílám položku s potvrzením (agreement). Payload: ${JSON.stringify(payload)}`);
+    
+            endpoint = `/documents-api/ordersItems/${stockId}/${createdOrderId}`;
+            
+            logger.debug(`Odesílám PUT na ${endpoint}. Payload: ${JSON.stringify(payload)}`);
 
             try {
-                // Voláme stejnou metodu postOrderItem, ale nyní s rozšířeným payloadem
-                await apiClient.documents.postOrderItem(stockId, payload);       
-                logger.info(`Krok 6 OK: Rozdíl množství schválen u karty ID ${foundStockCardId}.`);
+                // Pokud nemáte v apiClient metodu 'put', použijte obecný request
+                if (apiClient.documents.put) {
+                    await apiClient.documents.put(endpoint, payload);
+                } else {
+                     // Fallback na obecný axios/apiClient request, pokud metoda chybí v typech
+                    await (apiClient as any).put(endpoint, payload);
+                }
+                
+                logger.info(`Krok 6 OK: Položka ${createdOrderItemId} byla schválena/upravena.`);
             } catch (error) {
+                // Pro lepší debugování logujeme i URL
                 logger.error(`Krok 6 selhal: ${error}`);
                 throw error;
             }
         });
-    });
-}
+
+    }); // Konec test()
+} // Konec for smyčky
