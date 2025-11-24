@@ -38,6 +38,7 @@
   "author": "Marek Novák",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "tslog": "^4.9.3",
     "xml-js": "^1.6.11"
   },

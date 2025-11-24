@@ -4,6 +4,10 @@ playwright.config.ts
 
 import { defineConfig, devices } from '@playwright/test';
 import { baseURL } from './support/constants'; // Importujeme si naši základní URL
+//Načtení údajů z .env
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '.env') }); 
 
 
 // Nastavte zde úroveň logování (0=silly, 1=trace, 2=debug, 3=info, 4=warn, 5=error, 6=fatal)
@@ -33,46 +37,48 @@ export default defineConfig({
   use: {
     baseURL: baseURL,
     trace: 'on-first-retry',
+    ignoreHTTPSErrors: true, //Ošetření vůči pádům během AI testů
   },
 
   // Konfigurace projektů pro hlavní prohlížeče
   projects: [
     {
       name: 'chromium',
+      grepInvert: /@api/,
+      grep: /@e2e/,
       use: {
         ...devices['Desktop Chrome'],
         channel: 'chrome',
         video: 'retain-on-failure',
-        viewport: { width: 1920, height: 1080 }
-      },
-      testIgnore: '**/*_API.spec.ts',
-      testMatch: '**/*_UI.spec.ts',
+        viewport: { width: 1920, height: 1080 },
+        
+      }
     },
     {
       name: 'firefox',
+      grepInvert: /@api/,
+      grep: /@e2e/,
       use: {
         ...devices['Desktop Firefox'],
         video: 'retain-on-failure',
         viewport: { width: 1920, height: 1080 }
-      },
-      testIgnore: '**/*_API.spec.ts',
-      testMatch: '**/*_UI.spec.ts',
+      }
     },
     {
       name: 'edge',
+      grepInvert: /@api/,
+      grep: /@e2e/,
       use: {
         ...devices['Desktop Edge'],
         channel: 'msedge',
         video: 'retain-on-failure',
         viewport: { width: 1920, height: 1080 }
-      },
-      testIgnore: '**/*_API.spec.ts',
-      testMatch: '**/*_UI.spec.ts',
+      }
     },
     {
       name: 'API',
-      testMatch: '**/*_API.spec.ts',
-      testIgnore: '**/*_UI.spec.ts',
+      grep: /@api/,
+      grepInvert: /@e2e/,
       // API testy nepotřebují specifická nastavení prohlížeče v sekci 'use'
     },
   ],

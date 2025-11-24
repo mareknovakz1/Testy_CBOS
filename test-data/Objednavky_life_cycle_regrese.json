@@ -1,9 +1,10 @@
 {
   "TC_001": {
+    "caseName": "Regresní test životního cyklu objednávek přes API",
     "step1_CreateOrder": {
-      "name": "POST documents-api/orders",
+      "name": "Vytvoření objednávky POST documents-api/orders",
       "tags": ["regression", "api", "life_cycle", "@high", "@order", "@test"],
-      "description": "Automaticky vytvořená objednávka k rychlému ověření POST",
+      "description": "Automaticky vytvořená objednávka",
       "stockId": 231,
       "ownerId": 1,
       "ownerName": "ČEPRO, a.s.",
@@ -13,16 +14,15 @@
       "transporterName": "VELKÁ PECKA s.r.o."
     },
     "step2_GetOrdersList": {
-      "name": "GET reports-api/orders",
+      "name": "Ověření objednávky GET reports-api/orders",
       "stockId": 231,
       "year": 2025
     },
     "step3_GetStockCard": {
-      "name": "GET reports-api/listOfStockCards",
+      "name": "Nalezení skladové karty GET reports-api/listOfStockCards",
       "stockId": 231,
-      "PLU": 102067,
       "params": {
-        "search": "102067",
+        "search": "040328", 
         "searchType": "PLU",
         "stockId": 231,
         "ownerId": 1,
@@ -32,9 +32,23 @@
       }
     },
     "step4_AddOrderItem": {
-      "name": "POST documents-api/orderitems",
+      "name": "Přidání zboží POST documents-api/orderitems",
       "stockCardId": 13,
-      "stockId": 231
+      "stockId": 231,
+      "amount": 1
+    },
+    "step5_SendOrder": {
+      "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
+      "stockId": 231,
+      "sendOrder": false,
+      "saveEmail": false
+    },
+    "step6_ApproveDifference": {
+      "name": "Schválení rozdílu POST documents-api/ordersitems",
+      "stockId": 231,
+      "amount": 10,
+      "comment": "Schválení změny množství",
+      "agreement": true
     }
   }
 }

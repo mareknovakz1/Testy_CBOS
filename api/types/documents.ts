@@ -1,4 +1,4 @@
-/**
+/** 
  * @file documents.types.ts
  * @author AI Assistant
  * @date 12.09.2025
@@ -21,6 +21,12 @@ export interface CreateOrderPayload {
     description?: string; //Popis (číslo) objednávky
 }
 
+export interface SendOrderPayload {
+    stockId: number;
+    orderId: number;
+    sendOrder: boolean; // true/false flag
+    saveEmail: boolean; // true/false flag
+}
 
 export interface GetListOfStockCardsParams {
     stkitmType?: 'D' | 'S' | 'W';
@@ -44,6 +50,14 @@ export interface GetListOfStockCardsParams {
     accOwner?: string; // Opraveno z 'accOnwer' na 'accOwner'
     stockId?: number;
     for?: string;      // Přidáno pro kontext 'orders'
+}
+
+export interface AddOrderItemPayload {
+    orderId: number;
+    stockCardId: number;
+    amount: number;
+    comment?: string;
+    agreement?: boolean;
 }
 
 export interface UpdateOrderPayload {

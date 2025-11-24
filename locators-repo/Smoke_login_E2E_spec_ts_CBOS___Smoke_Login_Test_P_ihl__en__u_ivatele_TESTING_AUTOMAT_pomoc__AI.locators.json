@@ -1,0 +1,17 @@
+{
+  "cbos-login-username": {
+    "selector": "div.box input[type=\"text\"]",
+    "description": "Input pole (textové pole) pro zadání uživatelského jména nebo loginu.",
+    "lastUpdated": "2025-11-23T22:54:44.768Z"
+  },
+  "cbos-login-password": {
+    "selector": "input[type=\"password\"]",
+    "description": "Input pole pro zadání hesla (typ elementu je password).",
+    "lastUpdated": "2025-11-23T22:54:46.979Z"
+  },
+  "cbos-login-submit-btn": {
+    "selector": "button[type=\"submit\"]",
+    "description": "Tlačítko pro odeslání přihlašovacího formuláře (Login, Přihlásit se, Vstoupit).",
+    "lastUpdated": "2025-11-23T22:54:50.325Z"
+  }
+}

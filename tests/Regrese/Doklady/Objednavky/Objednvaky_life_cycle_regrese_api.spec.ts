@@ -30,18 +30,24 @@ type OrderStepData = {
     transporterId?: string;
     transporterName?: string;
     year?: number;
-    PLU?: number;
+    PLU?: string;
     stockCardId?: number;
     amount?: number;
-    // Zde definujeme, že v JSONu může být objekt parametrů pro filtraci
-    params?: t.GetListOfStockCardsParams; 
+    params?: t.GetListOfStockCardsParams;
+    sendOrder?: boolean;
+    saveEmail?: boolean;
+    comment?: string;
+    agreement?: boolean; 
 };
 
 type OrderTestCase = {
+    caseName: string;
     step1_CreateOrder: OrderStepData;
     step2_GetOrdersList: OrderStepData;
     step3_GetStockCard: OrderStepData;
     step4_AddOrderItem: OrderStepData;
+    step5_SendOrder: OrderStepData;
+    step6_ApproveDifference: OrderStepData;
 };
 
 logger.info('Spouštím regresní testy pro životní cyklus objednávek pomocí API.');
@@ -49,7 +55,7 @@ logger.info('Spouštím regresní testy pro životní cyklus objednávek pomocí
 for (const testCaseKey of Object.keys(allOrderData)) {
 
     logger.debug(`Načítám testovací data pro případ: ${testCaseKey}`);
-    const testCaseData = allOrderData[testCaseKey as keyof typeof allOrderData] as OrderTestCase;
+    const testCaseData = allOrderData[testCaseKey as keyof typeof allOrderData] as unknown as OrderTestCase;
     const tags = testCaseData.step1_CreateOrder?.tags;
     
     const tagsString = (tags && tags.length > 0) ? ` ${tags.join(' ')}` : '';
@@ -66,7 +72,7 @@ for (const testCaseKey of Object.keys(allOrderData)) {
         let endpoint: string;
         let response: any;
 
-        logger.info(`Spouštím test: ${testCaseKey} | Unikátní ID: ${uniqueOrderDescription}`);
+        logger.info(`Spouštím test: ${testCaseKey} ${testCaseData.caseName}`);
 
         // Krok 1: Vytvoření objednávky
         await test.step('Krok 1: POST /documents-api/orders/{stockId}', async () => {
@@ -152,12 +158,75 @@ for (const testCaseKey of Object.keys(allOrderData)) {
             const payload = { 
                 "orderId": createdOrderId, 
                 "stockCardId": foundStockCardId, 
-                "amount": stepData.amount ?? 5
+                "amount": stepData.amount ?? 1 
             };
 
             await apiClient.documents.postOrderItem(stockId, payload);       
             logger.info(`Krok 4 OK: Položka přidána do objednávky.`);
         });
 
+        // -------------------------------------------------------------------------
+        // Krok 5: Odeslání objednávky (Send Order)
+        // -------------------------------------------------------------------------
+        await test.step('Krok 5: PUT /documents-api/orders/ordersSend/{stockId}', async () => {
+            const stepData = testCaseData.step5_SendOrder;
+            
+            if (!createdOrderId) {
+                throw new Error("Nelze odeslat objednávku: ID objednávky nebylo v předchozích krocích získáno.");
+            }
+
+            endpoint = `/documents-api/orders/ordersSend/${stockId}`;
+            
+            // Sestavení payloadu přesně podle vašeho vzoru
+            const payload: t.SendOrderPayload = {
+                stockId: stepData.stockId!,
+                orderId: createdOrderId,       // ID z Kroku 2
+                sendOrder: stepData.sendOrder ?? false, // Default false, pokud není v JSONu
+                saveEmail: stepData.saveEmail ?? false  // Default false
+            };
+
+            logger.debug(`Odesílám PUT na ${endpoint}. Payload: ${JSON.stringify(payload)}`);
+
+            try {
+                // Volání metody sendOrder (kterou jste definoval: return this.put(..., payload))
+                await apiClient.documents.sendOrder(stockId, payload);       
+                logger.info(`Krok 5 OK: Objednávka ${createdOrderId} byla zpracována (SendOrder).`);
+            } catch (error) {
+                logger.error(`Krok 5 selhal: ${error}`);
+                throw error;
+            }
+        });
+
+    // -------------------------------------------------------------------------
+        // Krok 6: Schválení rozdílného množství (Agreement)
+        // -------------------------------------------------------------------------
+        await test.step('Krok 6: POST /documents-api/ordersItems (Agreement)', async () => {
+            const stepData = testCaseData.step6_ApproveDifference;
+            endpoint = `/documents-api/ordersItems/${stockId}`;
+
+            // Ujistíme se, že máme IDčka z předchozích kroků
+            if (!createdOrderId || !foundStockCardId) {
+                throw new Error("Chybí ID objednávky nebo skladové karty z předchozích kroků.");
+            }
+
+            const payload: t.AddOrderItemPayload = { 
+                orderId: createdOrderId, 
+                stockCardId: foundStockCardId, // Použijeme stejnou kartu jako v kroku 4
+                amount: stepData.amount ?? 10, // Nové množství
+                comment: stepData.comment,     // "test" nebo text z JSONu
+                agreement: stepData.agreement  // true
+            };
+
+            logger.debug(`Odesílám položku s potvrzením (agreement). Payload: ${JSON.stringify(payload)}`);
+
+            try {
+                // Voláme stejnou metodu postOrderItem, ale nyní s rozšířeným payloadem
+                await apiClient.documents.postOrderItem(stockId, payload);       
+                logger.info(`Krok 6 OK: Rozdíl množství schválen u karty ID ${foundStockCardId}.`);
+            } catch (error) {
+                logger.error(`Krok 6 selhal: ${error}`);
+                throw error;
+            }
+        });
     });
 }

@@ -1,0 +1,27 @@
+{
+  "cbos-login-username": {
+    "selector": ".box .field:nth-child(1) input",
+    "description": "Input pole (textové pole) pro zadání uživatelského jména nebo loginu.",
+    "lastUpdated": "2025-11-23T23:15:00.600Z"
+  },
+  "cbos-login-password": {
+    "selector": "input[type=\"password\"]",
+    "description": "Input pole pro zadání hesla (typ elementu je password).",
+    "lastUpdated": "2025-11-23T23:15:01.131Z"
+  },
+  "cbos-login-submit-btn": {
+    "selector": "button[type=\"submit\"]",
+    "description": "Tlačítko pro odeslání přihlašovacího formuláře (Login, Přihlásit se, Vstoupit).",
+    "lastUpdated": "2025-11-23T23:15:05.327Z"
+  },
+  "network-confirm-btn": {
+    "selector": ".box button[type=\"submit\"]",
+    "description": "Tlačítko pro potvrzení výběru sítě (Potvrdit, Pokračovat, Vstoupit).",
+    "lastUpdated": "2025-11-24T08:16:40.599Z"
+  },
+  "network-combobox": {
+    "selector": "#account",
+    "description": "Combobox, Select nebo Dropdown pro výběr vlastníka sítě.",
+    "lastUpdated": "2025-11-24T08:16:42.622Z"
+  }
+}
