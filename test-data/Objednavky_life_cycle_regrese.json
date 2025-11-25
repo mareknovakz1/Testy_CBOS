@@ -1,63 +1,120 @@
 {
   "TC_001": {
     "caseName": "Regresní test životního cyklu objednávek přes API",
-    "step1_CreateOrder": {
-      "name": "Vytvoření objednávky POST documents-api/orders",
-      "tags": ["@regression", "@api", "@life_cycle", "@high", "@order", "@test"],
-      "description": "Automaticky vytvořená objednávka",
-      "stockId": 231,
-      "ownerId": 1,
-      "ownerName": "ČEPRO, a.s.",
-      "supplierId": 8,
-      "supplierName": "Banner Baterie ČR spol.s r.o.",
-      "transporterId": "7",
-      "transporterName": "VELKÁ PECKA s.r.o."
-    },
-    "step2_GetOrdersList": {
-      "name": "Ověření objednávky GET reports-api/orders",
-      "stockId": 231,
-      "year": 2025
-    },
-    "step3_GetStockCard": {
-      "name": "Nalezení skladové karty GET reports-api/listOfStockCards",
-      "stockId": 231,
-      "params": {
-        "search": "040328", 
-        "searchType": "PLU",
+    "tags": ["@regression", "@api", "@life_cycle", "@high", "@order", "@test"],
+    "steps": {
+      "01_CreateOrder": {
+        "action": "CreateOrder",
+        "name": "Vytvoření objednávky POST documents-api/orders",
+        "description": "Automaticky vytvořená objednávka",
         "stockId": 231,
         "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
         "supplierId": 8,
-        "stkitmType": "D",
-        "for": "orders"
+        "supplierName": "Banner Baterie ČR spol.s r.o.",
+        "transporterId": "7",
+        "transporterName": "VELKÁ PECKA s.r.o."
+      },
+      "02_GetOrdersList": {
+        "action": "GetOrdersList",
+        "name": "Ověření objednávky GET reports-api/orders",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_GetStockCard": {
+        "action": "GetStockCard",
+        "name": "Nalezení skladové karty GET reports-api/listOfStockCards",
+        "stockId": 231,
+        "params": {
+          "search": "040328",
+          "searchType": "PLU",
+          "stockId": 231,
+          "ownerId": 1,
+          "supplierId": 8,
+          "stkitmType": "D",
+          "for": "orders"
+        }
+      },
+      "04_AddOrderItem": {
+        "action": "AddOrderItem",
+        "name": "Přidání zboží POST documents-api/orderitems",
+        "stockId": 231,
+        "amount": 1,
+        "expectationState": "201"
+      },
+      "05_GetOrderItems": {
+        "action": "GetOrderItems",
+        "name": "Získání ID položky GET documents-api/orders/items",
+        "stockId": 231
+      },
+      "06_SendOrder": {
+        "action": "SendOrder",
+        "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
+        "stockId": 231,
+        "sendOrder": false,
+        "saveEmail": false
+      },
+      "07_ApproveDifference": {
+        "action": "ApproveDifference",
+        "name": "Schválení rozdílu PUT documents-api/ordersItems",
+        "stockId": 231,
+        "amount": 10,
+        "comment": "Automaticky schváleno",
+        "agreement": true
+      },
+      "08_ApproveOrder": {
+        "action": "ApproveOrder",
+        "name": "Validace objednávky (POST /valid)",
+        "stockId": 231,
+        "description": "Finální schválení objednávky s emulateHTTP flagy"
       }
-    },
-    "step4_AddOrderItem": {
-      "name": "Přidání zboží POST documents-api/orderitems",
-      "stockId": 231,
-      "amount": 1,
-      "expectationState": "201"
-    },
-    "step5_GetOrderItems": {
-      "name": "Získání ID položky GET documents-api/orders/items",
-      "stockId": 231
-    },
-    "step6_SendOrder": {
-      "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
-      "stockId": 231,
-      "sendOrder": false,
-      "saveEmail": false
-    },
-    "step7_ApproveDifference": {
-      "name": "Schválení rozdílu PUT documents-api/ordersItems",
-      "stockId": 231,
-      "amount": 10,
-      "comment": "Automaticky schváleno",
-      "agreement": true
-    },
-    "step8_ApproveOrder": {
-      "name": "Validace objednávky (POST /valid)",
-      "stockId": 231,
-      "description": "Finální schválení objednávky s emulateHTTP flagy"
+    }
+  },
+  "TC_002": {
+    "caseName": "Negativní test - Duplicitní přidání položky",
+    "tags": ["@regression", "@api", "@medium", "@negative", "@test"],
+    "steps": {
+      "01_CreateOrder": {
+        "action": "CreateOrder",
+        "description": "Vytvoření objednávky pro negativní test",
+        "stockId": 231,
+        "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o."
+      },
+      "02_GetOrdersList": {
+        "action": "GetOrdersList",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_GetStockCard": {
+        "action": "GetStockCard",
+        "stockId": 231,
+        "params": {
+          "search": "040328",
+          "searchType": "PLU",
+          "stockId": 231,
+          "ownerId": 1,
+          "supplierId": 8,
+          "stkitmType": "D",
+          "for": "orders"
+        }
+      },
+      "04_AddOrderItem_Success": {
+        "action": "AddOrderItem",
+        "description": "První přidání (očekáváno OK)",
+        "stockId": 231,
+        "amount": 10,
+        "expectationState": "201"
+      },
+      "05_AddOrderItem_Duplicity": {
+        "action": "AddOrderItem",
+        "description": "Pokus o duplicitní přidání (očekáváno 409)",
+        "stockId": 231,
+        "amount": 5,
+        "expectationState": "409"
+      }
     }
   }
 }

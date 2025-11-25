@@ -58,9 +58,7 @@ interface TestContext {
 // -------------------------------------------------------------------------
 // REGISTR KROKŮ (MAPPING)
 // -------------------------------------------------------------------------
-// Tady mapujeme "NázevAkce" z JSONu (část za podtržítkem) na konkrétní TS funkci.
-// Příklad: klíč v JSON "step1_CreateOrder" -> hledá "CreateOrder" -> volá createOrder()
-
+// Mapování názvu akce z JSONu (např. "CreateOrder") na TypeScript funkci
 const STEP_REGISTRY: Record<string, (ctx: TestContext, data: OrderStepData) => Promise<void>> = {
     "CreateOrder": createOrder,
     "GetOrdersList": getOrderAndVerify,
@@ -257,66 +255,64 @@ async function approveOrder(ctx: TestContext, stepData: OrderStepData) {
         }
     });
 }
-
 // -------------------------------------------------------------------------
-// MAIN TEST LOOP
+// MAIN TEST LOOP (NOVÁ VERZE - PODPORUJE "steps")
 // -------------------------------------------------------------------------
 
 logger.info('Spouštím regresní testy pro životní cyklus objednávek pomocí API.');
 
+// Iterace přes jednotlivé Test Case (TC_001, TC_002...)
 for (const testCaseKey of Object.keys(allOrderData)) {
     const rawData = allOrderData[testCaseKey as keyof typeof allOrderData] as any;
-    
-    // Extrakce tagů
-    const tags = rawData.step1_CreateOrder?.tags || rawData.tags || [];
+
+    // 1. Načtení tagů z rootu (aby Playwright viděl @test)
+    const tags = rawData.tags || [];
     const tagsString = (tags.length > 0) ? ` ${tags.join(' ')}` : '';
-    const testTitle = `${testCaseKey}: Life Cycle ... ${tagsString}`;
+    
+    // Sestavení názvu testu
+    const testTitle = `${testCaseKey}: ${rawData.caseName || 'Unnamed'} ... ${tagsString}`;
 
     test(testTitle, async ({ apiClient }) => {
-        const caseName = rawData.caseName || "Unnamed Case";
-        logger.info(`Spouštím test: ${testCaseKey} - ${caseName}`);
+        logger.info(`Spouštím test: ${testCaseKey} - ${rawData.caseName}`);
 
-        // 1. Inicializace kontextu (paměť testu)
+        // Inicializace kontextu pro tento test
         const context: TestContext = {
             apiClient,
             uniqueOrderDescription: `AutoTest_${testCaseKey}_${Date.now()}`
         };
 
-        // 2. Získání a seřazení kroků
-        // Získáme klíče jako "step1_CreateOrder", "step2_GetOrdersList" atd.
-        const stepKeys = Object.keys(rawData).filter(key => key.startsWith('step'));
-
-        // Seřadíme je podle čísla za slovem "step" (aby step10 šel až po step2)
-        stepKeys.sort((a, b) => {
-            const numA = parseInt(a.match(/^step(\d+)_/)?.[1] || "0");
-            const numB = parseInt(b.match(/^step(\d+)_/)?.[1] || "0");
-            return numA - numB;
-        });
-
-        if (stepKeys.length === 0) {
-            logger.warn(`Test case ${testCaseKey} neobsahuje žádné kroky začínající na 'step'.`);
+        // KONTROLA: Máme objekt 'steps'?
+        if (!rawData.steps) {
+            logger.warn(`Test case ${testCaseKey} přeskočen: Chybí objekt 'steps' v definici JSON.`);
+            return;
         }
 
-        // 3. Dynamická iterace
+        // 2. Získání klíčů kroků (např. "01_CreateOrder", "02_Verify"...) a jejich seřazení
+        const stepKeys = Object.keys(rawData.steps).sort();
+
+        if (stepKeys.length === 0) {
+            logger.warn(`Test case ${testCaseKey} má prázdný objekt 'steps'.`);
+        }
+
+        // 3. Iterace přes seřazené kroky
         for (const stepKey of stepKeys) {
-            const stepData = rawData[stepKey];
+            const stepData = rawData.steps[stepKey];
             
-            // Z klíče "step1_CreateOrder" získáme "CreateOrder"
-            // Rozdělíme podle prvního podtržítka.
-            const splitIndex = stepKey.indexOf('_');
-            if (splitIndex === -1) {
-                logger.warn(`Krok '${stepKey}' nemá správný formát (očekáváno stepX_ActionName). Přeskakuji.`);
-                continue;
+            // Přečteme akci definovanou v JSONu (např. "CreateOrder")
+            const actionName = stepData.action;
+
+            if (!actionName) {
+                throw new Error(`Krok '${stepKey}' v testu '${testCaseKey}' nemá definovanou vlastnost 'action'!`);
             }
 
-            const actionName = stepKey.substring(splitIndex + 1); // Získá vše za prvním _
+            // Najdeme odpovídající funkci v registru
             const actionFunction = STEP_REGISTRY[actionName];
 
             if (actionFunction) {
-                // Zavoláme mapovanou funkci
+                // logger.debug(`Spouštím krok: ${stepKey} -> Akce: ${actionName}`);
                 await actionFunction(context, stepData);
             } else {
-                throw new Error(`Nenalezena implementace pro akci: '${actionName}' (z klíče ${stepKey}). Zkontrolujte STEP_REGISTRY.`);
+                logger.warn(`VAROVÁNÍ: Neznámá akce '${actionName}' v kroku '${stepKey}'. Zkontrolujte STEP_REGISTRY.`);
             }
         }
     });
