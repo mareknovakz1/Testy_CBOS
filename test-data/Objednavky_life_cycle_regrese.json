@@ -53,6 +53,11 @@
       "amount": 10,
       "comment": "Automaticky schváleno",
       "agreement": true
+    },
+    "step8_ApproveOrder": {
+      "name": "Validace objednávky (POST /valid)",
+      "stockId": 231,
+      "description": "Finální schválení objednávky s emulateHTTP flagy"
     }
   }
 }
