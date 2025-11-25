@@ -56,6 +56,23 @@ interface TestContext {
 }
 
 // -------------------------------------------------------------------------
+// REGISTR KROKŮ (MAPPING)
+// -------------------------------------------------------------------------
+// Tady mapujeme "NázevAkce" z JSONu (část za podtržítkem) na konkrétní TS funkci.
+// Příklad: klíč v JSON "step1_CreateOrder" -> hledá "CreateOrder" -> volá createOrder()
+
+const STEP_REGISTRY: Record<string, (ctx: TestContext, data: OrderStepData) => Promise<void>> = {
+    "CreateOrder": createOrder,
+    "GetOrdersList": getOrderAndVerify,
+    "GetStockCard": getStockCard,
+    "AddOrderItem": addOrderItem,
+    "GetOrderItems": getOrderItemId,
+    "SendOrder": sendOrder,
+    "ApproveDifference": approveDifference,
+    "ApproveOrder": approveOrder
+};
+
+// -------------------------------------------------------------------------
 // HELPER FUNCTIONS
 // -------------------------------------------------------------------------
 
@@ -249,53 +266,58 @@ logger.info('Spouštím regresní testy pro životní cyklus objednávek pomocí
 
 for (const testCaseKey of Object.keys(allOrderData)) {
     const rawData = allOrderData[testCaseKey as keyof typeof allOrderData] as any;
-    const testCaseData = rawData as OrderTestCase;
-
-    // Extrakce tagů z prvního kroku nebo rootu
-    const tags = testCaseData.step1_CreateOrder?.tags || rawData.tags || [];
+    
+    // Extrakce tagů
+    const tags = rawData.step1_CreateOrder?.tags || rawData.tags || [];
     const tagsString = (tags.length > 0) ? ` ${tags.join(' ')}` : '';
     const testTitle = `${testCaseKey}: Life Cycle ... ${tagsString}`;
 
     test(testTitle, async ({ apiClient }) => {
-        logger.info(`Spouštím test: ${testCaseKey} ${testCaseData.caseName}`);
+        const caseName = rawData.caseName || "Unnamed Case";
+        logger.info(`Spouštím test: ${testCaseKey} - ${caseName}`);
 
-        // Inicializace kontextu pro tento konkrétní test case
+        // 1. Inicializace kontextu (paměť testu)
         const context: TestContext = {
             apiClient,
             uniqueOrderDescription: `AutoTest_${testCaseKey}_${Date.now()}`
         };
 
-        // Provolávání funkcí řízené existencí dat v JSONu
-        if (testCaseData.step1_CreateOrder) {
-            await createOrder(context, testCaseData.step1_CreateOrder);
+        // 2. Získání a seřazení kroků
+        // Získáme klíče jako "step1_CreateOrder", "step2_GetOrdersList" atd.
+        const stepKeys = Object.keys(rawData).filter(key => key.startsWith('step'));
+
+        // Seřadíme je podle čísla za slovem "step" (aby step10 šel až po step2)
+        stepKeys.sort((a, b) => {
+            const numA = parseInt(a.match(/^step(\d+)_/)?.[1] || "0");
+            const numB = parseInt(b.match(/^step(\d+)_/)?.[1] || "0");
+            return numA - numB;
+        });
+
+        if (stepKeys.length === 0) {
+            logger.warn(`Test case ${testCaseKey} neobsahuje žádné kroky začínající na 'step'.`);
         }
 
-        if (testCaseData.step2_GetOrdersList) {
-            await getOrderAndVerify(context, testCaseData.step2_GetOrdersList);
-        }
+        // 3. Dynamická iterace
+        for (const stepKey of stepKeys) {
+            const stepData = rawData[stepKey];
+            
+            // Z klíče "step1_CreateOrder" získáme "CreateOrder"
+            // Rozdělíme podle prvního podtržítka.
+            const splitIndex = stepKey.indexOf('_');
+            if (splitIndex === -1) {
+                logger.warn(`Krok '${stepKey}' nemá správný formát (očekáváno stepX_ActionName). Přeskakuji.`);
+                continue;
+            }
 
-        if (testCaseData.step3_GetStockCard) {
-            await getStockCard(context, testCaseData.step3_GetStockCard);
-        }
+            const actionName = stepKey.substring(splitIndex + 1); // Získá vše za prvním _
+            const actionFunction = STEP_REGISTRY[actionName];
 
-        if (testCaseData.step4_AddOrderItem) {
-            await addOrderItem(context, testCaseData.step4_AddOrderItem);
-        }
-
-        if (testCaseData.step5_GetOrderItems) {
-            await getOrderItemId(context, testCaseData.step5_GetOrderItems);
-        }
-
-        if (testCaseData.step6_SendOrder) {
-            await sendOrder(context, testCaseData.step6_SendOrder);
-        }
-
-        if (testCaseData.step7_ApproveDifference) {
-            await approveDifference(context, testCaseData.step7_ApproveDifference);
-        }
-
-        if (testCaseData.step8_ApproveOrder) {
-            await approveOrder(context, testCaseData.step8_ApproveOrder);
+            if (actionFunction) {
+                // Zavoláme mapovanou funkci
+                await actionFunction(context, stepData);
+            } else {
+                throw new Error(`Nenalezena implementace pro akci: '${actionName}' (z klíče ${stepKey}). Zkontrolujte STEP_REGISTRY.`);
+            }
         }
     });
 }

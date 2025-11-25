@@ -1,26 +1,26 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="2.4438739999999997">
-  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-25T13:57:53.883Z" hostname="API" tests="1" failures="0" skipped="0" time="1.417" errors="0">
-    <testcase name="TC_001: Life Cycle ...  @regression @api @life_cycle @high @order @test" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.417">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:54[0m[0m.717[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:54[0m[0m.724[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:54[0m[0m.725[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:54[0m[0m.726[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:54[0m[0m.727[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:54[0m[0m.729[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.466[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.469[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.473[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.476[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.477[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:95[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.478[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:98[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.479[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:100[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.481[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:260[39m[0m[0m]Spouštím test: TC_001 Regresní test životního cyklu objednávek přes API
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.483[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][62656512] ---> POST http://192.168.130.239:8180/documents-api/orders/231 {
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="2.508778">
+  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-25T14:06:54.634Z" hostname="API" tests="1" failures="0" skipped="0" time="1.482" errors="0">
+    <testcase name="TC_001: Life Cycle ...  @regression @api @life_cycle @high @order @test" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.482">
+      <system-out><![CDATA[2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:55[0m[0m.480[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:55[0m[0m.492[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:55[0m[0m.493[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:55[0m[0m.494[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:55[0m[0m.495[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:55[0m[0m.497[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.170[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.172[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.179[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.185[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.186[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:95[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.188[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:98[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.190[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:100[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.192[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:277[39m[0m[0m]Spouštím test: TC_001 - Regresní test životního cyklu objednávek přes API
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.196[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][321932d9] ---> POST http://192.168.130.239:8180/documents-api/orders/231 {
   params: [90mundefined[39m,
   data: {
-    orderDate: [32m'2025-11-25T13:57:55.482Z'[39m,
-    deliveryDate: [32m'2025-11-26T13:57:55.482Z'[39m,
-    description: [32m'AutoTest_TC_001_1764079075481'[39m,
+    orderDate: [32m'2025-11-25T14:06:56.195Z'[39m,
+    deliveryDate: [32m'2025-11-26T14:06:56.195Z'[39m,
+    description: [32m'AutoTest_TC_001_1764079616193'[39m,
     ownerName: [32m'ČEPRO, a.s.'[39m,
     ownerId: [33m1[39m,
     stockId: [33m231[39m,
@@ -30,13 +30,13 @@
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'62656512'[39m,
+    [32m'X-Request-ID'[39m: [32m'321932d9'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.525[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][62656512] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/231 (37.25 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.527[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:90[39m[0m[0m]Krok 1 OK: Objednávka vytvořena.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.529[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][99504e5b] ---> GET http://192.168.130.239:8180/reports-api/listOfOrders {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.271[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][321932d9] <--- 201 POST http://192.168.130.239:8180/documents-api/orders/231 (68.49 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.277[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:107[39m[0m[0m]Krok 1 OK: Objednávka vytvořena.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.280[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][a3393714] ---> GET http://192.168.130.239:8180/reports-api/listOfOrders {
   params: {
     stockId: [33m231[39m,
     year: [33m2025[39m
@@ -45,13 +45,13 @@
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'99504e5b'[39m,
+    [32m'X-Request-ID'[39m: [32m'a3393714'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.709[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][99504e5b] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfOrders (178.16 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.714[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:105[39m[0m[0m]Krok 2 OK: Objednávka ID 159 nalezena.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.716[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][df1c4eff] ---> GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.424[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][a3393714] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfOrders (138.43 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.429[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:122[39m[0m[0m]Krok 2 OK: Objednávka ID 160 nalezena.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.430[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][1fb164b5] ---> GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 {
   params: {
     search: [32m'040328'[39m,
     searchType: [32m'PLU'[39m,
@@ -65,64 +65,64 @@
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'df1c4eff'[39m,
+    [32m'X-Request-ID'[39m: [32m'1fb164b5'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.776[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][df1c4eff] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 (58.03 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.779[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:124[39m[0m[0m]Krok 3 OK: StockCard ID: 959
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.780[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:141[39m[0m[0m]Krok 4: Odesílám items...
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.781[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][83bf8ca5] ---> POST http://192.168.130.239:8180/documents-api/ordersitems/231 {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.594[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][1fb164b5] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStockCards/60193531/231 (159.91 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.603[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:141[39m[0m[0m]Krok 3 OK: StockCard ID: 959
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.609[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:158[39m[0m[0m]Krok 4: Odesílám items...
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.613[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][c7f929ed] ---> POST http://192.168.130.239:8180/documents-api/ordersitems/231 {
   params: [90mundefined[39m,
   data: {
-    orderId: [33m159[39m,
+    orderId: [33m160[39m,
     stockCardId: [33m959[39m,
     amount: [33m1[39m
   },
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'83bf8ca5'[39m,
+    [32m'X-Request-ID'[39m: [32m'c7f929ed'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.852[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][83bf8ca5] <--- 201 POST http://192.168.130.239:8180/documents-api/ordersitems/231 (68.31 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.854[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:147[39m[0m[0m]Krok 4 OK: Item odeslán.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.856[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:154[39m[0m[0m]Krok 5: Stahuji items pro objednávku 159.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.857[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][e82fe8b1] ---> GET http://192.168.130.239:8180/documents-api/orders/items/231/159 {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.722[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][c7f929ed] <--- 201 POST http://192.168.130.239:8180/documents-api/ordersitems/231 (106.30 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.724[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:164[39m[0m[0m]Krok 4 OK: Item odeslán.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.726[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:171[39m[0m[0m]Krok 5: Stahuji items pro objednávku 160.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.727[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][8e77bff2] ---> GET http://192.168.130.239:8180/documents-api/orders/items/231/160 {
   params: {},
   data: [90mundefined[39m,
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'e82fe8b1'[39m,
+    [32m'X-Request-ID'[39m: [32m'8e77bff2'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.899[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][e82fe8b1] <--- 200 GET http://192.168.130.239:8180/documents-api/orders/items/231/159 (39.56 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.906[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:170[39m[0m[0m]Krok 5 OK: Získáno ordersItemId: 138
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.910[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][bcd4a0b9] ---> PUT http://192.168.130.239:8180/documents-api/orders/ordersSend/231 {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.758[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][8e77bff2] <--- 200 GET http://192.168.130.239:8180/documents-api/orders/items/231/160 (29.79 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.762[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:187[39m[0m[0m]Krok 5 OK: Získáno ordersItemId: 139
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.764[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][e87555b8] ---> PUT http://192.168.130.239:8180/documents-api/orders/ordersSend/231 {
   params: [90mundefined[39m,
   data: {
     stockId: [33m231[39m,
-    orderId: [33m159[39m,
+    orderId: [33m160[39m,
     sendOrder: [33mfalse[39m,
     saveEmail: [33mfalse[39m
   },
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'bcd4a0b9'[39m,
+    [32m'X-Request-ID'[39m: [32m'e87555b8'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.956[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][bcd4a0b9] <--- 204 PUT http://192.168.130.239:8180/documents-api/orders/ordersSend/231 (43.20 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.959[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:188[39m[0m[0m]Krok 6 OK: Objednávka odeslána.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.961[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:206[39m[0m[0m]Krok 7 PUT: /documents-api/ordersItems/231/138
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:55[0m[0m.962[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][7dd7869f] ---> PUT http://192.168.130.239:8180/documents-api/ordersItems/231/138 {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.815[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][e87555b8] <--- 204 PUT http://192.168.130.239:8180/documents-api/orders/ordersSend/231 (48.40 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.818[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:205[39m[0m[0m]Krok 6 OK: Objednávka odeslána.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.821[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:223[39m[0m[0m]Krok 7 PUT: /documents-api/ordersItems/231/139
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.823[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][aa46b449] ---> PUT http://192.168.130.239:8180/documents-api/ordersItems/231/139 {
   params: [90mundefined[39m,
   data: {
-    orderId: [33m159[39m,
+    orderId: [33m160[39m,
     stockCardId: [33m959[39m,
     amount: [33m10[39m,
     comment: [32m'Automaticky schváleno'[39m,
@@ -131,14 +131,14 @@
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'7dd7869f'[39m,
+    [32m'X-Request-ID'[39m: [32m'aa46b449'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:56[0m[0m.028[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][7dd7869f] <--- 204 PUT http://192.168.130.239:8180/documents-api/ordersItems/231/138 (64.31 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:56[0m[0m.039[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:209[39m[0m[0m]Krok 7 OK: Rozdíl schválen.
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:56[0m[0m.042[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:229[39m[0m[0m]Krok 8: Volám POST /documents-api/orders/valid/231/159 s payloadem: {"emulateJSON":true,"emulateHTTP":true}
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:56[0m[0m.044[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][b3318875] ---> POST http://192.168.130.239:8180/documents-api/orders/valid/231/159 {
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.874[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][aa46b449] <--- 204 PUT http://192.168.130.239:8180/documents-api/ordersItems/231/139 (48.40 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.885[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:226[39m[0m[0m]Krok 7 OK: Rozdíl schválen.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.888[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:246[39m[0m[0m]Krok 8: Volám POST /documents-api/orders/valid/231/160 s payloadem: {"emulateJSON":true,"emulateHTTP":true}
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.889[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][01ff7fd8] ---> POST http://192.168.130.239:8180/documents-api/orders/valid/231/160 {
   params: [90mundefined[39m,
   data: {
     emulateJSON: [33mtrue[39m,
@@ -147,12 +147,12 @@
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'b3318875'[39m,
+    [32m'X-Request-ID'[39m: [32m'01ff7fd8'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:56[0m[0m.107[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][b3318875] <--- 204 POST http://192.168.130.239:8180/documents-api/orders/valid/231/159 (61.24 ms)
-2025[0m[0m-11[0m[0m-25[0m[0m 13[0m[0m:57[0m[0m:56[0m[0m.111[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:236[39m[0m[0m]Krok 8 OK: Objednávka 159 byla úspěšně validována.
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.941[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][01ff7fd8] <--- 204 POST http://192.168.130.239:8180/documents-api/orders/valid/231/160 (50.64 ms)
+2025[0m[0m-11[0m[0m-25[0m[0m 14[0m[0m:06[0m[0m:56[0m[0m.944[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:253[39m[0m[0m]Krok 8 OK: Objednávka 160 byla úspěšně validována.
 ]]></system-out>
     </testcase>
   </testsuite>
