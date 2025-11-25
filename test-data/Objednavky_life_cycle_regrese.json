@@ -33,25 +33,26 @@
     },
     "step4_AddOrderItem": {
       "name": "Přidání zboží POST documents-api/orderitems",
-      "stockCardId": 13,
       "stockId": 231,
       "amount": 1,
-      "expectationState": "200"
-
+      "expectationState": "201"
     },
-    "step5_SendOrder": {
+    "step5_GetOrderItems": {
+      "name": "Získání ID položky GET documents-api/orders/items",
+      "stockId": 231
+    },
+    "step6_SendOrder": {
       "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
       "stockId": 231,
       "sendOrder": false,
       "saveEmail": false
     },
-    "step6_ApproveDifference": {
-      "name": "Schválení rozdílu POST documents-api/ordersitems",
+    "step7_ApproveDifference": {
+      "name": "Schválení rozdílu PUT documents-api/ordersItems",
       "stockId": 231,
       "amount": 10,
-      "comment": "Schválení změny množství",
-      "agreement": true,
-      "stockCardId": 959
+      "comment": "Automaticky schváleno",
+      "agreement": true
     }
   }
 }

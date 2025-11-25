@@ -55,16 +55,6 @@ export default defineConfig({
       }
     },
     {
-      name: 'firefox',
-      grepInvert: /@api/,
-      grep: /@e2e/,
-      use: {
-        ...devices['Desktop Firefox'],
-        video: 'retain-on-failure',
-        viewport: { width: 1920, height: 1080 }
-      }
-    },
-    {
       name: 'edge',
       grepInvert: /@api/,
       grep: /@e2e/,

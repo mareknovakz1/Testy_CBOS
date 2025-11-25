@@ -93,7 +93,7 @@ export class DocumentsApiService extends BaseApiClient {
      * Approves an order.
      */
     public async approveOrder(stockId: number, orderId: number): Promise<void> {
-        return this.put(`/documents-api/orders/valid/${stockId}/${orderId}`, {});
+        return this.post(`/documents-api/orders/valid/${stockId}/${orderId}`, {});
     }
 
     public async postOrderItems(stockId: number, payload: t.AddOrderItemPayload, orderId?: number): Promise<any> {
