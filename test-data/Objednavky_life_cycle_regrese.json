@@ -1,7 +1,7 @@
 {
   "TC_001": {
     "caseName": "Regresní test životního cyklu objednávek přes API",
-    "tags": ["@regression", "@api", "@life_cycle", "@high", "@order", "@test"],
+    "tags": ["@regression", "@api", "@life_cycle", "@high", "@order"],
     "steps": {
       "01_CreateOrder": {
         "action": "CreateOrder",
@@ -71,8 +71,8 @@
     }
   },
   "TC_002": {
-    "caseName": "Negativní test - Duplicitní přidání položky",
-    "tags": ["@regression", "@api", "@medium", "@negative", "@test"],
+    "caseName": "Negativní test - Duplicitní přidání položky OČEKÁVÁME ERROR 409",
+    "tags": ["@regression", "@api", "@medium", "@negative"],
     "steps": {
       "01_CreateOrder": {
         "action": "CreateOrder",
@@ -120,6 +120,284 @@
         "name": "Úklid: Smazání testovací objednávky",
         "stockId": 231
       } 
+    }
+  },
+"TC_003": {
+    "caseName": "Odeslání objednávky na email (SaveEmail + SendOrder)",
+    "tags": ["@regression", "@api", "@life_cycle", "@email"],
+    "steps": {
+      "01_CreateOrder": {
+        "action": "CreateOrder",
+        "name": "Vytvoření objednávky",
+        "stockId": 231,
+        "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o."
+      },
+      "02_Verify": {
+        "action": "GetOrdersList",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_Card": {
+        "action": "GetStockCard",
+        "stockId": 231,
+        "params": {
+          "search": "040328",
+          "searchType": "PLU",
+          "stockId": 231,
+          "ownerId": 1,
+          "supplierId": 8,
+          "stkitmType": "D",
+          "for": "orders"
+        }
+      },
+      "04_Add": {
+        "action": "AddOrderItem",
+        "stockId": 231,
+        "amount": 5
+      },
+      "05_GetItem": {
+        "action": "GetOrderItems",
+        "stockId": 231
+      },
+      "06_SendWithEmail": {
+        "action": "SendOrder",
+        "name": "Odeslání objednávky s příznakem EMAIL",
+        "description": "Nastaveno sendOrder=true a saveEmail=true",
+        "stockId": 231,
+        "sendOrder": true,
+        "saveEmail": true,
+        "email": "marek.novak@octo-technology.cz"
+      },
+      "07_Approve": {
+        "action": "ApproveDifference",
+        "stockId": 231,
+        "amount": 5,
+        "agreement": true
+      },
+      "08_Valid": {
+        "action": "ApproveOrder",
+        "stockId": 231
+      }
+    }
+  },
+  "TC_004": {
+    "caseName": "Schválení rozdílu se specifickým komentářem pro export",
+    "tags": ["@regression", "@api", "@life_cycle", "@comment"],
+    "steps": {
+      "01_CreateOrder": {
+        "action": "CreateOrder",
+        "stockId": 231,
+        "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o."
+      },
+      "02_Verify": {
+        "action": "GetOrdersList",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_Card": {
+        "action": "GetStockCard",
+        "stockId": 231,
+        "params": {
+          "search": "040328",
+          "searchType": "PLU",
+          "stockId": 231,
+          "ownerId": 1,
+          "supplierId": 8,
+          "stkitmType": "D",
+          "for": "orders"
+        }
+      },
+      "04_Add": {
+        "action": "AddOrderItem",
+        "stockId": 231,
+        "amount": 20
+      },
+      "05_GetItem": {
+        "action": "GetOrderItems",
+        "stockId": 231
+      },
+      "06_Send": {
+        "action": "SendOrder",
+        "stockId": 231,
+        "sendOrder": false,
+        "saveEmail": false
+      },
+      "07_ApproveComment": {
+        "action": "ApproveDifference",
+        "name": "Schválení rozdílu s komentářem",
+        "stockId": 231,
+        "amount": 20,
+        "comment": "TEST_EXPORTU_KOMENTAR_TC004_12345",
+        "agreement": true
+      },
+      "08_Valid": {
+        "action": "ApproveOrder",
+        "stockId": 231
+      }
+    }
+  }, 
+  
+  "TC_005": {
+    "caseName": "Regresní test životního cyklu objednávek přes API - Znovu-objednání",
+    "tags": ["@regression", "@api", "@life_cycle", "@high", "@order"],
+    "steps": {
+      "01_CreateOrder": {
+        "action": "CreateOrder",
+        "name": "Vytvoření objednávky POST documents-api/orders",
+        "description": "Automaticky vytvořená objednávka",
+        "stockId": 231,
+        "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o.",
+        "transporterId": "7",
+        "transporterName": "VELKÁ PECKA s.r.o."
+      },
+      "02_GetOrdersList": {
+        "action": "GetOrdersList",
+        "name": "Ověření objednávky GET reports-api/orders",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_GetStockCard": {
+        "action": "GetStockCard",
+        "name": "Nalezení skladové karty GET reports-api/listOfStockCards",
+        "stockId": 231,
+        "params": {
+          "search": "040328",
+          "searchType": "PLU",
+          "stockId": 231,
+          "ownerId": 1,
+          "supplierId": 8,
+          "stkitmType": "D",
+          "for": "orders"
+        }
+      },
+      "04_AddOrderItem": {
+        "action": "AddOrderItem",
+        "name": "Přidání zboží POST documents-api/orderitems",
+        "stockId": 231,
+        "amount": 1,
+        "expectationState": "201"
+      },
+      "05_GetOrderItems": {
+        "action": "GetOrderItems",
+        "name": "Získání ID položky GET documents-api/orders/items",
+        "stockId": 231
+      },
+      "06_SendOrder": {
+        "action": "SendOrder",
+        "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
+        "stockId": 231,
+        "sendOrder": false,
+        "saveEmail": false
+      },
+       "07_SendOrder": {
+        "action": "SendOrder",
+        "name": "Odeslání objednávky PUT documents-api/orders/ordersSend",
+        "stockId": 231,
+        "sendOrder": false,
+        "saveEmail": false
+      },
+      "08_ApproveDifference": {
+        "action": "ApproveDifference",
+        "name": "Schválení rozdílu PUT documents-api/ordersItems",
+        "stockId": 231,
+        "amount": 10,
+        "comment": "Automaticky schváleno",
+        "agreement": true
+      },
+      "09_ApproveOrder": {
+        "action": "ApproveOrder",
+        "name": "Validace objednávky (POST /valid)",
+        "stockId": 231,
+        "description": "Finální schválení objednávky s emulateHTTP flagy"
+      }
+    }
+  },
+  "TC_006": {
+    "caseName": "E2E - Vytvoření, schválení, kopie a schválení kopie",
+    "tags": ["@regression", "@api", "@life_cycle", "@copy_full", "@test"],
+    "steps": {
+      "01_CreateOrder": {
+        "action": "CreateOrder",
+        "name": "Vytvoření původní objednávky",
+        "stockId": 231,
+        "ownerId": 1,
+        "ownerName": "ČEPRO, a.s.",
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o."
+      },
+      "02_Verify": {
+        "action": "GetOrdersList",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_Card": {
+        "action": "GetStockCard",
+        "stockId": 231,
+        "params": {
+          "search": "040328",
+          "searchType": "PLU",
+          "stockId": 231,
+          "ownerId": 1,
+          "supplierId": 8,
+          "stkitmType": "D",
+          "for": "orders"
+        }
+      },
+      "04_AddOrderItem": {
+        "action": "AddOrderItem",
+        "stockId": 231,
+        "amount": 1,
+        "expectationState": "201"
+      },
+      "05_GetOrderItems": {
+        "action": "GetOrderItems",
+        "stockId": 231
+      },
+      "06_SendOriginal": {
+        "action": "SendOrder",
+        "name": "Odeslání původní objednávky",
+        "stockId": 231,
+        "sendOrder": false,
+        "saveEmail": false
+      },
+      "07_ApproveDifference": {
+        "action": "ApproveDifference",
+        "stockId": 231,
+        "amount": 10,
+        "agreement": true
+      },
+      "08_ApproveOriginal": {
+        "action": "ApproveOrder",
+        "name": "Validace (schválení) původní objednávky",
+        "stockId": 231
+      },
+      "09_CreateCopy": {
+        "action": "CopyOrder",
+        "name": "Vytvoření kopie ze schválené objednávky",
+        "stockId": 231
+      },
+      "10_SendCopy": {
+        "action": "SendOrder",
+        "name": "Odeslání NOVÉ (zkopírované) objednávky",
+        "description": "Kopie je ve stavu Draft, před schválením ji musíme odeslat.",
+        "stockId": 231,
+        "sendOrder": false,
+        "saveEmail": false
+      },
+      "11_ApproveCopy": {
+        "action": "ApproveOrder",
+        "name": "Validace (schválení) NOVÉ objednávky",
+        "stockId": 231
+      }
     }
   }
 }

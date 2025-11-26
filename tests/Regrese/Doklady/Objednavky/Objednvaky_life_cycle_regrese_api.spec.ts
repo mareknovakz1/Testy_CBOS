@@ -32,6 +32,7 @@ type OrderStepData = {
     saveEmail?: boolean;
     comment?: string;
     agreement?: boolean;
+    email?: string;
 };
 
 type OrderTestCase = {
@@ -85,7 +86,7 @@ function getTomorrowDate(): Date {
 // STEP FUNCTIONS
 // -------------------------------------------------------------------------
 
-/** Krok 1: Vytvoření objednávky */
+/** Vytvoření objednávky */
 async function createOrder(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 1: ${stepData.name}`, async () => {
         const tomorrow = getTomorrowDate();
@@ -107,7 +108,7 @@ async function createOrder(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 2: Ověření a získání ID objednávky */
+/** Ověření a získání ID objednávky */
 async function getOrderAndVerify(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 2: ${stepData.name}`, async () => {
         const payload = { stockId: stepData.stockId!, year: stepData.year! };
@@ -122,7 +123,7 @@ async function getOrderAndVerify(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 3: Vyhledání skladové karty */
+/** Vyhledání skladové karty */
 async function getStockCard(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 3: ${stepData.name}`, async () => {
         if (!stepData.params) throw new Error("Chybí params pro Krok 3");
@@ -141,7 +142,7 @@ async function getStockCard(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 4: Přidání zboží do objednávky */
+/** Přidání zboží do objednávky */
 async function addOrderItem(ctx: TestContext, stepData: OrderStepData) {
     // Vylepšený název kroku (aby v logu nebylo undefined)
     const stepName = stepData.name || stepData.description || 'AddOrderItem';
@@ -203,7 +204,7 @@ async function addOrderItem(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 5: Získání ID položky */
+/** Získání ID položky */
 async function getOrderItemId(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 5: ${stepData.name}`, async () => {
         logger.debug(`Krok 5: Stahuji items pro objednávku ${ctx.createdOrderId}.`);
@@ -229,14 +230,15 @@ async function getOrderItemId(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 6: Odeslání objednávky */
+/** Odeslání objednávky */
 async function sendOrder(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 6: ${stepData.name}`, async () => {
         const payload: t.SendOrderPayload = {
             stockId: stepData.stockId!,
             orderId: ctx.createdOrderId!,
             sendOrder: stepData.sendOrder ?? false, 
-            saveEmail: stepData.saveEmail ?? false 
+            saveEmail: stepData.saveEmail ?? false,
+            email: stepData.email 
         };
 
         await ctx.apiClient.documents.sendOrder(stepData.stockId!, payload);        
@@ -244,7 +246,7 @@ async function sendOrder(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 7: Schválení rozdílu */
+/** Schválení rozdílu */
 async function approveDifference(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 7: ${stepData.name}`, async () => {
         if (!ctx.createdOrderItemId) throw new Error("Chybí ordersItemId z Kroku 5!");
@@ -265,7 +267,7 @@ async function approveDifference(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok 8: Schválení objednávky (Validace) */
+/** Schválení objednávky (Validace) */
 async function approveOrder(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok 8: ${stepData.name}`, async () => {
         if (!ctx.createdOrderId) {
@@ -296,7 +298,7 @@ async function approveOrder(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
-/** Krok: Smazání objednávky */
+/** Smazání objednávky */
 async function deleteOrder(ctx: TestContext, stepData: OrderStepData) {
     await test.step(`Krok: ${stepData.name || 'DeleteOrder'}`, async () => {
         if (!ctx.createdOrderId) {
@@ -312,6 +314,37 @@ async function deleteOrder(ctx: TestContext, stepData: OrderStepData) {
         logger.info(`Krok OK: Objednávka ID ${ctx.createdOrderId} byla úspěšně smazána.`);
     });
 }
+
+/** Krok: Vytvoření kopie objednávky (Copy/Template) */
+async function copyOrderFromOrder(ctx: TestContext, stepData: OrderStepData) {
+    // Fallback pro název kroku
+    const stepName = stepData.name || 'CopyOrderFromOrder';
+
+    await test.step(`Krok: ${stepName}`, async () => {
+        // Validace vstupů
+        if (!ctx.createdOrderId) {
+            throw new Error("Nelze kopírovat: V kontextu chybí ID zdrojové objednávky (createdOrderId).");
+        }
+        if (!stepData.stockId) {
+            throw new Error("Chybí 'stockId' v definici kroku.");
+        }
+
+        logger.debug(`Kopíruji objednávku ID ${ctx.createdOrderId} na skladě ${stepData.stockId}...`);
+
+        // Volání API metody (dle vašeho zadání)
+        // Předpokládám, že vrací objekt nové objednávky (t.OrderResponse)
+        const response: any = await ctx.apiClient.documents.copyOrderFromOrder(stepData.stockId, ctx.createdOrderId);
+
+        // Aktualizace kontextu: Další kroky testu už budou pracovat s tou NOVOU objednávkou
+        if (response && response.id) {
+            logger.info(`Krok OK: Objednávka zkopírována. Původní ID: ${ctx.createdOrderId} -> Nové ID: ${response.id}`);
+            ctx.createdOrderId = response.id;
+        } else {
+            logger.warn("API nevrátilo ID nové objednávky, kontext (createdOrderId) zůstává nezměněn. Zkontrolujte response.");
+        }
+    });
+}
+
 // -------------------------------------------------------------------------
 // MAIN TEST LOOP (NOVÁ VERZE - PODPORUJE "steps")
 // -------------------------------------------------------------------------
