@@ -67,7 +67,8 @@ const STEP_REGISTRY: Record<string, (ctx: TestContext, data: OrderStepData) => P
     "GetOrderItems": getOrderItemId,
     "SendOrder": sendOrder,
     "ApproveDifference": approveDifference,
-    "ApproveOrder": approveOrder
+    "ApproveOrder": approveOrder,
+    "DeleteOrder": deleteOrder
 };
 
 // -------------------------------------------------------------------------
@@ -142,24 +143,63 @@ async function getStockCard(ctx: TestContext, stepData: OrderStepData) {
 
 /** Krok 4: Přidání zboží do objednávky */
 async function addOrderItem(ctx: TestContext, stepData: OrderStepData) {
-    await test.step(`Krok 4: ${stepData.name}`, async () => {
-        if (!ctx.createdOrderId) throw new Error("Chybí Order ID z předchozích kroků.");
-        if (!ctx.foundStockCardId) throw new Error("Chybí Stock Card ID z předchozích kroků.");
+    // Vylepšený název kroku (aby v logu nebylo undefined)
+    const stepName = stepData.name || stepData.description || 'AddOrderItem';
 
+    await test.step(`Krok: ${stepName}`, async () => {
+        if (!ctx.createdOrderId) throw new Error("Chybí Order ID z předchozích kroků.");
+        
+        // Získání očekávaného statusu (default 201)
         const expectedStatus = stepData.expectationState ? parseInt(stepData.expectationState) : 201;
+
+        // Pokud nemáme ID karty v datech, zkusíme kontext
+        const cardId = ctx.foundStockCardId; 
+        if (!cardId) throw new Error("Chybí Stock Card ID (z kontextu kroku FindStockCard).");
+
         const payload = { 
             "orderId": ctx.createdOrderId, 
-            "stockCardId": ctx.foundStockCardId, 
+            "stockCardId": cardId, 
             "amount": stepData.amount ?? 1 
         };
 
-        logger.trace(`Krok 4: Odesílám items...`);
-        const postResponse: any = await ctx.apiClient.documents.postOrderItems(stepData.stockId!, payload);        
-        
-        if (postResponse && postResponse.status) {
-            expect(postResponse.status).toBe(expectedStatus);
+        logger.trace(`Krok: Odesílám items (očekávám ${expectedStatus})...`);
+
+        try {
+            // --- POKUS O VOLÁNÍ API ---
+            const postResponse: any = await ctx.apiClient.documents.postOrderItems(stepData.stockId!, payload);
+            
+            // --- A) API NEVRÁTILO CHYBU (2xx) ---
+            
+            // Pokud jsme čekali chybu (např. 409), ale API vrátilo úspěch (201), je to chyba testu!
+            if (expectedStatus >= 400) {
+                throw new Error(`Test selhal: Očekávána chyba ${expectedStatus}, ale API vrátilo úspěch (Status ${postResponse?.status}).`);
+            }
+
+            // Validace úspěšného statusu
+            if (postResponse && postResponse.status) {
+                expect(postResponse.status).toBe(expectedStatus);
+            }
+            logger.info(`Krok OK: Item přidán (Status ${expectedStatus}).`);
+
+        } catch (error: any) {
+            // --- B) API VRÁTILO CHYBU (4xx, 5xx) ---
+
+            // Zkusíme vytáhnout status kód z chyby
+            // BaseApiClient obvykle hází ApiError, který může mít property .status nebo ho musíme vyčíst
+            const actualStatus = error.status || error.statusCode || (error.response ? error.response.status : undefined);
+
+            logger.debug(`Zachycena chyba API. Status v erroru: ${actualStatus}. Očekáváno: ${expectedStatus}`);
+
+            if (actualStatus && Number(actualStatus) === expectedStatus) {
+                // HURÁ! Nastala přesně ta chyba, kterou jsme chtěli (např. 409 Conflict)
+                logger.info(`Krok OK (Negativní test): Očekávaná chyba ${actualStatus} byla úspěšně zachycena.`);
+                return; // Test považujeme za úspěšný
+            }
+
+            // Pokud nastala jiná chyba, nebo jsme chybu nečekali, pošleme ji dál (test selže)
+            logger.error(`Krok selhal: Očekáván status ${expectedStatus}, ale přišel ${actualStatus}. Error message: ${error.message}`);
+            throw error; 
         }
-        logger.info(`Krok 4 OK: Item odeslán.`);
     });
 }
 
@@ -253,6 +293,23 @@ async function approveOrder(ctx: TestContext, stepData: OrderStepData) {
             logger.error(`Krok 8 selhal na endpointu ${endpoint}. Chyba: ${error}`);
             throw error;
         }
+    });
+}
+
+/** Krok: Smazání objednávky */
+async function deleteOrder(ctx: TestContext, stepData: OrderStepData) {
+    await test.step(`Krok: ${stepData.name || 'DeleteOrder'}`, async () => {
+        if (!ctx.createdOrderId) {
+            throw new Error("Nelze smazat objednávku: ID objednávky chybí z předchozích kroků.");
+        }
+
+        const endpoint = `/documents-api/orders/${stepData.stockId}/${ctx.createdOrderId}`;
+        logger.debug(`Mažu objednávku: DELETE ${endpoint}`);
+
+        // Volání API metody deleteOrder (kterou jsi definoval v zadání)
+        await ctx.apiClient.documents.deleteOrder(stepData.stockId!, ctx.createdOrderId);
+
+        logger.info(`Krok OK: Objednávka ID ${ctx.createdOrderId} byla úspěšně smazána.`);
     });
 }
 // -------------------------------------------------------------------------

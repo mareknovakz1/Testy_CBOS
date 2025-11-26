@@ -114,7 +114,12 @@
         "stockId": 231,
         "amount": 5,
         "expectationState": "409"
-      }
+      },
+      "06_Cleanup": {
+        "action": "DeleteOrder",
+        "name": "Úklid: Smazání testovací objednávky",
+        "stockId": 231
+      } 
     }
   }
 }
