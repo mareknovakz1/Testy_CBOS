@@ -1,7 +1,7 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="2.533098">
-  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-26T14:31:49.144Z" hostname="API" tests="1" failures="0" skipped="0" time="1.405" errors="0">
-    <testcase name="TC_006: E2E - Vytvoření, schválení, kopie a schválení kopie ...  @regression @api @life_cycle @copy_full @test" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.405">
-      <system-out><![CDATA[2025[0m[0m-11[0m[0m-26[0m[0m 14[0m[0m:31[0m[0m:51[0m[0m.359[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:378[39m[0m[0m]VAROVÁNÍ: Neznámá akce 'CopyOrder' v kroku '09_CreateCopy'. Zkontrolujte STEP_REGISTRY.
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="2.3815159999999995">
+  <testsuite name="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" timestamp="2025-11-26T15:24:38.523Z" hostname="API" tests="1" failures="0" skipped="0" time="1.381" errors="0">
+    <testcase name="TC_008: E2E - Životní cyklus s vytvořením příjemky před schválením ...  @regression @api @life_cycle @delivery_note @test" classname="Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts" time="1.381">
+      <system-out><![CDATA[2025[0m[0m-11[0m[0m-26[0m[0m 15[0m[0m:24[0m[0m:40[0m[0m.683[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Objednavky\Objednvaky_life_cycle_regrese_api.spec.ts:464[39m[0m[0m]VAROVÁNÍ: Neznámá akce 'CreateDeliveryNote' v kroku '08_MakeReceipt'. Zkontrolujte STEP_REGISTRY.
 ]]></system-out>
     </testcase>
   </testsuite>

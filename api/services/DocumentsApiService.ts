@@ -112,7 +112,6 @@ export class DocumentsApiService extends BaseApiClient {
 
     /**
      * Deletes an item from an order.
-     * [MISSING ENDPOINT ADDED]
      */
     public async deleteOrderItem(stockId: number, ordersItemId: number): Promise<void> {
         return this.delete(`/documents-api/ordersItems/${stockId}/${ordersItemId}`);

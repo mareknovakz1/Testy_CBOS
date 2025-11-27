@@ -345,6 +345,65 @@ async function copyOrderFromOrder(ctx: TestContext, stepData: OrderStepData) {
     });
 }
 
+/** Krok: Smazání položky objednávky */
+async function deleteOrderItem(ctx: TestContext, stepData: OrderStepData) {
+    const stepName = stepData.name || 'DeleteOrderItem';
+
+    await test.step(`Krok: ${stepName}`, async () => {
+        // Validace: Musíme mít ID položky z předchozích kroků
+        if (!ctx.createdOrderItemId) {
+            throw new Error("Nelze smazat položku: ID položky (ordersItemId) chybí v kontextu. Ujistěte se, že proběhl krok GetOrderItems.");
+        }
+        if (!stepData.stockId) {
+            throw new Error("Chybí 'stockId' v definici kroku.");
+        }
+
+        const endpoint = `/documents-api/ordersItems/${stepData.stockId}/${ctx.createdOrderItemId}`;
+        logger.debug(`Mažu položku ID ${ctx.createdOrderItemId}: DELETE ${endpoint}`);
+
+        // Volání API metody
+        await ctx.apiClient.documents.deleteOrderItem(stepData.stockId, ctx.createdOrderItemId);
+
+        logger.info(`Krok OK: Položka ${ctx.createdOrderItemId} byla úspěšně smazána.`);
+        
+        // Volitelně: Vyčistíme ID z kontextu, aby se nepoužilo omylem znovu
+        ctx.createdOrderItemId = undefined;
+    });
+}
+
+/** Krok: Vytvoření objednávky z Dodacího listu (Delivery Note) */
+async function copyOrderFromDeliveryNote(ctx: TestContext, stepData: OrderStepData) {
+    const stepName = stepData.name || 'CopyOrderFromDeliveryNote';
+
+    await test.step(`Krok: ${stepName}`, async () => {
+        // Validace: Musíme znát ID dodáku. 
+        // Předpokládám, že ho pošlete v JSONu jako property 'deliveryNoteId' nebo v 'params'.
+        // Zde používám přetypování (stepData as any), abychom nemuseli hned měnit definici OrderStepData typu.
+        const deliveryNoteId = (stepData as any).deliveryNoteId || stepData.params?.stockId;
+
+        if (!deliveryNoteId) {
+            throw new Error("Chybí ID dodacího listu (deliveryNoteId) v definici kroku.");
+        }
+        if (!stepData.stockId) {
+            throw new Error("Chybí 'stockId' v definici kroku.");
+        }
+
+        logger.debug(`Vytvářím objednávku z dodacího listu ID ${deliveryNoteId} na skladě ${stepData.stockId}...`);
+
+        // Volání API
+        const response: any = await ctx.apiClient.documents.copyOrderFromDeliveryNote(stepData.stockId, deliveryNoteId);
+
+        // Aktualizace kontextu: Další kroky testu budou pracovat s touto NOVOU objednávkou
+        if (response && response.id) {
+            logger.info(`Krok OK: Objednávka vytvořena z dodáku. Nové Order ID: ${response.id}`);
+            ctx.createdOrderId = response.id;
+        } else {
+            // Pokud API nevrací přímo objekt s ID, ale třeba jen status, musíme ID zjistit jinak (např. z hlaviček nebo listování)
+            logger.warn("API nevrátilo ID nové objednávky, kontext (createdOrderId) zůstává nezměněn.");
+        }
+    });
+}
+
 // -------------------------------------------------------------------------
 // MAIN TEST LOOP (NOVÁ VERZE - PODPORUJE "steps")
 // -------------------------------------------------------------------------
