@@ -457,7 +457,7 @@
   },
   "TC_008": {
     "caseName": "E2E - Životní cyklus s vytvořením příjemky před schválením",
-    "tags": ["@regression", "@api", "@life_cycle", "@delivery_note", "@test"],
+    "tags": ["@regression", "@api", "@life_cycle", "@delivery_note"],
     "steps": {
       "01_CreateOrder": {
         "action": "CreateOrder",

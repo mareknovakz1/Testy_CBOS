@@ -1,0 +1,64 @@
+{
+  "TC_GDN_001": {
+    "caseName": "Regresní test životního cyklu příjemky (Goods Delivery Note)",
+    "tags": ["@regression", "@api", "@delivery_note", "@high", "@test"],
+    "steps": {
+      "01_Create": {
+        "action": "CreateDeliveryNote",
+        "name": "Vytvoření příjemky POST documents-api/goodsDeliveryNotes",
+        "description": "Automaticky vytvořená příjemka",
+        "stockId": 231,
+        "ownerId": 1,
+        "supplierId": 8,
+        "supplierName": "Banner Baterie ČR spol.s r.o."
+      },
+      "02_Verify": {
+        "action": "GetDeliveryNotesList",
+        "name": "Ověření příjemky GET reports-api/listOfGoodsDeliveryNotes",
+        "stockId": 231,
+        "year": 2025
+      },
+      "03_Card": {
+        "action": "GetStockCard",
+        "name": "Nalezení skladové karty (Cola)",
+        "stockId": 231,
+        "params": {
+          "search": "cola",
+          "searchType": "name",
+          "stockId": 231,
+          "ownerId": 1,
+          "stkitmType": "D",
+          "takeMain": "true",
+          "for": "delivery"
+        }
+      },
+      "04_AddItem": {
+        "action": "AddDeliveryNoteItem",
+        "name": "Přidání položky POST documents-api/goodsDeliveryNotesItems",
+        "stockId": 231,
+        "amount": 10,
+        "supplyPrice": 25.50
+      },
+      "05_GetItems": {
+        "action": "GetDeliveryNoteItems",
+        "name": "Získání ID položky GET items",
+        "stockId": 231
+      },
+      "06_ChangeSupply": {
+        "action": "ChangeSupply",
+        "name": "Naskladnění (Change Supply) POST documents-api/goodsDeliveryNotes/changeSupply",
+        "stockId": 231
+      },
+      "07_Approve": {
+        "action": "ApproveDeliveryNote",
+        "name": "Validace příjemky POST documents-api/goodsDeliveryNotes/valid",
+        "stockId": 231
+      },
+      "08_Cleanup": {
+        "action": "DeleteDeliveryNote",
+        "name": "Smazání testovací příjemky",
+        "stockId": 231
+      }
+    }
+  }
+}
