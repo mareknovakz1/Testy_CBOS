@@ -8,9 +8,14 @@
         "name": "Vytvoření příjemky POST documents-api/goodsDeliveryNotes",
         "description": "Automaticky vytvořená příjemka",
         "stockId": 231,
-        "ownerId": 1,
+        "ownerId": 8,
+        "accOwner": "60193531",  
+        "documentType": 1,       
+        "documentSubType": 1,    
+        "sign": "+",
         "supplierId": 8,
-        "supplierName": "Banner Baterie ČR spol.s r.o."
+        "supplierName": "Banner Baterie ČR spol.s r.o.",
+        "ownerName": "Banner Baterie ČR spol.s r.o."
       },
       "02_Verify": {
         "action": "GetDeliveryNotesList",

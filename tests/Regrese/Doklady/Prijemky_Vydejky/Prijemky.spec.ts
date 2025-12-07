@@ -28,6 +28,12 @@ type StepData = {
     amount?: number;
     supplyPrice?: number; // Specifické pro příjemku
     expectationState?: string;
+    accOwner: string;
+    documentType?: number;
+    documentSubType?: number;
+    sign?: string;
+    ownerName: string;
+
 };
 
 // Kontext pro sdílení stavu mezi kroky
@@ -62,14 +68,18 @@ const STEP_REGISTRY: Record<string, (ctx: TestContext, data: StepData) => Promis
 async function createDeliveryNote(ctx: TestContext, stepData: StepData) {
     await test.step(`Krok: ${stepData.name}`, async () => {
         const payload = {
-            deliveryDate: new Date().toISOString(),
-            description: ctx.uniqueDescription,
-            stockId: stepData.stockId!,
-            supplierId: stepData.supplierId!,
-            supplierName: stepData.supplierName!,
-            // Další povinná pole pro příjemku, pokud jsou potřeba
-            documentType: 1
-        };
+                            stockId: stepData.stockId,
+                            ownerId: stepData.ownerId,           
+                            accOwner: stepData.accOwner,         
+                            documentType: stepData.documentType ?? 1,
+                            documentSubType: stepData.documentSubType ?? 1, 
+                            sign: stepData.sign,            
+                            description: ctx.uniqueDescription,
+                            deliveryDate: new Date().toISOString(), 
+                            supplierId: stepData.supplierId,
+                            supplierName: stepData.supplierName,
+                            ownerName: stepData.ownerName,
+                        };
 
         logger.debug(`Vytvářím příjemku: ${JSON.stringify(payload)}`);
         
