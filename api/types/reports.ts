@@ -254,3 +254,20 @@ export interface GetListOfWetDeliveryNotesParams {
     operator?: string;
     format?: string;
 }
+
+export interface GetJournalsValidatorParams {
+    columns?: string;      // např. "id,termId,termName,datetime,summary"
+    stockId: number;       // Povinné, např. 231
+    dateTo?: string;       // ISO string, např. "2025-12-05T11:29:22.622Z"
+    offset?: number;       // Default 0
+    limit?: number;        // Default 100
+    sort?: string;         // např. "-datetime" (sestupně) nebo "termId" (vzestupně)
+}
+
+export interface JournalValidatorItem {
+    id: number;
+    termId: string;
+    termName: string;
+    datetime: string;
+    summary: string;
+}

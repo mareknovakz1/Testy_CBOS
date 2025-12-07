@@ -1961,7 +1961,1382 @@
     "service": "administration",
     "method": "getCentralFsFeatures",
     "params": ["60193531", {"sort": "+operator", "limit": 10, "offset": 0}]
+  },
+  {
+  "TC_SORT_01_Journal_Terminal_ASC": {
+    "testId": "TC-211",
+    "name": "Řazení Deníku: Terminál (termId) - Vzestupně",
+    "tags": ["@regression", "@api", "@reports", "@sort"],
+    "steps": [
+      {
+        "stepName": "Získání seřazeného seznamu",
+        "action": "getListOfJournalsValidator",
+        "stockId": 231,
+        "params": {
+          "limit": 50,
+          "sort": "termId",
+          "columns": "id,termId,termName,datetime,summary"
+        },
+        "validation": {
+          "checkSort": true,
+          "sortColumn": "termId",
+          "sortDirection": "asc"
+        }
+      }
+    ]
+  },
+  "TC_SORT_02_Journal_Terminal_DESC": {
+    "testId": "TC-212",
+    "name": "Řazení Deníku: Terminál (termId) - Sestupně",
+    "tags": ["@regression", "@api", "@reports", "@sort"],
+    "steps": [
+      {
+        "stepName": "Získání seřazeného seznamu",
+        "action": "getListOfJournalsValidator",
+        "stockId": 231,
+        "params": {
+          "limit": 50,
+          "sort": "-termId",
+          "columns": "id,termId,termName,datetime,summary"
+        },
+        "validation": {
+          "checkSort": true,
+          "sortColumn": "termId",
+          "sortDirection": "desc"
+        }
+      }
+    ]
+  },
+  "TC_SORT_03_Journal_Trezor_ASC": {
+    "testId": "TC-213",
+    "name": "Řazení Deníku: Trezor otevřen (datetime) - Vzestupně",
+    "tags": ["@regression", "@api", "@reports", "@sort"],
+    "steps": [
+      {
+        "stepName": "Získání seřazeného seznamu",
+        "action": "getListOfJournalsValidator",
+        "stockId": 231,
+        "params": {
+          "limit": 50,
+          "sort": "datetime",
+          "columns": "id,termId,termName,datetime,summary"
+        },
+        "validation": {
+          "checkSort": true,
+          "sortColumn": "datetime",
+          "sortDirection": "asc"
+        }
+      }
+    ]
+  },
+  "TC_SORT_04_Journal_Trezor_DESC": {
+    "testId": "TC-214",
+    "name": "Řazení Deníku: Trezor otevřen (datetime) - Sestupně",
+    "tags": ["@regression", "@api", "@reports", "@sort"],
+    "steps": [
+      {
+        "stepName": "Získání seřazeného seznamu",
+        "action": "getListOfJournalsValidator",
+        "stockId": 231,
+        "params": {
+          "limit": 50,
+          "sort": "-datetime",
+          "columns": "id,termId,termName,datetime,summary"
+        },
+        "validation": {
+          "checkSort": true,
+          "sortColumn": "datetime",
+          "sortDirection": "desc"
+        }
+      }
+    ]
+  },
+  "TC_SORT_05_Journal_Summary_ASC": {
+    "testId": "TC-215",
+    "name": "Řazení Deníku: Výčetek hotovosti (summary) - Vzestupně",
+    "tags": ["@regression", "@api", "@reports", "@sort"],
+    "steps": [
+      {
+        "stepName": "Získání seřazeného seznamu",
+        "action": "getListOfJournalsValidator",
+        "stockId": 231,
+        "params": {
+          "limit": 50,
+          "sort": "summary",
+          "columns": "id,termId,termName,datetime,summary"
+        },
+        "validation": {
+          "checkSort": true,
+          "sortColumn": "summary",
+          "sortDirection": "asc"
+        }
+      }
+    ]
+  },
+  "TC_SORT_06_Journal_Summary_DESC": {
+    "testId": "TC-216",
+    "name": "Řazení Deníku: Výčetek hotovosti (summary) - Sestupně",
+    "tags": ["@regression", "@api", "@reports", "@sort"],
+    "steps": [
+      {
+        "stepName": "Získání seřazeného seznamu",
+        "action": "getListOfJournalsValidator",
+        "stockId": 231,
+        "params": {
+          "limit": 50,
+          "sort": "-summary",
+          "columns": "id,termId,termName,datetime,summary"
+        },
+        "validation": {
+          "checkSort": true,
+          "sortColumn": "summary",
+          "sortDirection": "desc"
+        }
+      }
+    ]
+  }
+},
+  {
+    "testId": "TC-217",
+    "name": "/administration-api/StockCardsSupergroupsLocal/ - Seznam lokálních nadskupin zboží řazení podle Operátora (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@supergroupsLocal", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsSupergroupsLocal",
+    "params": [231, { "sort": "-operator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-218",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle názvu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{ "sort": "-name", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-219",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Čísla sestavy (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{ "sort": "-id", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-220",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Typu sestavy (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{ "sort": "-public", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-221",
+    "name": "/reports-api/listOfUsersReports/ - Seznam uživatelských sestav řazení podle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@reports", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsersReports",
+    "params": [{ "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-222",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle názvu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 231, { "sort": "-stockCardName", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-223",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle Druhu zboží (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 231, { "sort": "-stkitmType", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-224",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle Centrální skupiny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 231, { "sort": "-cgroupId", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-225",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle Centrální kategorie (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 231, { "sort": "-category", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-226",
+    "name": "/reports-api/listOfStockCards/ - Seznam skladových karet řazení podle Lokální skupiny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stockCards", "@sort"],
+    "service": "reports",
+    "method": "getListOfStockCards",
+    "params": ["60193531", 231, { "sort": "-lgroupId", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-227",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle id (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-id" }]
+  },
+  {
+    "testId": "TC-228",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Názvu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-text" }]
+  },
+  {
+    "testId": "TC-229",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Ulice (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-street" }]
+  },
+  {
+    "testId": "TC-230",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Města (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-city" }]
+  },
+  {
+    "testId": "TC-231",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle PSČ (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-zip" }]
+  },
+  {
+    "testId": "TC-232",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Provozovatele ČS (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-franchiserId" }]
+  },
+  {
+    "testId": "TC-233",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-234",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Kurzu Operátora (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-235",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle data vytvoření (sestupně)",
+    "tags": ["@api", "@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 231, "sort": "-created", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-236",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle data odečtu hodnot (sestupně)",
+    "tags": ["@api", "@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 231, "sort": "-registerTimestamp", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-237",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle Typu záznamu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 231, "sort": "-reason", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-238",
+    "name": "GET /reports-api/listOfRegisters Seznam registrů výdejních pistolí řazeno podle Operátora (sestupně)",
+    "tags": ["@api", "@smoke", "@medium"],
+    "service": "reports",
+    "method": "getListOfRegisters",
+    "params": [{ "stockId": 231, "sort": "-operator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-239",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle názvu partnera (sestupně)",
+    "tags": ["@api", "@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "-company", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-240",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle IČO (sestupně)",
+    "tags": ["@api", "@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "-ico", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-241",
+    "name": "GET /reports-api/listOfPartners Seznam partnerů řazení podle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@high", "@sort", "@partners"],
+    "service": "reports",
+    "method": "getListOfPartners",
+    "params": [{ "accOwner": "00174939", "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-242",
+    "name": "GET /reports-api/listOfLocalCards - Seznam Fleet karet řazeno podle Čísla karty (elektornické karty) (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "-cardNr", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-243",
+    "name": "GET /reports-api/listOfLocalCards - Seznam Fleet karet řazeno podle Čísla karty (tištěné) (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "-cardLabel", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-244",
+    "name": "GET /reports-api/listOfLocalCards - Seznam Fleet karet řazeno podle Typu karty (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "-cardType", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-245",
+    "name": "GET /reports-api/listOfLocalCards - Seznam Fleet karet řazeno podle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fleet", "@sort"],
+    "service": "reports",
+    "method": "getListOfLocalCards",
+    "params": [{ "accOwner": "00174939", "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-246",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle id (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-id", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-247",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle Zadáno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-created", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-248",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle Telefonu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-phone", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-249",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle emailu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-email", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-250",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle města (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-city", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-251",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle Měsíční odběr CZK (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-consumption", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-252",
+    "name": "GET /reports-api/listOfEuroOilCardRequests - Seznam Přehled žádostí o EuroOil karty řazeno podle Operátora (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@eurooil", "@sort"],
+    "service": "reports",
+    "method": "getListOfEuroOilCardRequests",
+    "params": [231, { "sort": "-operator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-253",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle id (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "-id", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-254",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Názvu slevy/poplatku (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "-specification", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-255",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Začátku platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "-startValidDate", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-256",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno podle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-257",
+    "name": "GET /reports-api/listOfBonusClasses Seznam přehledu slev a poplatků řazeno Operátora (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@bonuses", "@sort"],
+    "service": "reports",
+    "method": "getListOfBonusClasses",
+    "params": [{ "accOwner": "00174939", "sort": "-operator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-258",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Typu účtenky (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-receiptType", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-259",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle IČO (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-company", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-260",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Čísla dokladu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-receipt", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-261",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle DIČ (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-dic", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-262",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Jméno zákazníka/Název firmy (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-company", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-263",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Vytvořeno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-created", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-264",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Vytvořil (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-createdByOperator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-265",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Poslední úpravy (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-266",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Upravil (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-updatedByOperator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-267",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle výtisků (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-printCount", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-268",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Naposledy vytisknuto (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-prinitngDate", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-269",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Vytiskl (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-prinitngByOperator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-270",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Stornováno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-canceled", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-271",
+    "name": "GET /reports-api/listOfReceiptsUdd Seznam Úplněných daňových dokladů řazení podle Stornoval (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@udd", "@sort"],
+    "service": "reports",
+    "method": "getListOfReceiptsUdd",
+    "params": [231, 2025, "00174939", { "sort": "-canceledByOperator", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-272",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Vystavena (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-generationTimestamp", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-273",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Číslo stvrzenky (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-ticketNr", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-274",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Vytištěna (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-printedTimestamp", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-275",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Expiruje (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-expDate", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-276",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Akceptováno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-acceptedTimestamp", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-277",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Účtenka (Hotovostní) (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-cashReceiptId", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-278",
+    "name": "GET /reports-api/listOfPosTankTickets Seznam stvrzenek o složení hotovosti s řazením podle Vydaná přeplatková poukázka (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankTickets",
+    "params": [{ "stockId": 231, "dateFrom": "2025-10-01T00:00:00.000Z", "sort": "-voucherId", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-279",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle Typu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-type"
+    }]
+  },
+  {
+    "testId": "TC-280",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle Zaevidováno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-datetime"
+    }]
+  },
+  {
+    "testId": "TC-281",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle OM (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-stockName"
+    }]
+  },
+  {
+    "testId": "TC-282",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle Pokladny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-termName"
+    }]
+  },
+  {
+    "testId": "TC-283",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle Popisu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-text"
+    }]
+  },
+  {
+    "testId": "TC-284",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle Částky (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-amount"
+    }]
+  },
+  {
+    "testId": "TC-285",
+    "name": "GET /reports-api/listOfPosMoneyOperations Seznam vkladů/výběrů řazení podle Operátora (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosMoneyOperations",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-operator"
+    }]
+  },
+  {
+    "testId": "TC-286",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Pokladna (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-termName"
+    }]
+  },
+  {
+    "testId": "TC-287",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Číslo poukázky (ID) (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-voucherId"
+    }]
+  },
+  {
+    "testId": "TC-288",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Vystavena (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-generationTimestamp"
+    }]
+  },
+  {
+    "testId": "TC-289",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Plán do (Expirace) (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-expDate"
+    }]
+  },
+  {
+    "testId": "TC-290",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Akceptováno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-acceptedTimestamp"
+    }]
+  },
+  {
+    "testId": "TC-291",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Číslo stvrzenky (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-tankTicketKey"
+    }]
+  },
+  {
+    "testId": "TC-292",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Rezervováno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-reservedTimestamp"
+    }]
+  },
+  {
+    "testId": "TC-293",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Místo rezervace (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-reservedPlace"
+    }]
+  },
+  {
+    "testId": "TC-294",
+    "name": "GET /reports-api/listOfPosTankVouchers Přeplatkové poukázky řazení podle Nominální hodnota (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@pos", "@sort"],
+    "service": "reports",
+    "method": "getListOfPosTankVouchers",
+    "params": [{
+      "stockId": 231,
+      "dateFrom": "2025-10-01T00:00:00.000Z",
+      "dateTo": "2025-12-31T23:59:59.999Z",
+      "sort": "-nominalValue"
+    }]
+  },
+  {
+    "testId": "TC-295",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Doklad (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-documentLabel" }]
+  },
+  {
+    "testId": "TC-296",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Datum dokladu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-deliveryDate" }]
+  },
+  {
+    "testId": "TC-297",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Datum naskladnění (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-changeSupplyDate" }]
+  },
+  {
+    "testId": "TC-298",
+    "name": "GET /reports-api/listOfGoodsDeliveryNotes Příjemky a výdejky řazení podle Datum schválení (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@goodsDeliveries", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-validDate" }]
+  },
+  {
+    "testId": "TC-299",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Doklad (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-documentLabel" }]
+  },
+  {
+    "testId": "TC-300",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Popis inventury (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-description" }]
+  },
+  {
+    "testId": "TC-301",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Založena (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-created" }]
+  },
+  {
+    "testId": "TC-302",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Aktualizováno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-303",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Spuštěna kontrola (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-checked" }]
+  },
+  {
+    "testId": "TC-304",
+    "name": "GET /reports-api/listOfGoodsInventories Seznam inventur řazení podle Dokončena (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@inventory", "@sort"],
+    "service": "reports",
+    "method": "getListOfGoodsInventories",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-finalized" }]
+  },
+  {
+    "testId": "TC-305",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Doklad (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@order", "@sort"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-documentLabel" }]
+  },
+  {
+    "testId": "TC-306",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Datum vytvoření (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@order", "@sort"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-created" }]
+  },
+  {
+    "testId": "TC-307",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Datum objednání (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@order", "@sort"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-orderDate" }]
+  },
+  {
+    "testId": "TC-308",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Datum uzavření (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@order", "@sort"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-validDate" }]
+  },
+  {
+    "testId": "TC-309",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Dodavatel zboží (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@order", "@sort"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-supplierName" }]
+  },
+  {
+    "testId": "TC-310",
+    "name": "GET /reports-api/listOfOrders Seznam objednávek řazení podle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@order", "@sort"],
+    "service": "reports",
+    "method": "getListOfOrders",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-311",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Doklad (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-documentLabel" }]
+  },
+  {
+    "testId": "TC-312",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Datum dokladu (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-deliveryDate" }]
+  },
+  {
+    "testId": "TC-313",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Naskladněno/vyskladněno (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-changeSupplyDate" }]
+  },
+  {
+    "testId": "TC-314",
+    "name": "GET /reports-api/listOfWetDeliveryNotes Seznam čerpadlových dodacích listů řazení podle Datum schválení (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@wetdeliverynotes", "@sort"],
+    "service": "reports",
+    "method": "getListOfWetDeliveryNotes",
+    "params": [{ "stockId": 231, "year": 2025, "sort": "-validDate" }]
+  },
+  {
+    "testId": "TC-315",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Přihlašovací kód uživatele (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@users", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{ "accOwner": "60193531", "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-316",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Jméno uživatele (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@users", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{ "accOwner": "60193531", "sort": "-name" }]
+  },
+  {
+    "testId": "TC-317",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Přístupová karta (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@users", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{ "accOwner": "60193531", "sort": "-cardNumber" }]
+  },
+  {
+    "testId": "TC-318",
+    "name": "GET /reports-api/listOfUsers Seznam uživatelů řazení podle Naposledy přihlášen (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@users", "@sort"],
+    "service": "reports",
+    "method": "getListOfUsers",
+    "params": [{ "accOwner": "60193531", "sort": "-lastLoginTimestamp" }]
+  },
+  {
+    "testId": "TC-319",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Třída (Názvu) (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{ "sort": "-name" }]
+  },
+  {
+    "testId": "TC-320",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Sazba (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{ "sort": "-value" }]
+  },
+  {
+    "testId": "TC-321",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Začátek platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{ "sort": "-startValidDate" }]
+  },
+  {
+    "testId": "TC-322",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{ "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-323",
+    "name": "GET /reports-api/listOfVatClasses Seznam tříd DPH řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@vat", "@sort"],
+    "service": "reports",
+    "method": "getListOfVatClasses",
+    "params": [{ "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-324",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle ID (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-id" }]
+  },
+  {
+    "testId": "TC-325",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Třída (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-name" }]
+  },
+  {
+    "testId": "TC-326",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Sazba [kč] (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-value" }]
+  },
+  {
+    "testId": "TC-327",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Nomenklatura (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-ckncs" }]
+  },
+  {
+    "testId": "TC-328",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Začátek platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-startValidDate" }]
+  },
+  {
+    "testId": "TC-329",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-330",
+    "name": "GET /reports-api/listOfCtClasses Seznam tříd spotřebních daní řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@ctclasses", "@sort"],
+    "service": "reports",
+    "method": "getListOfCtClasses",
+    "params": [{ "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-331",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Název karty (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", { "sort": "-cardName", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-332",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Typ vydavatele karet (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", { "sort": "-issuerCardType", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-333",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Začátek platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", { "sort": "-startValid", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-334",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Konec platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", { "sort": "-endValid", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-335",
+    "name": "GET /administration-api/listOfCardDefinitions Seznam definic karet řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "administration",
+    "method": "getListOfCardDefinitions",
+    "params": ["60193531", { "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-336",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle ID (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{ "sort": "-id" }]
+  },
+  {
+    "testId": "TC-337",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Název vydavatele (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{ "sort": "-issuerName" }]
+  },
+  {
+    "testId": "TC-338",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Typ vydavatele (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{ "sort": "-issuerType" }]
+  },
+  {
+    "testId": "TC-339",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Číselník skupin (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{ "sort": "-groupsConversionBy" }]
+  },
+  {
+    "testId": "TC-340",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{ "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-341",
+    "name": "GET /reports-api/listOfCardIssuers Seznam vydavatelů karet řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@cards", "@sort"],
+    "service": "reports",
+    "method": "getListOfCardIssuers",
+    "params": [{ "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-342",
+    "name": "GET /reports-api/listOfForeignStocksCCS ... (sestupně)",
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-ccsId" }]
+  },
+  {
+    "testId": "TC-343",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Konkurenční obchodní místo (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-name" }]
+  },
+  {
+    "testId": "TC-344",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Město (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-city" }]
+  },
+  {
+    "testId": "TC-345",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Ulice (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-street" }]
+  },
+  {
+    "testId": "TC-346",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Okres (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-district" }]
+  },
+  {
+    "testId": "TC-347",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Země (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-country" }]
+  },
+  {
+    "testId": "TC-348",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-349",
+    "name": "GET /reports-api/listOfForeignStocksCCS Správa konkurenčních obchodních míst - CCS řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@foreignstocks", "@sort"],
+    "service": "reports",
+    "method": "getListOfForeignStocksCCS",
+    "params": [{ "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-350",
+    "name": "GET /reports-api/listOfCurrencyRates Seznam centrálních kurzů řazeno dle Začátek platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@currency", "@sort"],
+    "service": "reports",
+    "method": "getListOfCurrencyRates",
+    "params": [{ "accOwner": "60193531", "sort": "-startValidDate" }]
+  },
+  {
+    "testId": "TC-351",
+    "name": "GET /reports-api/listOfCurrencyRates Seznam centrálních kurzů řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@currency", "@sort"],
+    "service": "reports",
+    "method": "getListOfCurrencyRates",
+    "params": [{ "accOwner": "60193531", "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-352",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Číslo (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", { "sort": "-id" }]
+  },
+  {
+    "testId": "TC-353",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Název (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", { "sort": "-name" }]
+  },
+  {
+    "testId": "TC-354",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Začátek platnosti (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", { "sort": "-startValid" }]
+  },
+  {
+    "testId": "TC-355",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", { "sort": "-updated" }]
+  },
+  {
+    "testId": "TC-356",
+    "name": "GET /administration-api/stockCardsGroupsCentral Seznam centrálních skupin zboží řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@groups", "@sort"],
+    "service": "administration",
+    "method": "getStockCardsGroupsCentral",
+    "params": ["60193531", { "sort": "-operator" }]
+  },
+  {
+    "testId": "TC-357",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Skupina (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", { "sort": "-group", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-358",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Jméno parametru (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", { "sort": "-name", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-359",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Platnost (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", { "sort": "-startValidDate", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-360",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Poslední změny (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", { "sort": "-updated", "limit": 10, "offset": 0 }]
+  },
+  {
+    "testId": "TC-361",
+    "name": "GET /administration-api/fsfeature Seznam Centrálních parametrů systému řazeno dle Operátor (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "@fsfeature", "@sort"],
+    "service": "administration",
+    "method": "getCentralFsFeatures",
+    "params": ["60193531", { "sort": "-operator", "limit": 10, "offset": 0 }]
   }
 ]
+
+
 
 

@@ -14,6 +14,7 @@
 import { BaseApiClient } from '../BaseApiClient';
 import * as ReportTypes from '../types/reports';
 import * as t from '../types/reports'; // Ujisti se, že máš správný import
+import { GetJournalsValidatorParams, JournalValidatorItem } from '../types/reports';
 
 export class ReportsApiService extends BaseApiClient {
   
@@ -271,4 +272,15 @@ public async getListOfWetDeliveryNotes(params: ReportTypes.GetListOfWetDeliveryN
     // BaseApiClient automaticky převede 'params' objekt na query string
     return this.get(`/reports-api/listOfWetDeliveryNotes`, params);
     }
+
+/**
+ * Získá seznam výčetek hotovostních akceptorů
+ * 
+*/
+async getListOfJournalsValidator(params: GetJournalsValidatorParams): Promise<JournalValidatorItem[]> {
+    // BaseApiClient automaticky převede 'params' objekt na query string
+    return this.get(`/reports-api/listOfCashAcceptorsCashCounts`, params);
+    }
+
 }
+
