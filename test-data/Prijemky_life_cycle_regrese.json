@@ -1,12 +1,12 @@
 {
   "TC_GDN_001": {
     "caseName": "Regresní test životního cyklu příjemky (Goods Delivery Note)",
-    "tags": ["@regression", "@api", "@delivery_note", "@high", "@test"],
+    "tags": ["@regression", "@delivery_note", "@high", "test_delivery"],
     "steps": {
       "01_Create": {
         "action": "CreateDeliveryNote",
         "name": "Vytvoření příjemky POST documents-api/goodsDeliveryNotes",
-        "description": "Automaticky vytvořená příjemka",
+        "deliveryNoteNr": "simulátor",
         "stockId": 231,
         "ownerId": 8,
         "accOwner": "60193531",  

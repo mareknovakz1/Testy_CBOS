@@ -97,7 +97,7 @@
   },
   {
     "testId": "TC-013",
-    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle id",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Čísla",
     "tags": [ "@api","@smoke", "@medium", "stocks", "@sort"],
     "service": "reports",
     "method": "getListOfStocks",
@@ -2178,7 +2178,7 @@
   },
   {
     "testId": "TC-227",
-    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle id (sestupně)",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Čísla (sestupně)",
     "tags": ["@api", "@smoke", "@medium", "stocks", "@sort"],
     "service": "reports",
     "method": "getListOfStocks",
@@ -3334,6 +3334,47 @@
     "service": "administration",
     "method": "getCentralFsFeatures",
     "params": ["60193531", { "sort": "-operator", "limit": 10, "offset": 0 }]
+  },
+    {
+    "testId": "TC-362",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Regionu (vzestupně)",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "region"}]
+  },
+    {
+    "testId": "TC-363",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Regionu (sestupně)",
+    "tags": [ "@api","@smoke", "@medium", "stocks", "@sort", "test"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": [{ "sort": "-region"}]
+  },
+  {
+    "testId": "TC-364",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (vzestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": {
+    "sort": "rate",
+    "columns": "id,text,region,rate",  
+    "valid": "true"                    
+  }
+    
+  },
+  {
+    "testId": "TC-364",
+    "name": "GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (sestupně)",
+    "tags": ["@api", "@smoke", "@medium", "stocks", "@sort", "@test"],
+    "service": "reports",
+    "method": "getListOfStocks",
+    "params": {
+    "sort": "-rate",
+    "columns": "id,text,region,rate",  
+    "valid": "true"                    
+  } 
   }
 ]
 

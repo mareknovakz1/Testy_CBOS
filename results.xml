@@ -1,78 +1,110 @@
-<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="2.320259">
-  <testsuite name="Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts" timestamp="2025-12-07T11:35:17.734Z" hostname="API" tests="1" failures="1" skipped="0" time="1.149" errors="0">
-    <testcase name="TC_GDN_001: Regresní test životního cyklu příjemky (Goods Delivery Note) ...  @regression @api @delivery_note @high @test" classname="Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts" time="1.149">
-      <failure message="Prijemky.spec.ts:251:9 TC_GDN_001: Regresní test životního cyklu příjemky (Goods Delivery Note) ...  @regression @api @delivery_note @high @test" type="FAILURE"><![CDATA[  [API] › Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:251:9 › TC_GDN_001: Regresní test životního cyklu příjemky (Goods Delivery Note) ...  @regression @api @delivery_note @high @test › Krok: Ověření příjemky GET reports-api/listOfGoodsDeliveryNotes 
-
-    Error: Příjemka s popisem AutoTest_GDN_1765107319483 nebyla nalezena.
-
-      127 |                  expect(exists, "Příjemka s ID z vytvoření nebyla nalezena v seznamu.").toBeTruthy();
-      128 |             } else {
-    > 129 |                 throw new Error(`Příjemka s popisem ${ctx.uniqueDescription} nebyla nalezena.`);
-          |                       ^
-      130 |             }
-      131 |         }
-      132 |     });
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:129:23
-        at verifyDeliveryNoteList (C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:102:5)
-        at C:\Users\novakma\Testy_CBOS\tests\Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:275:17
-]]></failure>
-      <system-out><![CDATA[2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:18[0m[0m.656[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:18[0m[0m.666[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:18[0m[0m.667[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:18[0m[0m.669[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:18[0m[0m.670[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:18[0m[0m.671[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.441[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.445[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.451[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.462[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.467[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:95[39m[0m[0m]FIXTURE 'apiClient': Budu vytvářet novou instanci ApiClient s poskytnutým tokenem.
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.471[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:98[39m[0m[0m]FIXTURE 'apiClient': Instance ApiClient byla úspěšně vytvořena.
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.475[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:100[39m[0m[0m]FIXTURE 'apiClient': Volám 'use(client)' a předávám hotového klienta testu...
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.481[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:252[39m[0m[0m]Spouštím test: TC_GDN_001
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.487[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:84[39m[0m[0m]Vytvářím příjemku: {"stockId":231,"ownerId":8,"accOwner":"60193531","documentType":1,"documentSubType":1,"sign":"+","description":"AutoTest_GDN_1765107319483","deliveryDate":"2025-12-07T11:35:19.487Z","supplierId":8,"supplierName":"Banner Baterie ČR spol.s r.o.","ownerName":"Banner Baterie ČR spol.s r.o."}
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.493[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][d060b7f9] ---> POST http://192.168.130.239:8180/documents-api/goodsDeliveryNotes/231 {
-  params: [90mundefined[39m,
-  data: {
-    stockId: [33m231[39m,
-    ownerId: [33m8[39m,
-    accOwner: [32m'60193531'[39m,
-    documentType: [33m1[39m,
-    documentSubType: [33m1[39m,
-    sign: [32m'+'[39m,
-    description: [32m'AutoTest_GDN_1765107319483'[39m,
-    deliveryDate: [32m'2025-12-07T11:35:19.487Z'[39m,
-    supplierId: [33m8[39m,
-    supplierName: [32m'Banner Baterie ČR spol.s r.o.'[39m,
-    ownerName: [32m'Banner Baterie ČR spol.s r.o.'[39m
-  },
-  headers: {
-    Accept: [32m'application/json, text/plain, */*'[39m,
-    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'd060b7f9'[39m,
-    Authorization: [32m'*** MASKED ***'[39m
-  }
-}
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.634[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][d060b7f9] <--- 201 POST http://192.168.130.239:8180/documents-api/goodsDeliveryNotes/231 (127.89 ms)
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.637[0m[0m [33m[1mWARN[22m[39m[0m[0m [[37m\tests\Regrese\Doklady\Prijemky_Vydejky\Prijemky.spec.ts:95[39m[0m[0m]API nevrátilo ID příjemky přímo. Bude nutné ho dohledat v seznamu.
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.640[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][9d99905b] ---> GET http://192.168.130.239:8180/reports-api/listOfGoodsDeliveryNotes {
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="3.9620990000000003">
+  <testsuite name="Smoke\Gets_api.spec.ts" timestamp="2025-12-10T08:55:41.550Z" hostname="API" tests="3" failures="0" skipped="0" time="2.919" errors="0">
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-362: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Regionu (vzestupně)&quot; @api @smoke @medium stocks @sort @test" classname="Smoke\Gets_api.spec.ts" time="0.978" id="TC-362">
+      <system-out><![CDATA[2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:42[0m[0m.370[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:42[0m[0m.375[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:42[0m[0m.376[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:42[0m[0m.378[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:42[0m[0m.380[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:42[0m[0m.381[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.145[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.145[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.148[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.151[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.151[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:86[39m[0m[0m]Inicializuji ApiClient pro autorizované GET endpointy...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.155[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:89[39m[0m[0m]ApiClient byl úspěšně inicializován.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.157[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:107[39m[0m[0m]Running smoke test for TC-362: GET /reports-api/listOfStocks Obchodní místo řazení podle Regionu (vzestupně)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.159[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:109[39m[0m[0m]Attempting to call reports.getListOfStocks with params: [{"sort":"region"}]
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.174[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:111[39m[0m[0m]Attempting to call reports.getListOfStocks with params: [{"sort":"region"}]
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.177[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:113[39m[0m[0m]Calling API method...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.179[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:119[39m[0m[0m]Invoking method...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.183[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][a3d49f7b] ---> GET http://192.168.130.239:8180/reports-api/listOfStocks {
   params: {
-    stockId: [33m231[39m,
-    year: [33m2025[39m,
-    accOwner: [32m'60193531'[39m,
-    documentType: [33m1[39m,
-    limit: [33m100[39m,
-    sort: [32m'-documentLabel'[39m
+    sort: [32m'region'[39m
   },
   data: [90mundefined[39m,
   headers: {
     Accept: [32m'application/json, text/plain, */*'[39m,
     [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
-    [32m'X-Request-ID'[39m: [32m'9d99905b'[39m,
+    [32m'X-Request-ID'[39m: [32m'a3d49f7b'[39m,
     Authorization: [32m'*** MASKED ***'[39m
   }
 }
-2025[0m[0m-12[0m[0m-07[0m[0m 11[0m[0m:35[0m[0m:19[0m[0m.785[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][9d99905b] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfGoodsDeliveryNotes (143.09 ms)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.315[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][a3d49f7b] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStocks (124.98 ms)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.318[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:134[39m[0m[0m]Determining final response status for assertion...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.319[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:135[39m[0m[0m]Response status determined: 200
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.322[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:140[39m[0m[0m]Preparing assertion for response status...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.326[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:156[39m[0m[0m]Test for "GET /reports-api/listOfStocks Obchodní místo řazení podle Regionu (vzestupně)" completed successfully with status 200.
+]]></system-out>
+    </testcase>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-364: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (vzestupně)&quot; @api @smoke @medium stocks @sort @test" classname="Smoke\Gets_api.spec.ts" time="0.982" id="TC-364">
+      <system-out><![CDATA[2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.350[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.354[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.355[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.358[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.360[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:43[0m[0m.363[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.152[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.153[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.160[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.165[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.167[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:86[39m[0m[0m]Inicializuji ApiClient pro autorizované GET endpointy...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.171[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:89[39m[0m[0m]ApiClient byl úspěšně inicializován.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.173[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:107[39m[0m[0m]Running smoke test for TC-364: GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (vzestupně)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.176[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:109[39m[0m[0m]Attempting to call reports.getListOfStocks with params: {"sort":"rate","columns":"id,text,region,rate","valid":"true"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.178[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:111[39m[0m[0m]Attempting to call reports.getListOfStocks with params: {"sort":"rate","columns":"id,text,region,rate","valid":"true"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.181[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:113[39m[0m[0m]Calling API method...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.184[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:119[39m[0m[0m]Invoking method...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.186[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][fc77b80e] ---> GET http://192.168.130.239:8180/reports-api/listOfStocks {
+  params: {},
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'fc77b80e'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.314[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][fc77b80e] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStocks (125.77 ms)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.317[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:134[39m[0m[0m]Determining final response status for assertion...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.318[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:135[39m[0m[0m]Response status determined: 200
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.321[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:140[39m[0m[0m]Preparing assertion for response status...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.324[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:156[39m[0m[0m]Test for "GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (vzestupně)" completed successfully with status 200.
+]]></system-out>
+    </testcase>
+    <testcase name="API Smoke Tests - GET Endpoints › Authenticated GETs from JSON › TC-364: Endpoint &quot;GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (sestupně)&quot; @api @smoke @medium stocks @sort @test" classname="Smoke\Gets_api.spec.ts" time="0.959" id="TC-364">
+      <system-out><![CDATA[2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.342[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:23[39m[0m[0m]FIXTURE 'authToken': Budu vytvářet nový request kontext...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.345[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:25[39m[0m[0m]FIXTURE 'authToken': Request kontext vytvořen.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.347[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:27[39m[0m[0m]Definuji loginPayload pro přihlášení...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.350[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:32[39m[0m[0m]Přihlašovací údaji: {"operator":"TESTING_AUTOMAT","password":"1"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.353[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:34[39m[0m[0m]FIXTURE 'authToken': Kóduji přihlašovací údaje do Base64...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:44[0m[0m.356[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:38[39m[0m[0m]FIXTURE 'authToken': Odesílám POST požadavek na 'http://192.168.130.239:8180/auth-api/user/authorization' s Base64... 
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.141[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:43[39m[0m[0m]FIXTURE 'authToken': Odpověď přijata se statusem 201.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.142[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:45[39m[0m[0m]FIXTURE 'authToken': Kontroluji, zda je odpověď OK (status 2xx)...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.147[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:62[39m[0m[0m]FIXTURE 'authToken': Získávám 'accessToken' z JSON odpovědi.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.149[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\support\fixtures\auth.fixture.ts:66[39m[0m[0m]FIXTURE 'authToken': Volám 'use(token)' a předávám token dál...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.153[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:86[39m[0m[0m]Inicializuji ApiClient pro autorizované GET endpointy...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.157[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:89[39m[0m[0m]ApiClient byl úspěšně inicializován.
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.159[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:107[39m[0m[0m]Running smoke test for TC-364: GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (sestupně)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.161[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:109[39m[0m[0m]Attempting to call reports.getListOfStocks with params: {"sort":"-rate","columns":"id,text,region,rate","valid":"true"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.163[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:111[39m[0m[0m]Attempting to call reports.getListOfStocks with params: {"sort":"-rate","columns":"id,text,region,rate","valid":"true"}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.166[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:113[39m[0m[0m]Calling API method...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.170[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:119[39m[0m[0m]Invoking method...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.173[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:76[39m[0m[0m][39b9c4aa] ---> GET http://192.168.130.239:8180/reports-api/listOfStocks {
+  params: {},
+  data: [90mundefined[39m,
+  headers: {
+    Accept: [32m'application/json, text/plain, */*'[39m,
+    [32m'Content-Type'[39m: [32m'application/json;charset=UTF-8'[39m,
+    [32m'X-Request-ID'[39m: [32m'39b9c4aa'[39m,
+    Authorization: [32m'*** MASKED ***'[39m
+  }
+}
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.279[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\api\BaseApiClient.ts:94[39m[0m[0m][39b9c4aa] <--- 200 GET http://192.168.130.239:8180/reports-api/listOfStocks (102.08 ms)
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.281[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:134[39m[0m[0m]Determining final response status for assertion...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.282[0m[0m [32m[1mDEBUG[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:135[39m[0m[0m]Response status determined: 200
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.286[0m[0m [97m[1mTRACE[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:140[39m[0m[0m]Preparing assertion for response status...
+2025[0m[0m-12[0m[0m-10[0m[0m 08[0m[0m:55[0m[0m:45[0m[0m.289[0m[0m [34m[1mINFO[22m[39m[0m[0m [[37m\tests\Smoke\Gets_api.spec.ts:156[39m[0m[0m]Test for "GET /reports-api/listOfStocks Obchodní místo řazení podle Kurz EUR (sestupně)" completed successfully with status 200.
 ]]></system-out>
     </testcase>
   </testsuite>

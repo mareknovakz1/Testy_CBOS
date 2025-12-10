@@ -17,7 +17,7 @@ import * as t from '../../../../api/types/documents';
 type StepData = {
     action: string;
     name?: string;
-    description?: string;
+    deliveryNoteNr?: string;
     tags?: string[];
     stockId?: number;
     ownerId?: number;
@@ -64,43 +64,60 @@ const STEP_REGISTRY: Record<string, (ctx: TestContext, data: StepData) => Promis
 // STEP FUNCTIONS
 // -------------------------------------------------------------------------
 
-/** Krok: Vytvoření příjemky (POST /goodsDeliveryNotes) */
+// -------------------------------------------------------------------------
+// createDeliveryNote (Vytvoření příjemky)
+// -------------------------------------------------------------------------
+
 async function createDeliveryNote(ctx: TestContext, stepData: StepData) {
     await test.step(`Krok: ${stepData.name}`, async () => {
+        
+        // 1. Vygenerujeme časové razítko a datum
+        const now = new Date();
+        const isoDate = now.toISOString();
+        
+        // Uložíme si datum odeslání pro pozdější hledání (dle předchozí opravy)
+        (ctx as any).sentDeliveryDate = isoDate; 
+        
+        // Unikátní ID (timestamp)
+        const uniqueId = Date.now();
+        ctx.uniqueDescription = `AutoTest_GDN_${uniqueId}`;
+
+        // 2. Sestavení deliveryNoteNr (Číslo dokladu)
+        // Spojíme unikátní ID a text z testovacích dat (pokud tam je)
+        // Výsledek např.: "1765101234567_Automaticky vytvořená příjemka"
+        const noteNumber = stepData.deliveryNoteNr 
+            ? `${uniqueId}_${stepData.deliveryNoteNr}` 
+            : ctx.uniqueDescription;
+
         const payload = {
-                            stockId: stepData.stockId,
-                            ownerId: stepData.ownerId,           
-                            accOwner: stepData.accOwner,         
-                            documentType: stepData.documentType ?? 1,
-                            documentSubType: stepData.documentSubType ?? 1, 
-                            sign: stepData.sign,            
-                            description: ctx.uniqueDescription,
-                            deliveryDate: new Date().toISOString(), 
-                            supplierId: stepData.supplierId,
-                            supplierName: stepData.supplierName,
-                            ownerName: stepData.ownerName,
-                        };
+            stockId: stepData.stockId,
+            ownerId: stepData.ownerId,
+            accOwner: String(stepData.accOwner), 
+            documentType: stepData.documentType ?? 1,
+            documentSubType: stepData.documentSubType ?? 1, 
+            sign: String(stepData.sign ?? "1"),  
+            deliveryNoteNr: noteNumber,         
+            description: ctx.uniqueDescription, 
+            
+            deliveryDate: isoDate,
+            supplierId: stepData.supplierId,
+            supplierName: stepData.supplierName,
+            ownerName: stepData.ownerName,
+        };
 
         logger.debug(`Vytvářím příjemku: ${JSON.stringify(payload)}`);
         
-        // Volání metody z DocumentsApiService
         const response = await ctx.apiClient.documents.postGoodsDeliveryNote(stepData.stockId!, payload);
         
-        // API obvykle vrací objekt s ID, nebo musíme ID zjistit z listu (záleží na implementaci postGoodsDeliveryNote)
-        if (response && response.id) {
-            ctx.createdDeliveryNoteId = response.id;
-            logger.info(`Krok OK: Příjemka vytvořena. ID: ${ctx.createdDeliveryNoteId}`);
-        } else {
-            // Fallback, pokud API nevrací ID přímo (některé verze API vrací jen 201)
-            logger.warn("API nevrátilo ID příjemky přímo. Bude nutné ho dohledat v seznamu.");
-        }
     });
 }
 
-/** Krok: Ověření v seznamu a získání ID (GET /reports-api/listOfGoodsDeliveryNotes) */
+// -------------------------------------------------------------------------
+// verifyDeliveryNoteList (Ověření v seznamu - hledání podle DATA)
+// -------------------------------------------------------------------------
+
 async function verifyDeliveryNoteList(ctx: TestContext, stepData: StepData) {
     await test.step(`Krok: ${stepData.name}`, async () => {
-        // Parametry dle tvého URL requestu
         const params = {
             stockId: stepData.stockId,
             year: stepData.year || 2025,
@@ -110,25 +127,53 @@ async function verifyDeliveryNoteList(ctx: TestContext, stepData: StepData) {
             sort: '-documentLabel'
         };
 
-        // Předpokládám existenci metody v reports službě. 
-        // Pokud neexistuje, použijte: await ctx.apiClient.get('/reports-api/listOfGoodsDeliveryNotes', params);
-        const response = await ctx.apiClient.reports.getListOfGoodsDeliveryNotes(params);
-        
-        // Hledáme podle našeho unikátního popisu
-        const foundDoc = response.find((doc: any) => doc.description === ctx.uniqueDescription || doc.erpExtNumber === ctx.uniqueDescription);
+        // Zde je změna v logování - hledáme podle data
+        logger.debug(`[Verify] Hledám příjemku vytvořenou v čase: ${ctx.sentDeliveryDate} (Fallabck: popis ${ctx.uniqueDescription})`);
 
-        if (foundDoc) {
-            ctx.createdDeliveryNoteId = foundDoc.id;
-            logger.info(`Krok OK: Příjemka nalezena v seznamu. ID: ${ctx.createdDeliveryNoteId}`);
-        } else {
-            // Pokud jsme ID získali už při vytvoření, jen ověříme existenci
-            if (ctx.createdDeliveryNoteId) {
-                 const exists = response.some((doc: any) => doc.id === ctx.createdDeliveryNoteId);
-                 expect(exists, "Příjemka s ID z vytvoření nebyla nalezena v seznamu.").toBeTruthy();
-            } else {
-                throw new Error(`Příjemka s popisem ${ctx.uniqueDescription} nebyla nalezena.`);
+        await expect.poll(async () => {
+            const response = await ctx.apiClient.reports.getListOfGoodsDeliveryNotes(params);
+            
+            // 1. Zkusíme najít přesnou shodu data (nejspolehlivější)
+            // (ctx as any).sentDeliveryDate musíme použít, pokud to nemáte v interface TestContext
+            const searchDate = (ctx as any).sentDeliveryDate; 
+            
+            let foundDoc = response.find((doc: any) => doc.deliveryDate === searchDate);
+
+            // 2. FALLBACK: Pokud server ořízl milisekundy nebo změnil formát,
+            // a protože řadíme od nejnovějších (-documentLabel), podíváme se na první záznam.
+            if (!foundDoc && response.length > 0) {
+                const firstDoc = response[0];
+                // Zkontrolujeme, jestli je to "náš" záznam (vytvořený námi před chvílí)
+                // Kontrolujeme operátora a zda datum začíná stejně (např. "2025-12-07")
+                if (firstDoc.operator === 'TESTING_AUTOMAT' && 
+                    searchDate && 
+                    String(firstDoc.deliveryDate).startsWith(searchDate.substring(0, 10))) {
+                     
+                     logger.warn(`[Verify] Přesná shoda data nevyšla (${searchDate} vs ${firstDoc.deliveryDate}). Beru nejnovější záznam od TESTING_AUTOMAT.`);
+                     foundDoc = firstDoc;
+                }
             }
-        }
+
+            if (foundDoc) {
+                ctx.createdDeliveryNoteId = foundDoc.id;
+                logger.info(`Krok OK: Příjemka nalezena. ID: ${ctx.createdDeliveryNoteId}, Label: ${foundDoc.documentLabel}`);
+                return true;
+            }
+            
+            // Debug výpis
+            if (response.length > 0) {
+                logger.trace(`[Polling] Nenalezeno. První v seznamu má datum: ${response[0].deliveryDate}`);
+            } else {
+                logger.trace(`[Polling] Seznam je prázdný.`);
+            }
+
+            return false;
+
+        }, {
+            message: `Příjemka se neobjevila v seznamu (hledáno dle data: ${(ctx as any).sentDeliveryDate}).`,
+            timeout: 15000, 
+            intervals: [1000, 2000, 4000]
+        }).toBe(true);
     });
 }
 

@@ -58,7 +58,7 @@
         "action": "ApproveDifference",
         "name": "Schválení rozdílu PUT documents-api/ordersItems",
         "stockId": 231,
-        "amount": 10,
+        "amount": 1,
         "comment": "Automaticky schváleno",
         "agreement": true
       },
